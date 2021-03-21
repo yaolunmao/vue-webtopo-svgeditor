@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'svgfont';
+    src: url('iconfont/iconfont.eot');
+    src: url('iconfont/iconfont.eot?#iefix') format('embedded-opentype'),
+        url('iconfont/iconfont.woff2') format('woff2'),
+        url('iconfont/iconfont.woff') format('woff'),
+        url('iconfont/iconfont.ttf') format('truetype'),
+        url('iconfont/iconfont.svg#iconfont') format('svg');
+}
+.svgfont {
+font-family: "svgfont" !important;
+font-size: 16px;
+font-style: normal;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
