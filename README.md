@@ -47,7 +47,7 @@ yarn serve
 
 ![编辑器页面](https://p.130014.xyz/2021/03/19/svgedit.png)
 
-![预览界面](https://p.130014.xyz/2021/03/19/svgview.png)
+![预览界面](https://p.130014.xyz/2021/03/21/svgview.png)
 
 ## License
 
