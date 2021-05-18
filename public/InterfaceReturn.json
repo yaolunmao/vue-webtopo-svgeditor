@@ -12,4 +12,11 @@
   "props": ["svg_color"],
   "default_color":"#00FF00",
   "priview_img":"/ArrowDownSvg.png"
+}, {
+  "type": "ArrowUpSvg",
+  "title": "箭头向上",
+  "template": "<polygon  points=\"0,8 5,0 10,8\" :fill=\"svg_color\" :stroke=\"svg_color\" stroke-width=\"2\" transform=\"translate(-5,0)\"></polygon>",
+  "props": ["svg_color"],
+  "default_color":"#FF0000",
+  "priview_img":"/ArrowUpSvg.png"
 }]
