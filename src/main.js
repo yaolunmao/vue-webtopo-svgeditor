@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue/dist/vue.esm-bundler.js'
 import Antd from 'ant-design-vue';
 import App from './App.vue'
 import 'ant-design-vue/dist/antd.css';
@@ -11,4 +11,3 @@ app.use(router);
 app.config.globalProperties.$UCore = UCore;
 app.config.globalProperties.$axios = axios;
 app.use(Antd).mount('#app');
-

@@ -16,6 +16,8 @@
           <LeftToolBar></LeftToolBar>
         </a-layout-sider>
         <a-layout-content class="centerContain" :class="{ fixed: !shrink }">
+          <DynamicTest></DynamicTest>
+          <DynamicTest1></DynamicTest1>
           <div class="canvas-content" id="canvas"  @mousemove="MouseMove"  @mousedown="MousedownCanvas" @mouseup="MouseupCanvas" @dblclick="DblClick" @mousewheel="MouseWheel">
             <!--拖动辅助线-->
             <div id="guide-x"></div>
@@ -46,8 +48,10 @@ import LeftToolBar from '@/components/LeftToolBar.vue';
 import RightToolBar from '@/components/RightToolBar.vue';
 import SvgComponents from '@/components/SvgComponents.vue';
 import global from '@/global/global.js';//全局变量
+import DynamicTest from '@/components/DynamicTest.vue';
+import DynamicTest1 from '@/components/DynamicTest1.vue';
 export default {
-  components: { LeftToolBar,RightToolBar,SvgComponents},
+  components: { LeftToolBar,RightToolBar,SvgComponents,DynamicTest,DynamicTest1},
   data(){
     return{
       shrink:true,//收缩状态  true收缩  false展开

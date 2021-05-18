@@ -25,7 +25,7 @@
     <GGJ :height = height :color= color :width= width v-else-if="type=='GGJSvg'"></GGJ>
     <StandardReactance :height = height :color= color :width= width v-else-if="type=='StandardReactanceSvg'"></StandardReactance>
     <Alternator :height = height :color= color :width= width v-else-if="type=='AlternatorSvg'"></Alternator>
-    <SmartTerminalSvg :height = height :color= color :width= width v-else-if="type=='SmartTerminalSvg'"></SmartTerminalSvg>
+    <!-- <SmartTerminalSvg :height = height :color= color :width= width v-else-if="type=='SmartTerminalSvg'"></SmartTerminalSvg> -->
 </template>
 <script>
 import CircuitBreakerSvg from '@/components/svgCpt/CircuitBreakerSvg.vue';//断路器svg
@@ -53,11 +53,11 @@ import DoubleWindingSvgB from '@/components/svgCpt/DoubleWindingSvgB.vue';//双�
 import GGJ from '@/components/svgCpt/GGJ.vue';//电容柜
 import StandardReactance from '@/components/svgCpt/StandardReactance.vue';//标准电抗
 import Alternator from '@/components/svgCpt/Alternator.vue';//发电机
-import SmartTerminalSvg from '@/components/svgCpt/SmartTerminalSvg.vue';//发电站
+// import SmartTerminalSvg from '@/components/svgCpt/SmartTerminalSvg.vue';//发电站
 export default {
     props: ['height','color','width','type','fontSize','tableData','svgText','editable'],
     components: {CircuitBreakerSvg ,VerticalLineSvg,TextSvg,IsolatingSwitchSvg,LightningArresterSvg,StandardCapacitorSvg,WireConnectionSvg,WireBreakOffSvg,TableSvg
   ,HorizontalLineSvg,PolylineUpSvg,PolylineDownSvg,ArrowUpSvg,ArrowDownSvg,GroundGraySvg,SignalLamp,RectSvg,TwoCircleSvg,TransformerY,TransformerTriphaseOpen,DoubleWindingSvg,DoubleWindingSvgB,GGJ
-  ,StandardReactance,Alternator,SmartTerminalSvg},
+  ,StandardReactance,Alternator},
 };
 </script>
