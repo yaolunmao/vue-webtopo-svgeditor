@@ -23,23 +23,8 @@
         <a-form-item label="大小">
           <a-input-number v-model:value="selectSvgInfo.height" :min="1" :max="3000"/>
         </a-form-item>
-        <a-form-item label="宽度">
-          <a-input-number v-model:value="selectSvgInfo.width" :min="1" :max="3000"/>
-        </a-form-item>
         <a-form-item label="旋转">
           <a-input-number v-model:value="selectSvgInfo.angle" :min="0" :max="360"/>
-        </a-form-item>
-        <a-form-item label="文本">
-          <a-input v-model:value="selectSvgInfo.svgText" placeholder="请输入文本" />
-        </a-form-item>
-        <a-form-item label="字体大小">
-          <a-input-number v-model:value="selectSvgInfo.fontSize" :min="1" :max="500"/>
-        </a-form-item>
-        <a-form-item label="表格行数">
-          <a-input-number v-model:value="selectSvgInfo.tableRowCount" :min="1" :max="500"/>
-        </a-form-item>
-        <a-form-item label="表格列数">
-          <a-input-number v-model:value="selectSvgInfo.tableColCount" :min="1" :max="500"/>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" class="btn-sure">

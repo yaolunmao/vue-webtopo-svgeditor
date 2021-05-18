@@ -1,5 +1,4 @@
 <template>
-{{svg_color}}
   <component :is="svgtype"
              :svg_color= svg_color></component>
 </template>
