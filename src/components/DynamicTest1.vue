@@ -10,8 +10,8 @@
 </template>
 <script>
 var componentA = {
-  template: `<div style="color:red">我是 {{color}}</div>`,
-  props: ['color']
+  template: "<div style=\"color:red\">我是 {{color}}</div>",
+  props: ["color"]
 }
 var componentB = {
   template: `<polygon  points="0,-8 5,0 10,-8" :fill="color" :stroke="color" stroke-width="2" :transform="translate"></polygon>`

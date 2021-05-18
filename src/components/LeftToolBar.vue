@@ -186,11 +186,11 @@
 <script>
 import global from '@/global/global.js';//全局变量
 export default {
+  props: ['svgInfoData'],
   data () {
     return {
       activeKey: ['1'],//当前激活的key
-      text: `这里是预留位置.`,
-      svgInfoData:[]
+      text: `这里是预留位置.`
     };
   },
   methods: {
@@ -205,20 +205,6 @@ export default {
       global.CurrentlySelectedToolBarWidth = width;
       // alert(this.$UCore.GenUUid());
     },
-  },
-  created () {
-    let _this=this;
-    //请求接口获取组件
-    this.$axios.get('/InterfaceReturn.json')
-      .then(function (response) {
-        _this.svgInfoData=response.data;
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-
   }
 };
 </script>
