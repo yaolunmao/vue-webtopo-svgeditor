@@ -21,7 +21,7 @@
           <input type="color" v-model="selectSvgInfo.svgColor">
         </a-form-item>
         <a-form-item label="大小">
-          <a-input-number v-model:value="selectSvgInfo.height" :min="1" :max="3000"/>
+          <a-input-number v-model:value="selectSvgInfo.size" :min="1" :max="3000"/>
         </a-form-item>
         <a-form-item label="旋转">
           <a-input-number v-model:value="selectSvgInfo.angle" :min="0" :max="360"/>

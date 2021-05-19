@@ -5,16 +5,25 @@
       <a-layout>
         <!-- {{tableDefaultData}} -->
         <a-layout-header>
-          <a-button type="primary"
+          <!-- <a-button type="primary"
                     @click="testD">导出数据</a-button>
           <a-button type="primary"
-                    @click="testE">载入模板</a-button>
+                    @click="testE">载入模板</a-button> -->
           <a-button type="primary"
                     @click="testH">预览</a-button>
+          <a style="margin-left:20px"
+             href="https://svgv1.yaolunmao.top">
+            <a-button type="primary">1.0版本</a-button>
+          </a>
+          <a style="margin-left:20px"
+             href="https://svgedit.yaolunmao.top">
+            <a-button type="primary">在线绘图</a-button>
+          </a>
+          <a style="margin-left:20px"
+             href="https://github.com/yaolunmao/vue-webtopo-svgeditor">
+            <a-button type="primary">帮助</a-button>
+          </a>
         </a-layout-header>
-        <span v-if="shrink"
-              @click="fullScreen"
-              class="icon-shrink svgfont">&#xe648;</span>
         <span v-if="!shrink"
               @click="exitFullscreen"
               class="icon-shrink svgfont">&#xe62b;</span>
@@ -56,11 +65,10 @@
                    :id=item.id
                    @mousedown="MousedownSvg(item.id,index,item.svgPositionX,item.svgPositionY,$event)"
                    :title=item.title
-                   :transform="'translate('+(item.svgPositionX)+','+(item.svgPositionY)+')' +'rotate('+item.angle+')' +'scale('+item.height+')'">
-                  <DynamicTest :svg_color=item.svgColor
-                               :svgtype=item.type
-                               :svgInfoData=svgInfoData></DynamicTest>
-                  <!-- <SvgComponents :color= item.svgColor :width= item.width :type= item.type :tableData= item.tableData :fontSize= item.fontSize :svgText= item.svgText :editable= editable></SvgComponents> -->
+                   :transform="'translate('+(item.svgPositionX)+','+(item.svgPositionY)+')' +'rotate('+item.angle+')' +'scale('+item.size+')'">
+                  <SvgComponents :svg_color=item.svgColor
+                                 :svgtype=item.type
+                                 :svgInfoData=svgInfoData></SvgComponents>
                 </g>
               </svg>
             </div>
@@ -79,9 +87,9 @@ import LeftToolBar from '@/components/LeftToolBar.vue';
 import RightToolBar from '@/components/RightToolBar.vue';
 // import SvgComponents from '@/components/SvgComponents.vue';
 import global from '@/global/global.js';//全局变量
-import DynamicTest from '@/components/DynamicTest.vue';
+import SvgComponents from '@/components/SvgComponents.vue';
 export default {
-  components: { LeftToolBar, RightToolBar, DynamicTest },
+  components: { LeftToolBar, RightToolBar, SvgComponents },
   data () {
     return {
       svgInfoData: [],//接口获取到的组件数据
@@ -100,11 +108,6 @@ export default {
         TypeName: '',//选中的工具栏svg类型名称
         Title: '',//选中的工具栏svg标题
         Color: '',//选中的工具栏svg颜色
-        Height: '',//选中的工具栏svg高度
-        FontSize: '',//选中的工具栏svg字体大小
-        Text: '',//选中的工具栏svg文字
-        Width: '',//选中的工具栏svg高度
-        Angle: '',//选中的工具栏svg角度
       },
       selectSvg: {
         ID: '',//要移动的svg
@@ -119,93 +122,28 @@ export default {
       selectSvgInfo: '',
       tableRowCount: 2,//表格默认行数
       tableColCount: 2,//表格默认列数
-      tableDefaultData: [],
-      editable: true
+      tableDefaultData: []
     }
   },
   methods: {
-    // 全屏  
-    fullScreen () {
-      let _this = this
-      this.shrink = !this.shrink
-      let element = document.documentElement;
-      if (element.requestFullscreen) {
-        element.requestFullscreen();
-      } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-      } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-      } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-      }
-      // 监听全屏后esc事件
-      window.onresize = function () {
-        if (!checkFull()) {
-          _this.shrink = !_this.shrink
-        }
-      }
-      function checkFull () {
-        var isFull =
-          document.fullscreenElement ||
-          document.mozFullScreenElement ||
-          document.webkitFullscreenElement
-        if (isFull === undefined) isFull = false
-        return isFull
-      }
-    },
-    //退出全屏 
-    exitFullscreen () {
-      // this.shrink = !this.shrink
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-    },
     MouseMove (e) {
       let _this = this;
-      // if (e.offsetX == -1) {
-      //   return;
-      // }
-      // if (e.target.nodeName == 'INPUT') {
-      //   return;
-      // }
-      // if (e.offsetY == -1) {
-      //   return;
-      // }
-      // if (this.selectSvg.ID == '') {
-      //   return;
-      // }
+
       if (this.selectSvg.mouseStatus == 0) {
         return;
       }
       const { clientX, clientY } = e
-      console.log("当前：" + clientX + "  " + clientY);
-      // this.mousePosition.positionX += (clientX-this.selectSvg.mPositionX);
-      // this.mousePosition.positionY += (clientY-this.selectSvg.mPositionY);
-      // if (this.mousePosition.positionX < 1) {
-      //   this.mousePosition.positionX = 10;
-      // }
-      // if (this.mousePosition.positionY < 1) {
-      //   this.mousePosition.positionY = 10;
-      // }
+
       let svgID = this.svgLists[this.selectSvg.Index].id;
       //排除当前元素剩下的所有svg元素的列表
       let anyPositionList = this.svgLists.filter(function (list) {
         return list.id != svgID
       });
-      console.log("点击：" + this.selectSvg.mPositionX + "  " + this.selectSvg.mPositionY);
       //将要移动的元素坐标设备为鼠标坐标
       let svgPositionX = this.selectSvg.pointX;
       let svgPositionY = this.selectSvg.pointY;
       svgPositionX += (clientX - this.selectSvg.mPositionX);
       svgPositionY += (clientY - this.selectSvg.mPositionY);
-      console.log("计算：" + (clientX - this.selectSvg.mPositionX) + "  " + (clientY - this.selectSvg.mPositionY));
-      console.log("结果：" + svgPositionX + "  " + svgPositionY);
       setTimeout(function () {
         //少于十个像素自动吸附
         //从所有的x坐标列表中查与当前坐标少于10个像素的组件是否存在
@@ -252,7 +190,7 @@ export default {
       //console.log('点击了画布');
 
     },
-    MousedownSvg (id, index,pointX,pointY, e) {
+    MousedownSvg (id, index, pointX, pointY, e) {
       this.CurrentlySelectedToolBar.Type = global.CurrentlySelectedToolBarType = '';
       this.CurrentlySelectedToolBar.Title = global.CurrentlySelectedToolBarTitle = '';
       //从数组里面根据index找到当前元素
@@ -289,10 +227,12 @@ export default {
       }
       e.preventDefault();
       //判断滚轮方向 -100是往上滑 100是下滑
-      let svgZoom = e.deltaY == "-100" ? "5" : "-5";
-      selectSvgInfo.height += parseInt(svgZoom);
-      if (selectSvgInfo.height < 1) {
-        selectSvgInfo.height = 1;
+      let svgZoom = e.deltaY <0 ? 0.1 : -0.1;
+      console.log(e.deltaY);
+      selectSvgInfo.size += svgZoom;
+      selectSvgInfo.size =parseFloat(selectSvgInfo.size.toFixed(1));
+      if (selectSvgInfo.size < 1) {
+        selectSvgInfo.size = 1;
       }
     },
     DblClick () {
@@ -365,51 +305,23 @@ export default {
       _this.CurrentlySelectedToolBar.TypeName = global.CurrentlySelectedToolBarTypeName;
       _this.CurrentlySelectedToolBar.Color = global.CurrentlySelectedToolBarColor;
       _this.CurrentlySelectedToolBar.Height = global.CurrentlySelectedToolBarHeight;
-      _this.CurrentlySelectedToolBar.FontSize = global.CurrentlySelectedToolBarFontSize;
-      _this.CurrentlySelectedToolBar.Text = global.CurrentlySelectedToolBarText;
-      _this.CurrentlySelectedToolBar.Width = global.CurrentlySelectedToolBarWidth;
-      _this.CurrentlySelectedToolBar.Angle = global.CurrentlySelectedToolBarAngle;
     }, false);
     canvasdiv.addEventListener("drop", function (e) {
       e.preventDefault();
       if (_this.CurrentlySelectedToolBar.Type == '') {
         return;
       }
-      let tableData = [];
-      if (_this.CurrentlySelectedToolBar.Type == 'TableSvg') {
-        for (let r = 0; r < _this.tableRowCount; r++) {
-          let tableColDataList = [];
-          for (let c = 0; c < _this.tableColCount; c++) {
-            let tableColData = {
-              "id": _this.$UCore.GenUUid(),
-              "val": `${r + 1}行${c + 1}列`
-            }
-            tableColDataList.push(tableColData);
-          }
-          let tableRowData = {
-            "cols": tableColDataList
-          };
-          tableData.push(tableRowData)
-        }
-      }
       //根据类型和鼠标位置创建组件
       let svgItem = {
         id: _this.$UCore.GenUUid(),
-        sort: 0,
         title: _this.CurrentlySelectedToolBar.Title,
         type: _this.CurrentlySelectedToolBar.Type,
         typeName: _this.CurrentlySelectedToolBar.TypeName,
         svgColor: _this.CurrentlySelectedToolBar.Color,
         svgPositionX: e.offsetX,
         svgPositionY: e.offsetY,
-        height: 1,
-        width: _this.CurrentlySelectedToolBar.Width,
-        fontSize: _this.CurrentlySelectedToolBar.FontSize,
-        svgText: _this.CurrentlySelectedToolBar.Text,
-        tableRowCount: _this.tableRowCount,
-        tableColCount: _this.tableColCount,
-        tableData: tableData,
-        angle: _this.CurrentlySelectedToolBar.Angle
+        size: 1,
+        angle: 0
         //translate:`translate(${this.mousePosition.positionX},${this.mousePosition.positionY})`
       };
       _this.svgLists.push(svgItem);
