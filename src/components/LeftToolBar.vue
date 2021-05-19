@@ -2,7 +2,7 @@
   <div class="components-layout-left">
 
     <a-input-search placeholder="搜索组件"
-                    @search="onSearch" />
+                    />
     <a-collapse v-model:activeKey="activeKey"
                 accordion>
       <a-collapse-panel key="1"
