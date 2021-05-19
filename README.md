@@ -78,6 +78,12 @@ yarn serve
 
 ![预览界面](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_210519050543%E6%B7%BB%E5%8A%A0%E7%BB%84%E4%BB%B63.png)
 
+也支持直接引入图片，只不过放大有失真，将下面的代码替换上面json文件的template值
+
+```
+<image x=\"-33\" y=\"-33\" width=\"66\" height=\"66\" xlink:href=\"https://svg.yaolunmao.top/test.png\" />
+```
+
 ps：目前中心辅助线的坐标取决于svg组件的中心坐标，请自行添加transform属性调整svg组件中心坐标
 
 ## 截图
