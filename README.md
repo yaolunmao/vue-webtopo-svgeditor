@@ -6,6 +6,7 @@
 
 ## [版本1.0请点此](https://svgv1.yaolunmao.top)
 
+## [图片挂了点此](https://www.cnblogs.com/Hero-/p/14784744.html)
 ## 预览地址
 
 [https://svg.yaolunmao.top](https://svg.yaolunmao.top)
@@ -45,7 +46,7 @@ yarn serve
 
 点击[这里](https://svgedit.yaolunmao.top/)进行svg图像绘制，我这里以心形为例
 
-![绘制心形图片](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_210519050533%E6%B7%BB%E5%8A%A0%E7%BB%84%E4%BB%B61.png)
+![绘制心形图片](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_2105190646421.png)
 
 将svg代码复制下来，双引号进行转义，删除无用属性（比如id），你也可以直接使用我下面的代码
 
