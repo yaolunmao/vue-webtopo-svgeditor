@@ -1,8 +1,7 @@
 <template>
   <div class="components-layout-left">
 
-    <a-input-search placeholder="搜索组件"
-                    />
+    <a-input-search placeholder="搜索组件" />
     <a-collapse v-model:activeKey="activeKey"
                 accordion>
       <a-collapse-panel key="1"
@@ -31,7 +30,6 @@
   </div>
 </template>
 <script>
-import global from '@/global/global.js';//全局变量
 export default {
   props: ['svgInfoData'],
   data () {
@@ -42,10 +40,12 @@ export default {
   },
   methods: {
     Mousedown (type, title, color) {
-      global.CurrentlySelectedToolBarType = type;
-      global.CurrentlySelectedToolBarTypeName = title;
-      global.CurrentlySelectedToolBarTitle = title;
-      global.CurrentlySelectedToolBarColor = color;
+      window.CurrentlySelectedToolBar = {
+        Type: type,//选中的工具栏svg类型
+        TypeName:title,//选中的工具栏svg类型名称
+        Title:title,//选中的工具栏svg标题
+        Color:color//选中的工具栏svg颜色
+      };
     },
   }
 };

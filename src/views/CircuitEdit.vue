@@ -87,7 +87,6 @@
 import LeftToolBar from '@/components/LeftToolBar.vue';
 import RightToolBar from '@/components/RightToolBar.vue';
 // import SvgComponents from '@/components/SvgComponents.vue';
-import global from '@/global/global.js';//全局变量
 import SvgComponents from '@/components/SvgComponents.vue';
 export default {
   components: { LeftToolBar, RightToolBar, SvgComponents },
@@ -104,12 +103,6 @@ export default {
       //辅助线元素
       guideX: '',
       guideY: '',
-      CurrentlySelectedToolBar: {
-        Type: '',//选中的工具栏svg类型
-        TypeName: '',//选中的工具栏svg类型名称
-        Title: '',//选中的工具栏svg标题
-        Color: '',//选中的工具栏svg颜色
-      },
       selectSvg: {
         ID: '',//要移动的svg
         Index: 0,
@@ -192,8 +185,8 @@ export default {
 
     },
     MousedownSvg (id, index, pointX, pointY, e) {
-      this.CurrentlySelectedToolBar.Type = global.CurrentlySelectedToolBarType = '';
-      this.CurrentlySelectedToolBar.Title = global.CurrentlySelectedToolBarTitle = '';
+      window.CurrentlySelectedToolBar.Type = '';
+      window.CurrentlySelectedToolBar.Title = '';
       //从数组里面根据index找到当前元素
       this.selectSvg.ID = id;
       this.selectSvg.Index = index;
@@ -209,7 +202,7 @@ export default {
     MouseupCanvas () {
       this.guideX.style.display = 'none';
       this.guideY.style.display = 'none';
-      if (this.CurrentlySelectedToolBar.Title != '' || this.CurrentlySelectedToolBar.Type != '') {
+      if (window.CurrentlySelectedToolBar.Title != '' || window.CurrentlySelectedToolBar.Type != '') {
         return;
       }
       // this.selectSvg.ID = '';
@@ -239,7 +232,6 @@ export default {
       alert(JSON.stringify(this.svgLists));
     },
     testE () {
-      this.svgLists = global.AnalogData;
     },
     testH () {
       localStorage.setItem('svginfo', JSON.stringify(this.svgLists));
@@ -291,24 +283,19 @@ export default {
     _this.guideY = document.querySelector('#guide-y');//辅助线y轴
     canvasdiv.addEventListener("dragover", function (e) {
       e.preventDefault();
-      _this.CurrentlySelectedToolBar.Type = global.CurrentlySelectedToolBarType;
-      _this.CurrentlySelectedToolBar.Title = global.CurrentlySelectedToolBarTitle;
-      _this.CurrentlySelectedToolBar.TypeName = global.CurrentlySelectedToolBarTypeName;
-      _this.CurrentlySelectedToolBar.Color = global.CurrentlySelectedToolBarColor;
-      _this.CurrentlySelectedToolBar.Height = global.CurrentlySelectedToolBarHeight;
     }, false);
     canvasdiv.addEventListener("drop", function (e) {
       e.preventDefault();
-      if (_this.CurrentlySelectedToolBar.Type == '') {
+      if (window.CurrentlySelectedToolBar.Type == '') {
         return;
       }
       //根据类型和鼠标位置创建组件
       let svgItem = {
         id: _this.$UCore.GenUUid(),
-        title: _this.CurrentlySelectedToolBar.Title,
-        type: _this.CurrentlySelectedToolBar.Type,
-        typeName: _this.CurrentlySelectedToolBar.TypeName,
-        svgColor: _this.CurrentlySelectedToolBar.Color,
+        title: window.CurrentlySelectedToolBar.Title,
+        type: window.CurrentlySelectedToolBar.Type,
+        typeName: window.CurrentlySelectedToolBar.TypeName,
+        svgColor: window.CurrentlySelectedToolBar.Color,
         svgPositionX: e.offsetX,
         svgPositionY: e.offsetY,
         size: 1,
