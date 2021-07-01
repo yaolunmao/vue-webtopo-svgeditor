@@ -63,6 +63,7 @@
                    v-for="(item,index) in svgLists"
                    :key="item"
                    :id=item.id
+                   :class="selectSvgInfo.id==item.id?'topo-layer-view-selected':''"
                    @mousedown="MousedownSvg(item.id,index,item.svgPositionX,item.svgPositionY,$event)"
                    :title=item.title
                    :transform="'translate('+(item.svgPositionX)+','+(item.svgPositionY)+')' +'rotate('+item.angle+')' +'scale('+item.size+')'">
@@ -203,12 +204,7 @@ export default {
       this.selectSvg.pointY = pointY;
       this.selectSvgInfo = this.svgLists[index];
 
-      //获取所有g标签 将当前标签追加选中样式
-      let gAnyList = document.querySelectorAll('g');
-      gAnyList.forEach(g => {
-        g.classList.remove("topo-layer-view-selected")
-      });
-      document.getElementById(id).classList.add("topo-layer-view-selected");
+
     },
     MouseupCanvas () {
       this.guideX.style.display = 'none';
@@ -227,20 +223,15 @@ export default {
       }
       e.preventDefault();
       //判断滚轮方向 -100是往上滑 100是下滑
-      let svgZoom = e.deltaY <0 ? 0.1 : -0.1;
+      let svgZoom = e.deltaY < 0 ? 0.1 : -0.1;
       console.log(e.deltaY);
       selectSvgInfo.size += svgZoom;
-      selectSvgInfo.size =parseFloat(selectSvgInfo.size.toFixed(1));
+      selectSvgInfo.size = parseFloat(selectSvgInfo.size.toFixed(1));
       if (selectSvgInfo.size < 1) {
         selectSvgInfo.size = 1;
       }
     },
     DblClick () {
-      //获取所有g标签 清除所有选中样式
-      let gAnyList = document.querySelectorAll('g');
-      gAnyList.forEach(g => {
-        g.classList.remove("topo-layer-view-selected")
-      });
       this.selectSvgInfo = '';
     },
     testD () {
@@ -325,15 +316,7 @@ export default {
         //translate:`translate(${this.mousePosition.positionX},${this.mousePosition.positionY})`
       };
       _this.svgLists.push(svgItem);
-      setTimeout(function () {
-        //获取所有g标签 将当前标签追加选中样式
-        let gAnyList = document.querySelectorAll('g');
-        gAnyList.forEach(g => {
-          g.classList.remove("topo-layer-view-selected")
-        });
-        document.getElementById(svgItem.id).classList.add("topo-layer-view-selected");
-        _this.selectSvgInfo = svgItem;
-      }, 100);
+      _this.selectSvgInfo = svgItem;
     }, false);
   },
   created () {
@@ -371,14 +354,6 @@ export default {
         copySvgInfo.svgPositionY = selectSvgInfo.svgPositionY + 10;
         _this.svgLists.push(copySvgInfo);
         _this.selectSvgInfo = copySvgInfo;
-        setTimeout(function () {
-          //获取所有g标签 将当前标签追加选中样式
-          let gAnyList = document.querySelectorAll('g');
-          gAnyList.forEach(g => {
-            g.classList.remove("topo-layer-view-selected")
-          });
-          document.getElementById(copySvgInfo.id).classList.add("topo-layer-view-selected");
-        }, 100);
       }
       //deleted
       else if (e1 && e1.keyCode == 46) {
