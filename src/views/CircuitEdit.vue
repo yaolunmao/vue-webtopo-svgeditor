@@ -5,12 +5,45 @@
       <a-layout>
         <!-- {{tableDefaultData}} -->
         <a-layout-header>
+          <a-modal v-model:visible="addSvgVisible"
+                   title="模拟添加组件"
+                   @ok="addSvgHandleOk">
+            <a-form layout="horizontal">
+              <a-form-item label="类型">
+                <a-input v-model:value="testAddSvg.type"
+                         placeholder="请输入组件类型" />
+              </a-form-item>
+              <a-form-item label="标题">
+                <a-input v-model:value="testAddSvg.title"
+                         placeholder="请输入组件标题" />
+              </a-form-item>
+              <a-form-item label="svg代码">
+                <a-input v-model:value="testAddSvg.template"
+                         placeholder="请输入svg代码" />
+              </a-form-item>
+              <a-form-item label="默认颜色">
+                <input type="color"
+                       v-model="testAddSvg.default_color">
+              </a-form-item>
+              <a-form-item label="预览图像">
+                <a-input v-model:value="testAddSvg.priview_img"
+                         placeholder="请输入预览图像地址" />
+              </a-form-item>
+            </a-form>
+          </a-modal>
           <!-- <a-button type="primary"
                     @click="testD">导出数据</a-button>
           <a-button type="primary"
                     @click="testE">载入模板</a-button> -->
           <a-button type="primary"
                     @click="testH">预览</a-button>
+          <a style="margin-left:20px">
+            <a-button type="primary"
+                      style="margin-left:20px"
+                      @click="showAddSvgModal">
+              添加组件
+            </a-button>
+          </a>
           <a style="margin-left:20px"
              href="https://svgv1.yaolunmao.top">
             <a-button type="primary">1.0版本</a-button>
@@ -22,6 +55,10 @@
           <a style="margin-left:20px"
              href="https://github.com/yaolunmao/vue-webtopo-svgeditor">
             <a-button type="primary">帮助</a-button>
+          </a>
+          <a style="margin-left:20px">
+            <a-button type="primary"
+                      @click="exportSvg">导出svg</a-button>
           </a>
         </a-layout-header>
         <span v-if="!shrink"
@@ -49,7 +86,8 @@
                    xmlns:xlink="http://www.w3.org/1999/xlink"
                    style="background-color:#000000"
                    width="100%"
-                   height="100%">
+                   height="100%"
+                   id="svgCanvas">
                 <defs />
                 <filter x="0"
                         y="0"
@@ -92,6 +130,15 @@ export default {
   components: { LeftToolBar, RightToolBar, SvgComponents },
   data () {
     return {
+      testAddSvg: {
+        type: "testAddSvg",
+        title: "测试新增组件",
+        template: "<path :fill=\"svg_color\" :stroke=\"svg_color\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>",
+        props: ["svg_color"],
+        default_color: "#FF0000",
+        priview_img: "https://svg.yaolunmao.top/test.png"
+      },
+      addSvgVisible: false,
       svgInfoData: [],//接口获取到的组件数据
       shrink: true,//收缩状态  true收缩  false展开
       svgLists: [],//svg列表
@@ -120,6 +167,18 @@ export default {
     }
   },
   methods: {
+    showAddSvgModal () {
+      this.addSvgVisible = true;
+    },
+    addSvgHandleOk () {
+      this.svgInfoData.push(this.testAddSvg);
+      this.addSvgVisible = false;
+    },
+    exportSvg () {
+      var exportStr = document.querySelector("#svgCanvas").outerHTML;
+      console.log(exportStr);
+      alert("请使用F12查看consolo面板");
+    },
     MouseMove (e) {
       let _this = this;
 
@@ -180,9 +239,9 @@ export default {
         }
       }, 1);
     },
-    MousedownCanvas () {
+    MousedownCanvas (e) {
       //console.log('点击了画布');
-
+      console.log('当前鼠标位置',e.clientX,e.clientY)
     },
     MousedownSvg (id, index, pointX, pointY, e) {
       window.CurrentlySelectedToolBar.Type = '';
@@ -191,8 +250,8 @@ export default {
       this.selectSvg.ID = id;
       this.selectSvg.Index = index;
       this.selectSvg.mouseStatus = 1;
-      this.selectSvg.mPositionX = e.clientX;
-      this.selectSvg.mPositionY = e.clientY;
+      this.selectSvg.mPositionX = e.offsetX;
+      this.selectSvg.mPositionY = e.offsetY;
       this.selectSvg.pointX = pointX;
       this.selectSvg.pointY = pointY;
       this.selectSvgInfo = this.svgLists[index];
@@ -217,7 +276,6 @@ export default {
       e.preventDefault();
       //判断滚轮方向 -100是往上滑 100是下滑
       let svgZoom = e.deltaY < 0 ? 0.1 : -0.1;
-      console.log(e.deltaY);
       selectSvgInfo.size += svgZoom;
       selectSvgInfo.size = parseFloat(selectSvgInfo.size.toFixed(1));
       if (selectSvgInfo.size < 1) {
