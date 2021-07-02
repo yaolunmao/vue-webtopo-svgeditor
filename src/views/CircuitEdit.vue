@@ -35,8 +35,13 @@
                     @click="testD">导出数据</a-button>
           <a-button type="primary"
                     @click="testE">载入模板</a-button> -->
+
+            <a-button type="danger">当前为2.1版本</a-button>
+
           <a-button type="primary"
-                    @click="testH">预览</a-button>
+                    @click="testH"
+                    style="margin-left:20px">预览</a-button>
+
           <a style="margin-left:20px">
             <a-button type="primary"
                       style="margin-left:20px"
@@ -47,6 +52,10 @@
           <a style="margin-left:20px"
              href="https://svgv1.yaolunmao.top">
             <a-button type="primary">1.0版本</a-button>
+          </a>
+          <a style="margin-left:20px"
+             href="https://svgv2.yaolunmao.top">
+            <a-button type="primary">2.0版本</a-button>
           </a>
           <a style="margin-left:20px"
              href="https://svgedit.yaolunmao.top">
@@ -105,8 +114,7 @@
                    @mousedown="MousedownSvg(item.id,index,item.svgPositionX,item.svgPositionY,$event)"
                    :title=item.title
                    :transform="'translate('+(item.svgPositionX)+','+(item.svgPositionY)+')' +'rotate('+item.angle+')' +'scale('+item.size+')'">
-                  <SvgComponents :svg_color=item.svgColor
-                                 :svgtype=item.type
+                  <SvgComponents :component_prop=item
                                  :svgInfoData=svgInfoData></SvgComponents>
                 </g>
               </svg>
@@ -153,14 +161,15 @@ export default {
       selectSvg: {
         ID: '',//要移动的svg
         Index: 0,
-        mouseStatus: 0, // 鼠标状态 1按下； 0弹起
         mPositionX: 0,//选中svg时鼠标的x轴坐标
         mPositionY: 0,//选中svg时鼠标的y轴坐标
         pointX: 0,//选中svg时svg的x轴坐标
         pointY: 0,//选中svg时svg的y轴坐标
       }
       ,
+      mouseStatus: 0, // 鼠标状态 1按下； 0弹起
       selectSvgInfo: '',
+      clickType: '',//鼠标点击行为
       tableRowCount: 2,//表格默认行数
       tableColCount: 2,//表格默认列数
       tableDefaultData: []
@@ -182,90 +191,144 @@ export default {
     MouseMove (e) {
       let _this = this;
 
-      if (this.selectSvg.mouseStatus == 0) {
-        return;
-      }
-      const { clientX, clientY } = e
+      if (this.clickType == 'draggable') {
+        if (this.mouseStatus == 0) {
+          return;
+        }
+        const { clientX, clientY } = e
 
-      let svgID = this.svgLists[this.selectSvg.Index].id;
-      //排除当前元素剩下的所有svg元素的列表
-      let anyPositionList = this.svgLists.filter(function (list) {
-        return list.id != svgID
-      });
-      //将要移动的元素坐标设备为鼠标坐标
-      let svgPositionX = this.selectSvg.pointX;
-      let svgPositionY = this.selectSvg.pointY;
-      svgPositionX += (clientX - this.selectSvg.mPositionX);
-      svgPositionY += (clientY - this.selectSvg.mPositionY);
-      setTimeout(function () {
-        //少于十个像素自动吸附
-        //从所有的x坐标列表中查与当前坐标少于10个像素的组件是否存在
-        let exitsAdsorbX = anyPositionList.filter(function (list) {
-          return -10 < (list.svgPositionX - svgPositionX) && (list.svgPositionX - svgPositionX) < 10
+        // let svgID = this.svgLists[this.selectSvg.Index].id;
+        let svgID = this.selectSvg.ID;
+        //排除当前元素剩下的所有svg元素的列表
+        let anyPositionList = this.svgLists.filter(function (list) {
+          return list.id != svgID
         });
-        if (exitsAdsorbX.length > 0) {
-          svgPositionX = exitsAdsorbX[0].svgPositionX;
+        //将要移动的元素坐标设备为鼠标坐标
+        let svgPositionX = this.selectSvg.pointX;
+        let svgPositionY = this.selectSvg.pointY;
+        svgPositionX += (clientX - this.selectSvg.mPositionX);
+        svgPositionY += (clientY - this.selectSvg.mPositionY);
+        setTimeout(function () {
+          //少于十个像素自动吸附
+          //从所有的x坐标列表中查与当前坐标少于10个像素的组件是否存在
+          let exitsAdsorbX = anyPositionList.filter(function (list) {
+            return -10 < (list.svgPositionX - svgPositionX) && (list.svgPositionX - svgPositionX) < 10
+          });
+          if (exitsAdsorbX.length > 0) {
+            svgPositionX = exitsAdsorbX[0].svgPositionX;
+          }
+          //y轴相同 横向坐标自动吸附
+          let exitsAdsorbY = anyPositionList.filter(function (list) {
+            return -10 < (list.svgPositionY - svgPositionY) && (list.svgPositionY - svgPositionY) < 10
+          });
+          if (exitsAdsorbY.length > 0) {
+            svgPositionY = exitsAdsorbY[0].svgPositionY;
+          }
+          _this.svgLists[_this.selectSvg.Index].svgPositionX = svgPositionX;
+          _this.svgLists[_this.selectSvg.Index].svgPositionY = svgPositionY;
+          //从所有的x坐标列表中查当前坐标是否存在
+          let exitsNowX = anyPositionList.filter(function (list) {
+            return list.svgPositionX === svgPositionX
+          });
+          if (exitsNowX.length > 0) {
+            _this.guideY.style.setProperty('left', svgPositionX - 1 + 'px');
+            _this.guideY.style.display = 'inline';
+          }
+          else {
+            _this.guideY.style.display = 'none';
+          }
+          //从所有的y坐标列表中查当前坐标是否存在
+          let exitsNowY = anyPositionList.filter(function (list) {
+            return list.svgPositionY === svgPositionY
+          });
+          if (exitsNowY.length > 0) {
+            _this.guideX.style.setProperty('top', svgPositionY + 'px');
+            _this.guideX.style.display = 'inline';
+          }
+          else {
+            _this.guideX.style.display = 'none';
+          }
+        }, 1);
+      }
+      else if (this.clickType == 'click') {
+        if (this.mouseStatus == 0) {
+          return;
         }
-        //y轴相同 横向坐标自动吸附
-        let exitsAdsorbY = anyPositionList.filter(function (list) {
-          return -10 < (list.svgPositionY - svgPositionY) && (list.svgPositionY - svgPositionY) < 10
-        });
-        if (exitsAdsorbY.length > 0) {
-          svgPositionY = exitsAdsorbY[0].svgPositionY;
-        }
-        _this.svgLists[_this.selectSvg.Index].svgPositionX = svgPositionX;
-        _this.svgLists[_this.selectSvg.Index].svgPositionY = svgPositionY;
-        //从所有的x坐标列表中查当前坐标是否存在
-        let exitsNowX = anyPositionList.filter(function (list) {
-          return list.svgPositionX === svgPositionX
-        });
-        if (exitsNowX.length > 0) {
-          _this.guideY.style.setProperty('left', svgPositionX - 1 + 'px');
-          _this.guideY.style.display = 'inline';
-        }
-        else {
-          _this.guideY.style.display = 'none';
-        }
-        //从所有的y坐标列表中查当前坐标是否存在
-        let exitsNowY = anyPositionList.filter(function (list) {
-          return list.svgPositionY === svgPositionY
-        });
-        if (exitsNowY.length > 0) {
-          _this.guideX.style.setProperty('top', svgPositionY + 'px');
-          _this.guideX.style.display = 'inline';
-        }
-        else {
-          _this.guideX.style.display = 'none';
-        }
-      }, 1);
+        this.selectSvgInfo.mPoint.endX = e.offsetX;
+        this.selectSvgInfo.mPoint.endY = e.offsetY;
+      }
     },
     MousedownCanvas (e) {
-      //console.log('点击了画布');
-      console.log('当前鼠标位置',e.clientX,e.clientY)
+      if (this.clickType == 'draggable') {
+        return;
+      }
+      if (this.$store.state.CurrentlySelectedToolBar && this.$store.state.CurrentlySelectedToolBar.CreateType == 'click') {
+        //根据类型和鼠标位置创建组件
+        let svg_id = this.$UCore.GenUUid()
+        let svgItem = {
+          id: svg_id,
+          title: this.$store.state.CurrentlySelectedToolBar.Title,
+          type: this.$store.state.CurrentlySelectedToolBar.Type,
+          typeName: this.$store.state.CurrentlySelectedToolBar.TypeName,
+          svgColor: this.$store.state.CurrentlySelectedToolBar.Color,
+          svgPositionX: e.offsetX,
+          svgPositionY: e.offsetY,
+          mPoint: {
+            startX: e.offsetX,
+            startY: e.offsetY,
+            endX: e.offsetX,
+            endY: e.offsetY
+          },
+          size: 1,
+          angle: 0
+          //translate:`translate(${this.mousePosition.positionX},${this.mousePosition.positionY})`
+        };
+        this.svgLists.push(svgItem);
+        this.selectSvgInfo = svgItem;
+        this.mouseStatus = 1;
+        this.clickType = 'click';
+      }
+
     },
     MousedownSvg (id, index, pointX, pointY, e) {
-      window.CurrentlySelectedToolBar.Type = '';
-      window.CurrentlySelectedToolBar.Title = '';
+      this.$store.clearCurrentlySelectedToolBarAction();
       //从数组里面根据index找到当前元素
       this.selectSvg.ID = id;
       this.selectSvg.Index = index;
-      this.selectSvg.mouseStatus = 1;
-      this.selectSvg.mPositionX = e.offsetX;
-      this.selectSvg.mPositionY = e.offsetY;
+      this.mouseStatus = 1;
+      this.selectSvg.mPositionX = e.clientX;
+      this.selectSvg.mPositionY = e.clientY;
       this.selectSvg.pointX = pointX;
       this.selectSvg.pointY = pointY;
       this.selectSvgInfo = this.svgLists[index];
-
+      this.clickType = 'draggable';
 
     },
     MouseupCanvas () {
-      this.guideX.style.display = 'none';
-      this.guideY.style.display = 'none';
-      if (window.CurrentlySelectedToolBar.Title != '' || window.CurrentlySelectedToolBar.Type != '') {
+      if (this.mouseStatus == 0) {
         return;
       }
+      this.guideX.style.display = 'none';
+      this.guideY.style.display = 'none';
+      // if (this.$store.state.CurrentlySelectedToolBar.Type != '') {
+      //   return;
+      // }
       // this.selectSvg.ID = '';
-      this.selectSvg.mouseStatus = 0;
+      this.mouseStatus = 0;
+      // this.clickType = '';
+      if (this.clickType == 'draggable') {
+        this.clickType = '';
+      }
+      if (this.clickType == 'click') {
+        if (this.selectSvgInfo.mPoint.startX == this.selectSvgInfo.mPoint.endX && this.selectSvgInfo.mPoint.startY == this.selectSvgInfo.mPoint.endY) {
+          //根据当前id找到当前元素的index
+          let selectSvgIndex = this.svgLists.indexOf(this.svgLists.filter(f => f.id == this.selectSvgInfo.id)[0]);
+          this.svgLists.splice(selectSvgIndex, 1);
+          this.selectSvg = {};
+          this.selectSvgInfo = {};
+        }
+      }
+      // this.$store.state.CurrentlySelectedToolBar = {};
     },
     MouseWheel (e) {
       //获取当前选中组件
@@ -284,6 +347,7 @@ export default {
     },
     DblClick () {
       this.selectSvgInfo = '';
+      this.$store.clearCurrentlySelectedToolBarAction();
     },
     testD () {
       console.log(JSON.stringify(this.svgLists));
@@ -344,16 +408,16 @@ export default {
     }, false);
     canvasdiv.addEventListener("drop", function (e) {
       e.preventDefault();
-      if (window.CurrentlySelectedToolBar.Type == '') {
+      if (_this.$store.state.CurrentlySelectedToolBar.Type == '' || _this.$store.state.CurrentlySelectedToolBar.CreateType != 'draggable') {
         return;
       }
       //根据类型和鼠标位置创建组件
       let svgItem = {
         id: _this.$UCore.GenUUid(),
-        title: window.CurrentlySelectedToolBar.Title,
-        type: window.CurrentlySelectedToolBar.Type,
-        typeName: window.CurrentlySelectedToolBar.TypeName,
-        svgColor: window.CurrentlySelectedToolBar.Color,
+        title: _this.$store.state.CurrentlySelectedToolBar.Title,
+        type: _this.$store.state.CurrentlySelectedToolBar.Type,
+        typeName: _this.$store.state.CurrentlySelectedToolBar.TypeName,
+        svgColor: _this.$store.state.CurrentlySelectedToolBar.Color,
         svgPositionX: e.offsetX,
         svgPositionY: e.offsetY,
         size: 1,
@@ -413,7 +477,7 @@ export default {
     this.$axios.get('/InterfaceReturn.json')
       .then(function (response) {
         _this.svgInfoData = response.data;
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

@@ -1,3 +1,4 @@
+
 <template>
   <div class="components-layout-left">
 
@@ -5,25 +6,34 @@
     <a-collapse v-model:activeKey="activeKey"
                 accordion>
       <a-collapse-panel key="1"
-                        header="基本形状">
+                        header="拖动组件">
         <ul class="svg-nav-list">
-          <li v-for="item in svgInfoData"
+          <li v-for="item in draggableComponentList"
               :key="item">
             <div class="title">{{item.title}}</div>
             <img :title="item.title"
-                 @mousedown="Mousedown(item.type,item.title,item.default_color)"
+                 @mousedown="Mousedown(item.type,item.title,item.default_attr,item.create_type)"
                  :src="item.priview_img"
-                 draggable="true">
+                 draggable="draggable">
           </li>
         </ul>
       </a-collapse-panel>
       <a-collapse-panel key="2"
-                        header="拓扑图"
+                        header="绘制组件"
                         :disabled="false">
-        <p>{{ text }}</p>
+        <ul class="svg-nav-list">
+          <li v-for="item in clickComponentList"
+              :key="item"
+              :class="$store.state.CurrentlySelectedToolBar.CreateType==item.create_type?'toolbar-selected':''">
+            <div class="title">{{item.title}}</div>
+            <img :title="item.title"
+                 @mousedown="Mousedown(item.type,item.title,item.default_attr,item.create_type)"
+                 :src="item.priview_img">
+          </li>
+        </ul>
       </a-collapse-panel>
       <a-collapse-panel key="3"
-                        header="物联网">
+                        header="图表">
         <p>{{ text }}</p>
       </a-collapse-panel>
     </a-collapse>
@@ -35,17 +45,39 @@ export default {
   data () {
     return {
       activeKey: ['1'],//当前激活的key
-      text: `这里是预留位置.`
+      text: `这里是预留位置.`,
+      draggableComponentList: [],//拖动组件
+      clickComponentList: [],//点击类型组件
     };
   },
+  watch: {
+    'svgInfoData': function (val) {
+      this.draggableComponentList = val.filter(m => {
+        return m.create_type == 'draggable'
+      });
+      this.clickComponentList = val.filter(m => {
+        return m.create_type == 'click'
+      });
+    },
+  },
   methods: {
-    Mousedown (type, title, color) {
-      window.CurrentlySelectedToolBar = {
+    /**
+     * @description: 点击左侧工具栏触发函数
+     * @param {*} type
+     * @param {*} title
+     * @param {*} default_attr 属性默认值
+     * @param {*} create_type 组件创建方式
+     * @return {*}
+     */
+    Mousedown (type, title, default_attr, create_type) {
+      let CurrentlySelectedToolBar = {
         Type: type,//选中的工具栏svg类型
-        TypeName:title,//选中的工具栏svg类型名称
-        Title:title,//选中的工具栏svg标题
-        Color:color//选中的工具栏svg颜色
+        TypeName: title,//选中的工具栏svg类型名称
+        Title: title,//选中的工具栏svg标题
+        Color: default_attr.color,//选中的工具栏svg颜色
+        CreateType: create_type//选中工具栏的创建方式
       };
+      this.$store.setCurrentlySelectedToolBarAction(CurrentlySelectedToolBar);
     },
   }
 };
@@ -127,5 +159,8 @@ export default {
       }
     }
   }
+}
+.toolbar-selected {
+  outline: 1px solid #0cf;
 }
 </style>

@@ -1,11 +1,14 @@
+<!--
+ * @Author: yaolunmao
+-->
 <template>
-  <component :is="svgtype"
-             :svg_color= svg_color></component>
+  <component :is="component_prop.type"
+             :prop_data= component_prop></component>
 </template>
 <script>
 let importComponents = {};
 export default {
-  props: ['svgInfoData','svg_color','svgtype'],
+  props: ['svgInfoData','component_prop'],
   data () {
     return {
       componentTag: ''
@@ -17,7 +20,6 @@ export default {
   },
   created () {
     this.svgInfoData.forEach(f => {
-      console.log(111);
       let componentInfo = {
         template: f.template,
         props: f.props
