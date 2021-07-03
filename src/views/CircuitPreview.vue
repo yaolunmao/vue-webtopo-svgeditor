@@ -14,8 +14,7 @@
            :id=item.id
            :title=item.title
            :transform="'translate('+(item.svgPositionX)+','+(item.svgPositionY)+')' +'rotate('+item.angle+')' +'scale('+item.size+')'">
-          <SvgComponents :svg_color=item.svgColor
-                         :svgtype=item.type
+          <SvgComponents :component_prop=item
                          :svgInfoData=svgInfoData></SvgComponents>
         </g>
       </svg>
@@ -35,7 +34,7 @@ export default {
   data () {
     return {
       svgLists: [],
-      svgInfoData:[],
+      svgInfoData: [],
       analogDataTimer: '',//模拟数据定时器
       userInfo: '',
       editable: false

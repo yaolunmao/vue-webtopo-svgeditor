@@ -6,6 +6,7 @@
 import {reactive } from 'vue';
 export const store = {
   state: reactive({
+    //选中工具栏
     CurrentlySelectedToolBar : {
       Type: '',//选中的工具栏svg类型
       TypeName: '',//选中的工具栏svg类型名称

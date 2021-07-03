@@ -51,14 +51,18 @@ export default {
     };
   },
   watch: {
-    'svgInfoData': function (val) {
-      this.draggableComponentList = val.filter(m => {
-        return m.create_type == 'draggable'
-      });
-      this.clickComponentList = val.filter(m => {
-        return m.create_type == 'click'
-      });
-    },
+    'svgInfoData': {
+      deep: true,
+      handler (val) {
+        console.log(val);
+        this.draggableComponentList = val.filter(m => {
+          return m.create_type == 'draggable'
+        });
+        this.clickComponentList = val.filter(m => {
+          return m.create_type == 'click'
+        });
+      }
+    }
   },
   methods: {
     /**

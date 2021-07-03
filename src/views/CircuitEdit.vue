@@ -23,7 +23,7 @@
               </a-form-item>
               <a-form-item label="默认颜色">
                 <input type="color"
-                       v-model="testAddSvg.default_color">
+                       v-model="testAddSvg.default_attr.color">
               </a-form-item>
               <a-form-item label="预览图像">
                 <a-input v-model:value="testAddSvg.priview_img"
@@ -36,7 +36,7 @@
           <a-button type="primary"
                     @click="testE">载入模板</a-button> -->
 
-            <a-button type="danger">当前为2.1版本</a-button>
+          <a-button type="danger">当前为2.1版本</a-button>
 
           <a-button type="primary"
                     @click="testH"
@@ -141,9 +141,12 @@ export default {
       testAddSvg: {
         type: "testAddSvg",
         title: "测试新增组件",
-        template: "<path :fill=\"svg_color\" :stroke=\"svg_color\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>",
-        props: ["svg_color"],
-        default_color: "#FF0000",
+        template: "<path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>",
+        props: ["prop_data"],
+        default_attr: {
+          "color": "#FF0000"
+        },
+        create_type:'draggable',
         priview_img: "https://svg.yaolunmao.top/test.png"
       },
       addSvgVisible: false,
@@ -180,7 +183,8 @@ export default {
       this.addSvgVisible = true;
     },
     addSvgHandleOk () {
-      this.svgInfoData.push(this.testAddSvg);
+      this.svgInfoData[this.svgInfoData.length]=this.testAddSvg;
+      console.log(this.svgInfoData);
       this.addSvgVisible = false;
     },
     exportSvg () {
