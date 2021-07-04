@@ -4,12 +4,24 @@
 
 当前主分支版本为2.0
 
+
+2.1版本已经在做了 新增了绘制组件和绘制图表 目前是集成Echarts图表
+
+
+预览地址：[https://svg.yaolunmao.top/](https://svg.yaolunmao.top/)
+
+预览图：
+![绘制组件](https://blog-static.cnblogs.com/files/Hero-/%E7%BB%98%E5%88%B6%E7%BB%84%E4%BB%B6.gif)
+![绘制图表](https://blog-static.cnblogs.com/files/Hero-/%E5%9B%BE%E8%A1%A8.gif)
+
+2.1暂时还没传上来，没有star都没动力了(；へ：)
+
 ## [版本1.0请点此](https://svgv1.yaolunmao.top)
 
 ## [图片挂了点此](https://www.cnblogs.com/Hero-/p/14784744.html)
-## 预览地址
+## 当前主分支预览地址
 
-[https://svg.yaolunmao.top](https://svg.yaolunmao.top)
+[https://svgv2.yaolunmao.top/](https://svgv2.yaolunmao.top/)
 
 ## 如何使用
 
