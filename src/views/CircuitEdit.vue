@@ -31,12 +31,20 @@
               </a-form-item>
             </a-form>
           </a-modal>
+          <a-modal title="版本更新说明"
+                   v-model:visible="versionModelVisible"
+                   @ok="versionModelHandleOk">
+            <p>新增绘制组件</p>
+            <p>新增图表</p>
+          </a-modal>
+
           <!-- <a-button type="primary"
                     @click="testD">导出数据</a-button>
           <a-button type="primary"
                     @click="testE">载入模板</a-button> -->
 
-          <a-button type="danger">当前为2.1版本</a-button>
+          <a-button type="danger"
+                    @click="versionModelVisible=true">当前为2.1版本</a-button>
 
           <a-button type="primary"
                     @click="testH"
@@ -135,22 +143,23 @@ import RightToolBar from '@/components/RightToolBar.vue';
 // import SvgComponents from '@/components/SvgComponents.vue';
 import SvgComponents from '@/components/SvgComponents.vue';
 export default {
-  components: { LeftToolBar, RightToolBar, SvgComponents},
+  components: { LeftToolBar, RightToolBar, SvgComponents },
   data () {
     return {
       testAddSvg: {
         type: "testAddSvg",
         title: "测试新增组件",
-        panelclass:"draggable",
+        panelclass: "draggable",
         template: "<path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>",
         props: ["prop_data"],
         default_attr: {
           "color": "#FF0000"
         },
-        create_type:'draggable',
+        create_type: 'draggable',
         priview_img: "https://svg.yaolunmao.top/test.png"
       },
       addSvgVisible: false,
+      versionModelVisible: false,
       svgInfoData: [],//接口获取到的组件数据
       shrink: true,//收缩状态  true收缩  false展开
       svgLists: [],//svg列表
@@ -184,8 +193,11 @@ export default {
       this.addSvgVisible = true;
     },
     addSvgHandleOk () {
-      this.svgInfoData[this.svgInfoData.length]=this.testAddSvg;
+      this.svgInfoData[this.svgInfoData.length] = this.testAddSvg;
       this.addSvgVisible = false;
+    },
+    versionModelHandleOk () {
+      this.versionModelVisible = false;
     },
     exportSvg () {
       var exportStr = document.querySelector("#svgCanvas").outerHTML;
@@ -412,7 +424,7 @@ export default {
       if (_this.$store.state.CurrentlySelectedToolBar.Type == '' || _this.$store.state.CurrentlySelectedToolBar.CreateType != 'draggable') {
         return;
       }
-      let eChartsOption=_this.$store.state.CurrentlySelectedToolBar.EChartsOption;
+      let eChartsOption = _this.$store.state.CurrentlySelectedToolBar.EChartsOption;
       //根据类型和鼠标位置创建组件
       let svgItem = {
         id: _this.$UCore.GenUUid(),
@@ -422,7 +434,7 @@ export default {
         svgColor: _this.$store.state.CurrentlySelectedToolBar.Color,
         svgPositionX: e.offsetX,
         svgPositionY: e.offsetY,
-        echarts_option:eChartsOption?JSON.parse(eChartsOption):"",
+        echarts_option: eChartsOption ? JSON.parse(eChartsOption) : "",
         size: 1,
         angle: 0
         //translate:`translate(${this.mousePosition.positionX},${this.mousePosition.positionY})`
