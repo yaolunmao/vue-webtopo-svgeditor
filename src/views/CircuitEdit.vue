@@ -135,12 +135,13 @@ import RightToolBar from '@/components/RightToolBar.vue';
 // import SvgComponents from '@/components/SvgComponents.vue';
 import SvgComponents from '@/components/SvgComponents.vue';
 export default {
-  components: { LeftToolBar, RightToolBar, SvgComponents },
+  components: { LeftToolBar, RightToolBar, SvgComponents},
   data () {
     return {
       testAddSvg: {
         type: "testAddSvg",
         title: "测试新增组件",
+        panelclass:"draggable",
         template: "<path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>",
         props: ["prop_data"],
         default_attr: {
@@ -184,7 +185,6 @@ export default {
     },
     addSvgHandleOk () {
       this.svgInfoData[this.svgInfoData.length]=this.testAddSvg;
-      console.log(this.svgInfoData);
       this.addSvgVisible = false;
     },
     exportSvg () {
@@ -354,10 +354,7 @@ export default {
       this.$store.clearCurrentlySelectedToolBarAction();
     },
     testD () {
-      console.log(JSON.stringify(this.svgLists));
       alert(JSON.stringify(this.svgLists));
-    },
-    testE () {
     },
     testH () {
       localStorage.setItem('svginfo', JSON.stringify(this.svgLists));
@@ -415,6 +412,7 @@ export default {
       if (_this.$store.state.CurrentlySelectedToolBar.Type == '' || _this.$store.state.CurrentlySelectedToolBar.CreateType != 'draggable') {
         return;
       }
+      let eChartsOption=_this.$store.state.CurrentlySelectedToolBar.EChartsOption;
       //根据类型和鼠标位置创建组件
       let svgItem = {
         id: _this.$UCore.GenUUid(),
@@ -424,6 +422,7 @@ export default {
         svgColor: _this.$store.state.CurrentlySelectedToolBar.Color,
         svgPositionX: e.offsetX,
         svgPositionY: e.offsetY,
+        echarts_option:eChartsOption?JSON.parse(eChartsOption):"",
         size: 1,
         angle: 0
         //translate:`translate(${this.mousePosition.positionX},${this.mousePosition.positionY})`

@@ -1,5 +1,8 @@
 /*
  * @Author: yaolunmao
+ */
+/*
+ * @Author: yaolunmao
  * 简单状态管理
  */
 
@@ -12,7 +15,8 @@ export const store = {
       TypeName: '',//选中的工具栏svg类型名称
       Title: '',//选中的工具栏svg标题
       Color: '',//选中的工具栏svg颜色
-      CreateType: ''//选中工具栏的创建方式
+      CreateType: '',//选中工具栏的创建方式
+      EChartsOption:''//选中工具栏的图表默认option
     }
   }),
 
@@ -26,7 +30,8 @@ export const store = {
       TypeName: '',//选中的工具栏svg类型名称
       Title: '',//选中的工具栏svg标题
       Color: '',//选中的工具栏svg颜色
-      CreateType: ''//选中工具栏的创建方式
+      CreateType: '',//选中工具栏的创建方式
+      EChartsOption:''//选中工具栏的图表默认option
     }
   }
 }

@@ -1,6 +1,7 @@
 [{
   "type": "AlternatorSvg",
   "title": "发电机",
+  "panelclass":"draggable",
   "template": "<ellipse id=\"c1\" cx=\"50\" cy=\"50\" rx=\"35\" ry=\"35\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\" transform=\"translate(-50,-50)\"></ellipse><path id=\"l1\" d=\"M30,50 C30,44 34,40 40,40 46,40 50,44 50,50 M50,50 C50,56 54,60 60,60 66,60 70,56 70,50 \" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\" transform=\"translate(-50,-50)\"></path>",
   "props": ["prop_data"],
   "default_attr":{
@@ -11,6 +12,7 @@
 }, {
   "type": "ArrowDownSvg",
   "title": "箭头向下",
+  "panelclass":"draggable",
   "template": "<polygon  points=\"0,-8 5,0 10,-8\" :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\" transform=\"translate(-5,0)\"></polygon>",
   "props": ["prop_data"],
   "default_attr":{
@@ -21,6 +23,7 @@
 }, {
   "type": "ArrowUpSvg",
   "title": "箭头向上",
+  "panelclass":"draggable",
   "template": "<polygon  points=\"0,8 5,0 10,8\" :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\" transform=\"translate(-5,0)\"></polygon>",
   "props": ["prop_data"],
   "default_attr":{
@@ -32,6 +35,7 @@
 {
   "type": "ConnLineSvg",
   "title": "连接线",
+  "panelclass":"draw",
   "template": "<line x1=\"0\" y1=\"0\" :x2=\"(prop_data.mPoint.endX-prop_data.mPoint.startX)\" :y2=\"(prop_data.mPoint.endY-prop_data.mPoint.startY)\" :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\"  stroke-width=\"2\"></line>",
   "props": ["prop_data"],
   "default_attr":{
@@ -39,4 +43,30 @@
   },
   "create_type":"click",
   "priview_img":"/VerticalLineSvg.png"
+},
+{
+  "type": "EchartsPieSvg",
+  "title": "Echart饼图",
+  "panelclass":"chart",
+  "template": "<foreignObject x=\"0\" y=\"0\" width=\"400\" height=\"400\"> <v-chart :option=\"prop_data.echarts_option\" /></foreignObject>",
+  "props": ["prop_data"],
+  "default_attr":{
+    "color":"#000000",
+    "echarts_option":"{\"title\":{\"text\":\"某站点用户访问来源\",\"subtext\":\"纯属虚构\",\"left\":\"center\"},\"tooltip\":{\"trigger\":\"item\"},\"legend\":{\"orient\":\"vertical\",\"left\":\"left\"},\"series\":[{\"name\":\"访问来源\",\"type\":\"pie\",\"radius\":\"50%\",\"data\":[{\"value\":1048,\"name\":\"搜索引擎\"},{\"value\":735,\"name\":\"直接访问\"},{\"value\":580,\"name\":\"邮件营销\"},{\"value\":484,\"name\":\"联盟广告\"},{\"value\":300,\"name\":\"视频广告\"}],\"emphasis\":{\"itemStyle\":{\"shadowBlur\":10,\"shadowOffsetX\":0,\"shadowColor\":\"rgba(0, 0, 0, 0.5)\"}}}]}"
+  },
+  "create_type":"draggable",
+  "priview_img":"/ECharts_PieSvg.png"
+},
+{
+  "type": "EchartsBasicBarSvg",
+  "title": "Echart基础柱状图",
+  "panelclass":"chart",
+  "template": "<foreignObject x=\"0\" y=\"0\" width=\"400\" height=\"400\"> <v-chart :option=\"prop_data.echarts_option\" /></foreignObject>",
+  "props": ["prop_data"],
+  "default_attr":{
+    "color":"#000000",
+    "echarts_option":"{\"xAxis\":{\"type\":\"category\",\"data\":[\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\",\"Sat\",\"Sun\"]},\"yAxis\":{\"type\":\"value\"},\"series\":[{\"data\":[120,200,150,80,70,110,130],\"type\":\"bar\"}]}"
+  },
+  "create_type":"draggable",
+  "priview_img":"/ECharts_BasicBar.png"
 }]

@@ -22,7 +22,7 @@
                         header="绘制组件"
                         :disabled="false">
         <ul class="svg-nav-list">
-          <li v-for="item in clickComponentList"
+          <li v-for="item in drawComponentList"
               :key="item"
               :class="$store.state.CurrentlySelectedToolBar.CreateType==item.create_type?'toolbar-selected':''">
             <div class="title">{{item.title}}</div>
@@ -34,7 +34,16 @@
       </a-collapse-panel>
       <a-collapse-panel key="3"
                         header="图表">
-        <p>{{ text }}</p>
+        <ul class="svg-nav-list">
+          <li v-for="item in chartComponentList"
+              :key="item">
+            <div class="title">{{item.title}}</div>
+            <img :title="item.title"
+                 @mousedown="Mousedown(item.type,item.title,item.default_attr,item.create_type)"
+                 :src="item.priview_img"
+                 draggable="draggable">
+          </li>
+        </ul>
       </a-collapse-panel>
     </a-collapse>
   </div>
@@ -47,19 +56,22 @@ export default {
       activeKey: ['1'],//当前激活的key
       text: `这里是预留位置.`,
       draggableComponentList: [],//拖动组件
-      clickComponentList: [],//点击类型组件
+      drawComponentList: [],//绘制类型组件
+      chartComponentList: [],//图表类型
     };
   },
   watch: {
     'svgInfoData': {
       deep: true,
       handler (val) {
-        console.log(val);
         this.draggableComponentList = val.filter(m => {
-          return m.create_type == 'draggable'
+          return m.panelclass == 'draggable'
         });
-        this.clickComponentList = val.filter(m => {
-          return m.create_type == 'click'
+        this.drawComponentList = val.filter(m => {
+          return m.panelclass == 'draw'
+        });
+        this.chartComponentList = val.filter(m => {
+          return m.panelclass == 'chart'
         });
       }
     }
@@ -79,7 +91,8 @@ export default {
         TypeName: title,//选中的工具栏svg类型名称
         Title: title,//选中的工具栏svg标题
         Color: default_attr.color,//选中的工具栏svg颜色
-        CreateType: create_type//选中工具栏的创建方式
+        CreateType: create_type,//选中工具栏的创建方式
+        EChartsOption: default_attr.echarts_option
       };
       this.$store.setCurrentlySelectedToolBarAction(CurrentlySelectedToolBar);
     },
