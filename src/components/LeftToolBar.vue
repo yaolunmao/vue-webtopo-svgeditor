@@ -65,13 +65,13 @@ export default {
       deep: true,
       handler (val) {
         this.draggableComponentList = val.filter(m => {
-          return m.panelclass == 'draggable'
+          return m.panel_class == 'draggable'
         });
         this.drawComponentList = val.filter(m => {
-          return m.panelclass == 'draw'
+          return m.panel_class == 'draw'
         });
         this.chartComponentList = val.filter(m => {
-          return m.panelclass == 'chart'
+          return m.panel_class == 'chart'
         });
       }
     }
