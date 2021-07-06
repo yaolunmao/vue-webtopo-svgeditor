@@ -36,6 +36,8 @@
                    @ok="versionModelHandleOk">
             <p>新增绘制组件</p>
             <p>新增图表</p>
+            <p>新增模板-加载模板后点击预览-点击模拟硬件-等待两秒查看效果</p>
+            <p>如果图片加载不出来请清空缓存刷新(F12右键刷新按钮-选择清空缓存并进行硬刷新)</p>
           </a-modal>
 
           <!-- <a-button type="primary"
@@ -46,6 +48,9 @@
           <a-button type="danger"
                     @click="versionModelVisible=true">当前为2.1版本</a-button>
 
+          <a-button type="primary"
+                    @click="testA"
+                    style="margin-left:20px">载入模板</a-button>
           <a-button type="primary"
                     @click="testH"
                     style="margin-left:20px">预览</a-button>
@@ -70,12 +75,17 @@
             <a-button type="primary">在线绘图</a-button>
           </a>
           <a style="margin-left:20px"
-             href="https://github.com/yaolunmao/vue-webtopo-svgeditor">
+             href="https://www.cnblogs.com/Hero-/p/14784744.html"
+             target="_blank">
             <a-button type="primary">帮助</a-button>
           </a>
           <a style="margin-left:20px">
             <a-button type="primary"
                       @click="exportSvg">导出svg</a-button>
+          </a>
+          <a style="margin-left:20px">
+            <a-button type="primary"
+                      @click="exportData">导出数据</a-button>
           </a>
         </a-layout-header>
         <span v-if="!shrink"
@@ -85,25 +95,29 @@
           <a-layout-sider class="leftNav">
             <LeftToolBar :svgInfoData=svgInfoData></LeftToolBar>
           </a-layout-sider>
-          <a-layout-content class="centerContain"
-                            :class="{ fixed: !shrink }">
+          <a-layout-content 
+                            :class="{ fixed: !shrink }"
+                            style="transform: scale(1)">
             <div class="canvas-content"
-                 id="canvas"
+                 ref="canvas"
+                 
                  @mousemove="MouseMove"
                  @mousedown="MousedownCanvas"
                  @mouseup="MouseupCanvas"
                  @dblclick="DblClick"
                  @mousewheel="MouseWheel">
               <!--拖动辅助线-->
-              <div id="guide-x"></div>
-              <div id="guide-y"></div>
+              <div id="guide-x"
+                   ref="guidex_dom"></div>
+              <div id="guide-y"
+                   ref="guidey_dom"></div>
               <!-- 画布 -->
               <svg version="1.1"
                    xmlns="http://www.w3.org/2000/svg"
                    xmlns:xlink="http://www.w3.org/1999/xlink"
                    style="background-color:#000000"
-                   width="100%"
-                   height="100%"
+                   width="1920"
+                   height="1080"
                    id="svgCanvas">
                 <defs />
                 <filter x="0"
@@ -168,9 +182,6 @@ export default {
         positionX: '',
         positiony: ''
       },
-      //辅助线元素
-      guideX: '',
-      guideY: '',
       selectSvg: {
         ID: '',//要移动的svg
         Index: 0,
@@ -200,9 +211,25 @@ export default {
       this.versionModelVisible = false;
     },
     exportSvg () {
-      var exportStr = document.querySelector("#svgCanvas").outerHTML;
+      let exportStr = document.querySelector("#svgCanvas").outerHTML;
+      exportStr = exportStr.replace('width="100%"', 'width="1920"').replace('height="100%"', 'height="1080"');
+      let datastr = 'data:text;charset=utf-8,' + encodeURIComponent(exportStr)
+      let download = document.createElement('a')
+      download.setAttribute('href', datastr)
+      download.setAttribute('download', 'download.html')
+      download.click()
+      download.remove()
       console.log(exportStr);
-      alert("请使用F12查看consolo面板");
+    },
+    exportData () {
+      localStorage.setItem('svginfo', JSON.stringify(this.svgLists));
+      let datastr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.svgLists))
+      let download = document.createElement('a')
+      download.setAttribute('href', datastr)
+      download.setAttribute('download', 'download.json')
+      download.click()
+      download.remove()
+      console.log(JSON.stringify(this.svgLists));
     },
     MouseMove (e) {
       let _this = this;
@@ -247,22 +274,22 @@ export default {
             return list.svgPositionX === svgPositionX
           });
           if (exitsNowX.length > 0) {
-            _this.guideY.style.setProperty('left', svgPositionX - 1 + 'px');
-            _this.guideY.style.display = 'inline';
+            _this.$refs.guidey_dom.style.setProperty('left', svgPositionX - 1 + 'px');
+            _this.$refs.guidey_dom.style.display = 'inline';
           }
           else {
-            _this.guideY.style.display = 'none';
+            _this.$refs.guidey_dom.style.display = 'none';
           }
           //从所有的y坐标列表中查当前坐标是否存在
           let exitsNowY = anyPositionList.filter(function (list) {
             return list.svgPositionY === svgPositionY
           });
           if (exitsNowY.length > 0) {
-            _this.guideX.style.setProperty('top', svgPositionY + 'px');
-            _this.guideX.style.display = 'inline';
+            _this.$refs.guidex_dom.style.setProperty('top', svgPositionY + 'px');
+            _this.$refs.guidex_dom.style.display = 'inline';
           }
           else {
-            _this.guideX.style.display = 'none';
+            _this.$refs.guidex_dom.style.display = 'none';
           }
         }, 1);
       }
@@ -324,8 +351,8 @@ export default {
       if (this.mouseStatus == 0) {
         return;
       }
-      this.guideX.style.display = 'none';
-      this.guideY.style.display = 'none';
+      this.$refs.guidex_dom.style.display = 'none';
+      this.$refs.guidey_dom.style.display = 'none';
       // if (this.$store.state.CurrentlySelectedToolBar.Type != '') {
       //   return;
       // }
@@ -364,6 +391,18 @@ export default {
     DblClick () {
       this.selectSvgInfo = '';
       this.$store.clearCurrentlySelectedToolBarAction();
+    },
+    testA () {
+      let _this = this;
+      //载入模板
+      this.$axios.get('/example.json')
+        .then(function (response) {
+          _this.svgLists = response.data;
+          // console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     testD () {
       alert(JSON.stringify(this.svgLists));
@@ -413,35 +452,35 @@ export default {
   },
   mounted () {
     let _this = this;
-    let canvasdiv = document.querySelector('#canvas');
-    _this.guideX = document.querySelector('#guide-x');//辅助线x轴
-    _this.guideY = document.querySelector('#guide-y');//辅助线y轴
-    canvasdiv.addEventListener("dragover", function (e) {
-      e.preventDefault();
-    }, false);
-    canvasdiv.addEventListener("drop", function (e) {
-      e.preventDefault();
-      if (_this.$store.state.CurrentlySelectedToolBar.Type == '' || _this.$store.state.CurrentlySelectedToolBar.CreateType != 'draggable') {
-        return;
-      }
-      let eChartsOption = _this.$store.state.CurrentlySelectedToolBar.EChartsOption;
-      //根据类型和鼠标位置创建组件
-      let svgItem = {
-        id: _this.$UCore.GenUUid(),
-        title: _this.$store.state.CurrentlySelectedToolBar.Title,
-        type: _this.$store.state.CurrentlySelectedToolBar.Type,
-        typeName: _this.$store.state.CurrentlySelectedToolBar.TypeName,
-        svgColor: _this.$store.state.CurrentlySelectedToolBar.Color,
-        svgPositionX: e.offsetX,
-        svgPositionY: e.offsetY,
-        echarts_option: eChartsOption ? JSON.parse(eChartsOption) : "",
-        size: 1,
-        angle: 0
-        //translate:`translate(${this.mousePosition.positionX},${this.mousePosition.positionY})`
-      };
-      _this.svgLists.push(svgItem);
-      _this.selectSvgInfo = svgItem;
-    }, false);
+    this.$nextTick(() => {
+      let canvasdiv = _this.$refs.canvas;
+      canvasdiv.addEventListener("dragover", function (e) {
+        e.preventDefault();
+      }, false);
+      canvasdiv.addEventListener("drop", function (e) {
+        e.preventDefault();
+        if (_this.$store.state.CurrentlySelectedToolBar.Type == '' || _this.$store.state.CurrentlySelectedToolBar.CreateType != 'draggable') {
+          return;
+        }
+        let eChartsOption = _this.$store.state.CurrentlySelectedToolBar.EChartsOption;
+        //根据类型和鼠标位置创建组件
+        let svgItem = {
+          id: _this.$UCore.GenUUid(),
+          title: _this.$store.state.CurrentlySelectedToolBar.Title,
+          type: _this.$store.state.CurrentlySelectedToolBar.Type,
+          typeName: _this.$store.state.CurrentlySelectedToolBar.TypeName,
+          svgColor: _this.$store.state.CurrentlySelectedToolBar.Color,
+          svgPositionX: e.offsetX,
+          svgPositionY: e.offsetY,
+          echartsOption: eChartsOption ? JSON.parse(eChartsOption) : "",
+          size: 1,
+          angle: 0
+          //translate:`translate(${this.mousePosition.positionX},${this.mousePosition.positionY})`
+        };
+        _this.svgLists.push(svgItem);
+        _this.selectSvgInfo = svgItem;
+      }, false);
+    })
   },
   created () {
     let _this = this;
@@ -571,6 +610,11 @@ export default {
   .canvas-content {
     width: 1920px;
     height: 1080px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
   .btns-content {
     position: fixed;
@@ -630,13 +674,6 @@ export default {
   height: 100%;
   left: 100px;
   top: 0px;
-}
-#canvas {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
 }
 .ant-slider {
   margin-bottom: 16px;

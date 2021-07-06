@@ -182,7 +182,7 @@
   "type": "TextSvg",
   "title": "文字",
   "panel_class":"draggable",
-  "template": "<text x=\"0\" y=\"0\" font-size=\"50\" :fill=\"prop_data.svgColor\">{{prop_data.title}}</text>",
+  "template": "<text x=\"0\" y=\"0\" font-size=\"10\" :fill=\"prop_data.svgColor\">{{prop_data.title}}</text>",
   "props": ["prop_data"],
   "default_attr":{
     "color":"#FF0000"
@@ -208,7 +208,7 @@
   "type": "TransformerYSvg",
   "title": "电流互感器Y",
   "panel_class":"draggable",
-  "template": "<ellipse cx=\"0\" cy=\"0\" rx=\"10\" ry=\"10\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></ellipse> <line x1=\"-2\" y1=\"-6\" x2=\"-2\" y2=\"6\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></line> <line x1=\"-2\" y1=\"-6\" x2=\"4\" y2=\"0\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></line> <line x1=\"4\" y1=\"2\" x2=\"-2\" y2=\"6\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></line>",
+  "template": "<ellipse cx=\"0\" cy=\"0\" rx=\"10\" ry=\"10\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></ellipse> <line x1=\"5\" y1=\"-5\" x2=\"0\" y2=\"0\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></line> <line x1=\"-5\" y1=\"-5\" x2=\"0\" y2=\"0\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></line> <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"5\" fill=\"none\" :stroke=\"prop_data.svgColor\" stroke-width=\"2\"></line>",
   "props": ["prop_data"],
   "default_attr":{
     "color":"#FF0000"
@@ -270,10 +270,36 @@
   "priview_img":"/VerticalLineSvg.png"
 },
 {
+  "type": "ConnHorizontalLineSvg",
+  "title": "连接线-横线",
+  "panel_class":"draw",
+  "template": "<line x1=\"0\" y1=\"0\" :x2=\"(prop_data.mPoint.endX-prop_data.mPoint.startX)\" y2=\"0\" :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\"  stroke-width=\"2\"></line>",
+  "props": ["prop_data"],
+  "default_attr":{
+    "color":"#FF0000"
+  },
+  "data_type":"none",
+  "create_type":"click",
+  "priview_img":"/ConnHorizontalLineSvg.png"
+},
+{
+  "type": "ConnVerticalLineSvg",
+  "title": "连接线-竖线",
+  "panel_class":"draw",
+  "template": "<line x1=\"0\" y1=\"0\" x2=\"0\" :y2=\"(prop_data.mPoint.endY-prop_data.mPoint.startY)\" :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\"  stroke-width=\"2\"></line>",
+  "props": ["prop_data"],
+  "default_attr":{
+    "color":"#FF0000"
+  },
+  "data_type":"none",
+  "create_type":"click",
+  "priview_img":"/VerticalLineSvg.png"
+},
+{
   "type": "EchartsPieSvg",
   "title": "Echart饼图",
   "panel_class":"chart",
-  "template": "<foreignObject x=\"0\" y=\"0\" width=\"400\" height=\"400\"> <v-chart :option=\"prop_data.echarts_option\" /></foreignObject>",
+  "template": "<foreignObject x=\"0\" y=\"0\" width=\"600\" height=\"500\"> <v-chart :option=\"prop_data.echartsOption\" /></foreignObject>",
   "props": ["prop_data"],
   "default_attr":{
     "color":"#000000",
@@ -287,7 +313,7 @@
   "type": "EchartsBasicBarSvg",
   "title": "Echart基础柱状图",
   "panel_class":"chart",
-  "template": "<foreignObject x=\"0\" y=\"0\" width=\"400\" height=\"400\"> <v-chart :option=\"prop_data.echarts_option\" /></foreignObject>",
+  "template": "<foreignObject x=\"0\" y=\"0\" width=\"400\" height=\"400\"> <v-chart :option=\"prop_data.echartsOption\" /></foreignObject>",
   "props": ["prop_data"],
   "default_attr":{
     "color":"#000000",

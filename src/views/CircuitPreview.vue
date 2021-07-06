@@ -19,12 +19,12 @@
         </g>
       </svg>
     </div>
-    <!-- <div class="btns-content">
+    <div class="btns-content">
       <a-button type="primary"
                 @click="testF">模拟硬件</a-button>
       <a-button type="primary"
                 @click="testG">取消模拟硬件</a-button>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -41,20 +41,20 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description: 此方法仅为演示使用 真正修改组件数据请判断data_type属性
+     * @param {*}
+     * @return {*}
+     */    
     testF () {
       //找出所有断路器
       let anyCircuitBreakerList = this.svgLists.filter(f => f.type == 'CircuitBreakerSvg');
       //找出所有的电线开关
-      let anyWireBreakList = this.svgLists.filter(f => f.type == 'WireConnectionSvg' || f.type == 'WireBreakOffSvg');
-      //查找所有表格值
-      let anyTable = this.svgLists.filter(f => f.type == 'TableSvg')[0];
-      let anyTableList;
-      if (anyTable == 'undefined' || anyTable == null) {
-        anyTableList = [];
-      }
-      else {
-        anyTableList = anyTable.tableData.map(m => m.cols);
-      }
+      let anyWireBreakList = this.svgLists.filter(f => f.type == 'WireBreakOnSvg' || f.type == 'WireBreakOffSvg');
+      //找到所有饼图
+      let anyEchartsPieList = this.svgLists.filter(f => f.type == 'EchartsPieSvg');
+      //找到所有柱状图
+      let anyEchartsBasicBarSvgList = this.svgLists.filter(f => f.type == 'EchartsBasicBarSvg');
       this.analogDataTimer = setInterval(function () {
         anyCircuitBreakerList.forEach(anyCircuitBreaker => {
           //生成一个随机数
@@ -70,23 +70,28 @@ export default {
           //生成一个随机数
           let random = Math.round(Math.random() * 10);
           if (random < 5) {
-            anyWireBreak.type = 'WireConnectionSvg';
-            anyWireBreak.svgColor = "#FF0000"
+            anyWireBreak.type = 'WireBreakOnSvg';
+            anyWireBreak.svgColor = "#00FF00"
           }
           else {
             anyWireBreak.type = 'WireBreakOffSvg';
+            anyWireBreak.svgColor = "#FF0000"
           }
         });
-        anyTableList.forEach(anyTables => {
-          anyTables.forEach(anyTable => {
-            if (anyTable.type == 'ff85bc7f-3b69-454f-8cf8-21c9f1903dd6' || anyTable.id == 'f8271273-d07d-4033-8b6c-6b52c04fe3e5'
-              || anyTable.id == 'dc5931bc-7e8e-47f4-b28e-5bc42fb207da' || anyTable.id == '560f5404-6539-422f-8fb9-77bac641e72b') {
-              //生成一个随机数
-              let random = Math.round(Math.random() * 100);
-              anyTable.val = random;
-            }
+        anyEchartsPieList.forEach(anyEchartsPie => {
+          anyEchartsPie.echartsOption.series[0].data.forEach(f => {
+            //生成一个随机数
+            let random = Math.round(Math.random() * 100);
+            f.value = random;
           });
-        });
+
+        })
+        anyEchartsBasicBarSvgList.forEach(anyEchartsBasicBar => {
+          let data_arr=[Math.round(Math.random() * 300),Math.round(Math.random() * 300),Math.round(Math.random() * 300),Math.round(Math.random() * 300),Math.round(Math.random() * 300),Math.round(Math.random() * 300),Math.round(Math.random() * 300)];
+          anyEchartsBasicBar.echartsOption.series[0].data=data_arr;
+
+        })
+
       }, 2000)
 
     },
@@ -96,12 +101,14 @@ export default {
   },
   created () {
     let _this = this;
-    _this.svgLists = JSON.parse(localStorage.getItem('svginfo'));
+
     //请求接口获取组件
     this.$axios.get('/InterfaceReturn.json')
       .then(function (response) {
         _this.svgInfoData = response.data;
         console.log(response.data);
+        //渲染组件
+        _this.svgLists = JSON.parse(localStorage.getItem('svginfo'));
       })
       .catch(function (error) {
         console.log(error);

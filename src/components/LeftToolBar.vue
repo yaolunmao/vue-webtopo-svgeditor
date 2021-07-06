@@ -24,7 +24,7 @@
         <ul class="svg-nav-list">
           <li v-for="item in drawComponentList"
               :key="item"
-              :class="$store.state.CurrentlySelectedToolBar.CreateType==item.create_type?'toolbar-selected':''">
+              :class="$store.state.CurrentlySelectedToolBar.Type==item.type?'toolbar-selected':''">
             <div class="title">{{item.title}}</div>
             <img :title="item.title"
                  @mousedown="Mousedown(item.type,item.title,item.default_attr,item.create_type)"
