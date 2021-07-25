@@ -1,12 +1,13 @@
 # vue-webtopo-svgeditor
 
-> 纯vue3实现的svg可视化web组态编辑器。可无需修改代码动态添加组件
+> 基于vue3实现的svg可视化web组态编辑器。可无需修改代码动态添加组件
 
-当前主分支版本为2.0
+当前主分支版本为2.1
 
 ## [版本1.0请点此](https://svgv1.yaolunmao.top)
 
 ## [图片挂了点此](https://www.cnblogs.com/Hero-/p/14784744.html)
+
 ## 预览地址
 
 [https://svg.yaolunmao.top](https://svg.yaolunmao.top)
@@ -57,19 +58,23 @@ yarn serve
 将拓展字段进行双向绑定 我目前只做了颜色
 
 ```
-<path :fill=\"svg_color\" :stroke=\"svg_color\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\"></path>
+<path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>
 ```
 
 修改项目文件夹pubilc下的模拟接口返回的json，新增一项：
 
 ```
 {
-  "type": "TestAddSvg",
-  "title": "测试新增组件",
-  "template": "<path :fill=\"svg_color\" :stroke=\"svg_color\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\"></path>",
-  "props": ["svg_color"],
-  "default_color":"#FF0000",
-  "priview_img":"https://svg.yaolunmao.top/test.png"
+	"type": "TestAddSvg",
+	"title": "测试新增组件",
+	"panel_class": "draggable",
+	"template": "<path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path>",
+	"props": ["prop_data"],
+	"default_attr": {
+		"color": "#FF0000"
+	},
+	"create_type": "draggable",
+	"priview_img": "https://svg.yaolunmao.top/test.png"
 }
 ```
 
@@ -89,9 +94,14 @@ ps：目前中心辅助线的坐标取决于svg组件的中心坐标，请自行
 
 ## 截图
 
+
+
+## ![绘制组件](https://blog-static.cnblogs.com/files/Hero-/%E7%BB%98%E5%88%B6%E7%BB%84%E4%BB%B6.gif)
+![绘制图表](https://blog-static.cnblogs.com/files/Hero-/%E5%9B%BE%E8%A1%A8.gif)
+
 ![编辑器页面](https://img-blog.csdnimg.cn/20210322100014954.gif#pic_center)
 
-![预览界面](https://img-blog.csdnimg.cn/20210322100043996.gif#pic_center)
+![预览界面](https://blog-static.cnblogs.com/files/Hero-/%E9%A2%84%E8%A7%88.gif)
 
 ## License
 

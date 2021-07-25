@@ -1,8 +1,8 @@
 
 <template>
-  <div class="components-layout-left">
+  <div class="components-layout-left leftNav">
 
-    <a-input-search placeholder="搜索组件" />
+    <!-- <a-input-search placeholder="搜索组件" /> -->
     <a-collapse v-model:activeKey="activeKey"
                 accordion>
       <a-collapse-panel key="1"
@@ -99,7 +99,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="less" scoped>
 .components-layout-left .ant-input-search-icon {
   font-size: 20px !important;
   color: #1890ff !important;
@@ -112,8 +112,6 @@ export default {
 .components-layout-left .ant-collapse-content > .ant-collapse-content-box {
   padding: 16px 0;
 }
-</style>
-<style lang="less" scoped>
 .ant-input-affix-wrapper {
   height: 45px;
   line-height: 45px;
@@ -129,7 +127,6 @@ export default {
   li {
     position: relative;
     width: calc(33.33% - 30px);
-    height: 56px;
     margin: 0 15px 15px 15px;
     padding: 0;
     border-radius: 50%;
@@ -140,7 +137,7 @@ export default {
     cursor: pointer;
 
     &:hover {
-      box-shadow: 1px 1px 5px #0090ff;
+      box-shadow: 1px 1px 10px #ccc;
     }
 
     img {
@@ -179,5 +176,16 @@ export default {
 }
 .toolbar-selected {
   outline: 1px solid #0cf;
+}
+.leftNav {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  min-width: unset !important;
+  max-width: unset !important;
+  width: 260px !important;
+  z-index: 1;
+  overflow: auto;
 }
 </style>

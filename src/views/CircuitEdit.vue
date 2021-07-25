@@ -36,6 +36,7 @@
                    @ok="versionModelHandleOk">
             <p>新增绘制组件</p>
             <p>新增图表</p>
+            <p>新增缩放功能</p>
             <p>新增模板-加载模板后点击预览-点击模拟硬件-等待两秒查看效果</p>
             <p>如果图片加载不出来请清空缓存刷新(F12右键刷新按钮-选择清空缓存并进行硬刷新)</p>
           </a-modal>
@@ -46,11 +47,12 @@
                     @click="testE">载入模板</a-button> -->
 
           <a-button type="danger"
-                    @click="versionModelVisible=true">当前为2.1版本</a-button>
+                    @click="versionModelVisible=true"
+                    style="margin-left:20px">当前为2.1版本</a-button>
 
           <a-button type="primary"
                     @click="testA"
-                    style="margin-left:20px">载入模板</a-button>
+                    style="margin-left:120px">载入模板</a-button>
           <a-button type="primary"
                     @click="testH"
                     style="margin-left:20px">预览</a-button>
@@ -88,19 +90,16 @@
                       @click="exportData">导出数据</a-button>
           </a>
         </a-layout-header>
-        <span v-if="!shrink"
-              @click="exitFullscreen"
-              class="icon-shrink svgfont">&#xe62b;</span>
         <a-layout class="pageMain">
-          <a-layout-sider class="leftNav">
+          <!-- <a-layout> -->
+          <a-layout-sider width="260px">
             <LeftToolBar :svgInfoData=svgInfoData></LeftToolBar>
           </a-layout-sider>
-          <a-layout-content 
-                            :class="{ fixed: !shrink }"
-                            style="transform: scale(1)">
-            <div class="canvas-content"
-                 ref="canvas"
-                 
+          <a-layout-content class="centerContain">
+
+            <div ref="canvas"
+                 class="canvansDiv"
+                 :style="'transform: scale('+scaleValue+')'"
                  @mousemove="MouseMove"
                  @mousedown="MousedownCanvas"
                  @mouseup="MouseupCanvas"
@@ -108,9 +107,11 @@
                  @mousewheel="MouseWheel">
               <!--拖动辅助线-->
               <div id="guide-x"
-                   ref="guidex_dom"></div>
+                   ref="guidex_dom"
+                   :style="'border-top: '+1/scaleValue+'px dashed #55f'"></div>
               <div id="guide-y"
-                   ref="guidey_dom"></div>
+                   ref="guidey_dom"
+                   :style="'border-left: '+1/scaleValue+'px dashed #55f'"></div>
               <!-- 画布 -->
               <svg version="1.1"
                    xmlns="http://www.w3.org/2000/svg"
@@ -141,8 +142,18 @@
                 </g>
               </svg>
             </div>
+            <div class="zoonStyle">
+              <div style="text-color:black">缩放：
+                <a-slider :default-value="1"
+                          :min="0.1"
+                          :max="2"
+                          :step="0.1"
+                          @change="scaleValueChange"
+                          style="width:200px" />
+              </div>
+            </div>
           </a-layout-content>
-          <a-layout-sider class="rightNav">
+          <a-layout-sider width="300px">
             <RightToolBar :svgInfo=selectSvgInfo
                           @setTableAttr="setTableAttr"></RightToolBar>
           </a-layout-sider>
@@ -154,7 +165,6 @@
 <script>
 import LeftToolBar from '@/components/LeftToolBar.vue';
 import RightToolBar from '@/components/RightToolBar.vue';
-// import SvgComponents from '@/components/SvgComponents.vue';
 import SvgComponents from '@/components/SvgComponents.vue';
 export default {
   components: { LeftToolBar, RightToolBar, SvgComponents },
@@ -194,9 +204,7 @@ export default {
       mouseStatus: 0, // 鼠标状态 1按下； 0弹起
       selectSvgInfo: '',
       clickType: '',//鼠标点击行为
-      tableRowCount: 2,//表格默认行数
-      tableColCount: 2,//表格默认列数
-      tableDefaultData: []
+      scaleValue: 1,//缩放倍数    
     }
   },
   methods: {
@@ -239,7 +247,7 @@ export default {
           return;
         }
         const { clientX, clientY } = e
-
+        // console.log(e.offsetX,e.offsetY);
         // let svgID = this.svgLists[this.selectSvg.Index].id;
         let svgID = this.selectSvg.ID;
         //排除当前元素剩下的所有svg元素的列表
@@ -249,8 +257,8 @@ export default {
         //将要移动的元素坐标设备为鼠标坐标
         let svgPositionX = this.selectSvg.pointX;
         let svgPositionY = this.selectSvg.pointY;
-        svgPositionX += (clientX - this.selectSvg.mPositionX);
-        svgPositionY += (clientY - this.selectSvg.mPositionY);
+        svgPositionX += (clientX - this.selectSvg.mPositionX) / this.scaleValue;
+        svgPositionY += (clientY - this.selectSvg.mPositionY) / this.scaleValue;
         setTimeout(function () {
           //少于十个像素自动吸附
           //从所有的x坐标列表中查与当前坐标少于10个像素的组件是否存在
@@ -274,7 +282,7 @@ export default {
             return list.svgPositionX === svgPositionX
           });
           if (exitsNowX.length > 0) {
-            _this.$refs.guidey_dom.style.setProperty('left', svgPositionX - 1 + 'px');
+            _this.$refs.guidey_dom.style.setProperty('left', svgPositionX - 1 / _this.scaleValue + 'px');
             _this.$refs.guidey_dom.style.display = 'inline';
           }
           else {
@@ -285,7 +293,7 @@ export default {
             return list.svgPositionY === svgPositionY
           });
           if (exitsNowY.length > 0) {
-            _this.$refs.guidex_dom.style.setProperty('top', svgPositionY + 'px');
+            _this.$refs.guidex_dom.style.setProperty('top', svgPositionY - 1 / _this.scaleValue + 'px');
             _this.$refs.guidex_dom.style.display = 'inline';
           }
           else {
@@ -448,6 +456,9 @@ export default {
         tableData.push(tableRowData)
       }
       this.svgLists[tableIndex].tableData = tableData;
+    },
+    scaleValueChange (newValue) {
+      this.scaleValue = newValue;
     }
   },
   mounted () {
@@ -576,19 +587,8 @@ export default {
   bottom: 0;
   overflow: auto;
 }
-.leftNav {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  min-width: unset !important;
-  max-width: unset !important;
-  width: 260px !important;
-  z-index: 1;
-  overflow: auto;
-}
 .centerContain {
-  position: absolute;
+  // position: absolute;
   left: 260px;
   right: 300px;
   top: 0;
@@ -606,7 +606,16 @@ export default {
     top: 0;
     bottom: 0;
   }
-
+  .canvansDiv {
+    width: 1920px;
+    height: 1080px;
+    transform-origin: left top;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+  }
   .canvas-content {
     width: 1920px;
     height: 1080px;
@@ -626,33 +635,6 @@ export default {
     }
   }
 }
-.rightNav {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  min-width: unset !important;
-  max-width: unset !important;
-  width: 300px !important;
-  z-index: 1;
-  overflow: auto;
-}
-.icon-shrink {
-  position: fixed;
-  right: 20px;
-  top: 5px;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-  background: #1890ff;
-  width: 38px;
-  height: 38px;
-  line-height: 38px;
-  text-align: center;
-  border-radius: 50%;
-  user-select: none;
-  z-index: 1111;
-}
 
 #components-layout .ant-layout-sider {
   background: #fff;
@@ -661,18 +643,16 @@ export default {
 #guide-x {
   display: none;
   position: absolute;
-  border-top: 1px dashed #55f;
   width: 100%;
   left: 0px;
-  top: 500px;
+  top: 0px;
 }
 
 #guide-y {
   display: none;
   position: absolute;
-  border-left: 1px dashed #55f;
   height: 100%;
-  left: 100px;
+  left: 0px;
   top: 0px;
 }
 .ant-slider {
@@ -750,5 +730,12 @@ export default {
 
 .topo-layer-view-selected {
   outline: 1px solid #0cf;
+}
+.zoonStyle {
+  position: fixed;
+  bottom: 4px;
+  z-index: 99;
+  color: #fff;
+  background: #000;
 }
 </style>

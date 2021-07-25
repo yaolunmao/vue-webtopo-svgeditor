@@ -1,7 +1,11 @@
+<!--
+ * @Author: yaolunmao
+-->
 <template>
+<div class="rightNav">
 <a-tabs type="card"  class="components-layout-right">
     <a-tab-pane key="1" tab="外观">
-      <a-form layout="horizontal">
+      <a-form layout="horizontal"  :label-col="{ span: 6 }" :wrapper-col="{ span: 10 }" labelAlign="left">
         <a-form-item label="id">
           <p>{{svgInfo.id}}</p>
         </a-form-item>
@@ -37,7 +41,7 @@
       <div class="bg-code">{{selectSvgInfo}}</div>
     </a-tab-pane>
   </a-tabs>
-  
+</div>
 </template>
 <script>
 export default {
@@ -57,7 +61,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style scoped lang="less">
 .components-layout-right{
   .ant-tabs-bar{
     margin-bottom: 0 !important;
@@ -97,7 +101,6 @@ export default {
       right: 15px;
       bottom: 0;
       height: 1px;
-      background: #f2f2f2;
     }
 
     &:last-child::after{
@@ -105,8 +108,6 @@ export default {
     }
   }
 }
-</style>
-<style scoped lang="less">
 .btn-sure{
   width: 260px;
   margin: 20px;
@@ -118,5 +119,16 @@ export default {
   margin: 20px 10px;
   border-radius: 4px;
   padding: 10px;
+}
+.rightNav {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  min-width: unset !important;
+  max-width: unset !important;
+  width: 300px !important;
+  z-index: 1;
+  overflow: auto;
+  padding:10px 20px;
 }
 </style>
