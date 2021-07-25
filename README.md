@@ -97,6 +97,7 @@ ps：目前中心辅助线的坐标取决于svg组件的中心坐标，请自行
 
 
 ## ![绘制组件](https://blog-static.cnblogs.com/files/Hero-/%E7%BB%98%E5%88%B6%E7%BB%84%E4%BB%B6.gif)
+
 ![绘制图表](https://blog-static.cnblogs.com/files/Hero-/%E5%9B%BE%E8%A1%A8.gif)
 
 ![编辑器页面](https://img-blog.csdnimg.cn/20210322100014954.gif#pic_center)
