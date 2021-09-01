@@ -41,6 +41,84 @@ yarn serve
 - deleted删除当前选中组件
 - 鼠标滚轮放大缩小选中组件
 
+## 特别说明
+
+vue2想使用动态组件请使用`Vue.component()`
+
+> vue2使用感谢大佬[chj2020](https://github.com/chj2020)指导
+
+举例 src\components\SvgComponents.vue
+
+```vue
+<template>
+  <component :is="component_prop"
+             :prop_data=component_prop></component>
+</template>
+<script>
+import Vue from 'vue'
+export default {
+  props: ['svgInfoData', 'component_prop'],
+  data () {
+    return {
+      componentTag: ''
+    }
+  },
+  created () {
+    this.svgInfoData.forEach(f => {
+      let componentInfo = {
+        template: f.template,
+        props: f.props
+      }
+      Vue.component(f.type, componentInfo)
+    })
+  }
+}
+</script>
+<style scoped>
+</style>
+
+```
+
+### vue2如何支持多节点
+
+首先安装vue-fragment
+
+```vue
+npm install vue-fragment
+```
+
+引用vue-fragment
+
+```vue
+//main.js
+import Fragment from 'vue-fragment'
+Vue.use(Fragment.Plugin)
+```
+
+然后在json文件的template属性值里面最外层使用标签
+
+```vue
+<fragment></fragment>
+```
+
+例如
+
+```vue
+<fragment><path :fill=\"prop_data.svgColor\" :stroke=\"prop_data.svgColor\" stroke-width=\"5\" style=\"pointer-events:inherit\" d=\"m143.72081869586242,163.35565803158485 c14.617751633754164,-41.93617271978648 71.89058180534832,0 0,53.91793635401125 c-71.89058180534832,-53.91793635401125 -14.617751633754164,-95.85410907379776 0,-53.91793635401125 z\"  fill-opacity=\"1\" stroke-opacity=\"1\" transform=\"translate(-145,-180)\"></path></fragment>
+```
+
+
+
+### 注意
+
+当前为了演示可动态添加组件，注册组件写在了通用组件的created生命周期，获取组件定义json的时候写在了Edit和Preview页面，此写法有一个弊端就是每次拖拽组件都会访问SvgComponents.vue的created生命周期进行组件注册，此步可以移到main.js里面使用app.component()进行组件全局注册，传递组件是通过is控制显示组件，提升运行效率
+
+## todo
+
+- vuecli移除改为使用vite构建
+- options写法改为composition写法
+- 画板标尺功能
+
 ## 动态添加组件
 
 可使用任意生成svg代码的工具，我这里使用在线编译器进行模拟
