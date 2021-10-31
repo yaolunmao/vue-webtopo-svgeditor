@@ -1,191 +1,155 @@
 
+<script setup lang="ts">
+import { computed, reactive, ref, watch } from 'vue';
+import { ChevronDoubleLeft20Regular, ChevronDoubleRight20Regular } from '@vicons/fluent';
+import { NIcon, NCollapse, NCollapseItem, useMessage } from "naive-ui";
+import { ILeftImgLists, IComponentInfo } from "../Model";
+const emit = defineEmits(['setCreatSvgInfo'])
+const message = useMessage();
+const props = defineProps({
+  left_imglists: {
+    type: Object as () => ILeftImgLists,
+    default: []
+  },
+  //选中的左侧工具图标
+  select_toolbar: {
+    type: String,
+    default: ''
+  }
+});
+const leftnav = reactive({
+  navclass: 'leftnavDisplay',
+  navopen: true
+});
+const clickHandleIcon = () => {
+  leftnav.navopen = !leftnav.navopen;
+  leftnav.navclass = leftnav.navclass == 'leftnavDisplay' ? 'leftnavNone' : 'leftnavDisplay'
+};
+const dragStartEvent = (leftImgItem: IComponentInfo, e: DragEvent) => {
+  //设置要创建的svg组件信息
+  emit('setCreatSvgInfo', leftImgItem);
+}
+const dragEndEvent = (leftImgItem: IComponentInfo, e: DragEvent) => {
+  //拖动时记录拖动的svg信息
+  if (e.dataTransfer?.dropEffect !== 'copy') {
+    message.error('请将组件拖到画布中!');
+    //清空已选择的信息
+    emit('setCreatSvgInfo', {});
+    return;
+  }
+}
+</script>
 <template>
-  <div class="components-layout-left leftNav">
-
-    <!-- <a-input-search placeholder="搜索组件" /> -->
-    <a-collapse v-model:activeKey="activeKey"
-                accordion>
-      <a-collapse-panel key="1"
-                        header="拖动组件">
-        <ul class="svg-nav-list">
-          <li v-for="item in draggableComponentList"
-              :key="item">
-            <div class="title">{{item.title}}</div>
-            <img :title="item.title"
-                 @mousedown="Mousedown(item.type,item.title,item.default_attr,item.create_type)"
-                 :src="item.priview_img"
-                 draggable="draggable">
-          </li>
-        </ul>
-      </a-collapse-panel>
-      <a-collapse-panel key="2"
-                        header="绘制组件"
-                        :disabled="false">
-        <ul class="svg-nav-list">
-          <li v-for="item in drawComponentList"
-              :key="item"
-              :class="$store.state.CurrentlySelectedToolBar.Type==item.type?'toolbar-selected':''">
-            <div class="title">{{item.title}}</div>
-            <img :title="item.title"
-                 @mousedown="Mousedown(item.type,item.title,item.default_attr,item.create_type)"
-                 :src="item.priview_img">
-          </li>
-        </ul>
-      </a-collapse-panel>
-      <a-collapse-panel key="3"
-                        header="图表">
-        <ul class="svg-nav-list">
-          <li v-for="item in chartComponentList"
-              :key="item">
-            <div class="title">{{item.title}}</div>
-            <img :title="item.title"
-                 @mousedown="Mousedown(item.type,item.title,item.default_attr,item.create_type)"
-                 :src="item.priview_img"
-                 draggable="draggable">
-          </li>
-        </ul>
-      </a-collapse-panel>
-    </a-collapse>
+  <div :class="leftnav.navclass">
+    <div class="svgimg" v-show="leftnav.navopen">
+      <n-collapse default-expanded-names="1" accordion>
+        <n-collapse-item title="常规组件" name="1" style="margin-top: 15px;">
+          <ul class="leftImgUl">
+            <li v-for="leftImgItem in props.left_imglists.commonComponentList">
+              <img
+                :title="leftImgItem.title"
+                :src="leftImgItem.priview_img"
+                draggable="true"
+                @dragstart="dragStartEvent(leftImgItem, $event)"
+                @dragend="dragEndEvent(leftImgItem, $event)"
+              />
+            </li>
+          </ul>
+        </n-collapse-item>
+        <n-collapse-item title="绘制组件" name="2">
+          <ul class="leftImgUl">
+            <li v-for="leftImgItem in props.left_imglists.drawComponentList">
+              <img
+                :class="props.select_toolbar == leftImgItem.type ? 'svg-selected' : ''"
+                :title="leftImgItem.title"
+                :src="leftImgItem.priview_img"
+                @click="() => { emit('setCreatSvgInfo', leftImgItem) }"
+              />
+            </li>
+          </ul>
+        </n-collapse-item>
+        <n-collapse-item title="图表组件" name="3">
+          <ul class="leftImgUl">
+            <li v-for="leftImgItem in props.left_imglists.chartComponentList">
+              <img
+                :title="leftImgItem.title"
+                :src="leftImgItem.priview_img"
+                draggable="true"
+                @dragstart="dragStartEvent(leftImgItem, $event)"
+                @dragend="dragEndEvent(leftImgItem, $event)"
+              />
+            </li>
+          </ul>
+        </n-collapse-item>
+      </n-collapse>
+    </div>
+    <div class="handlehidden">
+      <n-icon class="handleicon" size="10" @click="clickHandleIcon">
+        <chevron-double-left20-regular v-if="leftnav.navopen" />
+        <chevron-double-right20-regular v-else />
+      </n-icon>
+    </div>
   </div>
 </template>
-<script>
-export default {
-  props: ['svgInfoData'],
-  data () {
-    return {
-      activeKey: ['1'],//当前激活的key
-      text: `这里是预留位置.`,
-      draggableComponentList: [],//拖动组件
-      drawComponentList: [],//绘制类型组件
-      chartComponentList: [],//图表类型
-    };
-  },
-  watch: {
-    'svgInfoData': {
-      deep: true,
-      handler (val) {
-        this.draggableComponentList = val.filter(m => {
-          return m.panel_class == 'draggable'
-        });
-        this.drawComponentList = val.filter(m => {
-          return m.panel_class == 'draw'
-        });
-        this.chartComponentList = val.filter(m => {
-          return m.panel_class == 'chart'
-        });
-      }
-    }
-  },
-  methods: {
-    /**
-     * @description: 点击左侧工具栏触发函数
-     * @param {*} type
-     * @param {*} title
-     * @param {*} default_attr 属性默认值
-     * @param {*} create_type 组件创建方式
-     * @return {*}
-     */
-    Mousedown (type, title, default_attr, create_type) {
-      let CurrentlySelectedToolBar = {
-        Type: type,//选中的工具栏svg类型
-        TypeName: title,//选中的工具栏svg类型名称
-        Title: title,//选中的工具栏svg标题
-        Color: default_attr.color,//选中的工具栏svg颜色
-        CreateType: create_type,//选中工具栏的创建方式
-        EChartsOption: default_attr.echarts_option
-      };
-      this.$store.setCurrentlySelectedToolBarAction(CurrentlySelectedToolBar);
-    },
-  }
-};
-</script>
-<style lang="less" scoped>
-.components-layout-left .ant-input-search-icon {
-  font-size: 20px !important;
-  color: #1890ff !important;
+<style scoped>
+.leftnavDisplay,
+.leftnavNone {
+  height: 100%;
+  display: flex;
 }
-.components-layout-left .ant-collapse,
-.components-layout-left .ant-collapse-content,
-.components-layout-left .ant-collapse > .ant-collapse-item {
-  border-color: #eee !important;
+.leftnavDisplay {
+  width: 210px;
 }
-.components-layout-left .ant-collapse-content > .ant-collapse-content-box {
-  padding: 16px 0;
+.leftnavNone {
+  width: 10px;
 }
-.ant-input-affix-wrapper {
-  height: 45px;
-  line-height: 45px;
-  border: none;
+.svgimg {
+  /* background-color: green; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: overlay;
 }
-.svg-nav-list {
+.svgimg::-webkit-scrollbar {
+  display: none;
+}
+.handlehidden {
+  height: 100%;
+  width: 10px;
+  background-color: grey;
+}
+.handleicon {
+  top: 50%;
+  cursor: pointer;
+  position: relative;
+}
+.leftImgUl {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   margin: 0;
   padding: 0;
-
-  li {
-    position: relative;
-    width: calc(33.33% - 30px);
-    margin: 0 15px 15px 15px;
-    padding: 0;
-    border-radius: 50%;
-    box-shadow: 1px 1px 5px #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    &:hover {
-      box-shadow: 1px 1px 10px #ccc;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    .title {
-      display: none;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.4);
-      color: #fff;
-      height: 20px;
-      line-height: 20px;
-      font-size: 12px;
-      text-align: center;
-    }
-  }
-
-  &.two-item {
-    li {
-      width: calc(50% - 30px);
-      height: 100px;
-      margin-bottom: 25px;
-      border-radius: 10px;
-
-      img {
-        width: auto;
-        height: 100%;
-      }
-    }
-  }
 }
-.toolbar-selected {
+.leftImgUl li {
+  width: calc(33.33% - 30px);
+  margin: 0 15px 15px 15px;
+  padding: 0;
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px #ddd;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.leftImgUl li :hover {
+  box-shadow: 1px 1px 10px #ccc;
+  border-radius: 50%;
+}
+.leftImgUl img {
+  width: 100%;
+}
+.svg-selected {
   outline: 1px solid #0cf;
-}
-.leftNav {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  min-width: unset !important;
-  max-width: unset !important;
-  width: 260px !important;
-  z-index: 1;
-  overflow: auto;
 }
 </style>

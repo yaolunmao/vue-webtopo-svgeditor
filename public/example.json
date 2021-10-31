@@ -1,1436 +1,2055 @@
 [{
-	"id": "f1d2c15a-acd9-4eeb-8d16-c97f6f16e771",
-	"title": "演示监控系统",
+	"id": "1635556854467",
 	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#ffdd00",
-	"svgPositionX": 749,
-	"svgPositionY": 60,
-	"echartsOption": "",
-	"size": 5,
-	"angle": 0
-}, {
-	"id": "8f18beea-31f0-4e25-bc8e-f717bd10736f",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 749,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 473,
-		"startY": 92,
-		"endX": 674,
-		"endY": 92
-	},
-	"size": 1.1,
-	"angle": 0
-}, {
-	"id": "1e62abda-bcbc-45c8-a15b-d217ab137632",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 57,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 66,
-		"startY": 117,
-		"endX": 454,
-		"endY": 117
-	},
-	"size": 1.1,
-	"angle": 0
-}, {
-	"id": "a235e449-aed3-471e-b744-f831940e5d43",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1181,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 1183,
-		"startY": 131,
-		"endX": 1643,
-		"endY": 130
-	},
-	"size": 1.1,
-	"angle": 0
-}, {
-	"id": "b6548ff3-8a77-4172-8c03-76e0866b0916",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 123,
-	"svgPositionY": 130,
-	"mPoint": {
-		"startX": 123,
-		"startY": 131,
-		"endX": 122,
-		"endY": 461
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "33f1b4d4-d10c-486b-a742-a0338df7c166",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 123,
-	"svgPositionY": 170,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "eec5edea-4961-45ac-8cec-d3fdf666ab3f",
-	"title": "断路器",
-	"type": "CircuitBreakerSvg",
-	"typeName": "断路器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 123,
-	"svgPositionY": 211,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "841e8de6-0355-4347-8747-5b4850201a16",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 123,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 180
-}, {
-	"id": "1457d30a-1d8f-41ff-84ca-db525777b56d",
-	"title": "箭头向上",
-	"type": "ArrowUpSvg",
-	"typeName": "箭头向上",
-	"svgColor": "#FF0000",
-	"svgPositionX": 122,
-	"svgPositionY": 410,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "779f1ae2-7e5b-46f1-a380-96b17b290cfb",
-	"title": "接地灰白",
-	"type": "GroundGraySvg",
-	"typeName": "接地灰白",
-	"svgColor": "#CCCCCC",
-	"svgPositionX": 80,
-	"svgPositionY": 444,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "976c6e82-1fc4-46ae-8505-f4a6c75dc766",
-	"title": "接地灰白",
-	"type": "GroundGraySvg",
-	"typeName": "接地灰白",
-	"svgColor": "#CCCCCC",
-	"svgPositionX": 158,
-	"svgPositionY": 444,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "d4e75ccf-ca52-4067-8252-658b84d188df",
-	"title": "避雷器",
-	"type": "LightningArresterSvg",
-	"typeName": "避雷器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 80,
-	"svgPositionY": 410,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "0fd4abe0-f40d-4617-8826-69ad783ccb6f",
-	"title": "信号灯",
-	"type": "SignalLampSvg",
-	"typeName": "信号灯",
-	"svgColor": "#FF0000",
-	"svgPositionX": 158,
-	"svgPositionY": 423,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "fb455be2-49a9-41d5-81bc-eb96a24a2055",
-	"title": "标准电容器",
-	"type": "StandardCapacitorSvg",
-	"typeName": "标准电容器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 158,
-	"svgPositionY": 398,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "9bffb936-f588-4f50-be71-dbd80da371ab",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 80,
-	"svgPositionY": 389,
-	"mPoint": {
-		"startX": 79,
-		"startY": 389,
-		"endX": 79,
-		"endY": 372
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "80a7344e-b549-4055-92e5-ee423b3e1d8a",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 158,
-	"svgPositionY": 389,
-	"mPoint": {
-		"startX": 79,
-		"startY": 389,
-		"endX": 79,
-		"endY": 372
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "7dc05ed9-e4c9-4b9f-9a37-255800d9cfe9",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 79,
-	"svgPositionY": 371,
-	"mPoint": {
-		"startX": 78,
-		"startY": 369,
-		"endX": 158,
-		"endY": 369
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "006b5bbb-fcad-4d71-80e2-d617b460678c",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 190,
-	"svgPositionY": 130,
-	"mPoint": {
-		"startX": 224,
-		"startY": 134,
-		"endX": 224,
-		"endY": 163
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "f3091869-f768-4538-bfe3-4f3a9836208a",
-	"title": "隔离开关",
-	"type": "IsolatingSwitchSvg",
-	"typeName": "隔离开关",
-	"svgColor": "#FF0000",
-	"svgPositionX": 190,
-	"svgPositionY": 172,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "090d4447-bfbf-45bc-9ee2-7b7806029d9b",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 190,
-	"svgPositionY": 212,
-	"mPoint": {
-		"startX": 190,
-		"startY": 210,
-		"endX": 190,
-		"endY": 282
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "6deacccf-2564-42b5-93e9-c762f046d63b",
-	"title": "长方形",
-	"type": "RectSvg",
-	"typeName": "长方形",
-	"svgColor": "#FF0000",
-	"svgPositionX": 190,
-	"svgPositionY": 231,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "801fff38-0732-4665-8a49-01760723cf74",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 155,
-	"svgPositionY": 285,
-	"mPoint": {
-		"startX": 155,
-		"startY": 283,
-		"endX": 227,
-		"endY": 283
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "466e037b-86fb-47f6-8338-c3291ed7b7c3",
-	"title": "双圆",
-	"type": "TwoCircleSvg",
-	"typeName": "双圆",
-	"svgColor": "#FF0000",
-	"svgPositionX": 158,
-	"svgPositionY": 285,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "98a90b3d-57d2-464d-97bd-0f54c8c14945",
-	"title": "双圆",
-	"type": "TwoCircleSvg",
-	"typeName": "双圆",
-	"svgColor": "#FF0000",
-	"svgPositionX": 223,
-	"svgPositionY": 285,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "50f4b9bb-efc5-41a9-9a67-92da914e13d6",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 191,
-	"svgPositionY": 195,
-	"mPoint": {
-		"startX": 191,
-		"startY": 195,
-		"endX": 221,
-		"endY": 194
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "3ab0c76b-38da-4c1d-9ee8-6ba486ffc4d7",
-	"title": "标准电容器",
-	"type": "StandardCapacitorSvg",
-	"typeName": "标准电容器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 221,
-	"svgPositionY": 206,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "629b7b80-a882-48f4-8e63-8001cf913f79",
-	"title": "信号灯",
-	"type": "SignalLampSvg",
-	"typeName": "信号灯",
-	"svgColor": "#FF0000",
-	"svgPositionX": 220,
-	"svgPositionY": 231,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "08151d61-fefd-441a-946c-6c1547cbe74c",
-	"title": "接地灰白",
-	"type": "GroundGraySvg",
-	"typeName": "接地灰白",
-	"svgColor": "#CCCCCC",
-	"svgPositionX": 219,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "dc46733a-883f-4df7-a54b-882bdc09ed68",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 315,
-	"svgPositionY": 131,
-	"mPoint": {
-		"startX": 315,
-		"startY": 131,
-		"endX": 315,
-		"endY": 390
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "8436469b-e20c-476a-8947-bf70bb6c3f60",
-	"title": "电流互感器Y",
-	"type": "TransformerYSvg",
-	"typeName": "电流互感器Y",
-	"svgColor": "#FF0000",
-	"svgPositionX": 315,
-	"svgPositionY": 399,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "119184b9-ac5c-4140-9caf-def203d7294e",
-	"title": "电流互感器Y",
-	"type": "TransformerYSvg",
-	"typeName": "电流互感器Y",
-	"svgColor": "#FF0000",
-	"svgPositionX": 305,
-	"svgPositionY": 415,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "6cd34921-5587-45f7-8290-826fa2f0a536",
-	"title": "三相互感器",
-	"type": "TransformerTriphaseOpenSvg",
-	"typeName": "三相互感器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 326,
-	"svgPositionY": 415,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "eed507a3-4895-400f-aaaf-7c40612c9013",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 315,
-	"svgPositionY": 170,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "4cbe3849-d4ce-4393-8f00-b47850527cb1",
-	"title": "长方形",
-	"type": "RectSvg",
-	"typeName": "长方形",
-	"svgColor": "#FF0000",
-	"svgPositionX": 315,
-	"svgPositionY": 241,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "ddd48801-e2d1-4ea5-8478-8416c2b09176",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 270,
-	"svgPositionY": 203,
-	"mPoint": {
-		"startX": 270,
-		"startY": 203,
-		"endX": 314,
-		"endY": 203
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "e9dda543-a028-48ff-80ba-2093b8d02056",
-	"title": "避雷器",
-	"type": "LightningArresterSvg",
-	"typeName": "避雷器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 270,
-	"svgPositionY": 223,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "84ac2a15-a69a-4cb6-815a-d9aa95108e63",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 270,
-	"svgPositionY": 251,
-	"mPoint": {
-		"startX": 270,
-		"startY": 253,
-		"endX": 270,
-		"endY": 419
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "2f416e71-7089-492d-8839-06c8dcfea1f0",
-	"title": "接地灰白",
-	"type": "GroundGraySvg",
-	"typeName": "接地灰白",
-	"svgColor": "#CCCCCC",
-	"svgPositionX": 270,
-	"svgPositionY": 423,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "997ad25a-b021-41ff-86cd-cd55d8098494",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 271,
-	"svgPositionY": 409,
-	"mPoint": {
-		"startX": 273,
-		"startY": 409,
-		"endX": 297,
-		"endY": 409
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "f6ecaeb9-46cc-40f4-8e95-abe8d62ce762",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 271,
-	"svgPositionY": 393,
-	"mPoint": {
-		"startX": 272,
-		"startY": 393,
-		"endX": 306,
-		"endY": 393
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "7b2b2ac7-9cad-40e3-9bc9-2fe62e44f7a6",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 431,
-	"svgPositionY": 131,
-	"mPoint": {
-		"startX": 431,
-		"startY": 131,
-		"endX": 431,
-		"endY": 421
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "5f5aee56-449b-404f-bf61-100f8a9f2adc",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 431,
-	"svgPositionY": 170,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "4a234b3f-e506-45cc-8836-9b1822daa30f",
-	"title": "断路器",
-	"type": "CircuitBreakerSvg",
-	"typeName": "断路器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 431,
-	"svgPositionY": 211,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "b49ad639-25ee-4d26-aa0b-be3d9fa6a5e7",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 431,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 180
-}, {
-	"id": "0644280a-6d15-431d-860a-ef19d6d7eb08",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 366,
-	"svgPositionY": 355,
-	"mPoint": {
-		"startX": 366,
-		"startY": 355,
-		"endX": 485,
-		"endY": 355
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "9ca19602-f29f-41da-8ce9-95752d8cc690",
-	"title": "隔离开关",
-	"type": "IsolatingSwitchSvg",
-	"typeName": "隔离开关",
-	"svgColor": "#FF0000",
-	"svgPositionX": 366,
-	"svgPositionY": 374,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "029e58ae-3d7e-4ece-8ae5-3484782b27b5",
-	"title": "接地灰白",
-	"type": "GroundGraySvg",
-	"typeName": "接地灰白",
-	"svgColor": "#CCCCCC",
-	"svgPositionX": 366,
-	"svgPositionY": 419,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "02fa851b-ebcb-4e92-ac9e-0099e9fbffc3",
-	"title": "避雷器",
-	"type": "LightningArresterSvg",
-	"typeName": "避雷器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 484,
-	"svgPositionY": 377,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "ff0ff14a-9c8b-4e41-bc38-4a721cd6af22",
-	"title": "接地灰白",
-	"type": "GroundGraySvg",
-	"typeName": "接地灰白",
-	"svgColor": "#CCCCCC",
-	"svgPositionX": 484,
-	"svgPositionY": 410,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "1f66f055-a7af-4b75-bd62-6b9e0e65d9c9",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 479,
-	"svgPositionY": 130,
-	"mPoint": {
-		"startX": 479,
-		"startY": 131,
-		"endX": 479,
-		"endY": 292
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "61c252b0-471a-4087-8fde-54bb45a0c434",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 479,
-	"svgPositionY": 170,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "6bc84973-9248-4c16-8d55-ad726e6ef221",
-	"title": "断路器",
-	"type": "CircuitBreakerSvg",
-	"typeName": "断路器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 479,
-	"svgPositionY": 211,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "87d4c6d1-504a-4257-8cc3-37acdacb49cc",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 479,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 180
-}, {
-	"id": "6ec58a1e-6a58-46b2-8529-20147229216f",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 478,
-	"svgPositionY": 291,
-	"mPoint": {
-		"startX": 476,
-		"startY": 295,
-		"endX": 767,
-		"endY": 294
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "57d1141c-6265-4084-83b8-c479ae66e821",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 768,
-	"svgPositionY": 131,
-	"mPoint": {
-		"startX": 767,
-		"startY": 131,
-		"endX": 767,
-		"endY": 290
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "8de5cdd0-ff11-4a96-8f62-9fd212b959d8",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 768,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 180
-}, {
-	"id": "5b4395f1-682f-424d-8271-27a4421966e8",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 768,
-	"svgPositionY": 170,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "e00e440f-14e1-49d2-9a7d-5079e17faae9",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 834,
-	"svgPositionY": 131,
-	"mPoint": {
-		"startX": 834,
-		"startY": 131,
-		"endX": 834,
-		"endY": 417
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "cd3f5e5e-9ebd-455a-97ce-f738570d6629",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 948,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 834,
-		"startY": 131,
-		"endX": 834,
-		"endY": 417
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "41d78aca-8c68-40a2-b201-2f60a1ff6fbf",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 834,
-	"svgPositionY": 170,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "c28a8d30-1104-4ec5-8195-293b5e8c4bb7",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 834,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 180
-}, {
-	"id": "d6e8146c-7811-47ae-b508-4dda6b364cd0",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 948,
-	"svgPositionY": 170,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "bb2a03ef-8778-4715-839d-2d655b3478fd",
-	"title": "多段折线",
-	"type": "PolylineSvg",
-	"typeName": "多段折线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 948,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 180
-}, {
-	"id": "fe3c6169-84bf-4349-8872-f210dcbc70f7",
-	"title": "断路器",
-	"type": "CircuitBreakerSvg",
-	"typeName": "断路器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 834,
-	"svgPositionY": 211,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "746b535d-57f7-43a5-b197-6d4167e5c181",
-	"title": "断路器",
-	"type": "CircuitBreakerSvg",
-	"typeName": "断路器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 948,
-	"svgPositionY": 211,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "5193db37-a169-46d2-8906-c56ec2716464",
-	"title": "Echart饼图",
-	"type": "EchartsPieSvg",
-	"typeName": "Echart饼图",
-	"svgColor": "#000000",
-	"svgPositionX": 158,
-	"svgPositionY": 594,
-	"echartsOption": {
-		"title": {
-			"text": "某单位各场所报警占比",
-			"subtext": "纯属虚构",
-			"left": "center"
+	"title": "文字",
+	"svgPositionX": 829,
+	"svgPositionY": 57,
+	"angle": 0,
+	"size": 3,
+	"extend_attr": {
+		"color": {
+			"title": "文字颜色",
+			"val": "#FFF200FF",
+			"type": "colorinputbox"
 		},
-		"tooltip": {
-			"trigger": "item"
+		"font_size": {
+			"title": "字体大小",
+			"val": 15,
+			"type": "numberinputbox"
 		},
-		"legend": {
-			"orient": "vertical",
-			"left": "left"
-		},
-		"series": [{
-			"name": "访问来源",
-			"type": "pie",
-			"radius": "50%",
-			"data": [{
-				"value": 1048,
-				"name": "办公楼A"
-			}, {
-				"value": 735,
-				"name": "办公楼B"
-			}, {
-				"value": 580,
-				"name": "保安室"
-			}, {
-				"value": 484,
-				"name": "地下车库"
-			}, {
-				"value": 300,
-				"name": "食堂"
-			}],
-			"emphasis": {
-				"itemStyle": {
-					"shadowBlur": 10,
-					"shadowOffsetX": 0,
-					"shadowColor": "rgba(0, 0, 0, 0.5)"
-				}
+		"font_family": {
+			"title": "字体样式",
+			"val": {
+				"selectval": "Microsoft YaHei",
+				"selectgroup": [{
+					"value": "Microsoft YaHei",
+					"label": "微软雅黑"
+				}, {
+					"value": "NSimSun",
+					"label": "新宋体"
+				}]
 			},
-			"itemStyle": {
-				"normal": {
-					"label": {
-						"show": "true",
-						"formatter": "{b} : {c} ({d}%)"
-					}
-				}
-			}
-		}]
-	},
-	"size": 1.2,
-	"angle": 0
-}, {
-	"id": "706d465a-84eb-4d92-902a-e45d0220d076",
-	"title": "Echart基础柱状图",
-	"type": "EchartsBasicBarSvg",
-	"typeName": "Echart基础柱状图",
-	"svgColor": "#000000",
-	"svgPositionX": 1165,
-	"svgPositionY": 574,
-	"echartsOption": {
-		"title": {
-			"text": "某单位各楼层用电量监控",
-			"subtext": "纯属虚构",
-			"left": "center"
+			"type": "select"
 		},
-		"xAxis": {
-			"type": "category",
-			"data": ["一楼", "二楼", "三楼", "四楼", "五楼", "六楼", "七楼"]
+		"text": {
+			"title": "文字内容",
+			"val": "演示监控系统",
+			"type": "textinputbox"
+		}
+	}
+}, {
+	"id": "1635556944468",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 56,
+	"svgPositionY": 136,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
 		},
-		"yAxis": {
-			"type": "value"
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
 		},
-		"series": [{
-			"data": [120, 200, 150, 80, 70, 110, 130],
-			"type": "bar",
-			"itemStyle": {
-				"normal": {
-					"label": {
-						"show": "true",
-						"position": "top"
-					}
-				}
-			}
-		}]
-	},
-	"size": 1.3,
-	"angle": 0
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 475,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "2a7cc52b-b881-4626-b0e3-f2d22975d91f",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 58,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 56,
-		"startY": 132,
-		"endX": 56,
-		"endY": 534
-	},
+	"id": "1635556970843",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 56,
+	"svgPositionY": 135,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 470,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "bff3366d-edd5-4b48-8386-bd52c78f3245",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#fff700",
-	"svgPositionX": 57,
-	"svgPositionY": 532,
-	"mPoint": {
-		"startX": 57,
-		"startY": 532,
-		"endX": 501,
-		"endY": 532
-	},
-	"size": 1.2,
-	"angle": 0
-}, {
-	"id": "74299afc-96bc-4bcb-8b93-b241f43982d8",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 948,
-	"svgPositionY": 414,
-	"mPoint": {
-		"startX": 946,
-		"startY": 415,
-		"endX": 1234,
-		"endY": 414
-	},
+	"id": "1635556988089",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 130,
+	"svgPositionY": 138,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 416,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "c73d0d58-5198-4d87-a37a-f00c73e0c8f7",
-	"title": "电线开关-连接",
-	"type": "WireBreakOnSvg",
-	"typeName": "电线开关-连接",
-	"svgColor": "#00FF00",
-	"svgPositionX": 1234,
-	"svgPositionY": 252,
-	"echartsOption": "",
+	"id": "1635557011355",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 130,
+	"svgPositionY": 173,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
 }, {
-	"id": "5c235951-d11b-48cc-814b-76fa5ae414bd",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1234,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 1230,
-		"startY": 131,
-		"endX": 1230,
-		"endY": 215
-	},
+	"id": "1635557016918",
+	"type": "CircuitBreakerSvg",
+	"title": "断路器",
+	"svgPositionX": 131,
+	"svgPositionY": 212,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"fill\":\"#FF0000\"}",
+				"ridiogroup": [{
+					"value": "{\"fill\":\"#FF0000\"}",
+					"label": "断开"
+				}, {
+					"value": "{\"fill\":\"#00FF00\"}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
 }, {
-	"id": "8dbf95f5-4554-4f6e-be71-94795b893ae9",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1234,
-	"svgPositionY": 295,
-	"mPoint": {
-		"startX": 1233,
-		"startY": 297,
-		"endX": 1234,
-		"endY": 416
-	},
+	"id": "1635557028385",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 130,
+	"svgPositionY": 250,
+	"angle": 180,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
 }, {
-	"id": "37c9be82-fd6f-40af-8965-9b28b17294ed",
-	"title": "箭头向上",
-	"type": "ArrowUpSvg",
-	"typeName": "箭头向上",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1234,
-	"svgPositionY": 355,
-	"echartsOption": "",
+	"id": "1635557063525",
+	"type": "ArrowDownSvg",
+	"title": "箭头向下",
+	"svgPositionX": 130,
+	"svgPositionY": 474,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
 }, {
-	"id": "a9dde4fd-e84b-4085-ad08-b7d68d5094f8",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1298,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 1230,
-		"startY": 131,
-		"endX": 1230,
-		"endY": 215
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "f8b75c73-6fce-427d-8d3f-eaefda2d0d2d",
-	"title": "电线开关-连接",
-	"type": "WireBreakOnSvg",
-	"typeName": "电线开关-连接",
-	"svgColor": "#00FF00",
-	"svgPositionX": 1298,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "74ae5333-bdc3-47a9-9b0e-607eb6151769",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1298,
-	"svgPositionY": 291,
-	"mPoint": {
-		"startX": 1233,
-		"startY": 297,
-		"endX": 1234,
-		"endY": 416
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "5c247366-d14e-418d-82f2-289543ad81ad",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1381,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 1230,
-		"startY": 131,
-		"endX": 1230,
-		"endY": 215
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "ef6833de-78b7-4c0b-8952-1e4bd9553afa",
-	"title": "电线开关-连接",
-	"type": "WireBreakOnSvg",
-	"typeName": "电线开关-连接",
-	"svgColor": "#00FF00",
-	"svgPositionX": 1381,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "5a542ccb-a065-4e37-9121-4dcc15a90004",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1381,
-	"svgPositionY": 291,
-	"mPoint": {
-		"startX": 1233,
-		"startY": 297,
-		"endX": 1234,
-		"endY": 416
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "263ca38f-ef2d-4d4e-8b38-9583f52a971d",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1471,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 1230,
-		"startY": 131,
-		"endX": 1230,
-		"endY": 215
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "0658388d-0ef4-4739-862c-1eb23fe82d0d",
-	"title": "电线开关-连接",
-	"type": "WireBreakOnSvg",
-	"typeName": "电线开关-连接",
-	"svgColor": "#00FF00",
-	"svgPositionX": 1471,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "77e9b40e-1b22-4412-9541-b8474d26d00c",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1471,
-	"svgPositionY": 295,
-	"mPoint": {
-		"startX": 1233,
-		"startY": 297,
-		"endX": 1234,
-		"endY": 416
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "651c041c-c694-4a52-8e6d-28b514f7a993",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1568,
-	"svgPositionY": 130,
-	"mPoint": {
-		"startX": 1230,
-		"startY": 131,
-		"endX": 1230,
-		"endY": 215
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "19ac81be-85df-43fb-82a2-d7ee566728d9",
-	"title": "电线开关-连接",
-	"type": "WireBreakOnSvg",
-	"typeName": "电线开关-连接",
-	"svgColor": "#00FF00",
-	"svgPositionX": 1568,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "9564e22c-af8c-4131-91bd-721aebefc692",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1568,
-	"svgPositionY": 295,
-	"mPoint": {
-		"startX": 1233,
-		"startY": 297,
-		"endX": 1234,
-		"endY": 416
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "578e14df-47da-4fec-81ab-2c4a7fc8dd77",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1684,
-	"svgPositionY": 129,
-	"mPoint": {
-		"startX": 1230,
-		"startY": 131,
-		"endX": 1230,
-		"endY": 215
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "cc55d207-57bb-4a09-871f-4eceb892b7de",
-	"title": "发电机",
-	"type": "AlternatorSvg",
-	"typeName": "发电机",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1684,
-	"svgPositionY": 252,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "14e79b39-885d-438b-8cb6-65c145817f56",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1684,
-	"svgPositionY": 287,
-	"mPoint": {
-		"startX": 1233,
-		"startY": 297,
-		"endX": 1234,
-		"endY": 416
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "cd307df7-5ee5-429e-bfc9-ebd750070f1d",
-	"title": "电容柜",
-	"type": "GGJSvg",
-	"typeName": "电容柜",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1684,
+	"id": "1635557080603",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 90,
 	"svgPositionY": 427,
-	"echartsOption": "",
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 83,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "85d64ffa-0ff2-4bd6-b862-579d25cde899",
-	"title": "箭头向下",
-	"type": "ArrowDownSvg",
-	"typeName": "箭头向下",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1298,
-	"svgPositionY": 371,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "32a75720-f42d-4e8b-8784-bf3a9a791a84",
-	"title": "箭头向下",
-	"type": "ArrowDownSvg",
-	"typeName": "箭头向下",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1381,
-	"svgPositionY": 371,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "d71b65c9-2766-4077-8199-bc3fa30e2f05",
-	"title": "箭头向下",
-	"type": "ArrowDownSvg",
-	"typeName": "箭头向下",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1471,
-	"svgPositionY": 371,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "ad00017f-f29b-4246-8623-11bccf03bf9b",
-	"title": "箭头向下",
-	"type": "ArrowDownSvg",
-	"typeName": "箭头向下",
-	"svgColor": "#FF0000",
-	"svgPositionX": 1568,
-	"svgPositionY": 371,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "d0aa0d8f-6d18-4e48-885b-d89fca632978",
-	"title": "双绕组变压器",
-	"type": "DoubleWindingSvg",
-	"typeName": "双绕组变压器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 634,
-	"svgPositionY": 532,
-	"echartsOption": "",
-	"size": 1,
-	"angle": 90
-}, {
-	"id": "461cd7a0-7233-4af4-a26c-0756a22945a2",
-	"title": "连接线",
-	"type": "ConnLineSvg",
-	"typeName": "连接线",
-	"svgColor": "#FF0000",
-	"svgPositionX": 678,
-	"svgPositionY": 533,
-	"mPoint": {
-		"startX": 682,
-		"startY": 533,
-		"endX": 839,
-		"endY": 533
-	},
-	"size": 1,
-	"angle": 0
-}, {
-	"id": "0811c7fc-900d-4378-9b77-0725d24e7148",
-	"title": "信号灯",
-	"type": "SignalLampSvg",
-	"typeName": "信号灯",
-	"svgColor": "#FF0000",
-	"svgPositionX": 834,
+	"id": "1635557101863",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 172,
 	"svgPositionY": 428,
-	"echartsOption": "",
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 29,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "47db6638-a56b-41fa-8106-6eb70da240e3",
-	"title": "标准电抗",
-	"type": "StandardReactanceSvg",
-	"typeName": "标准电抗",
-	"svgColor": "#FF0000",
-	"svgPositionX": 834,
-	"svgPositionY": 469,
-	"echartsOption": "",
+	"id": "1635557117775",
+	"type": "StandardCapacitorSvg",
+	"title": "标准电容器",
+	"svgPositionX": 172,
+	"svgPositionY": 466,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
 }, {
-	"id": "8c8754e1-8c53-45af-8501-e8b958ca9d3c",
-	"title": "避雷器",
+	"id": "1635557133315",
+	"type": "SignalLampSvg",
+	"title": "信号灯",
+	"svgPositionX": 172,
+	"svgPositionY": 490,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635557143537",
+	"type": "GroundGraySvg",
+	"title": "接地灰白",
+	"svgPositionX": 171,
+	"svgPositionY": 511,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#CCCCCC",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635557161556",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 90,
+	"svgPositionY": 427,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 38,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635557169614",
 	"type": "LightningArresterSvg",
-	"typeName": "避雷器",
-	"svgColor": "#FF0000",
-	"svgPositionX": 835,
-	"svgPositionY": 505,
-	"echartsOption": "",
+	"title": "避雷器",
+	"svgPositionX": 90,
+	"svgPositionY": 485,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
 }, {
-	"id": "c6e12c55-4b8a-462f-888a-45957d5bea0d",
-	"title": "进线柜",
-	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#fbff00",
-	"svgPositionX": 107,
-	"svgPositionY": 484,
-	"echartsOption": "",
+	"id": "1635557181065",
+	"type": "GroundGraySvg",
+	"title": "接地灰白",
+	"svgPositionX": 90,
+	"svgPositionY": 517,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#CCCCCC",
+			"type": "colorinputbox"
+		}
+	}
 }, {
-	"id": "9f34b118-61be-40d0-8e08-9a728ad4ccb8",
-	"title": "电容柜",
+	"id": "1635557195802",
 	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#fbff00",
-	"svgPositionX": 1672,
-	"svgPositionY": 457,
-	"echartsOption": "",
+	"title": "文字",
+	"svgPositionX": 113,
+	"svgPositionY": 566,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "文字颜色",
+			"val": "#FFFB00FF",
+			"type": "colorinputbox"
+		},
+		"font_size": {
+			"title": "字体大小",
+			"val": 11,
+			"type": "numberinputbox"
+		},
+		"font_family": {
+			"title": "字体样式",
+			"val": {
+				"selectval": "Microsoft YaHei",
+				"selectgroup": [{
+					"value": "Microsoft YaHei",
+					"label": "微软雅黑"
+				}, {
+					"value": "NSimSun",
+					"label": "新宋体"
+				}]
+			},
+			"type": "select"
+		},
+		"text": {
+			"title": "文字内容",
+			"val": "进线柜",
+			"type": "textinputbox"
+		}
+	}
 }, {
-	"id": "fea54d97-fbc4-4335-891a-1aef67892a39",
-	"title": "门卫开关",
-	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#fbff00",
-	"svgPositionX": 1555,
-	"svgPositionY": 457,
-	"echartsOption": "",
+	"id": "1635557262881",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 56,
+	"svgPositionY": 606,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#51FF00FF",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 626,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "028ab1c8-8a2f-4c32-81c4-16f3463173af",
-	"title": "车库开关",
-	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#fbff00",
-	"svgPositionX": 1457,
-	"svgPositionY": 457,
-	"echartsOption": "",
+	"id": "1635557289014",
+	"type": "DoubleWindingSvg",
+	"title": "双绕组变压器",
+	"svgPositionX": 728,
+	"svgPositionY": 607,
+	"angle": 90,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
 }, {
-	"id": "29b60400-2833-40c0-92bb-569c2bdb8673",
-	"title": "B座开关",
-	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#fbff00",
+	"id": "1635557373942",
+	"type": "EchartsPieSvg",
+	"title": "Echart饼图",
+	"svgPositionX": 87,
+	"svgPositionY": 612,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"echarts_option": {
+			"title": "饼图数据",
+			"val": "{\"title\":{\"text\":\"某单位各场所报警占比\",\"subtext\":\"纯属虚构\",\"left\":\"center\"},\"tooltip\":{\"trigger\":\"item\"},\"legend\":{\"orient\":\"vertical\",\"left\":\"left\"},\"series\":[{\"name\":\"访问来源\",\"type\":\"pie\",\"radius\":\"50%\",\"data\":[{\"value\":1048,\"name\":\"办公楼A\"},{\"value\":735,\"name\":\"办公楼B\"},{\"value\":580,\"name\":\"保安室\"},{\"value\":484,\"name\":\"地下车库\"},{\"value\":300,\"name\":\"食堂\"}],\"emphasis\":{\"itemStyle\":{\"shadowBlur\":10,\"shadowOffsetX\":0,\"shadowColor\":\"rgba(0, 0, 0, 0.5)\"}}}]}",
+			"type": "textareainputbox"
+		}
+	}
+}, {
+	"id": "1635558259583",
+	"type": "EchartsBasicBarSvg",
+	"title": "Echart基础柱状图",
+	"svgPositionX": 1172,
+	"svgPositionY": 630,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"echarts_option": {
+			"title": "柱状图数据",
+			"val": "{\"title\":{\"text\":\"某单位各楼层用电量监控\",\"subtext\":\"纯属虚构\",\"left\":\"center\"},\"xAxis\":{\"type\":\"category\",\"data\":[\"一楼\",\"二楼\",\"三楼\",\"四楼\",\"五楼\",\"六楼\",\"七楼\"]},\"yAxis\":{\"type\":\"value\"},\"series\":[{\"data\":[120,200,150,80,70,110,130],\"type\":\"bar\"}]}",
+			"type": "textareainputbox"
+		}
+	}
+}, {
+	"id": "1635558550289",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 775,
+	"svgPositionY": 605,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 166,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558687187",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 940,
+	"svgPositionY": 542,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 63,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558688878",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 936,
+	"svgPositionY": 583,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558712071",
+	"type": "StandardReactanceSvg",
+	"title": "标准电抗",
+	"svgPositionX": 940,
+	"svgPositionY": 516,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635558721492",
+	"type": "SignalLampSvg",
+	"title": "信号灯",
+	"svgPositionX": 940,
+	"svgPositionY": 474,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635558740451",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 940,
+	"svgPositionY": 143,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 318,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558760794",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 940,
+	"svgPositionY": 185,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635558766505",
+	"type": "CircuitBreakerSvg",
+	"title": "断路器",
+	"svgPositionX": 940,
+	"svgPositionY": 224,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"fill\":\"#FF0000\"}",
+				"ridiogroup": [{
+					"value": "{\"fill\":\"#FF0000\"}",
+					"label": "断开"
+				}, {
+					"value": "{\"fill\":\"#00FF00\"}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635558774476",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 940,
+	"svgPositionY": 268,
+	"angle": 180,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635558806205",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 756,
+	"svgPositionY": 141,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 378,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558835553",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 775,
+	"svgPositionY": 142,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 117,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558845601",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 775,
+	"svgPositionY": 171,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635558849864",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 775,
+	"svgPositionY": 234,
+	"angle": 180,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635558868444",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 536,
+	"svgPositionY": 260,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": -6,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 240,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558912749",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 530,
+	"svgPositionY": 137,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 123,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635558959407",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 530,
+	"svgPositionY": 160,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635558965024",
+	"type": "CircuitBreakerSvg",
+	"title": "断路器",
+	"svgPositionX": 530,
+	"svgPositionY": 199,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"fill\":\"#FF0000\"}",
+				"ridiogroup": [{
+					"value": "{\"fill\":\"#FF0000\"}",
+					"label": "断开"
+				}, {
+					"value": "{\"fill\":\"#00FF00\"}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635558974660",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 530,
+	"svgPositionY": 238,
+	"angle": 180,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559046320",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 388,
+	"svgPositionY": 137,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 131,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559059551",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 388,
+	"svgPositionY": 160,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559065648",
+	"type": "CircuitBreakerSvg",
+	"title": "断路器",
+	"svgPositionX": 389,
+	"svgPositionY": 199,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"fill\":\"#FF0000\"}",
+				"ridiogroup": [{
+					"value": "{\"fill\":\"#FF0000\"}",
+					"label": "断开"
+				}, {
+					"value": "{\"fill\":\"#00FF00\"}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635559073094",
+	"type": "PolylineSvg",
+	"title": "多段折线",
+	"svgPositionX": 388,
+	"svgPositionY": 239,
+	"angle": 180,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559112983",
+	"type": "StandardCapacitorSvg",
+	"title": "标准电容器",
+	"svgPositionX": 388,
+	"svgPositionY": 279,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559123797",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 388,
+	"svgPositionY": 291,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 184,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559129564",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 324,
+	"svgPositionY": 372,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 133,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559147799",
+	"type": "TransformerYSvg",
+	"title": "电流互感器Y",
+	"svgPositionX": 460,
+	"svgPositionY": 431,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559157655",
+	"type": "TransformerYSvg",
+	"title": "电流互感器Y",
+	"svgPositionX": 452,
+	"svgPositionY": 451,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559172598",
+	"type": "TransformerTriphaseOpenSvg",
+	"title": "三相互感器",
+	"svgPositionX": 470,
+	"svgPositionY": 451,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559180753",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 456,
+	"svgPositionY": 373,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 47,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559192384",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 390,
+	"svgPositionY": 448,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 51,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559194700",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 533,
+	"svgPositionY": 448,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559207993",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 389,
+	"svgPositionY": 426,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 60,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559223145",
+	"type": "GroundGraySvg",
+	"title": "接地灰白",
+	"svgPositionX": 388,
+	"svgPositionY": 481,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#CCCCCC",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559244944",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 324,
+	"svgPositionY": 371,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 156,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559252463",
+	"type": "RectSvg",
+	"title": "长方形",
+	"svgPositionX": 324,
+	"svgPositionY": 415,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559285005",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 267,
+	"svgPositionY": 526,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 116,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559303280",
+	"type": "TwoCircleSvg",
+	"title": "双圆",
+	"svgPositionX": 265,
+	"svgPositionY": 526,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559309733",
+	"type": "TwoCircleSvg",
+	"title": "双圆",
+	"svgPositionX": 388,
+	"svgPositionY": 527,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559369015",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 1107,
+	"svgPositionY": 143,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 369,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559388816",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
+	"svgPositionX": 1107,
+	"svgPositionY": 513,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 259,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559401179",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 1365,
+	"svgPositionY": 367,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 145,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559416514",
+	"type": "WireBreakSvg",
+	"title": "电线开关",
+	"svgPositionX": 1365,
+	"svgPositionY": 323,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"x2\":-10}",
+				"ridiogroup": [{
+					"value": "{\"x2\":-10}",
+					"label": "断开"
+				}, {
+					"value": "{\"x2\":0}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635559426917",
+	"type": "ArrowUpSvg",
+	"title": "箭头向上",
+	"svgPositionX": 1365,
+	"svgPositionY": 450,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559440753",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 1365,
+	"svgPositionY": 152,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": -7,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 132,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559458667",
+	"type": "ConnHorizontalLineSvg",
+	"title": "连接线-横线",
 	"svgPositionX": 1364,
-	"svgPositionY": 457,
-	"echartsOption": "",
+	"svgPositionY": 145,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_x": {
+			"title": "起点x相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_x": {
+			"title": "终点x相对坐标",
+			"val": 359,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "3e4e4687-65ed-4898-bd37-5f866ebbff41",
-	"title": "A座开关",
-	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#fbff00",
-	"svgPositionX": 1284,
-	"svgPositionY": 457,
-	"echartsOption": "",
+	"id": "1635559486894",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 1724,
+	"svgPositionY": 146,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 133,
+			"type": "numberinputbox"
+		}
+	}
 }, {
-	"id": "b2c50372-c4d4-4f90-a4df-d1110d7b88d5",
-	"title": "总开关",
-	"type": "TextSvg",
-	"typeName": "文字",
-	"svgColor": "#fbff00",
-	"svgPositionX": 1217,
-	"svgPositionY": 444,
-	"echartsOption": "",
+	"id": "1635559496127",
+	"type": "AlternatorSvg",
+	"title": "发电机",
+	"svgPositionX": 1724,
+	"svgPositionY": 314,
+	"angle": 0,
 	"size": 1,
-	"angle": 0
+	"extend_attr": {
+		"stroke_color_a": {
+			"title": "外轮廓颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"stroke_color_b": {
+			"title": "内轮廓颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"stroke_width_a": {
+			"title": "外轮廓厚度",
+			"val": 2,
+			"type": "numberinputbox"
+		},
+		"stroke_width_b": {
+			"title": "内轮廓厚度",
+			"val": 2,
+			"type": "numberinputbox"
+		},
+		"transform_a": {
+			"title": "外中心点坐标",
+			"val": "translate(-50,-50)",
+			"type": "textinputbox"
+		},
+		"transform_b": {
+			"title": "内中心点坐标",
+			"val": "translate(-50,-50)",
+			"type": "textinputbox"
+		}
+	}
+}, {
+	"id": "1635559542809",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线",
+	"svgPositionX": 1726,
+	"svgPositionY": 350,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 136,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559559967",
+	"type": "GGJSvg",
+	"title": "电容柜",
+	"svgPositionX": 1726,
+	"svgPositionY": 511,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559577578",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy",
+	"svgPositionX": 1422,
+	"svgPositionY": 154,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": -7,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 132,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559586978",
+	"type": "WireBreakSvg",
+	"title": "电线开关-copy",
+	"svgPositionX": 1422,
+	"svgPositionY": 326,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"x2\":-10}",
+				"ridiogroup": [{
+					"value": "{\"x2\":-10}",
+					"label": "断开"
+				}, {
+					"value": "{\"x2\":0}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635559601271",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy",
+	"svgPositionX": 1422,
+	"svgPositionY": 369,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 145,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559610651",
+	"type": "ArrowUpSvg",
+	"title": "箭头向上-copy",
+	"svgPositionX": 1423,
+	"svgPositionY": 449,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559637911",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy-copy",
+	"svgPositionX": 1478,
+	"svgPositionY": 154,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": -7,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 132,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559657319",
+	"type": "WireBreakSvg",
+	"title": "电线开关-copy-copy",
+	"svgPositionX": 1478,
+	"svgPositionY": 326,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"x2\":-10}",
+				"ridiogroup": [{
+					"value": "{\"x2\":-10}",
+					"label": "断开"
+				}, {
+					"value": "{\"x2\":0}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635559669503",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy-copy",
+	"svgPositionX": 1478,
+	"svgPositionY": 371,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 145,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559675668",
+	"type": "ArrowUpSvg",
+	"title": "箭头向上-copy-copy",
+	"svgPositionX": 1478,
+	"svgPositionY": 449,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559687785",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy-copy-copy",
+	"svgPositionX": 1539,
+	"svgPositionY": 155,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": -7,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 132,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559694747",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy-copy-copy-copy",
+	"svgPositionX": 1602,
+	"svgPositionY": 154,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": -7,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 132,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559706119",
+	"type": "WireBreakSvg",
+	"title": "电线开关-copy-copy-copy",
+	"svgPositionX": 1539,
+	"svgPositionY": 326,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"x2\":-10}",
+				"ridiogroup": [{
+					"value": "{\"x2\":-10}",
+					"label": "断开"
+				}, {
+					"value": "{\"x2\":0}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635559706512",
+	"type": "WireBreakSvg",
+	"title": "电线开关-copy-copy-copy",
+	"svgPositionX": 1602,
+	"svgPositionY": 324,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"switch": {
+			"title": "类型",
+			"val": {
+				"selectval": "{\"x2\":-10}",
+				"ridiogroup": [{
+					"value": "{\"x2\":-10}",
+					"label": "断开"
+				}, {
+					"value": "{\"x2\":0}",
+					"label": "连接"
+				}]
+			},
+			"type": "radiogroup"
+		}
+	}
+}, {
+	"id": "1635559722396",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy-copy-copy",
+	"svgPositionX": 1602,
+	"svgPositionY": 367,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 145,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559722647",
+	"type": "ConnVerticalLineSvg",
+	"title": "连接线-竖线-copy-copy-copy",
+	"svgPositionX": 1539,
+	"svgPositionY": 371,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		},
+		"startpoint_y": {
+			"title": "起点y相对坐标",
+			"val": 0,
+			"type": "numberinputbox"
+		},
+		"endpoint_y": {
+			"title": "终点y相对坐标",
+			"val": 145,
+			"type": "numberinputbox"
+		}
+	}
+}, {
+	"id": "1635559748742",
+	"type": "ArrowUpSvg",
+	"title": "箭头向上-copy",
+	"svgPositionX": 1603,
+	"svgPositionY": 449,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559749003",
+	"type": "ArrowUpSvg",
+	"title": "箭头向上-copy",
+	"svgPositionX": 1539,
+	"svgPositionY": 450,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "填充颜色",
+			"val": "#FF0000",
+			"type": "colorinputbox"
+		}
+	}
+}, {
+	"id": "1635559788732",
+	"type": "TextSvg",
+	"title": "文字",
+	"svgPositionX": 1352,
+	"svgPositionY": 534,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "文字颜色",
+			"val": "#F9E166FF",
+			"type": "colorinputbox"
+		},
+		"font_size": {
+			"title": "字体大小",
+			"val": 10,
+			"type": "numberinputbox"
+		},
+		"font_family": {
+			"title": "字体样式",
+			"val": {
+				"selectval": "Microsoft YaHei",
+				"selectgroup": [{
+					"value": "Microsoft YaHei",
+					"label": "微软雅黑"
+				}, {
+					"value": "NSimSun",
+					"label": "新宋体"
+				}]
+			},
+			"type": "select"
+		},
+		"text": {
+			"title": "文字内容",
+			"val": "总开关",
+			"type": "textinputbox"
+		}
+	}
+}, {
+	"id": "1635559871729",
+	"type": "TextSvg",
+	"title": "文字",
+	"svgPositionX": 1410,
+	"svgPositionY": 534,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "文字颜色",
+			"val": "#FFED2CFF",
+			"type": "colorinputbox"
+		},
+		"font_size": {
+			"title": "字体大小",
+			"val": 10,
+			"type": "numberinputbox"
+		},
+		"font_family": {
+			"title": "字体样式",
+			"val": {
+				"selectval": "Microsoft YaHei",
+				"selectgroup": [{
+					"value": "Microsoft YaHei",
+					"label": "微软雅黑"
+				}, {
+					"value": "NSimSun",
+					"label": "新宋体"
+				}]
+			},
+			"type": "select"
+		},
+		"text": {
+			"title": "文字内容",
+			"val": "A座开关",
+			"type": "textinputbox"
+		}
+	}
+}, {
+	"id": "1635560442994",
+	"type": "TextSvg",
+	"title": "文字-copy",
+	"svgPositionX": 1463,
+	"svgPositionY": 534,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "文字颜色",
+			"val": "#FFED2CFF",
+			"type": "colorinputbox"
+		},
+		"font_size": {
+			"title": "字体大小",
+			"val": 10,
+			"type": "numberinputbox"
+		},
+		"font_family": {
+			"title": "字体样式",
+			"val": {
+				"selectval": "Microsoft YaHei",
+				"selectgroup": [{
+					"value": "Microsoft YaHei",
+					"label": "微软雅黑"
+				}, {
+					"value": "NSimSun",
+					"label": "新宋体"
+				}]
+			},
+			"type": "select"
+		},
+		"text": {
+			"title": "文字内容",
+			"val": "B座开关",
+			"type": "textinputbox"
+		}
+	}
+}, {
+	"id": "1635560454337",
+	"type": "TextSvg",
+	"title": "文字-copy-copy",
+	"svgPositionX": 1524,
+	"svgPositionY": 534,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "文字颜色",
+			"val": "#FFED2CFF",
+			"type": "colorinputbox"
+		},
+		"font_size": {
+			"title": "字体大小",
+			"val": 10,
+			"type": "numberinputbox"
+		},
+		"font_family": {
+			"title": "字体样式",
+			"val": {
+				"selectval": "Microsoft YaHei",
+				"selectgroup": [{
+					"value": "Microsoft YaHei",
+					"label": "微软雅黑"
+				}, {
+					"value": "NSimSun",
+					"label": "新宋体"
+				}]
+			},
+			"type": "select"
+		},
+		"text": {
+			"title": "文字内容",
+			"val": "C座开关",
+			"type": "textinputbox"
+		}
+	}
+}, {
+	"id": "1635560460682",
+	"type": "TextSvg",
+	"title": "文字-copy-copy-copy",
+	"svgPositionX": 1584,
+	"svgPositionY": 534,
+	"angle": 0,
+	"size": 1,
+	"extend_attr": {
+		"color": {
+			"title": "文字颜色",
+			"val": "#FFED2CFF",
+			"type": "colorinputbox"
+		},
+		"font_size": {
+			"title": "字体大小",
+			"val": 10,
+			"type": "numberinputbox"
+		},
+		"font_family": {
+			"title": "字体样式",
+			"val": {
+				"selectval": "Microsoft YaHei",
+				"selectgroup": [{
+					"value": "Microsoft YaHei",
+					"label": "微软雅黑"
+				}, {
+					"value": "NSimSun",
+					"label": "新宋体"
+				}]
+			},
+			"type": "select"
+		},
+		"text": {
+			"title": "文字内容",
+			"val": "D座开关",
+			"type": "textinputbox"
+		}
+	}
 }]
