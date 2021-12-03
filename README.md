@@ -8,9 +8,7 @@
 
 ## 预览地址
 
-[https://svg.yaolunmao.top](https://svg.yaolunmao.top)（请使用版本新一点的浏览器🤔）
-
-[历史版本](https://svgv2_1.yaolunmao.top/)
+[http://svg.yaolm.top](http://svg.yaolm.top)（请使用版本新一点的浏览器🤔）
 
 ## git地址
 
@@ -61,7 +59,7 @@ import 'vue-webtopo-svgeditor/dist/style.css'
       }
     },
     "create_type": "draggable",//创建方式 拖动还是绘制
-    "priview_img": "https://svg.yaolunmao.top/test.png"//左侧工具栏的预览图像
+    "priview_img": "http://svg.yaolm.top/test.png"//左侧工具栏的预览图像
   }
 ]
 ```
@@ -133,7 +131,7 @@ npm run dev
 
 可使用任意生成svg代码的工具，我这里使用在线编译器进行模拟
 
-点击[这里](https://svgedit.yaolunmao.top/)进行svg图像绘制，我这里以心形为例
+点击[这里](http://svgedit.yaolm.top/)进行svg图像绘制，我这里以心形为例
 
 ![绘制心形图片](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_2105190646421.png)
 
@@ -168,7 +166,7 @@ npm run dev
       }
     },
     "create_type": "draggable",
-    "priview_img": "https://svg.yaolunmao.top/test.png"
+    "priview_img": "http://svg.yaolm.top/test.png"
 }
 ```
 
@@ -181,7 +179,7 @@ npm run dev
 也支持直接引入图片，只不过放大有失真，将下面的代码替换上面json文件的template值
 
 ```
-<image x=\"-33\" y=\"-33\" width=\"66\" height=\"66\" xlink:href=\"https://svg.yaolunmao.top/test.png\" />
+<image x=\"-33\" y=\"-33\" width=\"66\" height=\"66\" xlink:href=\"http://svg.yaolm.top/test.png\" />
 ```
 
 ps：目前中心辅助线的坐标取决于svg组件的中心坐标，请自行添加transform属性调整svg组件中心坐标
