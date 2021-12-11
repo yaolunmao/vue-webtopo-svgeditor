@@ -15,6 +15,15 @@
     stroke-dasharray: 13, 5;
   }
 }
+@-webkit-keyframes ani_flow {
+  from {
+    stroke-dasharray: 10, 5;
+  }
+
+  to {
+    stroke-dasharray: 13, 5;
+  }
+}
 
 /* 停止流动效果 */
 .svg_ani_flow_stop {
@@ -33,7 +42,15 @@
     stroke-dasharray: 10, 5;
   }
 }
+@-webkit-keyframes ani_flow_stop {
+  from {
+    stroke-dasharray: 10, 5;
+  }
 
+  to {
+    stroke-dasharray: 10, 5;
+  }
+}
 /* 反向流动效果 */
 .svg_ani_flow_back {
   stroke-dasharray: 1000;
@@ -45,6 +62,15 @@
 @keyframes ani_flow_back {
   from {
     stroke-dasharray: 13, 5;
+  }
+
+  to {
+    stroke-dasharray: 10, 5;
+  }
+}
+@-webkit-keyframes ani_flow_stop {
+  from {
+    stroke-dasharray: 10, 5;
   }
 
   to {
@@ -64,5 +90,14 @@
 
   to {
     height: 40px;
+  }
+}
+@-webkit-keyframes ani_flow_stop {
+  from {
+    stroke-dasharray: 10, 5;
+  }
+
+  to {
+    stroke-dasharray: 10, 5;
   }
 }
