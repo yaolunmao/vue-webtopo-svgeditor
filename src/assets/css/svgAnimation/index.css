@@ -1,0 +1,68 @@
+/* 正向流动效果 */
+.svg_ani_flow {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: ani_flow 10s linear infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ani_flow {
+  from {
+    stroke-dasharray: 10, 5;
+  }
+
+  to {
+    stroke-dasharray: 13, 5;
+  }
+}
+
+/* 停止流动效果 */
+.svg_ani_flow_stop {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: ani_flow_stop 10s linear infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ani_flow_stop {
+  from {
+    stroke-dasharray: 10, 5;
+  }
+
+  to {
+    stroke-dasharray: 10, 5;
+  }
+}
+
+/* 反向流动效果 */
+.svg_ani_flow_back {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: ani_flow_back 10s linear infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ani_flow_back {
+  from {
+    stroke-dasharray: 13, 5;
+  }
+
+  to {
+    stroke-dasharray: 10, 5;
+  }
+}
+/* 以最大40高度填充 */
+.svg_ani_fill_h40 {
+  animation: ani_fill_h40 5s linear infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ani_fill_h40 {
+  from {
+    height: 0px;
+  }
+
+  to {
+    height: 40px;
+  }
+}

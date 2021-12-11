@@ -7,6 +7,7 @@ import BottomBar from './BottomBar.vue';
 import { NMessageProvider } from "naive-ui";
 import { IComponentInfo, ISvgDataLists, ISvgCanvas, ILeftImgLists, IMouseInfo, ISelectSvg } from "../Model";
 import SvgDynamic from "./SvgDynamic.vue";
+import  "../assets/css/svgAnimation/index.css";
 const emit = defineEmits(['saveSvgInfo'])
 const props = defineProps({
   //组件的json格式

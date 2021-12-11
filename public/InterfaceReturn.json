@@ -426,7 +426,7 @@
     "type": "ConnLineSvg",
     "title": "连接线",
     "panel_class": "draw",
-    "template": "<line :x1=\"prop_data.extend_attr.startpoint_x.val\" :y1=\"prop_data.extend_attr.startpoint_y.val\" :x2=\"prop_data.extend_attr.endpoint_x.val\" :y2=\"prop_data.extend_attr.endpoint_y.val\" :fill=\"prop_data.extend_attr.color.val\" :stroke=\"prop_data.extend_attr.color.val\"  stroke-width=\"2\"></line>",
+    "template": "<line :x1=\"prop_data.extend_attr.startpoint_x.val\" :y1=\"prop_data.extend_attr.startpoint_y.val\" :x2=\"prop_data.extend_attr.endpoint_x.val\" :y2=\"prop_data.extend_attr.endpoint_y.val\" :fill=\"prop_data.extend_attr.color.val\" :stroke=\"prop_data.extend_attr.color.val\"  stroke-width=\"2\" :class=\"prop_data.extend_attr.svg_line_ani.val.selectval\"></line>",
     "props": [
       "prop_data"
     ],
@@ -455,6 +455,31 @@
         "title": "终点y相对坐标",
         "val": 0,
         "type": "numberinputbox"
+      },
+      "svg_line_ani": {
+        "title": "电流效果",
+        "val": {
+          "selectval": "",
+          "selectgroup": [
+            {
+              "value": "",
+              "label": "无"
+            },
+            {
+              "value": "svg_ani_flow",
+              "label": "正向"
+            },
+            {
+              "value": "svg_ani_flow_back",
+              "label": "反向"
+            },
+            {
+              "value": "svg_ani_flow_stop",
+              "label": "停止"
+            }
+          ]
+        },
+        "type": "select"
       }
     },
     "create_type": "draw",
@@ -464,7 +489,7 @@
     "type": "ConnHorizontalLineSvg",
     "title": "连接线-横线",
     "panel_class": "draw",
-    "template": "<line :x1=\"prop_data.extend_attr.startpoint_x.val\" y1=\"0\" :x2=\"prop_data.extend_attr.endpoint_x.val\" y2=\"0\" :fill=\"prop_data.extend_attr.color.val\" :stroke=\"prop_data.extend_attr.color.val\"  stroke-width=\"2\"></line>",
+    "template": "<line :x1=\"prop_data.extend_attr.startpoint_x.val\" y1=\"0\" :x2=\"prop_data.extend_attr.endpoint_x.val\" y2=\"0\" :fill=\"prop_data.extend_attr.color.val\" :stroke=\"prop_data.extend_attr.color.val\"  stroke-width=\"2\" :class=\"prop_data.extend_attr.svg_line_ani.val.selectval\"></line>",
     "props": [
       "prop_data"
     ],
@@ -483,6 +508,31 @@
         "title": "终点x相对坐标",
         "val": 0,
         "type": "numberinputbox"
+      },
+      "svg_line_ani": {
+        "title": "电流效果",
+        "val": {
+          "selectval": "",
+          "selectgroup": [
+            {
+              "value": "",
+              "label": "无"
+            },
+            {
+              "value": "svg_ani_flow",
+              "label": "正向"
+            },
+            {
+              "value": "svg_ani_flow_back",
+              "label": "反向"
+            },
+            {
+              "value": "svg_ani_flow_stop",
+              "label": "停止"
+            }
+          ]
+        },
+        "type": "select"
       }
     },
     "create_type": "click",
@@ -492,7 +542,7 @@
     "type": "ConnVerticalLineSvg",
     "title": "连接线-竖线",
     "panel_class": "draw",
-    "template": "<line x1=\"0\" :y1=\"prop_data.extend_attr.startpoint_y.val\" x2=\"0\" :y2=\"prop_data.extend_attr.endpoint_y.val\" :fill=\"prop_data.extend_attr.color.val\" :stroke=\"prop_data.extend_attr.color.val\"  stroke-width=\"2\"></line>",
+    "template": "<line x1=\"0\" :y1=\"prop_data.extend_attr.startpoint_y.val\" x2=\"0\" :y2=\"prop_data.extend_attr.endpoint_y.val\" :fill=\"prop_data.extend_attr.color.val\" :stroke=\"prop_data.extend_attr.color.val\"  stroke-width=\"2\" :class=\"prop_data.extend_attr.svg_line_ani.val.selectval\"></line>",
     "props": [
       "prop_data"
     ],
@@ -511,6 +561,31 @@
         "title": "终点y相对坐标",
         "val": 0,
         "type": "numberinputbox"
+      },
+      "svg_line_ani": {
+        "title": "电流效果",
+        "val": {
+          "selectval": "",
+          "selectgroup": [
+            {
+              "value": "",
+              "label": "无"
+            },
+            {
+              "value": "svg_ani_flow",
+              "label": "正向"
+            },
+            {
+              "value": "svg_ani_flow_back",
+              "label": "反向"
+            },
+            {
+              "value": "svg_ani_flow_stop",
+              "label": "停止"
+            }
+          ]
+        },
+        "type": "select"
       }
     },
     "create_type": "click",
@@ -568,6 +643,260 @@
       }
     },
     "create_type": "draggable",
-    "priview_img": "https://svg.yaolm.top/test.png"
+    "priview_img": "http://svg.yaolm.top/test.png"
+  },
+  {
+    "type": "PipelineSvg",
+    "title": "管道",
+    "panel_class": "draw",
+    "template": "<line :x1=\"prop_data.extend_attr.startpoint_x.val\" :y1=\"prop_data.extend_attr.startpoint_y.val\" :x2=\"prop_data.extend_attr.endpoint_x.val\" :y2=\"prop_data.extend_attr.endpoint_y.val\"  :stroke=\"prop_data.extend_attr.o_color.val\" :stroke-width=\"prop_data.extend_attr.o_width.val\"></line><line :x1=\"prop_data.extend_attr.startpoint_x.val\" :y1=\"prop_data.extend_attr.startpoint_y.val\" :x2=\"prop_data.extend_attr.endpoint_x.val\" :y2=\"prop_data.extend_attr.endpoint_y.val\"  :stroke=\"prop_data.extend_attr.i_color.val\" :stroke-width=\"prop_data.extend_attr.i_width.val\" :class=\"prop_data.extend_attr.svg_line_ani.val.selectval\"></line>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "o_color": {
+        "title": "管道颜色",
+        "val": "#0a7ae2",
+        "type": "colorinputbox"
+      },
+      "i_color": {
+        "title": "水流颜色",
+        "val": "#119bfa",
+        "type": "colorinputbox"
+      },
+      "startpoint_x": {
+        "title": "起点x相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "startpoint_y": {
+        "title": "起点y相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "endpoint_x": {
+        "title": "终点x相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "endpoint_y": {
+        "title": "终点y相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "o_width": {
+        "title": "管道宽度",
+        "val": 10,
+        "type": "numberinputbox"
+      },
+      "i_width": {
+        "title": "水流宽度",
+        "val": 5,
+        "type": "numberinputbox"
+      },
+      "svg_line_ani": {
+        "title": "水流效果",
+        "val": {
+          "selectval": "svg_ani_flow",
+          "selectgroup": [
+            {
+              "value": "",
+              "label": "无"
+            },
+            {
+              "value": "svg_ani_flow",
+              "label": "正向"
+            },
+            {
+              "value": "svg_ani_flow_back",
+              "label": "反向"
+            },
+            {
+              "value": "svg_ani_flow_stop",
+              "label": "停止"
+            }
+          ]
+        },
+        "type": "select"
+      }
+    },
+    "create_type": "draw",
+    "priview_img": "/Pipeline_V_Svg.png"
+  },
+  {
+    "type": "Pipeline_H_Svg",
+    "title": "管道-横向",
+    "panel_class": "draw",
+    "template": "<line :x1=\"prop_data.extend_attr.startpoint_x.val\" :y1=\"0\" :x2=\"prop_data.extend_attr.endpoint_x.val\" :y2=\"0\"  :stroke=\"prop_data.extend_attr.o_color.val\" :stroke-width=\"prop_data.extend_attr.o_width.val\"></line><line :x1=\"prop_data.extend_attr.startpoint_x.val\" :y1=\"0\" :x2=\"prop_data.extend_attr.endpoint_x.val\" :y2=\"0\"  :stroke=\"prop_data.extend_attr.i_color.val\" :stroke-width=\"prop_data.extend_attr.i_width.val\" :class=\"prop_data.extend_attr.svg_line_ani.val.selectval\"></line>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "o_color": {
+        "title": "管道颜色",
+        "val": "#0a7ae2",
+        "type": "colorinputbox"
+      },
+      "i_color": {
+        "title": "水流颜色",
+        "val": "#119bfa",
+        "type": "colorinputbox"
+      },
+      "startpoint_x": {
+        "title": "起点x相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "endpoint_x": {
+        "title": "终点x相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "o_width": {
+        "title": "管道宽度",
+        "val": 10,
+        "type": "numberinputbox"
+      },
+      "i_width": {
+        "title": "水流宽度",
+        "val": 5,
+        "type": "numberinputbox"
+      },
+      "svg_line_ani": {
+        "title": "水流效果",
+        "val": {
+          "selectval": "svg_ani_flow",
+          "selectgroup": [
+            {
+              "value": "",
+              "label": "无"
+            },
+            {
+              "value": "svg_ani_flow",
+              "label": "正向"
+            },
+            {
+              "value": "svg_ani_flow_back",
+              "label": "反向"
+            },
+            {
+              "value": "svg_ani_flow_stop",
+              "label": "停止"
+            }
+          ]
+        },
+        "type": "select"
+      }
+    },
+    "create_type": "draw",
+    "priview_img": "/Pipeline_H_Svg.png"
+  },
+  {
+    "type": "Pipeline_V_Svg",
+    "title": "管道-纵向",
+    "panel_class": "draw",
+    "template": "<line :x1=\"0\" :y1=\"prop_data.extend_attr.startpoint_y.val\" :x2=\"0\" :y2=\"prop_data.extend_attr.endpoint_y.val\"  :stroke=\"prop_data.extend_attr.o_color.val\" :stroke-width=\"prop_data.extend_attr.o_width.val\"></line><line :x1=\"0\" :y1=\"prop_data.extend_attr.startpoint_y.val\" :x2=\"0\" :y2=\"prop_data.extend_attr.endpoint_y.val\"  :stroke=\"prop_data.extend_attr.i_color.val\" :stroke-width=\"prop_data.extend_attr.i_width.val\" :class=\"prop_data.extend_attr.svg_line_ani.val.selectval\"></line>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "o_color": {
+        "title": "管道颜色",
+        "val": "#0a7ae2",
+        "type": "colorinputbox"
+      },
+      "i_color": {
+        "title": "水流颜色",
+        "val": "#119bfa",
+        "type": "colorinputbox"
+      },
+      "startpoint_y": {
+        "title": "起点y相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "endpoint_y": {
+        "title": "终点y相对坐标",
+        "val": 0,
+        "type": "numberinputbox"
+      },
+      "o_width": {
+        "title": "管道宽度",
+        "val": 10,
+        "type": "numberinputbox"
+      },
+      "i_width": {
+        "title": "水流宽度",
+        "val": 5,
+        "type": "numberinputbox"
+      },
+      "svg_line_ani": {
+        "title": "水流效果",
+        "val": {
+          "selectval": "svg_ani_flow",
+          "selectgroup": [
+            {
+              "value": "",
+              "label": "无"
+            },
+            {
+              "value": "svg_ani_flow",
+              "label": "正向"
+            },
+            {
+              "value": "svg_ani_flow_back",
+              "label": "反向"
+            },
+            {
+              "value": "svg_ani_flow_stop",
+              "label": "停止"
+            }
+          ]
+        },
+        "type": "select"
+      }
+    },
+    "create_type": "draw",
+    "priview_img": "/Pipeline_V_Svg.png"
+  },
+  {
+    "type": "ReservoirSvg",
+    "title": "蓄水池",
+    "panel_class": "common",
+    "template": "<polyline points=\"10,0 0,0 0,65 100,65 100,0 90,0\" :stroke=\"prop_data.extend_attr.color.val\" stroke-width=\"5\"></polyline><rect transform=\"rotate(180,50 65)\" :class=\"prop_data.extend_attr.svg_fill_ani.val.selectval\" x=\"2.5\" y=\"65\" width=\"95\" height=\"40\" :fill=\"prop_data.extend_attr.f_color.val\"></rect>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "color": {
+        "title": "边框颜色",
+        "val": "#FFFFFF",
+        "type": "colorinputbox"
+      },
+      "f_color": {
+        "title": "填充颜色",
+        "val": "#37cfe7",
+        "type": "colorinputbox"
+      },
+      "svg_fill_ani": {
+        "title": "填充效果",
+        "val": {
+          "selectval": "svg_ani_fill_h40",
+          "selectgroup": [
+            {
+              "value": "",
+              "label": "无"
+            },
+            {
+              "value": "svg_ani_fill_h40",
+              "label": "正向"
+            }
+          ]
+        },
+        "type": "select"
+      }
+    },
+    "create_type": "draggable",
+    "priview_img": "/ReservoirSvg.png"
   }
 ]

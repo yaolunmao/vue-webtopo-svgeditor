@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import SvgDynamic from "./SvgDynamic.vue";
 import { ISvgDataLists, ISvgCanvas, IComponentInfo } from "../Model";
-
+import  "../assets/css/svgAnimation/index.css";
 const props = defineProps({
     //组件的json格式
     component_infos: {

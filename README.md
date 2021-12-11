@@ -245,7 +245,9 @@ Vue.use(Fragment.Plugin)
 
 ![修改组件属性](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_211031114045_%E4%BF%AE%E6%94%B9%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7.gif)
 
-![预览界面](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_211031114050_%E9%A2%84%E8%A7%88.gif)
+![](https://images.cnblogs.com/cnblogs_com/Hero-/2077550/o_211211080131_%E5%8A%A8%E7%94%BB%E7%BB%98%E5%88%B6.gif)
+
+![预览界面](https://images.cnblogs.com/cnblogs_com/Hero-/2077550/o_211211075750_%E7%94%B5%E5%8A%9B%E9%A2%84%E8%A7%88.gif)
 
 ## License
 
