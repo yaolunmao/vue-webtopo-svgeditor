@@ -7,8 +7,9 @@ import BottomBar from './BottomBar.vue';
 import { NMessageProvider } from "naive-ui";
 import { IComponentInfo, ISvgDataLists, ISvgCanvas, ILeftImgLists, IMouseInfo, ISelectSvg } from "../Model";
 import SvgDynamic from "./SvgDynamic.vue";
-import  "../assets/css/svgAnimation/index.css";
-const emit = defineEmits(['saveSvgInfo'])
+import "../assets/css/svgAnimation/index.css";
+import { moveUp, moveDown, moveLeft, moveRight, hotkeyCopy, hotkeyDel, hotkeyPutOnTop, hotkeyPutOnButtom, hotkeyPutOnUp, hotkeyPutOnDown } from "../func/HotkeyFunc";
+const emit = defineEmits(['saveSvgInfo']);
 const props = defineProps({
   //组件的json格式
   component_infos: {
@@ -22,8 +23,79 @@ const props = defineProps({
   }
 });
 const svg_dom_ref = ref<null | HTMLElement>(null);
+const contextMenuRef = ref<HTMLElement>();
 const svgLists: ISvgDataLists[] = reactive([]);
 const topbar_dom_ref = ref(null);
+//显示右键菜单
+const display_contextmenu = ref(false);
+//右键菜单数据
+const contextmenu_data = reactive([{
+  name: "复制",
+  hotkey: "Ctrl+C",
+  enable: true,
+  fun: function () {
+    if (!this.enable) {
+      return;
+    }
+    hotkeyCopy(svgLists, select_svg);
+    display_contextmenu.value = false;
+  }
+}, {
+  name: "删除",
+  hotkey: "Delete",
+  enable: false,
+  fun: function () {
+    if (!this.enable) {
+      return;
+    }
+    hotkeyDel(svgLists, select_svg);
+    display_contextmenu.value = false;
+  }
+}, {
+  name: "置于顶层",
+  hotkey: "Ctrl+→",
+  enable: true,
+  fun: function () {
+    if (!this.enable) {
+      return;
+    }
+    hotkeyPutOnTop(svgLists, select_svg);
+    display_contextmenu.value = false;
+  }
+}, {
+  name: "置于底层",
+  hotkey: "Ctrl+←",
+  enable: true,
+  fun: function () {
+    if (!this.enable) {
+      return;
+    }
+    hotkeyPutOnButtom(svgLists, select_svg);
+    display_contextmenu.value = false;
+  }
+}, {
+  name: "置于上一层",
+  hotkey: "Ctrl+↑",
+  enable: true,
+  fun: function () {
+    if (!this.enable) {
+      return;
+    }
+    hotkeyPutOnUp(svgLists, select_svg);
+    display_contextmenu.value = false;
+  }
+}, {
+  name: "置于下一层",
+  hotkey: "Ctrl+↓",
+  enable: true,
+  fun: function () {
+    if (!this.enable) {
+      return;
+    }
+    hotkeyPutOnDown(svgLists, select_svg);
+    display_contextmenu.value = false;
+  }
+}]);
 const set_svg_info: Ref<ISvgDataLists> = ref({
   id: '', title: '', svgPositionX: 0, svgPositionY: 0
 });
@@ -205,6 +277,51 @@ const mouseDownCanvasEvent = (e: MouseEvent) => {
   mouseInfo.mPositionX = e.clientX;
   mouseInfo.mPositionY = e.clientY;
 }
+/**
+ * @description: 鼠标右键
+ * @param {*}
+ * @return {*}
+ */
+const contextmenuEvent = (e: MouseEvent) => {
+  e.preventDefault();
+  display_contextmenu.value = true;
+  (contextMenuRef.value as any).style.left = e.pageX + 'px';
+  (contextMenuRef.value as any).style.top = e.pageY + 'px';
+  contextmenu_data.map(m => m.enable = true);
+  //判断当前选中组件的index
+  if (svgLists.length === 1) {
+    //禁用下移
+    contextmenu_data[3].enable = false;
+    contextmenu_data[5].enable = false;
+    //禁用上移
+    contextmenu_data[2].enable = false;
+    contextmenu_data[4].enable = false;
+  }
+  else if (select_svg.index === 0) {
+    //禁用下移
+    contextmenu_data[3].enable = false;
+    contextmenu_data[5].enable = false;
+
+  }
+  else if (select_svg.index === svgLists.length - 1) {
+    //禁用上移
+    contextmenu_data[2].enable = false;
+    contextmenu_data[4].enable = false;
+  }
+
+}
+
+/**
+ * @description: 点击页面其他位置隐藏右键菜单
+ * @param {*}
+ * @return {*}
+ */
+const documentClickEvent = (e: MouseEvent) => {
+  if (e.button !== 2) {
+    display_contextmenu.value = false;
+
+  }
+}
 watch(() => [...props.component_infos], (newval, oldval) => {
   leftimg_lists.value = {
     commonComponentList: newval.filter(f => f.panel_class == 'common'),
@@ -218,35 +335,40 @@ document.onkeydown = function (e) {
   if (!select_svg.id) {
     return;
   }
-  if (e.key == 'ArrowUp') {
-    e.preventDefault();
-    svgLists[select_svg.index].svgPositionY -= 1;
-  } else if (e.key == 'ArrowDown') {
-    e.preventDefault();
-    svgLists[select_svg.index].svgPositionY += 1;
-  } else if (e.key == 'ArrowLeft') {
-    e.preventDefault();
-    svgLists[select_svg.index].svgPositionX -= 1;
-  } else if (e.key == 'ArrowRight') {
-    e.preventDefault();
-    svgLists[select_svg.index].svgPositionX += 1;
+  e.preventDefault();
+  if (!e.ctrlKey && e.key == 'ArrowUp') {
+    moveUp(svgLists, select_svg);
+  } else if (!e.ctrlKey && e.key == 'ArrowDown') {
+    moveDown(svgLists, select_svg);
+  } else if (!e.ctrlKey && e.key == 'ArrowLeft') {
+    moveLeft(svgLists, select_svg);
+  } else if (!e.ctrlKey && e.key == 'ArrowRight') {
+    moveRight(svgLists, select_svg);
   }
   //ctrl  c
   else if (e.ctrlKey && e.key.toLowerCase() == 'c') {
-    e.preventDefault();
-    svgLists.push({
-      ...(JSON.parse(JSON.stringify(svgLists[select_svg.index]))),
-      id: `${new Date().getTime()}`,
-      svgPositionX: svgLists[select_svg.index].svgPositionX + 10,
-      svgPositionY: svgLists[select_svg.index].svgPositionY + 10,
-      title: svgLists[select_svg.index].title + `-copy`
-    })
+    hotkeyCopy(svgLists, select_svg);
   }
   //deleted
   else if (e.key == 'Delete') {
-    e.preventDefault();
-    svgLists.splice(select_svg.index, 1);
+    hotkeyDel(svgLists, select_svg);
     rightnav_open.value = false;
+  }
+  //上移一层
+  else if (e.ctrlKey && e.key == 'ArrowUp') {
+    hotkeyPutOnUp(svgLists, select_svg);
+  }
+  //下移一层
+  else if (e.ctrlKey && e.key == 'ArrowDown') {
+    hotkeyPutOnDown(svgLists, select_svg);
+  }
+  //置于底层
+  else if (e.ctrlKey && e.key == 'ArrowLeft') {
+    hotkeyPutOnButtom(svgLists, select_svg);
+  }
+  //置于顶层
+  else if (e.ctrlKey && e.key == 'ArrowRight') {
+    hotkeyPutOnTop(svgLists, select_svg);
   }
 }
 </script>
@@ -257,7 +379,7 @@ document.onkeydown = function (e) {
       <top-tool-bar @saveSvgInfo="saveSvgInfo" ref="topbar_dom_ref"></top-tool-bar>
     </n-message-provider>
   </div>
-  <div class="ancestors">
+  <div class="ancestors" @mousedown="documentClickEvent">
     <div class="navleft">
       <n-message-provider>
         <left-tool-bar
@@ -297,6 +419,7 @@ document.onkeydown = function (e) {
           :id="item.id"
           :transform="'translate(' + (item.svgPositionX) + ',' + (item.svgPositionY) + ')' + 'rotate(' + item.angle + ')' + 'scale(' + item.size + ')'"
           @mousedown="mouseDownEvent(item, index, $event)"
+          @contextmenu.stop="contextmenuEvent"
         >
           <svg-dynamic
             :component_type="item.type"
@@ -314,9 +437,68 @@ document.onkeydown = function (e) {
   <div class="navbuttom">
     <bottom-bar></bottom-bar>
   </div>
+  <!-- 右键菜单 -->
+  <ul ref="contextMenuRef" class="contextMenu" v-show="display_contextmenu">
+    <li v-for="(item,index) in contextmenu_data" :key="index" @click="item.fun()">
+      <p :class="item.enable ? '' : 'disabled'">
+        {{ item.name }}
+        <span class="shortcut">{{ item.hotkey }}</span>
+      </p>
+    </li>
+  </ul>
 </template>
 
 <style scoped>
+.contextMenu {
+  position: absolute;
+  z-index: 99999;
+  background: #ffffff;
+  padding: 5px 0;
+  margin: 0px;
+  display: block;
+  border-radius: 5px;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.contextMenu li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.contextMenu .shortcut {
+  width: 115px;
+  text-align: right;
+  float: right;
+}
+
+.contextMenu p {
+  text-decoration: none;
+  display: block;
+  padding: 0px 15px 1px 20px;
+  margin: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.contextMenu p:hover {
+  background-color: #0cf;
+  color: #ffffff;
+  cursor: default;
+}
+
+.contextMenu .disabled {
+  color: #999;
+}
+.contextMenu .disabled:hover {
+  color: #999;
+  background-color: transparent;
+}
+.contextMenu li.separator {
+  border-top: solid 1px #e3e3e3;
+  padding-top: 5px;
+  margin-top: 5px;
+}
 .ancestors {
   display: flex;
   flex-direction: row;

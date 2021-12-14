@@ -898,5 +898,53 @@
     },
     "create_type": "draggable",
     "priview_img": "/ReservoirSvg.png"
+  },
+  {
+    "type": "WaterPipeValveSvg",
+    "title": "水管阀",
+    "panel_class": "common",
+    "template": "<ellipse cx=\"0\" cy=\"-12\" :fill=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" :stroke=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" rx=\"20\" ry=\"2\"/><rect :fill=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" :stroke=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" height=\"9\"    width=\"6\" x=\"-2\" y=\"-12\"/><rect :fill=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" :stroke=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" height=\"5\"   width=\"19\" x=\"-8\" y=\"-6\"/><rect :fill=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" :stroke=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" height=\"12\"  width=\"39\" x=\"-19\" y=\"-1\"/><rect :fill=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" :stroke=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" height=\"20\"  width=\"11\" x=\"-30\" y=\"-6\"/><rect :fill=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" :stroke=\"JSON.parse(prop_data.extend_attr.switch.val.selectval).fill\" height=\"20\"   width=\"11\" x=\"20\" y=\"-6\"/>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "switch": {
+        "title": "类型",
+        "val": {
+          "selectval": "{\"fill\":\"#FF0000\"}",
+          "ridiogroup": [
+            {
+              "value": "{\"fill\":\"#FF0000\"}",
+              "label": "关阀"
+            },
+            {
+              "value": "{\"fill\":\"#00FF00\"}",
+              "label": "开阀"
+            }
+          ]
+        },
+        "type": "radiogroup"
+      }
+    },
+    "create_type": "draggable",
+    "priview_img": "/WaterPipeValveSvg.png"
+  },
+  {
+    "type": "RightAnglePipeSvg",
+    "title": "直角管道",
+    "panel_class": "common",
+    "template": "<path :fill=\"prop_data.extend_attr.color.val\" d=\"m-2.84801,-8.56044l7.8889,0l0,0c4.35692,0 7.8889,3.75583 7.8889,8.38889c0,4.63306 -3.53198,8.38889 -7.8889,8.38889l-7.8889,0l0,-16.77778z\"/><rect :fill=\"prop_data.extend_attr.color.val\" x=\"-16.07021\" y=\"-8.56044\" width=\"15.84921\" height=\"16\" /><rect :fill=\"prop_data.extend_attr.color.val\" x=\"-3.07021\" y=\"1.6548\" width=\"16\" height=\"16\"/>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "color": {
+        "title": "管道颜色",
+        "val": "#0a7ae2",
+        "type": "colorinputbox"
+      }
+    },
+    "create_type": "draggable",
+    "priview_img": "/RightAnglePipeSvg.png"
   }
 ]
