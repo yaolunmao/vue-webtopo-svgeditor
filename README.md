@@ -35,7 +35,11 @@ import 'vue-webtopo-svgeditor/dist/style.css'
   alias: {
     'vue': 'vue/dist/vue.esm-bundler.js' // 定义vue的别名，如果使用其他的插件，可能会用到别名
   },
-
+# 如果需要使用图表 修改main.ts 全局注册一下图表组件
+import { VChart} from 'vue-webtopo-svgeditor';
+const app=createApp(App)
+app.component('v-chart',VChart)
+app.mount('#app')
 ```
 
 ## 如何使用

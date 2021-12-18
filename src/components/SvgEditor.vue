@@ -335,39 +335,48 @@ document.onkeydown = function (e) {
   if (!select_svg.id) {
     return;
   }
-  e.preventDefault();
   if (!e.ctrlKey && e.key == 'ArrowUp') {
+    e.preventDefault();
     moveUp(svgLists, select_svg);
   } else if (!e.ctrlKey && e.key == 'ArrowDown') {
+    e.preventDefault();
     moveDown(svgLists, select_svg);
   } else if (!e.ctrlKey && e.key == 'ArrowLeft') {
+    e.preventDefault();
     moveLeft(svgLists, select_svg);
   } else if (!e.ctrlKey && e.key == 'ArrowRight') {
+    e.preventDefault();
     moveRight(svgLists, select_svg);
   }
   //ctrl  c
   else if (e.ctrlKey && e.key.toLowerCase() == 'c') {
+    e.preventDefault();
     hotkeyCopy(svgLists, select_svg);
   }
   //deleted
   else if (e.key == 'Delete') {
+    e.preventDefault();
     hotkeyDel(svgLists, select_svg);
     rightnav_open.value = false;
   }
   //上移一层
   else if (e.ctrlKey && e.key == 'ArrowUp') {
+    e.preventDefault();
     hotkeyPutOnUp(svgLists, select_svg);
   }
   //下移一层
   else if (e.ctrlKey && e.key == 'ArrowDown') {
+    e.preventDefault();
     hotkeyPutOnDown(svgLists, select_svg);
   }
   //置于底层
   else if (e.ctrlKey && e.key == 'ArrowLeft') {
+    e.preventDefault();
     hotkeyPutOnButtom(svgLists, select_svg);
   }
   //置于顶层
   else if (e.ctrlKey && e.key == 'ArrowRight') {
+    e.preventDefault();
     hotkeyPutOnTop(svgLists, select_svg);
   }
 }
