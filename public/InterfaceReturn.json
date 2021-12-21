@@ -946,5 +946,79 @@
     },
     "create_type": "draggable",
     "priview_img": "/RightAnglePipeSvg.png"
+  },
+  {
+    "type": "CoolingTowerSvg",
+    "title": "冷却塔",
+    "panel_class": "common",
+    "template": "<rect transform=\"translate(-375 -210)\" height=\"6.35115\" width=\"30\" y=\"182.99916\" x=\"362.03168\" :fill=\"prop_data.extend_attr.color.val\"/><path transform=\"translate(-375 -210)\" d=\"m351.12388,196.27079l0,-3.62923l0,0c0,-2.00437 11.75252,-3.62923 26.24999,-3.62923c14.49747,0 26.24999,1.62486 26.24999,3.62923l0,3.62923l-52.49998,0z\" :fill=\"prop_data.extend_attr.color.val\"/><rect transform=\"translate(-375 -210)\" height=\"18.14613\" width=\"45.46875\" y=\"196.60876\" x=\"354.06293\" :fill=\"prop_data.extend_attr.color.val\"/><path transform=\"translate(-375 -210)\" d=\"m339.11917,231.98921l14.0625,-16.7852l46.875,0l14.06249,16.7852l-74.99999,0z\" :fill=\"prop_data.extend_attr.color.val\"/>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "color": {
+        "title": "冷却塔颜色",
+        "val": "#E6EEFAFF",
+        "type": "colorinputbox"
+      }
+    },
+    "create_type": "draggable",
+    "priview_img": "/CoolingTowerSvg.png"
+  },
+  {
+    "type": "ChemicalFeederSvg",
+    "title": "化学加料器",
+    "panel_class": "common",
+    "template": "<path transform=\"translate(-460,-171)\" d=\"m490.83794,134.8702c0,3.4359 -13.80016,6.22125 -30.82353,6.22125m30.82353,-6.22125l0,0c0,3.4359 -13.80016,6.22125 -30.82353,6.22125c-17.02336,0 -30.82351,-2.78534 -30.82351,-6.22125m0,0l0,0c0,-3.4359 13.80016,-6.22125 30.82351,-6.22125c17.02336,0 30.82353,2.78535 30.82353,6.22125l0,24.885c0,3.4359 -13.80016,6.22124 -30.82353,6.22124c-17.02336,0 -30.82351,-2.78534 -30.82351,-6.22124l0,-24.885z\" :fill=\"prop_data.extend_attr.color.val\"/><path transform=\"translate(-460,-171)\" d=\"m473.3227,122.35395c0,1.53294 -5.47793,2.77564 -12.23531,2.77564m12.23531,-2.77564l0,0c0,1.53294 -5.47793,2.77564 -12.23531,2.77564c-6.75737,0 -12.2353,-1.24269 -12.2353,-2.77564m0,0l0,0c0,-1.53294 5.47793,-2.77564 12.2353,-2.77564c6.75737,0 12.23531,1.2427 12.23531,2.77564l0,11.10255c0,1.53294 -5.47793,2.77563 -12.23531,2.77563c-6.75737,0 -12.2353,-1.24269 -12.2353,-2.77563l0,-11.10255z\" :fill=\"prop_data.extend_attr.color.val\"/><rect transform=\"translate(-460,-171)\" height=\"4.59415\" width=\"30.58823\" y=\"164.03918\" x=\"444.22147\" :fill=\"prop_data.extend_attr.color.val\"/><rect transform=\"translate(-460,-171)\" height=\"49.9614\" width=\"94.11762\" y=\"167.63333\" x=\"412.69207\" :fill=\"prop_data.extend_attr.color.val\"/><path transform=\"translate(-460,-171)\" d=\"m500.73203,173.02074l13.76468,0l4.58824,18.6637l-4.58824,18.66378l-13.76468,0l4.58823,-18.66378l-4.58823,-18.6637z\" :fill=\"prop_data.extend_attr.color.val\"/><path transform=\"translate(-460,-171)\" d=\"m417.43793,210.92252l-13.76468,0l-4.58823,-18.6637l4.58823,-18.66379l13.76468,0l-4.58823,18.66379l4.58823,18.6637z\" :fill=\"prop_data.extend_attr.color.val\"/>",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "color": {
+        "title": "化学加料器",
+        "val": "#E6EEFAFF",
+        "type": "colorinputbox"
+      }
+    },
+    "create_type": "draggable",
+    "priview_img": "/ChemicalFeederSvg.png"
+  },
+  {
+    "type": "RectangleSvg",
+    "title": "矩形",
+    "panel_class": "common",
+    "template": "<rect :width=\"prop_data.extend_attr.width.val\" :height=\"prop_data.extend_attr.height.val\" :fill=\"prop_data.extend_attr.fill_color.val\" :stroke-width=\"prop_data.extend_attr.stroke_width.val\"  :stroke=\"prop_data.extend_attr.stroke_color.val\" />",
+    "props": [
+      "prop_data"
+    ],
+    "extend_attr": {
+      "width": {
+        "title": "矩形宽度",
+        "val": 80,
+        "type": "numberinputbox"
+      },
+      "height": {
+        "title": "矩形高度",
+        "val": 30,
+        "type": "numberinputbox"
+      },
+      "fill_color": {
+        "title": "填充颜色",
+        "val": "#000000",
+        "type": "colorinputbox"
+      },
+      "stroke_width": {
+        "title": "边框宽度",
+        "val": 2,
+        "type": "numberinputbox"
+      },      
+      "stroke_color": {
+        "title": "边框颜色",
+        "val": "#FFFFFF",
+        "type": "colorinputbox"
+      }
+    },
+    "create_type": "draggable",
+    "priview_img": "/RectangleSvg.png"
   }
 ]
