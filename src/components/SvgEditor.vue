@@ -380,6 +380,14 @@ document.onkeydown = function (e) {
     hotkeyPutOnTop(svgLists, select_svg);
   }
 }
+const setSvgLists = (new_val: ISvgDataLists[]) => {
+  svgLists.length = 0;
+  svgLists.push(...new_val);
+  emit('saveSvgInfo', svgLists, svg_dom_ref.value)
+}
+defineExpose({
+  setSvgLists
+})
 </script>
 
 <template>

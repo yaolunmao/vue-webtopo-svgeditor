@@ -5,8 +5,9 @@ import SvgEditor from './components/SvgEditor.vue';
 import SvgPrview from './components/SvgPrview.vue';
 import axios from "axios";
 import { ref } from '@vue/reactivity';
-const interval=ref<any>(null);
+const interval = ref<any>(null);
 const component_infos = ref([]);
+const ref_svgedit = ref();
 //要预览的数据
 const prview_data = ref<any>([]);
 //获取组件列表
@@ -72,7 +73,7 @@ const loadExampleData = () => {
     const anyEchartsPieList = temp.filter(f => f.type == 'EchartsPieSvg');
     //找到所有柱状图
     const anyEchartsBasicBarSvgList = temp.filter(f => f.type == 'EchartsBasicBarSvg');
-    interval.value=setInterval(function () {
+    interval.value = setInterval(function () {
       anyCircuitBreakerList.forEach(anyCircuitBreaker => {
         //生成一个随机数
         let random = Math.round(Math.random() * 10);
@@ -106,27 +107,36 @@ const loadExampleData = () => {
         let data_arr = [Math.round(Math.random() * 300), Math.round(Math.random() * 300), Math.round(Math.random() * 300), Math.round(Math.random() * 300), Math.round(Math.random() * 300), Math.round(Math.random() * 300), Math.round(Math.random() * 300)];
         const temp_val = JSON.parse(anyEchartsBasicBar.extend_attr.echarts_option.val);
         temp_val.series[0].data = data_arr;
-        anyEchartsBasicBar.extend_attr.echarts_option.val= JSON.stringify(temp_val);
+        anyEchartsBasicBar.extend_attr.echarts_option.val = JSON.stringify(temp_val);
       })
       const tempa = JSON.stringify(temp)
       prview_data.value = JSON.parse(tempa);
     }, 2000)
   });
 }
+const loadExample = (file_name: string) => {
+  axios.get(file_name).then(res => {
+    console.log(ref_svgedit.value);
+    (ref_svgedit.value as any).setSvgLists(res.data);
+  })
+}
 </script>
 
 <template>
   <div style="text-align: center;">
     <span>此处为测试演示用 组件不包含此元素：</span>
+    <button class="btn" @click="loadExample('example.json')" v-if="displaymode == 0">电力系统模板</button>
+    <button class="btn" @click="loadExample('example2.json')" v-if="displaymode == 0">水务系统模板</button>
     <button class="btn" @click="switchMode">切换到{{ displaymode == 0 ? '预览' : '绘制' }}模式</button>
     <button class="btn" @click="downloadSvgData" v-if="displaymode == 0">下载保存数据</button>
     <button class="btn" @click="downloadSvgDomData" v-if="displaymode == 0">下载svg数据</button>
-    <button class="btn" @click="loadExampleData" v-if="displaymode == 1">加载模拟数据并模拟硬件工作</button>
+    <button class="btn" @click="loadExampleData" v-if="displaymode == 1">加载电力模板并模拟硬件工作</button>
   </div>
 
   <div style="width:1500px;height:650px;margin:0 auto">
     <div v-show="displaymode == 0">
       <svg-editor
+        ref="ref_svgedit"
         :component_infos="component_infos"
         @saveSvgInfo="saveSvgInfo"
         :svgCanvas="{ width: 1920, height: 1080 }"
