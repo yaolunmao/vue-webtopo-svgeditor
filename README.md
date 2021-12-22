@@ -16,6 +16,31 @@ https://github.com/yaolunmao/vue-webtopo-svgeditor
 
 https://gitee.com/yaolunmao/vue-webtopo-svgeditor
 
+## 这个项目都能干什么
+
+目前我用来绘制物联网监控系统图
+
+电力监控系统图
+
+![电力监控系统图](https://images.cnblogs.com/cnblogs_com/Hero-/2077550/o_211211075750_%E7%94%B5%E5%8A%9B%E9%A2%84%E8%A7%88.gif)
+
+水务系统图
+
+![水务系统图](https://images.cnblogs.com/cnblogs_com/Hero-/2077550/o_211222131344_shuiwu.gif)
+
+但不仅仅局限于这些，只要是svg矢量图标都可以作为组件进行拖拽组态
+
+
+
+## 优点
+
+- **学习成本极低**：核心代码仅500多行
+- **添加组件无需修改代码**：只要在json里新增一项就可
+- **轻量**：组件打包只有1MB
+- **易拓展**：按照我定义好的格式，只需要在json里面定义好属性，便可以动态修改svg组件的任意节点
+- **易于集成**：组件已经发布到npm，只需要引用到现有项目将组件数据传给组件即可使用
+- **免费**：MIT开源协议 可商用
+
 ## 如何引用
 
 ```
