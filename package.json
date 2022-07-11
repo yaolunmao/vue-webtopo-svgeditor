@@ -1,39 +1,40 @@
 {
   "name": "vue-webtopo-svgeditor",
-  "version": "0.0.4",
-  "files": [
-    "dist"
-  ],
-  "module": "./dist/vue-webtopo-svgeditor.es.ts",
-  "main": "./dist/vue-webtopo-svgeditor.umd.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/vue-webtopo-svgeditor.es.ts",
-      "require": "./dist/vue-webtopo-svgeditor.umd.ts"
-    },
-    "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    }
-  },
+  "version": "0.0.5",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "preview": "vite preview",
+    "lint:eslint": "eslint --fix --ext .js,.ts,.vue,.tsx ./src",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "husky install"
   },
   "dependencies": {
-    "axios": "^0.22.0",
-    "vue": "^3.2.6"
+    "vue": "^3.2.25",
+    "vue-router": "4"
   },
   "devDependencies": {
-    "@vicons/fluent": "^0.11.0",
-    "@vitejs/plugin-vue": "^1.6.1",
-    "@vue/compiler-sfc": "^3.2.6",
-    "naive-ui": "^2.18.2",
-    "typescript": "^4.3.2",
-    "vite": "^2.5.4",
-    "echarts": "^5.2.1",
-    "vue-echarts": "^6.0.0",
-    "vue-tsc": "^0.2.2"
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-define-config": "^1.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.2.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9",
+    "vite-plugin-eslint": "^1.6.1",
+    "vue-eslint-parser": "^9.0.3",
+    "vue-tsc": "^0.34.7"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "pnpm run lint:eslint"
+    ]
   }
 }
