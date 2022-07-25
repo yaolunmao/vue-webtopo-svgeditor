@@ -2,6 +2,10 @@
 
 > 基于vue3.2+ts实现的svg可视化web组态编辑器。可无需修改代码动态添加组件、自定义拓展组件参数
 
+重制版正在开发中，请关注分支Re-1.0,预览地址[Re-1.0](http://re.svg.yaolm.top/)
+
+qq交流群：209048413
+
 当前主分支版本为3.0,该项目基于vue3.2+ts开发,ui使用了[naiveui](https://www.naiveui.com/zh-CN/os-theme)
 
 ## [本文图片挂了请点此查看](https://www.cnblogs.com/Hero-/p/14784744.html)
