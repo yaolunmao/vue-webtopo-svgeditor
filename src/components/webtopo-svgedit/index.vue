@@ -5,7 +5,7 @@
         <top-panel></top-panel>
       </el-header>
       <el-container class="middle">
-        <el-aside class="side-nav" :class="'show-nav'">
+        <el-aside class="side-nav" :class="svgEditLayoutStore.left_nav ? 'show-nav' : 'hide-nav'">
           <el-scrollbar class="elscrooll-pc">
             <left-panel class="content-left"></left-panel>
           </el-scrollbar>
@@ -17,7 +17,7 @@
             </div>
           </el-scrollbar>
         </el-main>
-        <el-aside class="side-nav" :class="'show-nav'">
+        <el-aside class="side-nav" :class="svgEditLayoutStore.right_nav ? 'show-nav' : 'hide-nav'">
           <el-scrollbar class="elscrooll-pc">
             <right-panel></right-panel>
           </el-scrollbar>
@@ -37,6 +37,8 @@
   import CenterPanel from './components/center-panel/index.vue';
   import RightPanel from './components/right-panel/index.vue';
   import BottomPanel from './components/bottom-panel/index.vue';
+  import { useSvgEditLayoutStore } from '../../store/svgedit-layout';
+  const svgEditLayoutStore = useSvgEditLayoutStore();
 </script>
 <style scoped lang="less">
   @headerHeight: 60px;

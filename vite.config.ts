@@ -15,9 +15,14 @@ export default defineConfig({
     WindiCSS(),
     createSvgIconsPlugin({
       // 指定需要缓存的图标文件夹
-      iconDirs: [resolve(process.cwd(), 'src/assets/svgs')],
+      iconDirs: [
+        resolve(process.cwd(), 'src/assets/svgs'),
+        resolve(process.cwd(), 'src/assets/icons')
+      ],
       // 指定symbolId格式
-      symbolId: 'svg-[name]'
+      symbolId: 'svg-[name]',
+      // 禁用压缩 否则想要修改无状态组件的stroke或者fill会影响到预设样式 例如stroke-width
+      svgoOptions: false
     })
   ]
 });
