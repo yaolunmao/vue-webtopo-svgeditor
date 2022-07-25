@@ -5,7 +5,7 @@
       <div class="source-repo">组件库 :</div>
       <el-select v-model="select_lib" placeholder="请选择组件库" @change="libChange">
         <el-option
-          v-for="(item, key) in global_store.config_center"
+          v-for="(item, key) in globalStore.config_center"
           :key="key"
           :label="key"
           :value="item"
@@ -19,15 +19,22 @@
           <div style="font-weight: bolder">{{ item.title }}</div>
         </template>
         <div class="component-group flex flex-warp">
-          <div v-for="iconitem in item.list" class="ideal" :key="iconitem.name">
+          <div
+            v-for="svg_item in item.list"
+            class="ideal"
+            :key="svg_item.name"
+            draggable="true"
+            @dragstart="createBegin(svg_item)"
+            @dragend="dragEndEvent"
+          >
             <div class="flex component-item items-center ml-10px">
               <el-icon :size="40" class="flex items-center">
                 <svg-analysis
-                  :name="iconitem.name"
-                  :props="handleIconProps(iconitem.props)"
+                  :name="svg_item.name"
+                  :props="handleIconProps(svg_item.props)"
                 ></svg-analysis>
               </el-icon>
-              <div>{{ iconitem.title }}</div>
+              <div>{{ svg_item.title }}</div>
             </div>
           </div>
         </div>
@@ -38,13 +45,18 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { ElSelect, ElOption, ElCollapse, ElCollapseItem, ElIcon } from 'element-plus';
-  import { IConfigComponentGroup, IConfigItemProps } from '../../../../config-center/types';
+  import { ElSelect, ElOption, ElCollapse, ElCollapseItem, ElIcon, ElMessage } from 'element-plus';
+  import {
+    IConfigComponentGroup,
+    IConfigItem,
+    IConfigItemProps
+  } from '../../../../config-center/types';
   import { useGlobalStore } from '../../../../store/global';
   import SvgAnalysis from '../../../svg-analysis/index.vue';
-  const global_store = useGlobalStore();
+  import { EGlobalStoreIntention } from '../../../../store/global/types';
+  const globalStore = useGlobalStore();
   const select_lib = ref('电力系统');
-  const config_center = ref<IConfigComponentGroup[]>(global_store.config_center.电力系统);
+  const config_center = ref<IConfigComponentGroup[]>(globalStore.config_center.电力系统);
   const activeNames = ref(['stateful', 'stateless']);
   const libChange = (val: any) => {
     config_center.value = [];
@@ -52,12 +64,24 @@
 
     console.log(val, 71474);
   };
-  const handleIconProps = (svg_item: IConfigItemProps) => {
+  const handleIconProps = (svg_item_props: IConfigItemProps) => {
     let temp = {};
-    for (const key in svg_item) {
-      temp = { ...temp, ...{ [key]: svg_item[key].val } };
+    for (const key in svg_item_props) {
+      temp = { ...temp, ...{ [key]: svg_item_props[key].val } };
     }
     return temp;
+  };
+  const createBegin = (svg_item: IConfigItem) => {
+    globalStore.setCreateInfo(svg_item);
+  };
+  const dragEndEvent = (e: DragEvent) => {
+    //拖动时记录拖动的svg信息
+    if (e.dataTransfer?.dropEffect !== 'copy') {
+      ElMessage.warning('请将组件拖到画布中!');
+      //清空已选择的信息
+      globalStore.intention = EGlobalStoreIntention.None;
+      return;
+    }
   };
 </script>
 <style scoped lang="less">

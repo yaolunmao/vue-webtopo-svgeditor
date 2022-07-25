@@ -11,11 +11,9 @@
           </el-scrollbar>
         </el-aside>
         <el-main class="middle main">
-          <el-scrollbar class="canvas-main-pc">
-            <div>
-              <center-panel></center-panel>
-            </div>
-          </el-scrollbar>
+          <div class="canvas-main-pc">
+            <center-panel></center-panel>
+          </div>
         </el-main>
         <el-aside class="side-nav" :class="svgEditLayoutStore.right_nav ? 'show-nav' : 'hide-nav'">
           <el-scrollbar class="elscrooll-pc">
@@ -48,12 +46,12 @@
   }
 
   .canvas-main-pc {
-    min-height: calc(100vh - (@headerHeight + @buttomHeight));
     width: 100%;
+    height: 100%;
     margin: 0 auto;
   }
   .middle {
-    min-height: calc(100vh - (@headerHeight + @buttomHeight));
+    height: calc(100vh - (@headerHeight + @buttomHeight));
     &.main {
       margin: 0px 5px;
       background-color: #ffffff;

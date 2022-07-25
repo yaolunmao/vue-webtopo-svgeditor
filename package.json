@@ -1,6 +1,6 @@
 {
   "name": "vue-webtopo-svgeditor",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
