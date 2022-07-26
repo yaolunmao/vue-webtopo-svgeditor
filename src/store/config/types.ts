@@ -1,6 +1,10 @@
 export interface IPositionCenter {
-  position_center: {
-    x: number;
-    y: number;
+  svg: {
+    background_color: string;
+    scale: number;
+    position_center: {
+      x: number;
+      y: number;
+    };
   };
 }

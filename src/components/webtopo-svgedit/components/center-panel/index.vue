@@ -11,26 +11,33 @@
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      style="background-color: #fff;:hover:border: 1px;"
+      :style="{ backgroundColor: configStore.svg.background_color }"
       width="100%"
       height="100%"
     >
       <g
         :transform="`translate(${
-          configStore.position_center.x + svgEditLayoutStore.center_offset.x
-        },${configStore.position_center.y + svgEditLayoutStore.center_offset.y})rotate(0)scale(1)`"
+          configStore.svg.position_center.x + svgEditLayoutStore.center_offset.x
+        },${
+          configStore.svg.position_center.y + svgEditLayoutStore.center_offset.y
+        })rotate(${0})scale(${configStore.svg.scale})`"
       >
         <g
           v-for="(item, index) in globalStore.done_json"
           :key="item.id"
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
           :class="`${globalStore.intention == EGlobalStoreIntention.None ? 'svg-item-none' : ''}
-            ${
-              globalStore.intention == EGlobalStoreIntention.Move &&
-              globalStore.handle_svg_info?.info.id == item.id
-                ? 'svg-item-move'
-                : ''
-            }`"
+                    ${
+                      globalStore.intention == EGlobalStoreIntention.Move &&
+                      globalStore.handle_svg_info?.info.id == item.id
+                        ? 'svg-item-move'
+                        : ''
+                    } ${
+            globalStore.intention == EGlobalStoreIntention.Select &&
+            globalStore.handle_svg_info?.info.id == item.id
+              ? 'svg-item-select'
+              : ''
+          }`"
           @mousedown="onSvgMouseDown(item, index, $event)"
         >
           <rect
@@ -91,7 +98,7 @@
     e.preventDefault();
     e.cancelBubble = true;
     //鼠标在画布上的组件按下记录选中的组件信息和鼠标位置信息等
-    globalStore.intention = EGlobalStoreIntention.Move;
+    globalStore.intention = EGlobalStoreIntention.Select;
     globalStore.setHandleSvgInfo(select_item, index);
     globalStore.setMouseInfo({
       state: EMouseInfoState.Down,
@@ -113,10 +120,15 @@
       globalStore.mouse_info.now_position_x + clientX - globalStore.mouse_info.position_x;
     globalStore.mouse_info.new_position_y =
       globalStore.mouse_info.now_position_y + clientY - globalStore.mouse_info.position_y;
-    if (globalStore.handle_svg_info?.info && globalStore.intention == EGlobalStoreIntention.Move) {
+    if (
+      globalStore.handle_svg_info?.info &&
+      (globalStore.intention == EGlobalStoreIntention.Select ||
+        globalStore.intention == EGlobalStoreIntention.Move)
+    ) {
       //有选中组件 移动组件
       globalStore.handle_svg_info.info.x = globalStore.mouse_info.new_position_x;
       globalStore.handle_svg_info.info.y = globalStore.mouse_info.new_position_y;
+      globalStore.intention = EGlobalStoreIntention.Move;
     } else if (globalStore.intention == EGlobalStoreIntention.MoveCanvas) {
       //移动画布
       svgEditLayoutStore.center_offset.x = globalStore.mouse_info.new_position_x;
@@ -134,10 +146,12 @@
       globalStore.done_json[globalStore.handle_svg_info.index].y =
         globalStore.mouse_info.new_position_y;
       globalStore.setDoneJson(globalStore.done_json);
-      globalStore.setHandleSvgInfo(undefined, 0);
+      globalStore.intention = EGlobalStoreIntention.Select;
+      // globalStore.setHandleSvgInfo(undefined, 0);
+    } else if (globalStore.intention != EGlobalStoreIntention.Select) {
+      globalStore.intention = EGlobalStoreIntention.None;
     }
 
-    globalStore.intention = EGlobalStoreIntention.None;
     globalStore.setMouseInfo({
       state: EMouseInfoState.Up,
       position_x: 0,
@@ -168,14 +182,22 @@
     height: 100%;
     cursor: v-bind('globalStore.intention == EGlobalStoreIntention.MoveCanvas?"grab":"default"');
   }
+
   .svg-item-none {
     cursor: move;
+
     &:hover {
       outline: 1px solid #0cf;
     }
   }
+
   .svg-item-move {
     cursor: move;
     outline: 1px dashed rgb(23, 222, 30);
+  }
+
+  .svg-item-select {
+    cursor: move;
+    outline: 1px solid rgb(23, 222, 30);
   }
 </style>

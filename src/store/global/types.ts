@@ -17,7 +17,8 @@ export enum EGlobalStoreIntention {
   None = 'None',
   Create = 'Create',
   Move = 'Move',
-  MoveCanvas = 'MoveCanvas'
+  MoveCanvas = 'MoveCanvas',
+  Select = 'Select'
 }
 export interface IMouseInfo {
   state: EMouseInfoState;

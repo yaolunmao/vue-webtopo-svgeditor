@@ -6,9 +6,13 @@ import { IPositionCenter } from './types';
 export const useConfigStore = defineStore('config-store', {
   state: (): IPositionCenter => {
     return {
-      position_center: {
-        x: -50,
-        y: -50
+      svg: {
+        background_color: '#fff',
+        scale: 1,
+        position_center: {
+          x: -50,
+          y: -50
+        }
       }
     };
   },
