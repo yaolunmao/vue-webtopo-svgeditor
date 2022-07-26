@@ -5,3 +5,7 @@
 当前分支为重制版本，正在开发中。。。
 
 qq交流群：209048413
+
+## 常见问题
+行尾序列问题（error  Delete `␍`  prettier/prettier）
+git config --global core.autocrlf false
