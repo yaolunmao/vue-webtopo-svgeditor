@@ -17,3 +17,12 @@ export const randomString = (len?: number) => {
 export const isOfType = <T>(target: unknown, prop: keyof T): target is T => {
   return (target as T)[prop] !== undefined;
 };
+/**
+ * 获取坐标偏移量
+ * @param length 真实宽/高
+ * @param scale 缩放倍数
+ * @returns 坐标偏移量
+ */
+export const getCoordinateOffset = (length: number, scale: number) => {
+  return (length / 2) * (scale - 1);
+};

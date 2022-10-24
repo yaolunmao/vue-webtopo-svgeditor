@@ -26,29 +26,59 @@
           v-for="(item, index) in globalStore.done_json"
           :key="item.id"
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
-          :class="`${globalStore.intention == EGlobalStoreIntention.None ? 'svg-item-none' : ''}
-                    ${
-                      globalStore.intention == EGlobalStoreIntention.Move &&
-                      globalStore.handle_svg_info?.info.id == item.id
-                        ? 'svg-item-move'
-                        : ''
-                    } ${
-            globalStore.intention == EGlobalStoreIntention.Select &&
-            globalStore.handle_svg_info?.info.id == item.id
-              ? 'svg-item-select'
-              : ''
-          }`"
-          @mousedown="onSvgMouseDown(item, index, $event)"
         >
-          <rect
+          <use
+            :xlink:href="`#svg-${item.name}`"
+            fill="#ff0000"
             width="100"
             height="100"
+            :id="item.id"
+            :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+              item.actual_bound.y + item.actual_bound.height / 2
+            }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+              item.actual_bound.x +
+              item.actual_bound.width / 2
+            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+          ></use>
+          <rect
+            :id="`rect${item.id}`"
             fill="black"
             fill-opacity="0"
+            :x="
+              item.actual_bound.x -
+              (item.actual_bound.width / 2) * item.scale_x +
+              item.actual_bound.width / 2
+            "
+            :y="
+              item.actual_bound.y -
+              (item.actual_bound.height / 2) * item.scale_y +
+              item.actual_bound.height / 2
+            "
+            :width="item.actual_bound.width * item.scale_x"
+            :height="item.actual_bound.height * item.scale_y"
             style="stroke: none; stroke-width: 2; stroke-miterlimit: 10"
+            :class="`${globalStore.intention == EGlobalStoreIntention.None ? 'svg-item-none' : ''}
+                                    ${
+                                      globalStore.intention == EGlobalStoreIntention.Move &&
+                                      globalStore.handle_svg_info?.info.id == item.id
+                                        ? 'svg-item-move'
+                                        : ''
+                                    } ${
+              globalStore.intention == EGlobalStoreIntention.Select &&
+              globalStore.handle_svg_info?.info.id == item.id
+                ? 'svg-item-select'
+                : ''
+            }`"
+            @mousedown="onSvgMouseDown(item, index, $event)"
           ></rect>
-
-          <use :xlink:href="`#svg-${item.name}`" fill="#ff0000" width="100" height="100"></use>
+          <handle-panel
+            v-if="
+              globalStore.handle_svg_info?.info.id == item.id &&
+              (globalStore.intention == EGlobalStoreIntention.Select ||
+                globalStore.intention == EGlobalStoreIntention.Zoom)
+            "
+            :item-info="item"
+          ></handle-panel>
         </g>
       </g>
     </svg>
@@ -60,11 +90,13 @@
   import {
     EGlobalStoreIntention,
     EMouseInfoState,
+    EScaleInfoType,
     IDoneJson
   } from '../../../../store/global/types';
   import { useSvgEditLayoutStore } from '../../../../store/svgedit-layout';
   import { randomString } from '../../../../utils';
-
+  import HandlePanel from '../handle-panel/index.vue';
+  // import HandlePanel from '../handle-panel/index.vue';
   const globalStore = useGlobalStore();
   const configStore = useConfigStore();
   const svgEditLayoutStore = useSvgEditLayoutStore();
@@ -76,14 +108,23 @@
         console.error('要创建的数据获取失败');
         return;
       }
-      const done_item_json = {
-        id: randomString(),
+      const done_item_json: IDoneJson = {
+        id: globalStore.create_svg_info.name + randomString(),
         x: e.offsetX - svgEditLayoutStore.center_offset.x,
         y: e.offsetY - svgEditLayoutStore.center_offset.y,
+        scale_x: 1,
+        scale_y: 1,
+        actual_bound: {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0
+        },
         ...globalStore.create_svg_info
       };
       globalStore.setHandleSvgInfo(done_item_json, globalStore.done_json.length);
       globalStore.setDoneJson(done_item_json);
+      globalStore.intention = EGlobalStoreIntention.None;
     }
   };
   const dragEnterEvent = (e: DragEvent) => {
@@ -133,10 +174,63 @@
       //移动画布
       svgEditLayoutStore.center_offset.x = globalStore.mouse_info.new_position_x;
       svgEditLayoutStore.center_offset.y = globalStore.mouse_info.new_position_y;
+    } else if (globalStore.intention == EGlobalStoreIntention.Zoom) {
+      //缩放
+      const move_length_x =
+        globalStore.scale_info.type === EScaleInfoType.TopLeft ||
+        globalStore.scale_info.type === EScaleInfoType.Left ||
+        globalStore.scale_info.type === EScaleInfoType.BottomLeft
+          ? globalStore.mouse_info.new_position_x - globalStore.mouse_info.now_position_x
+          : globalStore.scale_info.type === EScaleInfoType.TopRight ||
+            globalStore.scale_info.type === EScaleInfoType.Right ||
+            globalStore.scale_info.type === EScaleInfoType.BottomRight
+          ? globalStore.mouse_info.now_position_x - globalStore.mouse_info.new_position_x
+          : 0;
+      const move_length_y =
+        globalStore.scale_info.type === EScaleInfoType.TopLeft ||
+        globalStore.scale_info.type === EScaleInfoType.TopCenter ||
+        globalStore.scale_info.type === EScaleInfoType.TopRight
+          ? globalStore.mouse_info.new_position_y - globalStore.mouse_info.now_position_y
+          : globalStore.scale_info.type === EScaleInfoType.BottomLeft ||
+            globalStore.scale_info.type === EScaleInfoType.BottomCenter ||
+            globalStore.scale_info.type === EScaleInfoType.BottomRight
+          ? globalStore.mouse_info.now_position_y - globalStore.mouse_info.new_position_y
+          : 0;
+      //算出缩放倍数
+      if (globalStore.handle_svg_info) {
+        const scale_x =
+          (globalStore.handle_svg_info.info.actual_bound.width *
+            globalStore.scale_info.scale_times.x -
+            move_length_x) /
+          globalStore.handle_svg_info.info.actual_bound.width;
+        const scale_y =
+          (globalStore.handle_svg_info.info.actual_bound.height *
+            globalStore.scale_info.scale_times.y -
+            move_length_y) /
+          globalStore.handle_svg_info.info.actual_bound.height;
+        if (scale_x > 0) {
+          globalStore.handle_svg_info.info.scale_x = scale_x;
+          globalStore.handle_svg_info.info.x =
+            globalStore.scale_info.type === EScaleInfoType.TopLeft ||
+            globalStore.scale_info.type === EScaleInfoType.Left ||
+            globalStore.scale_info.type === EScaleInfoType.BottomLeft
+              ? globalStore.scale_info.scale_item_info.x + move_length_x / 2
+              : globalStore.scale_info.scale_item_info.x - move_length_x / 2;
+        }
+        if (scale_y > 0) {
+          globalStore.handle_svg_info.info.scale_y = scale_y;
+          globalStore.handle_svg_info.info.y =
+            globalStore.scale_info.type === EScaleInfoType.TopLeft ||
+            globalStore.scale_info.type === EScaleInfoType.TopCenter ||
+            globalStore.scale_info.type === EScaleInfoType.TopRight
+              ? globalStore.scale_info.scale_item_info.y + move_length_y / 2
+              : globalStore.scale_info.scale_item_info.y - move_length_y / 2;
+        }
+      }
     }
   };
   const onCanvasMouseUp = () => {
-    //如果鼠标不是按下状态或者没有选择组件
+    //如果鼠标不是按下状态
     if (globalStore.mouse_info.state != EMouseInfoState.Down) {
       return;
     }

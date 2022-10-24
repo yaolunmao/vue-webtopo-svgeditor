@@ -15,6 +15,6 @@ module.exports = {
   requirePragma: false, // 需要编译指示
   proseWrap: 'never', // 如果散文超过打印宽度，则换行
   htmlWhitespaceSensitivity: 'strict', // 所有标签周围的空格（或缺少空格）被认为是重要的。
-  endOfLine: 'lf', // 确保在文本文件中仅使用 ( \n)换行，常见于 Linux 和 macOS 以及 git repos 内部。
+  endOfLine: 'auto', // 确保在文本文件中仅使用 ( \n)换行，常见于 Linux 和 macOS 以及 git repos 内部。
   rangeStart: 0 // 格式化文件时，回到包含所选语句的第一行的开头。
 };
