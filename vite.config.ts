@@ -24,5 +24,10 @@ export default defineConfig({
       // 禁用压缩 否则想要修改无状态组件的stroke或者fill会影响到预设样式 例如stroke-width
       svgoOptions: false
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src')
+    }
+  }
 });

@@ -27,64 +27,75 @@
           :key="item.id"
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
         >
-          <use
-            :xlink:href="`#svg-${item.name}`"
-            fill="#ff0000"
-            width="100"
-            height="100"
-            :id="item.id"
+          <g
             :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
               item.actual_bound.y + item.actual_bound.height / 2
-            }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+            })rotate(${item.rotate}) scale(1) translate(${-(
               item.actual_bound.x +
               item.actual_bound.width / 2
             )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-          ></use>
-          <rect
-            :id="`rect${item.id}`"
-            fill="black"
-            fill-opacity="0"
-            :x="
-              item.actual_bound.x -
-              (item.actual_bound.width / 2) * item.scale_x +
-              item.actual_bound.width / 2
-            "
-            :y="
-              item.actual_bound.y -
-              (item.actual_bound.height / 2) * item.scale_y +
-              item.actual_bound.height / 2
-            "
-            :width="item.actual_bound.width * item.scale_x"
-            :height="item.actual_bound.height * item.scale_y"
-            style="stroke: none; stroke-width: 2; stroke-miterlimit: 10"
-            :class="`${globalStore.intention == EGlobalStoreIntention.None ? 'svg-item-none' : ''}
+          >
+            <use
+              :xlink:href="`#svg-${item.name}`"
+              fill="#ff0000"
+              width="100"
+              height="100"
+              :id="item.id"
+              :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+                item.actual_bound.y + item.actual_bound.height / 2
+              }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+                item.actual_bound.x +
+                item.actual_bound.width / 2
+              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+            ></use>
+            <rect
+              :id="`rect${item.id}`"
+              fill="black"
+              fill-opacity="0"
+              :x="
+                item.actual_bound.x -
+                (item.actual_bound.width / 2) * item.scale_x +
+                item.actual_bound.width / 2
+              "
+              :y="
+                item.actual_bound.y -
+                (item.actual_bound.height / 2) * item.scale_y +
+                item.actual_bound.height / 2
+              "
+              :width="item.actual_bound.width * item.scale_x"
+              :height="item.actual_bound.height * item.scale_y"
+              style="stroke: none; stroke-width: 2; stroke-miterlimit: 10"
+              :class="`${globalStore.intention == EGlobalStoreIntention.None ? 'svg-item-none' : ''}
                                     ${
                                       globalStore.intention == EGlobalStoreIntention.Move &&
                                       globalStore.handle_svg_info?.info.id == item.id
                                         ? 'svg-item-move'
                                         : ''
                                     } ${
-              globalStore.intention == EGlobalStoreIntention.Select &&
-              globalStore.handle_svg_info?.info.id == item.id
-                ? 'svg-item-select'
-                : ''
-            }`"
-            @mousedown="onSvgMouseDown(item, index, $event)"
-          ></rect>
-          <handle-panel
-            v-if="
-              globalStore.handle_svg_info?.info.id == item.id &&
-              (globalStore.intention == EGlobalStoreIntention.Select ||
-                globalStore.intention == EGlobalStoreIntention.Zoom)
-            "
-            :item-info="item"
-          ></handle-panel>
+                globalStore.intention == EGlobalStoreIntention.Select &&
+                globalStore.handle_svg_info?.info.id == item.id
+                  ? 'svg-item-select'
+                  : ''
+              }`"
+              @mousedown="onSvgMouseDown(item, index, $event)"
+            ></rect>
+            <handle-panel
+              v-if="
+                globalStore.handle_svg_info?.info.id == item.id &&
+                (globalStore.intention === EGlobalStoreIntention.Select ||
+                  globalStore.intention === EGlobalStoreIntention.Zoom ||
+                  globalStore.intention === EGlobalStoreIntention.Rotate)
+              "
+              :item-info="item"
+            ></handle-panel>
+          </g>
         </g>
       </g>
     </svg>
   </div>
 </template>
 <script setup lang="ts">
+  import { computed } from 'vue';
   import { useConfigStore } from '../../../../store/config';
   import { useGlobalStore } from '../../../../store/global';
   import {
@@ -100,6 +111,13 @@
   const globalStore = useGlobalStore();
   const configStore = useConfigStore();
   const svgEditLayoutStore = useSvgEditLayoutStore();
+  const cursor_style = computed(() =>
+    globalStore.intention == EGlobalStoreIntention.MoveCanvas
+      ? 'grab'
+      : globalStore.intention == EGlobalStoreIntention.Rotate
+      ? "url('/src/assets/icons/rotate.svg') 12 12, auto"
+      : 'default'
+  );
   const dropEvent = (e: DragEvent) => {
     if (globalStore.intention == EGlobalStoreIntention.None) {
       return;
@@ -112,8 +130,13 @@
         id: globalStore.create_svg_info.name + randomString(),
         x: e.offsetX - svgEditLayoutStore.center_offset.x,
         y: e.offsetY - svgEditLayoutStore.center_offset.y,
+        client: {
+          x: e.clientX,
+          y: e.clientY
+        },
         scale_x: 1,
         scale_y: 1,
+        rotate: 0,
         actual_bound: {
           x: 0,
           y: 0,
@@ -174,7 +197,7 @@
       //移动画布
       svgEditLayoutStore.center_offset.x = globalStore.mouse_info.new_position_x;
       svgEditLayoutStore.center_offset.y = globalStore.mouse_info.new_position_y;
-    } else if (globalStore.intention == EGlobalStoreIntention.Zoom) {
+    } else if (globalStore.intention === EGlobalStoreIntention.Zoom) {
       //缩放
       const move_length_x =
         globalStore.scale_info.type === EScaleInfoType.TopLeft ||
@@ -227,6 +250,24 @@
               : globalStore.scale_info.scale_item_info.y - move_length_y / 2;
         }
       }
+    } else if (globalStore.intention === EGlobalStoreIntention.Rotate) {
+      if (!globalStore.handle_svg_info) {
+        return;
+      }
+      const rotateDegreeBefore =
+        Math.atan2(
+          globalStore.mouse_info.position_y - globalStore.handle_svg_info.info.client.y,
+          globalStore.mouse_info.position_x - globalStore.handle_svg_info.info.client.x
+        ) /
+        (Math.PI / 180);
+      const rotateDegreeAfter =
+        Math.atan2(
+          clientY - globalStore.handle_svg_info.info.client.y,
+          clientX - globalStore.handle_svg_info.info.client.x
+        ) /
+        (Math.PI / 180);
+      globalStore.handle_svg_info.info.rotate =
+        globalStore.rotate_info.angle + rotateDegreeAfter - rotateDegreeBefore;
     }
   };
   const onCanvasMouseUp = () => {
@@ -274,7 +315,7 @@
   .canvas {
     width: 100%;
     height: 100%;
-    cursor: v-bind('globalStore.intention == EGlobalStoreIntention.MoveCanvas?"grab":"default"');
+    cursor: v-bind('cursor_style');
   }
 
   .svg-item-none {

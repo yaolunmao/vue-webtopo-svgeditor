@@ -42,6 +42,9 @@ export const useGlobalStore = defineStore('global-store', {
           x: 0,
           y: 0
         }
+      },
+      rotate_info: {
+        angle: 0
       }
     };
   },

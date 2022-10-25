@@ -8,13 +8,19 @@ export interface IGlobalStore {
   mouse_info: IMouseInfo;
   handle_svg_info: IHandleSvgInfo | undefined;
   scale_info: IScaleInfo;
+  rotate_info: IRotateInfo;
 }
 export interface IDoneJson extends IConfigItem {
   id: string;
   x: number;
   y: number;
+  client: {
+    x: number;
+    y: number;
+  };
   scale_x: number;
   scale_y: number;
+  rotate: number;
   actual_bound: {
     x: number;
     y: number;
@@ -28,7 +34,8 @@ export enum EGlobalStoreIntention {
   Move = 'Move',
   MoveCanvas = 'MoveCanvas',
   Select = 'Select',
-  Zoom = 'Zoom'
+  Zoom = 'Zoom',
+  Rotate = 'Rotate'
 }
 export interface IMouseInfo {
   state: EMouseInfoState;
@@ -61,6 +68,12 @@ export interface IScaleInfo {
     x: number;
     y: number;
   };
+}
+/**
+ * 旋转信息
+ */
+export interface IRotateInfo {
+  angle: number;
 }
 export enum EScaleInfoType {
   None = '',
