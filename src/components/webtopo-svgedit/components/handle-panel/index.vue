@@ -163,6 +163,15 @@
       scale_item_info: {
         x: props.itemInfo.x,
         y: props.itemInfo.y
+      },
+      symmetric_point: {
+        x:
+          props.itemInfo.client.x +
+          Math.abs(clientX - props.itemInfo.client.x) *
+            (clientX < props.itemInfo.client.x ? 1 : -1),
+        y:
+          props.itemInfo.client.y +
+          Math.abs(clientY - props.itemInfo.client.y) * (clientY < props.itemInfo.client.y ? 1 : -1)
       }
     });
   };

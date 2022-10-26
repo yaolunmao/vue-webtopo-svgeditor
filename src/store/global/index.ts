@@ -41,6 +41,10 @@ export const useGlobalStore = defineStore('global-store', {
         scale_item_info: {
           x: 0,
           y: 0
+        },
+        symmetric_point: {
+          x: 0,
+          y: 0
         }
       },
       rotate_info: {

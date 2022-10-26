@@ -68,6 +68,11 @@ export interface IScaleInfo {
     x: number;
     y: number;
   };
+  symmetric_point: {
+    //缩放前缩放手柄对应组件中心坐标的对称点坐标
+    x: number;
+    y: number;
+  };
 }
 /**
  * 旋转信息
