@@ -281,7 +281,6 @@
           globalStore.handle_svg_info.info.client
         );
       }
-      console.log('坐标', globalStore.scale_info.symmetric_point, curPositon, new_length);
 
       //缩放
       // const move_length_x =
@@ -307,41 +306,32 @@
       //算出缩放倍数
       if (globalStore.handle_svg_info && new_length.width > 0 && new_length.height > 0) {
         const scale_x = !new_length.is_old_width
-          ? new_length.width /
-            (globalStore.handle_svg_info.info.actual_bound.width *
-              globalStore.scale_info.scale_times.x)
+          ? new_length.width / globalStore.handle_svg_info.info.actual_bound.width
           : 1;
         const scale_y = !new_length.is_old_height
-          ? new_length.height /
-            (globalStore.handle_svg_info.info.actual_bound.height *
-              globalStore.scale_info.scale_times.y)
+          ? new_length.height / globalStore.handle_svg_info.info.actual_bound.height
           : 1;
-        // const move_length_x =
-        //   new_length.width -
-        //   globalStore.handle_svg_info.info.actual_bound.width *
-        //     globalStore.scale_info.scale_times.x;
-        // const move_length_y =
-        //   new_length.height -
-        //   globalStore.handle_svg_info.info.actual_bound.height *
-        //     globalStore.scale_info.scale_times.y;
-        if (scale_x > 0) {
+        const newCenterPoint = getCenterPoint(curPositon, globalStore.scale_info.symmetric_point);
+        const move_length_x = newCenterPoint.x - globalStore.handle_svg_info.info.client.x;
+        const move_length_y = newCenterPoint.y - globalStore.handle_svg_info.info.client.y;
+
+        if (
+          scale_x > 0 &&
+          globalStore.scale_info.type !== EScaleInfoType.TopCenter &&
+          globalStore.scale_info.type !== EScaleInfoType.BottomCenter
+        ) {
           globalStore.handle_svg_info.info.scale_x = scale_x;
-          //现在是沿着中心缩放 后续这里要改下
-          // globalStore.handle_svg_info.info.x =
-          //   globalStore.scale_info.type === EScaleInfoType.TopLeft ||
-          //   globalStore.scale_info.type === EScaleInfoType.Left ||
-          //   globalStore.scale_info.type === EScaleInfoType.BottomLeft
-          //     ? globalStore.scale_info.scale_item_info.x - move_length_x / 2
-          //     : globalStore.scale_info.scale_item_info.x + move_length_x / 2;
+          globalStore.handle_svg_info.info.x =
+            globalStore.scale_info.scale_item_info.x + move_length_x;
         }
-        if (scale_y > 0) {
+        if (
+          scale_y > 0 &&
+          globalStore.scale_info.type !== EScaleInfoType.Left &&
+          globalStore.scale_info.type !== EScaleInfoType.Right
+        ) {
           globalStore.handle_svg_info.info.scale_y = scale_y;
-          // globalStore.handle_svg_info.info.y =
-          //   globalStore.scale_info.type === EScaleInfoType.TopLeft ||
-          //   globalStore.scale_info.type === EScaleInfoType.TopCenter ||
-          //   globalStore.scale_info.type === EScaleInfoType.TopRight
-          //     ? globalStore.scale_info.scale_item_info.y - move_length_y / 2
-          //     : globalStore.scale_info.scale_item_info.y + move_length_y / 2;
+          globalStore.handle_svg_info.info.y =
+            globalStore.scale_info.scale_item_info.y + move_length_y;
         }
       }
     } else if (globalStore.intention === EGlobalStoreIntention.Rotate) {

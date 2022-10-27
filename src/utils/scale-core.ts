@@ -14,7 +14,6 @@ export const calculateLeftTop = (
 ) => {
   //新的中心点坐标
   const newCenterPoint = getCenterPoint(curPositon, symmetricPoint);
-  console.log('left中心坐标', newCenterPoint);
   const newTopLeftPoint = calculateRotatedPointCoordinate(curPositon, newCenterPoint, -rotate);
   const newBottomRightPoint = calculateRotatedPointCoordinate(
     symmetricPoint,
@@ -102,19 +101,20 @@ export const calculateLeftBottom = (
     is_old_height: false
   };
 };
-
+/**
+ * 顶点中心缩放
+ * @param curPositon 按住的缩放按钮的坐标
+ * @param symmetricPoint 缩放前对称点的坐标
+ * @param rotate 旋转角度
+ * @returns
+ */
 export const calculateTop = (
   curPositon: IScalePoint,
   symmetricPoint: IScalePoint,
   rotate: number,
   curPoint: IScalePoint
 ) => {
-  // 由于用户拉伸时是以任意角度拉伸的，所以在求得旋转前的坐标时，只取 y 坐标（这里的 x 坐标可能是任意值），x 坐标用 curPoint 的。
-  // 这个中心点（第二个参数）用 curPoint, center, symmetricPoint 都可以，只要他们在一条直线上就行
   const rotatedcurPositon = calculateRotatedPointCoordinate(curPositon, curPoint, -rotate);
-  console.log('top中心坐标', rotatedcurPositon);
-
-  // 算出旋转前 y 坐标，再用 curPoint 的 x 坐标，重新计算它们旋转后对应的坐标
   const rotatedTopMiddlePoint = calculateRotatedPointCoordinate(
     {
       x: curPoint.x,
@@ -123,8 +123,6 @@ export const calculateTop = (
     curPoint,
     rotate
   );
-
-  // 用旋转后的坐标和对称点算出新的高度（勾股定理）
   const newHeight = Math.sqrt(
     (rotatedTopMiddlePoint.x - symmetricPoint.x) ** 2 +
       (rotatedTopMiddlePoint.y - symmetricPoint.y) ** 2
@@ -136,7 +134,13 @@ export const calculateTop = (
     is_old_height: false
   };
 };
-
+/**
+ * 右侧中心缩放
+ * @param curPositon 按住的缩放按钮的坐标
+ * @param symmetricPoint 缩放前对称点的坐标
+ * @param rotate 旋转角度
+ * @returns
+ */
 export const calculateRight = (
   curPositon: IScalePoint,
   symmetricPoint: IScalePoint,
@@ -165,7 +169,13 @@ export const calculateRight = (
     is_old_height: true
   };
 };
-
+/**
+ * 底部中心缩放
+ * @param curPositon 按住的缩放按钮的坐标
+ * @param symmetricPoint 缩放前对称点的坐标
+ * @param rotate 旋转角度
+ * @returns
+ */
 export const calculateBottom = (
   curPositon: IScalePoint,
   symmetricPoint: IScalePoint,
@@ -194,7 +204,13 @@ export const calculateBottom = (
     is_old_height: false
   };
 };
-
+/**
+ * 左侧中心缩放
+ * @param curPositon 按住的缩放按钮的坐标
+ * @param symmetricPoint 缩放前对称点的坐标
+ * @param rotate 旋转角度
+ * @returns
+ */
 export const calculateLeft = (
   curPositon: IScalePoint,
   symmetricPoint: IScalePoint,
