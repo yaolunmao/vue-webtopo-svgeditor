@@ -153,6 +153,40 @@
           width: 0,
           height: 0
         },
+        point_coordinate: {
+          tl: {
+            x: 0,
+            y: 0
+          },
+          tc: {
+            x: 0,
+            y: 0
+          },
+          tr: {
+            x: 0,
+            y: 0
+          },
+          l: {
+            x: 0,
+            y: 0
+          },
+          r: {
+            x: 0,
+            y: 0
+          },
+          bl: {
+            x: 0,
+            y: 0
+          },
+          bc: {
+            x: 0,
+            y: 0
+          },
+          br: {
+            x: 0,
+            y: 0
+          }
+        },
         ...globalStore.create_svg_info
       };
       globalStore.setHandleSvgInfo(done_item_json, globalStore.done_json.length);

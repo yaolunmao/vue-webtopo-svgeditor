@@ -14,10 +14,7 @@ export interface IDoneJson extends IConfigItem {
   id: string;
   x: number;
   y: number;
-  client: {
-    x: number;
-    y: number;
-  };
+  client: ICoordinate;
   scale_x: number;
   scale_y: number;
   rotate: number;
@@ -26,6 +23,16 @@ export interface IDoneJson extends IConfigItem {
     y: number;
     width: number;
     height: number;
+  };
+  point_coordinate: {
+    tl: ICoordinate;
+    tc: ICoordinate;
+    tr: ICoordinate;
+    l: ICoordinate;
+    r: ICoordinate;
+    bl: ICoordinate;
+    bc: ICoordinate;
+    br: ICoordinate;
   };
 }
 export enum EGlobalStoreIntention {
@@ -90,4 +97,8 @@ export enum EScaleInfoType {
   BottomLeft = 'BottomLeft',
   BottomCenter = 'BottomCenter',
   BottomRight = 'BottomRight'
+}
+export interface ICoordinate {
+  x: number;
+  y: number;
 }

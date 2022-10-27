@@ -98,3 +98,6 @@ export const useGlobalStore = defineStore('global-store', {
     }
   }
 });
+useGlobalStore().$subscribe((mutation, state) => {
+  console.log(mutation, state, 102);
+});
