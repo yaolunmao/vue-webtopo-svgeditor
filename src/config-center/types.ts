@@ -20,12 +20,13 @@ export interface IConfigItem {
   title: string;
   props: IConfigItemProps;
   type: EDoneJsonType;
+  config: IDoneJsonConfig;
 }
 export interface IConfigItemProps {
   [key: string]: {
     title: string;
     type: EConfigItemPropsType;
-    val: string;
+    val: any;
     options?: { value: any; label: string }[];
   };
 }
@@ -33,9 +34,15 @@ export enum EConfigItemPropsType {
   Input = 'Input',
   Color = 'Color',
   InputNumber = 'InputNumber',
-  Switch = 'Switch' //此类型option默认索引0为关闭
+  Switch = 'Switch', //此类型option默认索引0为关闭
+  JsonEdit = 'JsonEdit'
 }
 export enum EDoneJsonType {
   File = 'File',
-  StraightLine = 'StraightLine'
+  StraightLine = 'StraightLine',
+  ConnectionLine = 'ConnectionLine'
+}
+interface IDoneJsonConfig {
+  can_zoom: boolean;
+  have_anchor: boolean;
 }

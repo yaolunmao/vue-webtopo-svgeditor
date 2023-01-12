@@ -8,6 +8,7 @@
     @mousedown="onCanvasMouseDown"
     @mousemove="onCanvasMouseMove"
     @mouseup="onCanvasMouseUp"
+    @contextmenu="onCanvasContextMenuEvent"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -34,8 +35,12 @@
               item.actual_bound.x +
               item.actual_bound.width / 2
             )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+            @mousedown="onSvgMouseDown(item, index, $event)"
+            @mouseenter="onSvgMouseEnter(item, index, $event)"
+            @mouseleave="onSvgMouseLeave(item, index, $event)"
           >
             <use
+              v-if="item.type === EDoneJsonType.File"
               :xlink:href="`#svg-${item.name}`"
               fill="#ff0000"
               width="100"
@@ -48,6 +53,25 @@
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
             ></use>
+            <line
+              v-else-if="item.type === EDoneJsonType.StraightLine"
+              :id="item.id"
+              :x1="item.props.start_x.val"
+              :y1="item.props.start_y.val"
+              :x2="item.props.end_x.val"
+              :y2="item.props.end_y.val"
+              fill="#FF0000"
+              stroke="#FF0000"
+              stroke-width="2"
+            ></line>
+            <path
+              v-else-if="item.type === EDoneJsonType.ConnectionLine"
+              :id="item.id"
+              :d="positionArrarToPath(item.props.point_position.val)"
+              fill-opacity="0"
+              stroke="#FF0000"
+              stroke-width="2"
+            ></path>
             <rect
               :id="`rect${item.id}`"
               fill="black"
@@ -77,17 +101,24 @@
                   ? 'svg-item-select'
                   : ''
               }`"
-              @mousedown="onSvgMouseDown(item, index, $event)"
             ></rect>
             <handle-panel
               v-if="
-                globalStore.handle_svg_info?.info.id == item.id &&
-                (globalStore.intention === EGlobalStoreIntention.Select ||
-                  globalStore.intention === EGlobalStoreIntention.Zoom ||
-                  globalStore.intention === EGlobalStoreIntention.Rotate)
+                globalStore.handle_svg_info?.info.id === item.id &&
+                visiable_info.handle_panel &&
+                item.config.can_zoom
               "
               :item-info="item"
             ></handle-panel>
+            <connection-panel
+              v-if="
+                (globalStore.handle_svg_info?.info.id !== item.id ||
+                  globalStore.intention == EGlobalStoreIntention.None) &&
+                visiable_info.connection_panel &&
+                item.config.have_anchor
+              "
+              :item-info="item"
+            ></connection-panel>
           </g>
         </g>
       </g>
@@ -95,17 +126,23 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { computed } from 'vue';
-  import { useConfigStore } from '../../../../store/config';
-  import { useGlobalStore } from '../../../../store/global';
+  import { computed, reactive } from 'vue';
+  import { useConfigStore } from '@/store/config';
+  import { useGlobalStore } from '@/store/global';
   import {
     EGlobalStoreIntention,
     EMouseInfoState,
     EScaleInfoType,
     IDoneJson
-  } from '../../../../store/global/types';
-  import { useSvgEditLayoutStore } from '../../../../store/svgedit-layout';
-  import { getCenterPoint, randomString } from '../../../../utils';
+  } from '@/store/global/types';
+  import { useSvgEditLayoutStore } from '@/store/svgedit-layout';
+  import {
+    getCenterPoint,
+    randomString,
+    positionArrarToPath,
+    getSvgNowPosition,
+    setSvgActualInfo
+  } from '@/utils';
   import {
     calculateBottom,
     calculateLeft,
@@ -115,8 +152,10 @@
     calculateRightBottom,
     calculateRightTop,
     calculateTop
-  } from '../../../../utils/scale-core';
-  import HandlePanel from '../handle-panel/index.vue';
+  } from '@/utils/scale-core';
+  import HandlePanel from '@/components/webtopo-svgedit/components/handle-panel/index.vue';
+  import ConnectionPanel from '@/components/webtopo-svgedit/components/connection-panel/index.vue';
+  import { EDoneJsonType } from '@/config-center/types';
   // import HandlePanel from '../handle-panel/index.vue';
   const globalStore = useGlobalStore();
   const configStore = useConfigStore();
@@ -128,6 +167,15 @@
       ? "url('/src/assets/icons/rotate.svg') 12 12, auto"
       : 'default'
   );
+  const visiable_info = reactive({
+    handle_panel: computed(
+      () =>
+        globalStore.intention === EGlobalStoreIntention.Select ||
+        globalStore.intention === EGlobalStoreIntention.Zoom ||
+        globalStore.intention === EGlobalStoreIntention.Rotate
+    ),
+    connection_panel: false
+  });
   const dropEvent = (e: DragEvent) => {
     if (globalStore.intention == EGlobalStoreIntention.None) {
       return;
@@ -138,8 +186,8 @@
       }
       const done_item_json: IDoneJson = {
         id: globalStore.create_svg_info.name + randomString(),
-        x: e.offsetX - svgEditLayoutStore.center_offset.x,
-        y: e.offsetY - svgEditLayoutStore.center_offset.y,
+        x: e.clientX - svgEditLayoutStore.center_offset.x,
+        y: e.clientY - svgEditLayoutStore.center_offset.y,
         client: {
           x: e.clientX,
           y: e.clientY
@@ -204,7 +252,9 @@
   };
   const onSvgMouseDown = (select_item: IDoneJson, index: number, e: MouseEvent) => {
     console.log(172, e);
-
+    if (globalStore.intention === EGlobalStoreIntention.Connection) {
+      return;
+    }
     e.preventDefault();
     e.cancelBubble = true;
     //鼠标在画布上的组件按下记录选中的组件信息和鼠标位置信息等
@@ -220,9 +270,22 @@
       new_position_y: select_item.y
     });
   };
+  const onSvgMouseEnter = (select_item: IDoneJson, index: number, e: MouseEvent) => {
+    e.preventDefault();
+    e.cancelBubble = true;
+    visiable_info.connection_panel = true;
+  };
+  const onSvgMouseLeave = (select_item: IDoneJson, index: number, e: MouseEvent) => {
+    e.preventDefault();
+    e.cancelBubble = true;
+    visiable_info.connection_panel = false;
+  };
   const onCanvasMouseMove = (e: MouseEvent) => {
-    //如果鼠标不是按下状态
-    if (globalStore.mouse_info.state != EMouseInfoState.Down) {
+    //如果鼠标不是按下状态 连线除外
+    if (
+      globalStore.mouse_info.state != EMouseInfoState.Down &&
+      globalStore.intention !== EGlobalStoreIntention.Connection
+    ) {
       return;
     }
     const { clientX, clientY } = e;
@@ -346,17 +409,17 @@
           ? new_length.height / globalStore.handle_svg_info.info.actual_bound.height
           : 1;
         const newCenterPoint = getCenterPoint(curPositon, globalStore.scale_info.symmetric_point);
-        const move_length_x = newCenterPoint.x - globalStore.handle_svg_info.info.client.x;
-        const move_length_y = newCenterPoint.y - globalStore.handle_svg_info.info.client.y;
-
         if (
           scale_x > 0 &&
           globalStore.scale_info.type !== EScaleInfoType.TopCenter &&
           globalStore.scale_info.type !== EScaleInfoType.BottomCenter
         ) {
           globalStore.handle_svg_info.info.scale_x = scale_x;
-          globalStore.handle_svg_info.info.x =
-            globalStore.scale_info.scale_item_info.x + move_length_x;
+          globalStore.handle_svg_info.info.x = getSvgNowPosition(
+            globalStore.handle_svg_info.info.client.x,
+            newCenterPoint.x,
+            globalStore.scale_info.scale_item_info.x
+          );
         }
         if (
           scale_y > 0 &&
@@ -364,8 +427,11 @@
           globalStore.scale_info.type !== EScaleInfoType.Right
         ) {
           globalStore.handle_svg_info.info.scale_y = scale_y;
-          globalStore.handle_svg_info.info.y =
-            globalStore.scale_info.scale_item_info.y + move_length_y;
+          globalStore.handle_svg_info.info.y = getSvgNowPosition(
+            globalStore.handle_svg_info.info.client.y,
+            newCenterPoint.y,
+            globalStore.scale_info.scale_item_info.y
+          );
         }
       }
     } else if (globalStore.intention === EGlobalStoreIntention.Rotate) {
@@ -386,6 +452,25 @@
         (Math.PI / 180);
       globalStore.handle_svg_info.info.rotate =
         globalStore.rotate_info.angle + rotateDegreeAfter - rotateDegreeBefore;
+    } else if (
+      globalStore.intention === EGlobalStoreIntention.Connection &&
+      globalStore.handle_svg_info
+    ) {
+      globalStore.handle_svg_info.info.props.point_position.val[
+        globalStore.handle_svg_info?.info.props.point_position.val.length - 1
+      ] = {
+        x: getSvgNowPosition(
+          globalStore.mouse_info.position_x,
+          clientX,
+          globalStore.handle_svg_info?.info.props.point_position.val[0].x
+        ),
+        y: getSvgNowPosition(
+          globalStore.mouse_info.position_y,
+          clientY,
+          globalStore.handle_svg_info?.info.props.point_position.val[0].y
+        )
+      };
+      // console.log('连线', start_x, start_y, end_x, end_y, clientX, clientY);
     }
   };
   const onCanvasMouseUp = (e: MouseEvent) => {
@@ -398,7 +483,8 @@
         globalStore.mouse_info.new_position_x;
       globalStore.done_json[globalStore.handle_svg_info.index].y =
         globalStore.mouse_info.new_position_y;
-      globalStore.setDoneJson(globalStore.done_json);
+      // globalStore.setDoneJson(globalStore.done_json);
+      setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
       globalStore.intention = EGlobalStoreIntention.Select;
       // globalStore.setHandleSvgInfo(undefined, 0);
     } else if (
@@ -414,6 +500,8 @@
       console.log(newCenterPoint);
       globalStore.handle_svg_info.info.client = newCenterPoint;
       globalStore.intention = EGlobalStoreIntention.None;
+    } else if (globalStore.intention === EGlobalStoreIntention.Connection) {
+      return;
     } else if (globalStore.intention != EGlobalStoreIntention.Select) {
       globalStore.intention = EGlobalStoreIntention.None;
     }
@@ -429,17 +517,51 @@
     });
   };
   const onCanvasMouseDown = (e: MouseEvent) => {
+    console.log('onCanvasMouseDown', e);
+    const { clientX, clientY } = e;
+    if (globalStore.intention === EGlobalStoreIntention.Connection && globalStore.handle_svg_info) {
+      if (e.button === 0) {
+        //鼠标左键创建新线段
+        globalStore.handle_svg_info.info.props.point_position.val.push({
+          x: getSvgNowPosition(
+            globalStore.mouse_info.position_x,
+            clientX,
+            globalStore.handle_svg_info?.info.props.point_position.val[0].x
+          ),
+          y: getSvgNowPosition(
+            globalStore.mouse_info.position_y,
+            clientY,
+            globalStore.handle_svg_info?.info.props.point_position.val[0].y
+          )
+        });
+      }
+      if (e.button === 2) {
+        //鼠标右键结束线段绘制
+        globalStore.intention = EGlobalStoreIntention.None;
+        setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
+      }
+      return;
+    }
     //点击画布 未选中组件 拖动画布
     globalStore.intention = EGlobalStoreIntention.MoveCanvas;
     globalStore.setMouseInfo({
       state: EMouseInfoState.Down,
-      position_x: e.clientX,
-      position_y: e.clientY,
+      position_x: clientX,
+      position_y: clientY,
       now_position_x: svgEditLayoutStore.center_offset.x,
       now_position_y: svgEditLayoutStore.center_offset.y,
       new_position_x: svgEditLayoutStore.center_offset.x,
       new_position_y: svgEditLayoutStore.center_offset.y
     });
+  };
+  /**
+   * 鼠标右键事件
+   * @param select_component
+   * @param e
+   * @returns
+   */
+  const onCanvasContextMenuEvent = (e: MouseEvent) => {
+    e.preventDefault(); //禁用浏览器右键
   };
 </script>
 <style lang="less" scoped>

@@ -6,5 +6,9 @@ export interface IPositionCenter {
       x: number;
       y: number;
     };
+    svg_position_center: {
+      x: number;
+      y: number;
+    };
   };
 }

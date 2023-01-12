@@ -2,7 +2,7 @@
   "name": "vue-webtopo-svgeditor",
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3001",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint:eslint": "eslint --fix --ext .js,.ts,.vue,.tsx ./src",

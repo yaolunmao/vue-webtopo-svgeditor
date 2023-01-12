@@ -4,6 +4,10 @@ export const circuit_breaker_svg_file: IConfigItem = {
   name: 'circuit-breaker',
   title: '断路器',
   type: EDoneJsonType.File,
+  config: {
+    can_zoom: true,
+    have_anchor: true
+  },
   props: {
     fill: {
       title: '填充色',

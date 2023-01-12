@@ -142,6 +142,7 @@
     { start: 158, end: 203, cursor: 'se', type: EScaleInfoType.BottomRight }
   ];
   const onHandleMouseDown = (type: EScaleInfoType, e: MouseEvent) => {
+    console.log('onHandleMouseDown', e);
     const { clientX, clientY } = e;
     e.cancelBubble = true;
     globalStore.intention = EGlobalStoreIntention.Zoom;

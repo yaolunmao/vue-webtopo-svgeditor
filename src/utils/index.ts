@@ -1,3 +1,6 @@
+import { ELineBindAnchors } from '@/config-center/svg-file/system/types';
+import type { IDoneJson } from '@/store/global/types';
+
 /**
  * 生成随机字符串
  * @param len 生成个数
@@ -71,4 +74,108 @@ export const getCenterPoint = (p1: { x: number; y: number }, p2: { x: number; y:
     x: p1.x + (p2.x - p1.x) / 2,
     y: p1.y + (p2.y - p1.y) / 2
   };
+};
+/**
+ * 坐标数组转换成path路径
+ * @param position_arr
+ * @returns
+ */
+export const positionArrarToPath = (position_arr: { x: number; y: number }[]) => {
+  let path_str = '';
+  for (let index = 0; index < position_arr.length; index++) {
+    if (index === 0) {
+      path_str += `M ${position_arr[index].x} ${position_arr[index].y}`;
+    } else {
+      path_str += ` L ${position_arr[index].x} ${position_arr[index].y}`;
+    }
+  }
+  return path_str;
+};
+/**
+ * 获取相对于svg最新的坐标
+ * @param init_pos 相对于页面的初始坐标
+ * @param finally_pos 相对于页面的最终坐标
+ * @param svg_init_pos 相对于svg的初始坐标
+ * @returns svg最新的坐标
+ */
+export const getSvgNowPosition = (init_pos: number, finally_pos: number, svg_init_pos: number) => {
+  return svg_init_pos + (finally_pos - init_pos);
+};
+/**
+ * 对象深拷贝
+ * @param object
+ * @param default_val
+ * @returns
+ */
+export const objectDeepClone = <T>(object: object, default_val: any = {}) => {
+  if (!object) {
+    return default_val as T;
+  }
+  return JSON.parse(JSON.stringify(object)) as T;
+};
+/**
+ * 设置实际的属性
+ * @param done_json
+ */
+export const setSvgActualInfo = (done_json: IDoneJson) => {
+  const queryBbox = document.querySelector(`#${done_json.id}`);
+  const rectBBox = document.querySelector(`#rect${done_json.id}`);
+  if (queryBbox && rectBBox) {
+    const BBox = (queryBbox as SVGGraphicsElement).getBBox();
+    const { x, y, width, height } = BBox;
+    rectBBox.setAttribute('x', x.toString());
+    rectBBox.setAttribute('y', y.toString());
+    rectBBox.setAttribute('width', width.toString());
+    rectBBox.setAttribute('height', height.toString());
+    done_json.actual_bound = { x, y, width, height };
+    done_json.point_coordinate.tl = {
+      x: done_json.x - width / 2,
+      y: done_json.y - height / 2
+    };
+    done_json.point_coordinate.tc = {
+      x: done_json.x,
+      y: done_json.y - height / 2
+    };
+    done_json.point_coordinate.tr = {
+      x: done_json.x + width / 2,
+      y: done_json.y - height / 2
+    };
+    done_json.point_coordinate.l = {
+      x: done_json.x - width / 2,
+      y: done_json.y
+    };
+    done_json.point_coordinate.r = {
+      x: done_json.x + width / 2,
+      y: done_json.y
+    };
+    done_json.point_coordinate.bl = {
+      x: done_json.x - width / 2,
+      y: done_json.y + height / 2
+    };
+    done_json.point_coordinate.bc = {
+      x: done_json.x,
+      y: done_json.y + height / 2
+    };
+    done_json.point_coordinate.br = {
+      x: done_json.x + width / 2,
+      y: done_json.y + height / 2
+    };
+  }
+};
+/**
+ * 根据锚点类型获取锚点坐标
+ * @param anchor_type
+ * @param done_json
+ * @returns
+ */
+export const getAnchorPosByAnchorType = (anchor_type: ELineBindAnchors, done_json: IDoneJson) => {
+  if (anchor_type === ELineBindAnchors.BottomCenter) {
+    return done_json.point_coordinate.bc;
+  } else if (anchor_type === ELineBindAnchors.Left) {
+    return done_json.point_coordinate.l;
+  } else if (anchor_type === ELineBindAnchors.Right) {
+    return done_json.point_coordinate.r;
+  } else {
+    return done_json.point_coordinate.tc;
+  }
 };

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { nextTick } from 'vue';
-import { configCenter } from '../../config-center';
-import { IConfigItem } from '../../config-center/types';
-import { isOfType } from '../../utils';
+import { configCenter } from '@/config-center';
+import { IConfigItem } from '@/config-center/types';
+import { isOfType, objectDeepClone, setSvgActualInfo } from '@/utils';
 import {
   EGlobalStoreIntention,
   EMouseInfoState,
@@ -20,7 +20,7 @@ export const useGlobalStore = defineStore('global-store', {
     return {
       config_center: configCenter,
       intention: EGlobalStoreIntention.None,
-      create_svg_info: undefined,
+      create_svg_info: null,
       done_json: [],
       mouse_info: {
         state: EMouseInfoState.Up,
@@ -31,7 +31,7 @@ export const useGlobalStore = defineStore('global-store', {
         new_position_x: 0,
         new_position_y: 0
       },
-      handle_svg_info: undefined,
+      handle_svg_info: null,
       scale_info: {
         type: EScaleInfoType.None,
         scale_times: {
@@ -54,7 +54,7 @@ export const useGlobalStore = defineStore('global-store', {
   },
   getters: {},
   actions: {
-    setCreateInfo(create_svg_info: IConfigItem | undefined) {
+    setCreateInfo(create_svg_info: IConfigItem | null) {
       this.intention = EGlobalStoreIntention.Create;
       this.create_svg_info = create_svg_info;
     },
@@ -63,27 +63,16 @@ export const useGlobalStore = defineStore('global-store', {
       if (isOfType(done_json, 'id')) {
         this.done_json.push(done_json);
         nextTick(() => {
-          const queryBbox = document.querySelector(`#${done_json.id}`);
-          const rectBBox = document.querySelector(`#rect${done_json.id}`);
-          // console.log(queryBbox, 190);
-          if (queryBbox && rectBBox) {
-            const BBox = (queryBbox as SVGGraphicsElement).getBBox();
-            const { x, y, width, height } = BBox;
-            rectBBox.setAttribute('x', x.toString());
-            rectBBox.setAttribute('y', y.toString());
-            rectBBox.setAttribute('width', width.toString());
-            rectBBox.setAttribute('height', height.toString());
-            done_json.actual_bound = { x, y, width, height };
-          }
+          setSvgActualInfo(done_json);
         });
       } else {
-        this.done_json = JSON.parse(JSON.stringify(done_json));
+        this.done_json = objectDeepClone<IDoneJson[]>(done_json);
       }
     },
     setMouseInfo(mouse_info: IMouseInfo) {
       this.mouse_info = mouse_info;
     },
-    setHandleSvgInfo(info: IDoneJson | undefined, index: number) {
+    setHandleSvgInfo(info: IDoneJson | null, index: number) {
       if (info) {
         this.handle_svg_info = {
           info: info,
@@ -98,6 +87,6 @@ export const useGlobalStore = defineStore('global-store', {
     }
   }
 });
-useGlobalStore().$subscribe((mutation, state) => {
-  console.log(mutation, state, 102);
-});
+// useGlobalStore().$subscribe((mutation, state) => {
+//   console.log(mutation, state, 102);
+// });

@@ -3,10 +3,10 @@ import { IConfigCenter, IConfigItem } from '../../config-center/types';
 export interface IGlobalStore {
   config_center: IConfigCenter;
   intention: EGlobalStoreIntention;
-  create_svg_info: IConfigItem | undefined;
+  create_svg_info: IConfigItem | null;
   done_json: IDoneJson[];
   mouse_info: IMouseInfo;
-  handle_svg_info: IHandleSvgInfo | undefined;
+  handle_svg_info: IHandleSvgInfo | null;
   scale_info: IScaleInfo;
   rotate_info: IRotateInfo;
 }
@@ -42,7 +42,8 @@ export enum EGlobalStoreIntention {
   MoveCanvas = 'MoveCanvas',
   Select = 'Select',
   Zoom = 'Zoom',
-  Rotate = 'Rotate'
+  Rotate = 'Rotate',
+  Connection = 'Connection'
 }
 export interface IMouseInfo {
   state: EMouseInfoState;

@@ -1,51 +1,16 @@
-import { useGlobalStore } from '../store/global';
-import { calculateRotatedPointCoordinate } from '../utils';
+import { IDoneJson } from '@/store/global/types';
+import { calculateRotatedPointCoordinate } from '@/utils';
 
-export const useSetPointCoordinate = () => {
-  const globalStore = useGlobalStore();
-  if (globalStore.handle_svg_info) {
-    const item_point = globalStore.handle_svg_info.info;
-    globalStore.handle_svg_info.info.point_coordinate = {
-      tl: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.tl,
-        item_point.client,
-        -item_point.rotate
-      ),
-      tc: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.tc,
-        item_point.client,
-        -item_point.rotate
-      ),
-      tr: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.tr,
-        item_point.client,
-        -item_point.rotate
-      ),
-      l: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.l,
-        item_point.client,
-        -item_point.rotate
-      ),
-      r: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.r,
-        item_point.client,
-        -item_point.rotate
-      ),
-      bl: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.bl,
-        item_point.client,
-        -item_point.rotate
-      ),
-      bc: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.bc,
-        item_point.client,
-        -item_point.rotate
-      ),
-      br: calculateRotatedPointCoordinate(
-        item_point.point_coordinate.br,
-        item_point.client,
-        -item_point.rotate
-      )
-    };
-  }
+export const useSetPointCoordinate = (item: IDoneJson) => {
+  item.point_coordinate = {
+    tl: calculateRotatedPointCoordinate(item.point_coordinate.tl, item.client, -item.rotate),
+    tc: calculateRotatedPointCoordinate(item.point_coordinate.tc, item.client, -item.rotate),
+    tr: calculateRotatedPointCoordinate(item.point_coordinate.tr, item.client, -item.rotate),
+    l: calculateRotatedPointCoordinate(item.point_coordinate.l, item.client, -item.rotate),
+    r: calculateRotatedPointCoordinate(item.point_coordinate.r, item.client, -item.rotate),
+    bl: calculateRotatedPointCoordinate(item.point_coordinate.bl, item.client, -item.rotate),
+    bc: calculateRotatedPointCoordinate(item.point_coordinate.bc, item.client, -item.rotate),
+    br: calculateRotatedPointCoordinate(item.point_coordinate.br, item.client, -item.rotate)
+  };
+  console.log(item, 1515);
 };
