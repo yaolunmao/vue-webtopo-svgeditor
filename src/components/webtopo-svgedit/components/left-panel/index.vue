@@ -55,8 +55,8 @@
   import SvgAnalysis from '../../../svg-analysis/index.vue';
   import { EGlobalStoreIntention } from '../../../../store/global/types';
   const globalStore = useGlobalStore();
-  const select_lib = ref('电力系统');
-  const config_center = ref<IConfigComponentGroup[]>(globalStore.config_center.电力系统);
+  const select_lib = ref('svg文件');
+  const config_center = ref<IConfigComponentGroup[]>(globalStore.config_center.svg文件);
   const activeNames = ref(['stateful', 'stateless']);
   const libChange = (val: any) => {
     config_center.value = [];

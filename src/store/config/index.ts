@@ -10,8 +10,8 @@ export const useConfigStore = defineStore('config-store', {
         background_color: '#fff',
         scale: 1,
         position_center: {
-          x: -50,
-          y: -50
+          x: -295,
+          y: -95
         }
       }
     };

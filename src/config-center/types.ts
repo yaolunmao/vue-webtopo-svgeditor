@@ -19,24 +19,23 @@ export interface IConfigItem {
   name: string;
   title: string;
   props: IConfigItemProps;
-  state?: IConfigItemState;
+  type: EDoneJsonType;
 }
 export interface IConfigItemProps {
   [key: string]: {
     title: string;
     type: EConfigItemPropsType;
     val: string;
+    options?: { value: any; label: string }[];
   };
 }
 export enum EConfigItemPropsType {
   Input = 'Input',
   Color = 'Color',
-  InputNumber = 'InputNumber'
+  InputNumber = 'InputNumber',
+  Switch = 'Switch' //此类型option默认索引0为关闭
 }
-export interface IConfigItemState {
-  type: EConfigItemStateType;
-  default: any;
-}
-export enum EConfigItemStateType {
-  Switch = 'Switch'
+export enum EDoneJsonType {
+  File = 'File',
+  StraightLine = 'StraightLine'
 }
