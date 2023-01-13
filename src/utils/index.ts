@@ -119,47 +119,50 @@ export const objectDeepClone = <T>(object: object, default_val: any = {}) => {
  */
 export const setSvgActualInfo = (done_json: IDoneJson) => {
   const queryBbox = document.querySelector(`#${done_json.id}`);
-  const rectBBox = document.querySelector(`#rect${done_json.id}`);
-  if (queryBbox && rectBBox) {
+  // const rectBBox = document.querySelector(`#rect${done_json.id}`);
+  if (queryBbox) {
     const BBox = (queryBbox as SVGGraphicsElement).getBBox();
     const { x, y, width, height } = BBox;
-    rectBBox.setAttribute('x', x.toString());
-    rectBBox.setAttribute('y', y.toString());
-    rectBBox.setAttribute('width', width.toString());
-    rectBBox.setAttribute('height', height.toString());
+    // rectBBox.setAttribute('x', x.toString());
+    // rectBBox.setAttribute('y', y.toString());
+    // rectBBox.setAttribute('width', width.toString());
+    // rectBBox.setAttribute('height', height.toString());
     done_json.actual_bound = { x, y, width, height };
     done_json.point_coordinate.tl = {
-      x: done_json.x - width / 2,
-      y: done_json.y - height / 2
+      x: done_json.x - (width * done_json.scale_x) / 2,
+      y: done_json.y - (height * done_json.scale_y) / 2
     };
     done_json.point_coordinate.tc = {
       x: done_json.x,
-      y: done_json.y - height / 2
+      y: done_json.y - (height * done_json.scale_y) / 2
     };
     done_json.point_coordinate.tr = {
-      x: done_json.x + width / 2,
-      y: done_json.y - height / 2
+      x: done_json.x + (width * done_json.scale_x) / 2,
+      y: done_json.y - (height * done_json.scale_y) / 2
     };
     done_json.point_coordinate.l = {
-      x: done_json.x - width / 2,
+      x: done_json.x - (width * done_json.scale_x) / 2,
       y: done_json.y
     };
     done_json.point_coordinate.r = {
-      x: done_json.x + width / 2,
+      x: done_json.x + (width * done_json.scale_x) / 2,
       y: done_json.y
     };
     done_json.point_coordinate.bl = {
-      x: done_json.x - width / 2,
-      y: done_json.y + height / 2
+      x: done_json.x - (width * done_json.scale_x) / 2,
+      y: done_json.y + (height * done_json.scale_y) / 2
     };
     done_json.point_coordinate.bc = {
       x: done_json.x,
-      y: done_json.y + height / 2
+      y: done_json.y + (height * done_json.scale_y) / 2
     };
     done_json.point_coordinate.br = {
-      x: done_json.x + width / 2,
-      y: done_json.y + height / 2
+      x: done_json.x + (width * done_json.scale_x) / 2,
+      y: done_json.y + (height * done_json.scale_y) / 2
     };
+    if (done_json.rotate !== 0) {
+      setAfterRotationPointCoordinate(done_json);
+    }
   }
 };
 /**
@@ -178,4 +181,52 @@ export const getAnchorPosByAnchorType = (anchor_type: ELineBindAnchors, done_jso
   } else {
     return done_json.point_coordinate.tc;
   }
+};
+/**
+ * 旋转之后重新设置组件八点坐标
+ * @param item
+ */
+export const setAfterRotationPointCoordinate = (item: IDoneJson) => {
+  item.point_coordinate = {
+    tl: calculateRotatedPointCoordinate(
+      item.point_coordinate.tl,
+      { x: item.x, y: item.y },
+      item.rotate
+    ),
+    tc: calculateRotatedPointCoordinate(
+      item.point_coordinate.tc,
+      { x: item.x, y: item.y },
+      item.rotate
+    ),
+    tr: calculateRotatedPointCoordinate(
+      item.point_coordinate.tr,
+      { x: item.x, y: item.y },
+      item.rotate
+    ),
+    l: calculateRotatedPointCoordinate(
+      item.point_coordinate.l,
+      { x: item.x, y: item.y },
+      item.rotate
+    ),
+    r: calculateRotatedPointCoordinate(
+      item.point_coordinate.r,
+      { x: item.x, y: item.y },
+      item.rotate
+    ),
+    bl: calculateRotatedPointCoordinate(
+      item.point_coordinate.bl,
+      { x: item.x, y: item.y },
+      item.rotate
+    ),
+    bc: calculateRotatedPointCoordinate(
+      item.point_coordinate.bc,
+      { x: item.x, y: item.y },
+      item.rotate
+    ),
+    br: calculateRotatedPointCoordinate(
+      item.point_coordinate.br,
+      { x: item.x, y: item.y },
+      item.rotate
+    )
+  };
 };

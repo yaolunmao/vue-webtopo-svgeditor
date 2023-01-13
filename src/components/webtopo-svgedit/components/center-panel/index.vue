@@ -500,6 +500,12 @@
       console.log(newCenterPoint);
       globalStore.handle_svg_info.info.client = newCenterPoint;
       globalStore.intention = EGlobalStoreIntention.None;
+      setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
+    } else if (
+      globalStore.intention === EGlobalStoreIntention.Rotate &&
+      globalStore.handle_svg_info?.info
+    ) {
+      setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
     } else if (globalStore.intention === EGlobalStoreIntention.Connection) {
       return;
     } else if (globalStore.intention != EGlobalStoreIntention.Select) {
