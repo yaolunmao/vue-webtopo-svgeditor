@@ -49,6 +49,13 @@ export const useGlobalStore = defineStore('global-store', {
       },
       rotate_info: {
         angle: 0
+      },
+      connection_line_node_info: {
+        init_pos: {
+          x: 0,
+          y: 0
+        },
+        point_index: 0
       }
     };
   },
@@ -72,11 +79,16 @@ export const useGlobalStore = defineStore('global-store', {
     setMouseInfo(mouse_info: IMouseInfo) {
       this.mouse_info = mouse_info;
     },
-    setHandleSvgInfo(info: IDoneJson | null, index: number) {
+    setHandleSvgInfo(info: IDoneJson | null, index?: number) {
+      let current_index = index;
       if (info) {
+        if (!current_index && current_index != 0) {
+          //如果索引没传 在这根据id查出索引
+          current_index = this.done_json.findIndex((f) => f.id === info.id) ?? -1;
+        }
         this.handle_svg_info = {
           info: info,
-          index: index
+          index: current_index
         };
       } else {
         this.handle_svg_info = info;

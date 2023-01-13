@@ -144,7 +144,7 @@
   const onHandleMouseDown = (type: EScaleInfoType, e: MouseEvent) => {
     console.log('onHandleMouseDown', e);
     const { clientX, clientY } = e;
-    e.cancelBubble = true;
+    e.stopPropagation();
     globalStore.intention = EGlobalStoreIntention.Zoom;
     globalStore.setMouseInfo({
       state: EMouseInfoState.Down,
@@ -178,7 +178,7 @@
   };
   const onRotateCircleMouseDown = (e: MouseEvent) => {
     const { clientX, clientY } = e;
-    e.cancelBubble = true;
+    e.stopPropagation();
     globalStore.intention = EGlobalStoreIntention.Rotate;
     globalStore.rotate_info = {
       angle: props.itemInfo.rotate

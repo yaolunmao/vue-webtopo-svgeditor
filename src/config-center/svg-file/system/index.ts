@@ -1,4 +1,4 @@
-import { EConfigItemPropsType, EDoneJsonType } from '@/config-center/types';
+import { EConfigAnimationsType, EConfigItemPropsType, EDoneJsonType } from '@/config-center/types';
 import type { ISystemStraightLine } from './types';
 
 export const straight_line_system: ISystemStraightLine = Object.seal({
@@ -7,7 +7,8 @@ export const straight_line_system: ISystemStraightLine = Object.seal({
   type: EDoneJsonType.StraightLine,
   config: {
     can_zoom: false,
-    have_anchor: false
+    have_anchor: false,
+    actual_rect: false
   },
   props: {
     fill: {
@@ -47,11 +48,12 @@ export const connection_line_system: ISystemStraightLine = Object.freeze({
   type: EDoneJsonType.ConnectionLine,
   config: {
     can_zoom: false,
-    have_anchor: false
+    have_anchor: false,
+    actual_rect: false
   },
   props: {
-    fill: {
-      title: '填充色',
+    stroke: {
+      title: '线条颜色',
       type: EConfigItemPropsType.Color,
       val: '#ff0000'
     },
@@ -60,6 +62,40 @@ export const connection_line_system: ISystemStraightLine = Object.freeze({
       type: EConfigItemPropsType.JsonEdit,
       val: []
     }
+  },
+  animations: {
+    type: {
+      title: '动画类型',
+      type: EConfigItemPropsType.Select,
+      val: EConfigAnimationsType.None,
+      options: [
+        {
+          label: '无',
+          value: EConfigAnimationsType.None
+        },
+        {
+          label: '电流',
+          value: EConfigAnimationsType.Electricity
+        },
+        {
+          label: '轨迹',
+          value: EConfigAnimationsType.Track
+        },
+        {
+          label: '水珠',
+          value: EConfigAnimationsType.WaterDrop
+        }
+      ]
+    },
+    dur: { title: '持续时间', type: EConfigItemPropsType.InputNumber, val: 20 },
+    repeatCount: {
+      title: '循环次数',
+      type: EConfigItemPropsType.Input,
+      val: 'indefinite',
+      disabled: true
+    },
+    color: { title: '颜色', type: EConfigItemPropsType.Color, val: '#0a7ae2' },
+    reverse: { title: '反转动画', type: EConfigItemPropsType.Switch, val: false }
   },
   bind_anchors: {
     start: null,

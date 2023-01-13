@@ -9,6 +9,7 @@ export interface IGlobalStore {
   handle_svg_info: IHandleSvgInfo | null;
   scale_info: IScaleInfo;
   rotate_info: IRotateInfo;
+  connection_line_node_info: IConnectionLineNodeInfo;
 }
 export interface IDoneJson extends IConfigItem {
   id: string;
@@ -43,7 +44,8 @@ export enum EGlobalStoreIntention {
   Select = 'Select',
   Zoom = 'Zoom',
   Rotate = 'Rotate',
-  Connection = 'Connection'
+  Connection = 'Connection',
+  SetConnectionLineNode = 'SetConnectionLineNode'
 }
 export interface IMouseInfo {
   state: EMouseInfoState;
@@ -102,4 +104,11 @@ export enum EScaleInfoType {
 export interface ICoordinate {
   x: number;
   y: number;
+}
+export interface IConnectionLineNodeInfo {
+  init_pos: {
+    x: number;
+    y: number;
+  };
+  point_index: number;
 }

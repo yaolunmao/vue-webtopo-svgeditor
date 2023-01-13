@@ -39,10 +39,17 @@
             @mouseenter="onSvgMouseEnter(item, index, $event)"
             @mouseleave="onSvgMouseLeave(item, index, $event)"
           >
+            <connection-line
+              v-if="item.type === EDoneJsonType.ConnectionLine"
+              :item-info="item"
+              :point-visiable="
+                visiable_info.connection_line && visiable_info.select_item.info?.id == item.id
+              "
+            ></connection-line>
             <use
-              v-if="item.type === EDoneJsonType.File"
+              v-else-if="item.type === EDoneJsonType.File"
               :xlink:href="`#svg-${item.name}`"
-              fill="#ff0000"
+              :fill="item.props.fill.val"
               width="100"
               height="100"
               :id="item.id"
@@ -64,15 +71,8 @@
               stroke="#FF0000"
               stroke-width="2"
             ></line>
-            <path
-              v-else-if="item.type === EDoneJsonType.ConnectionLine"
-              :id="item.id"
-              :d="positionArrarToPath(item.props.point_position.val)"
-              fill-opacity="0"
-              stroke="#FF0000"
-              stroke-width="2"
-            ></path>
             <rect
+              v-if="item.config.actual_rect"
               :id="`rect${item.id}`"
               fill="black"
               fill-opacity="0"
@@ -89,7 +89,12 @@
               :width="item.actual_bound.width * item.scale_x"
               :height="item.actual_bound.height * item.scale_y"
               style="stroke: none; stroke-width: 2; stroke-miterlimit: 10"
-              :class="`${globalStore.intention == EGlobalStoreIntention.None ? 'svg-item-none' : ''}
+              :class="`${
+                globalStore.intention == EGlobalStoreIntention.None ||
+                globalStore.intention == EGlobalStoreIntention.Select
+                  ? 'svg-item-none'
+                  : ''
+              }
                                     ${
                                       globalStore.intention == EGlobalStoreIntention.Move &&
                                       globalStore.handle_svg_info?.info.id == item.id
@@ -112,10 +117,14 @@
             ></handle-panel>
             <connection-panel
               v-if="
-                (globalStore.handle_svg_info?.info.id !== item.id ||
-                  globalStore.intention == EGlobalStoreIntention.None) &&
+                visiable_info.select_item.info?.id == item.id &&
                 visiable_info.connection_panel &&
-                item.config.have_anchor
+                item.config.have_anchor &&
+                (globalStore.intention === EGlobalStoreIntention.Select
+                  ? item.id !== globalStore.handle_svg_info?.info.id
+                    ? true
+                    : false
+                  : true)
               "
               :item-info="item"
             ></connection-panel>
@@ -136,13 +145,7 @@
     IDoneJson
   } from '@/store/global/types';
   import { useSvgEditLayoutStore } from '@/store/svgedit-layout';
-  import {
-    getCenterPoint,
-    randomString,
-    positionArrarToPath,
-    getSvgNowPosition,
-    setSvgActualInfo
-  } from '@/utils';
+  import { getCenterPoint, randomString, getSvgNowPosition, setSvgActualInfo } from '@/utils';
   import {
     calculateBottom,
     calculateLeft,
@@ -156,6 +159,8 @@
   import HandlePanel from '@/components/webtopo-svgedit/components/handle-panel/index.vue';
   import ConnectionPanel from '@/components/webtopo-svgedit/components/connection-panel/index.vue';
   import { EDoneJsonType } from '@/config-center/types';
+  import ConnectionLine from '@/components/webtopo-svgedit/components/connection-line/index.vue';
+  import { IVisiableInfo } from './types';
   // import HandlePanel from '../handle-panel/index.vue';
   const globalStore = useGlobalStore();
   const configStore = useConfigStore();
@@ -167,14 +172,19 @@
       ? "url('/src/assets/icons/rotate.svg') 12 12, auto"
       : 'default'
   );
-  const visiable_info = reactive({
+  const visiable_info: IVisiableInfo = reactive({
     handle_panel: computed(
       () =>
         globalStore.intention === EGlobalStoreIntention.Select ||
         globalStore.intention === EGlobalStoreIntention.Zoom ||
         globalStore.intention === EGlobalStoreIntention.Rotate
     ),
-    connection_panel: false
+    connection_panel: false,
+    connection_line: false,
+    select_item: {
+      info: null,
+      index: -1
+    }
   });
   const dropEvent = (e: DragEvent) => {
     if (globalStore.intention == EGlobalStoreIntention.None) {
@@ -251,12 +261,12 @@
     e.preventDefault();
   };
   const onSvgMouseDown = (select_item: IDoneJson, index: number, e: MouseEvent) => {
-    console.log(172, e);
+    console.log('触发选中', e);
     if (globalStore.intention === EGlobalStoreIntention.Connection) {
       return;
     }
     e.preventDefault();
-    e.cancelBubble = true;
+    e.stopPropagation();
     //鼠标在画布上的组件按下记录选中的组件信息和鼠标位置信息等
     globalStore.intention = EGlobalStoreIntention.Select;
     globalStore.setHandleSvgInfo(select_item, index);
@@ -272,13 +282,33 @@
   };
   const onSvgMouseEnter = (select_item: IDoneJson, index: number, e: MouseEvent) => {
     e.preventDefault();
-    e.cancelBubble = true;
+    e.stopPropagation();
     visiable_info.connection_panel = true;
+    visiable_info.connection_line = true;
+    if (
+      (globalStore.intention === EGlobalStoreIntention.Connection ||
+        globalStore.intention === EGlobalStoreIntention.SetConnectionLineNode) &&
+      select_item.type === EDoneJsonType.ConnectionLine
+    ) {
+      return;
+    }
+    visiable_info.select_item.info = select_item;
+    visiable_info.select_item.index = index;
   };
   const onSvgMouseLeave = (select_item: IDoneJson, index: number, e: MouseEvent) => {
     e.preventDefault();
-    e.cancelBubble = true;
+    e.stopPropagation();
+    if (
+      (globalStore.intention === EGlobalStoreIntention.Connection ||
+        globalStore.intention === EGlobalStoreIntention.SetConnectionLineNode) &&
+      select_item.type === EDoneJsonType.ConnectionLine
+    ) {
+      return;
+    }
     visiable_info.connection_panel = false;
+    visiable_info.connection_line = false;
+    visiable_info.select_item.info = null;
+    visiable_info.select_item.index = -1;
   };
   const onCanvasMouseMove = (e: MouseEvent) => {
     //如果鼠标不是按下状态 连线除外
@@ -471,6 +501,24 @@
         )
       };
       // console.log('连线', start_x, start_y, end_x, end_y, clientX, clientY);
+    } else if (
+      globalStore.intention === EGlobalStoreIntention.SetConnectionLineNode &&
+      globalStore.handle_svg_info
+    ) {
+      globalStore.handle_svg_info.info.props.point_position.val[
+        globalStore.connection_line_node_info.point_index
+      ] = {
+        x: getSvgNowPosition(
+          globalStore.mouse_info.position_x,
+          clientX,
+          globalStore.connection_line_node_info.init_pos.x
+        ),
+        y: getSvgNowPosition(
+          globalStore.mouse_info.position_y,
+          clientY,
+          globalStore.connection_line_node_info.init_pos.y
+        )
+      };
     }
   };
   const onCanvasMouseUp = (e: MouseEvent) => {

@@ -21,6 +21,7 @@ export interface IConfigItem {
   props: IConfigItemProps;
   type: EDoneJsonType;
   config: IDoneJsonConfig;
+  animations?: IConfigItemProps;
 }
 export interface IConfigItemProps {
   [key: string]: {
@@ -28,14 +29,23 @@ export interface IConfigItemProps {
     type: EConfigItemPropsType;
     val: any;
     options?: { value: any; label: string }[];
+    disabled?: boolean;
   };
+}
+
+export enum EConfigAnimationsType {
+  None = 'None',
+  Electricity = 'Electricity', //电流效果
+  WaterDrop = 'WaterDrop', //水珠
+  Track = 'Track' //轨迹
 }
 export enum EConfigItemPropsType {
   Input = 'Input',
   Color = 'Color',
   InputNumber = 'InputNumber',
   Switch = 'Switch', //此类型option默认索引0为关闭
-  JsonEdit = 'JsonEdit'
+  JsonEdit = 'JsonEdit',
+  Select = 'Select'
 }
 export enum EDoneJsonType {
   File = 'File',
@@ -45,4 +55,5 @@ export enum EDoneJsonType {
 interface IDoneJsonConfig {
   can_zoom: boolean;
   have_anchor: boolean;
+  actual_rect: boolean;
 }

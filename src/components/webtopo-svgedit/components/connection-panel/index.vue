@@ -10,7 +10,7 @@
       stroke="rgba(0,0,0,0)" 
       stroke-width="2"       
       :fill="fill"
-      :style="{ 'vector-effect': 'non-scaling-stroke'}"
+      :style="{ 'vector-effect': 'non-scaling-stroke','cursor': 'pointer'}"
       pointer-events="all" 
       @mousedown="onConnectionMouseDown(ELineBindAnchors.TopCenter,$event)"/>
     <circle
@@ -21,7 +21,7 @@
       stroke="rgba(0,0,0,0)" 
       stroke-width="2"       
       :fill="fill"
-      :style="{ 'vector-effect': 'non-scaling-stroke'}"
+      :style="{ 'vector-effect': 'non-scaling-stroke','cursor': 'pointer'}"
       pointer-events="all" 
       @mousedown="onConnectionMouseDown(ELineBindAnchors.Left,$event)"/>
     <circle
@@ -32,7 +32,7 @@
       stroke="rgba(0,0,0,0)" 
       stroke-width="2"       
       :fill="fill"
-      :style="{ 'vector-effect': 'non-scaling-stroke'}"
+      :style="{ 'vector-effect': 'non-scaling-stroke','cursor': 'pointer'}"
       pointer-events="all" 
       @mousedown="onConnectionMouseDown(ELineBindAnchors.Right,$event)"/>
     <circle
@@ -43,7 +43,7 @@
       stroke="rgba(0,0,0,0)" 
       stroke-width="2"       
       :fill="fill"
-      :style="{ 'vector-effect': 'non-scaling-stroke'}"
+      :style="{ 'vector-effect': 'non-scaling-stroke','cursor': 'pointer'}"
       pointer-events="all" 
       @mousedown="onConnectionMouseDown(ELineBindAnchors.BottomCenter,$event)"/>
 
@@ -148,19 +148,10 @@
       },
       ...create_line_info
     };
-    done_item_json.props.point_position.val.push(
-      {
-        x: configStore.svg.svg_position_center.x,
-        y: configStore.svg.svg_position_center.y
-      },
-      //push一个用来实时显示鼠标移动的
-      {
-        x: configStore.svg.svg_position_center.x,
-        y: configStore.svg.svg_position_center.y
-      }
-    );
-
-    done_item_json.props.point_position.val.push();
+    done_item_json.props.point_position.val.push({
+      x: configStore.svg.svg_position_center.x,
+      y: configStore.svg.svg_position_center.y
+    });
     globalStore.setHandleSvgInfo(done_item_json, globalStore.done_json.length);
     globalStore.setDoneJson(done_item_json);
 

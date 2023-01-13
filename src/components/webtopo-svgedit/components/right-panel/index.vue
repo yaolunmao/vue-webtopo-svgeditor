@@ -42,9 +42,22 @@
             <el-form-item label="y轴坐标" size="small">
               <el-input-number v-model="globalStore.handle_svg_info.info.y"></el-input-number>
             </el-form-item>
+            <dynamic-el-form-item
+              :obj-info="globalStore.handle_svg_info.info.props"
+            ></dynamic-el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="动画" name="animation"></el-tab-pane>
+        <el-tab-pane label="动画" name="animation">
+          <el-form
+            label-width="90px"
+            label-position="left"
+            v-if="globalStore.handle_svg_info.info.animations"
+          >
+            <dynamic-el-form-item
+              :obj-info="globalStore.handle_svg_info.info.animations"
+            ></dynamic-el-form-item>
+          </el-form>
+        </el-tab-pane>
         <el-tab-pane label="事件" name="event"></el-tab-pane>
       </el-tabs>
     </div>
@@ -63,14 +76,14 @@
     ElInput
   } from 'element-plus';
   import { ref } from 'vue';
-  import { useConfigStore } from '../../../../store/config';
-  import { useGlobalStore } from '../../../../store/global';
-  import { EGlobalStoreIntention } from '../../../../store/global/types';
+  import { useConfigStore } from '@/store/config';
+  import { useGlobalStore } from '@/store/global';
+  import { EGlobalStoreIntention } from '@/store/global/types';
+  import DynamicElFormItem from './dynamic-el-form-item.vue';
   const configStore = useConfigStore();
   const globalStore = useGlobalStore();
 
   const activeName = ref('style');
-
   const handleClick = (tab: TabsPaneContext, event: Event) => {
     console.log(tab, event);
   };
