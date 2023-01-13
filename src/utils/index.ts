@@ -1,4 +1,4 @@
-import { ELineBindAnchors } from '@/config-center/svg-file/system/types';
+import { ELineBindAnchors } from '@/config-center/system/types';
 import type { IDoneJson } from '@/store/global/types';
 
 /**

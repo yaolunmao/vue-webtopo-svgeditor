@@ -51,8 +51,8 @@
 </template>
 <script lang="ts" setup>
   // import { IConfigItem } from '@/config-center/types';
-  import { straight_line_system, connection_line_system } from '@/config-center/svg-file/system';
-  import { ELineBindAnchors, ISystemStraightLine } from '@/config-center/svg-file/system/types';
+  import { straight_line_system, connection_line_system } from '@/config-center/system';
+  import { ELineBindAnchors, ISystemStraightLine } from '@/config-center/system/types';
   import { useConfigStore } from '@/store/config';
   import { PropType, ref } from 'vue';
   import { useGlobalStore } from '@/store/global';
