@@ -14,6 +14,11 @@ export const reservoir_svg_file: IConfigItem = {
       title: '水流颜色',
       type: EConfigItemPropsType.Color,
       val: '#37cfe7'
+    },
+    stroke: {
+      title: '边框颜色',
+      type: EConfigItemPropsType.Color,
+      val: '#000'
     }
   }
 };
