@@ -1,5 +1,5 @@
 import { ELineBindAnchors } from '@/config-center/system/types';
-import type { IConfigItemProps } from '@/config-center/types';
+import { IConfigItem } from '@/config-center/types';
 import type { IDoneJson } from '@/store/global/types';
 
 /**
@@ -231,10 +231,27 @@ export const setAfterRotationPointCoordinate = (item: IDoneJson) => {
     )
   };
 };
-export const prosToVBind = (props: IConfigItemProps) => {
+
+export const prosToVBind = (item: IConfigItem) => {
   let temp = {};
-  for (const key in props) {
-    temp = { ...temp, ...{ [key]: props[key].val } };
+  if (item.state) {
+    for (const key in item.state) {
+      if (key === 'OnOff') {
+        for (const on_off_key in item.state[key]?.props) {
+          temp = {
+            ...temp,
+            ...{
+              [on_off_key]: item.state[key]?.default
+                ? item.state[key]?.props[on_off_key].openVal
+                : item.state[key]?.props[on_off_key].closeVal
+            }
+          };
+        }
+      }
+    }
+  }
+  for (const key in item.props) {
+    temp = { ...temp, ...{ [key]: item.props[key].val } };
   }
   return temp;
 };

@@ -1,4 +1,4 @@
-import { EConfigItemPropsType, EDoneJsonType, IConfigItem } from '../../../types';
+import { EDoneJsonType, IConfigItem } from '@/config-center/types';
 
 export const circuit_breaker_svg_file: IConfigItem = {
   name: 'circuit-breaker',
@@ -9,21 +9,21 @@ export const circuit_breaker_svg_file: IConfigItem = {
     have_anchor: true,
     actual_rect: true
   },
-  props: {
-    fill: {
+  props: {},
+  state: {
+    OnOff: {
       title: '开关',
-      type: EConfigItemPropsType.Select,
-      val: '#ff0000',
-      options: [
-        {
-          value: '#ff0000',
-          label: '关'
+      default: false,
+      props: {
+        fill: {
+          openVal: '#00ff00',
+          closeVal: '#ff0000'
         },
-        {
-          value: '#00ff00',
-          label: '开'
+        'fill-opacity': {
+          openVal: '0',
+          closeVal: '1'
         }
-      ]
+      }
     }
   }
 };

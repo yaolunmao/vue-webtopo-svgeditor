@@ -49,7 +49,7 @@
             <use
               v-else-if="item.type === EDoneJsonType.File"
               :xlink:href="`#svg-${item.name}`"
-              v-bind="prosToVBind(item.props)"
+              v-bind="prosToVBind(item)"
               width="100"
               height="100"
               :id="item.id"
@@ -63,7 +63,7 @@
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
               :is="item.tag"
-              v-bind="prosToVBind(item.props)"
+              v-bind="prosToVBind(item)"
               width="100"
               height="100"
               :id="item.id"

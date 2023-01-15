@@ -42,6 +42,13 @@
             <el-form-item label="y轴坐标" size="small">
               <el-input-number v-model="globalStore.handle_svg_info.info.y"></el-input-number>
             </el-form-item>
+            <el-form-item
+              :label="globalStore.handle_svg_info.info.state?.OnOff.title"
+              size="small"
+              v-if="globalStore.handle_svg_info.info.state?.OnOff"
+            >
+              <el-switch v-model="globalStore.handle_svg_info.info.state.OnOff.default"></el-switch>
+            </el-form-item>
             <dynamic-el-form-item
               :obj-info="globalStore.handle_svg_info.info.props"
             ></dynamic-el-form-item>
@@ -73,7 +80,8 @@
     ElTabs,
     ElTabPane,
     TabsPaneContext,
-    ElInput
+    ElInput,
+    ElSwitch
   } from 'element-plus';
   import { ref } from 'vue';
   import { useConfigStore } from '@/store/config';

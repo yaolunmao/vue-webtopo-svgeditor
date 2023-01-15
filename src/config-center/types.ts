@@ -23,6 +23,7 @@ export interface IConfigItem {
   config: IDoneJsonConfig;
   animations?: IConfigItemProps;
   tag?: any;
+  state?: IConfigItemState; //通过一个属性去控制多个属性就是有状态组件
 }
 export interface IConfigItemProps {
   [key: string]: {
@@ -61,4 +62,11 @@ interface IDoneJsonConfig {
 }
 export interface IComponentImport {
   [key: string]: any;
+}
+export interface IConfigItemState {
+  OnOff?: {
+    title: string;
+    default: false;
+    props: { [key: string]: { openVal: any; closeVal: any } };
+  };
 }

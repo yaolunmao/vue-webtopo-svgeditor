@@ -29,10 +29,7 @@
           >
             <div class="flex component-item items-center ml-10px">
               <el-icon :size="40" class="flex items-center">
-                <svg-analysis
-                  :name="svg_item.name"
-                  :props="handleIconProps(svg_item.props)"
-                ></svg-analysis>
+                <svg-analysis :name="svg_item.name" :props="prosToVBind(svg_item)"></svg-analysis>
               </el-icon>
               <div>{{ svg_item.title }}</div>
             </div>
@@ -46,14 +43,11 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { ElSelect, ElOption, ElCollapse, ElCollapseItem, ElIcon, ElMessage } from 'element-plus';
-  import {
-    IConfigComponentGroup,
-    IConfigItem,
-    IConfigItemProps
-  } from '../../../../config-center/types';
-  import { useGlobalStore } from '../../../../store/global';
-  import SvgAnalysis from '../../../svg-analysis/index.vue';
-  import { EGlobalStoreIntention } from '../../../../store/global/types';
+  import { IConfigComponentGroup, IConfigItem } from '@/config-center/types';
+  import { useGlobalStore } from '@/store/global';
+  import SvgAnalysis from '@/components/svg-analysis/index.vue';
+  import { EGlobalStoreIntention } from '@/store/global/types';
+  import { prosToVBind } from '@/utils';
   const globalStore = useGlobalStore();
   const select_lib = ref('svg文件');
   const config_center = ref<IConfigComponentGroup[]>(globalStore.config_center.svg文件);
@@ -64,13 +58,7 @@
 
     console.log(val, 71474);
   };
-  const handleIconProps = (svg_item_props: IConfigItemProps) => {
-    let temp = {};
-    for (const key in svg_item_props) {
-      temp = { ...temp, ...{ [key]: svg_item_props[key].val } };
-    }
-    return temp;
-  };
+
   const createBegin = (svg_item: IConfigItem) => {
     globalStore.setCreateInfo(svg_item);
   };
