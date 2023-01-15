@@ -74,6 +74,26 @@
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
             ></component>
+            <foreignObject
+              v-else-if="item.type === EDoneJsonType.Vue"
+              width="100"
+              height="100"
+              :id="`foreign-object${item.id}`"
+            >
+              <component
+                :is="item.tag"
+                v-bind="prosToVBind(item)"
+                :id="item.id"
+                :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+                  item.actual_bound.y + item.actual_bound.height / 2
+                }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+                  item.actual_bound.x +
+                  item.actual_bound.width / 2
+                )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+                >{{ item.tag_slot }}</component
+              >
+            </foreignObject>
+
             <line
               v-else-if="item.type === EDoneJsonType.StraightLine"
               :id="item.id"

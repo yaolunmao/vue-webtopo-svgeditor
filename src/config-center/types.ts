@@ -24,13 +24,14 @@ export interface IConfigItem {
   animations?: IConfigItemProps;
   tag?: any;
   state?: IConfigItemState; //通过一个属性去控制多个属性就是有状态组件
+  tag_slot?: string;
 }
 export interface IConfigItemProps {
   [key: string]: {
     title: string;
     type: EConfigItemPropsType;
     val: any;
-    options?: { value: any; label: string }[];
+    options?: any;
     disabled?: boolean;
   };
 }
@@ -53,7 +54,8 @@ export enum EDoneJsonType {
   File = 'File',
   StraightLine = 'StraightLine',
   ConnectionLine = 'ConnectionLine',
-  CustomSvg = 'CustomSvg'
+  CustomSvg = 'CustomSvg',
+  Vue = 'Vue'
 }
 interface IDoneJsonConfig {
   can_zoom: boolean;

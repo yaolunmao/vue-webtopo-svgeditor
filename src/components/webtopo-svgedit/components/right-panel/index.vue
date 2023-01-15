@@ -49,6 +49,13 @@
             >
               <el-switch v-model="globalStore.handle_svg_info.info.state.OnOff.default"></el-switch>
             </el-form-item>
+            <el-form-item
+              label="文字插槽"
+              size="small"
+              v-if="globalStore.handle_svg_info.info.tag_slot"
+            >
+              <el-input v-model="globalStore.handle_svg_info.info.tag_slot" />
+            </el-form-item>
             <dynamic-el-form-item
               :obj-info="globalStore.handle_svg_info.info.props"
             ></dynamic-el-form-item>

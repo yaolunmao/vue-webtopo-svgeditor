@@ -1,5 +1,5 @@
 import { ELineBindAnchors } from '@/config-center/system/types';
-import { IConfigItem } from '@/config-center/types';
+import { EDoneJsonType, IConfigItem } from '@/config-center/types';
 import type { IDoneJson } from '@/store/global/types';
 
 /**
@@ -122,8 +122,29 @@ export const setSvgActualInfo = (done_json: IDoneJson) => {
   const queryBbox = document.querySelector(`#${done_json.id}`);
   // const rectBBox = document.querySelector(`#rect${done_json.id}`);
   if (queryBbox) {
-    const BBox = (queryBbox as SVGGraphicsElement).getBBox();
-    const { x, y, width, height } = BBox;
+    let x = 0,
+      y = 0,
+      width = 0,
+      height = 0;
+    if (done_json.type !== EDoneJsonType.Vue) {
+      const BBox = (queryBbox as SVGGraphicsElement).getBBox();
+      x = BBox.x;
+      y = BBox.y;
+      (width = BBox.width), (height = BBox.height);
+    } else {
+      (width = (queryBbox as HTMLElement).offsetWidth),
+        (height = (queryBbox as HTMLElement).offsetHeight);
+      x = 50 - width / 2;
+      y = 50 - height / 2;
+      const foreignObjectBox = document.querySelector(`#foreign-object${done_json.id}`);
+      if (foreignObjectBox) {
+        foreignObjectBox.setAttribute('x', x.toString());
+        foreignObjectBox.setAttribute('y', y.toString());
+        foreignObjectBox.setAttribute('width', width.toString());
+        foreignObjectBox.setAttribute('height', height.toString());
+      }
+    }
+
     // rectBBox.setAttribute('x', x.toString());
     // rectBBox.setAttribute('y', y.toString());
     // rectBBox.setAttribute('width', width.toString());

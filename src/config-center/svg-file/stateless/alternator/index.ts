@@ -13,7 +13,7 @@ export const alternator_svg_file: IConfigItem = {
     fill: {
       title: '填充色',
       type: EConfigItemPropsType.Color,
-      val: '#ff0000'
+      val: '#00ff00'
     }
   }
 };

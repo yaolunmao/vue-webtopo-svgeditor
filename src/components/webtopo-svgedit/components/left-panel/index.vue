@@ -51,7 +51,13 @@
   const globalStore = useGlobalStore();
   const select_lib = ref('svg文件');
   const config_center = ref<IConfigComponentGroup[]>(globalStore.config_center.svg文件);
-  const activeNames = ref(['stateful', 'stateless', 'have_animation', 'custom_svg_group']);
+  const activeNames = ref([
+    'stateful',
+    'stateless',
+    'have_animation',
+    'custom_svg_group',
+    'element-ui'
+  ]);
   const libChange = (val: any) => {
     config_center.value = [];
     config_center.value = val;
