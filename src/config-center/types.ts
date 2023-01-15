@@ -22,6 +22,7 @@ export interface IConfigItem {
   type: EDoneJsonType;
   config: IDoneJsonConfig;
   animations?: IConfigItemProps;
+  tag?: any;
 }
 export interface IConfigItemProps {
   [key: string]: {
@@ -50,10 +51,14 @@ export enum EConfigItemPropsType {
 export enum EDoneJsonType {
   File = 'File',
   StraightLine = 'StraightLine',
-  ConnectionLine = 'ConnectionLine'
+  ConnectionLine = 'ConnectionLine',
+  CustomSvg = 'CustomSvg'
 }
 interface IDoneJsonConfig {
   can_zoom: boolean;
   have_anchor: boolean;
   actual_rect: boolean;
+}
+export interface IComponentImport {
+  [key: string]: any;
 }

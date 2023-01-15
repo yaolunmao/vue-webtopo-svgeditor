@@ -1,4 +1,5 @@
 import { ELineBindAnchors } from '@/config-center/system/types';
+import type { IConfigItemProps } from '@/config-center/types';
 import type { IDoneJson } from '@/store/global/types';
 
 /**
@@ -229,4 +230,11 @@ export const setAfterRotationPointCoordinate = (item: IDoneJson) => {
       item.rotate
     )
   };
+};
+export const prosToVBind = (props: IConfigItemProps) => {
+  let temp = {};
+  for (const key in props) {
+    temp = { ...temp, ...{ [key]: props[key].val } };
+  }
+  return temp;
 };

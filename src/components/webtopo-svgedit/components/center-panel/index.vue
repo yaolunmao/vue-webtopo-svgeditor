@@ -49,7 +49,7 @@
             <use
               v-else-if="item.type === EDoneJsonType.File"
               :xlink:href="`#svg-${item.name}`"
-              :fill="item.props.fill.val"
+              v-bind="prosToVBind(item.props)"
               width="100"
               height="100"
               :id="item.id"
@@ -60,6 +60,20 @@
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
             ></use>
+            <component
+              v-else-if="item.type === EDoneJsonType.CustomSvg"
+              :is="item.tag"
+              v-bind="prosToVBind(item.props)"
+              width="100"
+              height="100"
+              :id="item.id"
+              :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+                item.actual_bound.y + item.actual_bound.height / 2
+              }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+                item.actual_bound.x +
+                item.actual_bound.width / 2
+              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+            ></component>
             <line
               v-else-if="item.type === EDoneJsonType.StraightLine"
               :id="item.id"
@@ -135,7 +149,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { computed, reactive } from 'vue';
+  import { computed, getCurrentInstance, reactive } from 'vue';
   import { useConfigStore } from '@/store/config';
   import { useGlobalStore } from '@/store/global';
   import {
@@ -145,7 +159,14 @@
     IDoneJson
   } from '@/store/global/types';
   import { useSvgEditLayoutStore } from '@/store/svgedit-layout';
-  import { getCenterPoint, randomString, getSvgNowPosition, setSvgActualInfo } from '@/utils';
+  import {
+    getCenterPoint,
+    randomString,
+    getSvgNowPosition,
+    setSvgActualInfo,
+    prosToVBind,
+    objectDeepClone
+  } from '@/utils';
   import {
     calculateBottom,
     calculateLeft,
@@ -158,10 +179,18 @@
   } from '@/utils/scale-core';
   import HandlePanel from '@/components/webtopo-svgedit/components/handle-panel/index.vue';
   import ConnectionPanel from '@/components/webtopo-svgedit/components/connection-panel/index.vue';
-  import { EDoneJsonType } from '@/config-center/types';
+  import { EDoneJsonType, IConfigItem } from '@/config-center/types';
   import ConnectionLine from '@/components/webtopo-svgedit/components/connection-line/index.vue';
   import { IVisiableInfo } from './types';
+  import { ComponentImport } from '@/config-center';
   // import HandlePanel from '../handle-panel/index.vue';
+  //注册所有组件
+  const instance = getCurrentInstance();
+  Object.keys(ComponentImport).forEach((key) => {
+    if (!Object.keys(instance?.appContext?.components as any).includes(key)) {
+      instance?.appContext.app.component(key, ComponentImport[key]);
+    }
+  });
   const globalStore = useGlobalStore();
   const configStore = useConfigStore();
   const svgEditLayoutStore = useSvgEditLayoutStore();
@@ -245,7 +274,7 @@
             y: 0
           }
         },
-        ...globalStore.create_svg_info
+        ...objectDeepClone<IConfigItem>(globalStore.create_svg_info)
       };
       globalStore.setHandleSvgInfo(done_item_json, globalStore.done_json.length);
       globalStore.setDoneJson(done_item_json);
