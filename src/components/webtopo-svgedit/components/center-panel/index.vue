@@ -369,8 +369,8 @@
       globalStore.handle_svg_info.info.x = globalStore.mouse_info.new_position_x;
       globalStore.handle_svg_info.info.y = globalStore.mouse_info.new_position_y;
       globalStore.handle_svg_info.info.client = {
-        x: clientX,
-        y: clientY
+        x: globalStore.mouse_info.new_position_x,
+        y: globalStore.mouse_info.new_position_y
       };
       globalStore.intention = EGlobalStoreIntention.Move;
     } else if (globalStore.intention == EGlobalStoreIntention.MoveCanvas) {
@@ -558,7 +558,7 @@
       };
     }
   };
-  const onCanvasMouseUp = (e: MouseEvent) => {
+  const onCanvasMouseUp = () => {
     //如果鼠标不是按下状态
     if (globalStore.mouse_info.state != EMouseInfoState.Down) {
       return;
@@ -576,14 +576,15 @@
       globalStore.handle_svg_info?.info &&
       globalStore.intention == EGlobalStoreIntention.Zoom
     ) {
-      //缩放完成后重置中点
-      const newCenterPoint = getCenterPoint(
-        { x: e.clientX, y: e.clientY },
-        globalStore.scale_info.symmetric_point
-      );
-      //这里有bug 要先把移动的时候不根据中点放大 这里才好用
-      console.log(newCenterPoint);
-      globalStore.handle_svg_info.info.client = newCenterPoint;
+      //缩放完成后重置中点 新版本中点就是组件坐标
+      // const newCenterPoint = getCenterPoint(
+      //   { x: e.clientX, y: e.clientY },
+      //   globalStore.scale_info.symmetric_point
+      // );
+      globalStore.handle_svg_info.info.client = {
+        x: globalStore.handle_svg_info.info.x,
+        y: globalStore.handle_svg_info.info.y
+      };
       globalStore.intention = EGlobalStoreIntention.None;
       setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
     } else if (
