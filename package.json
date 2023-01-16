@@ -10,9 +10,11 @@
     "postinstall": "husky install"
   },
   "dependencies": {
+    "echarts": "^5.4.1",
     "element-plus": "^2.2.9",
     "pinia": "^2.0.16",
     "vue": "^3.2.25",
+    "vue-echarts": "^6.5.1",
     "vue-router": "4"
   },
   "devDependencies": {

@@ -66,7 +66,7 @@ export const useGlobalStore = defineStore('global-store', {
       this.create_svg_info = create_svg_info;
     },
     setDoneJson(done_json: IDoneJson[] | IDoneJson) {
-      console.log('这里要记录操作历史记录');
+      console.log('这里要记录操作历史记录', done_json);
       if (isOfType(done_json, 'id')) {
         this.done_json.push(done_json);
         nextTick(() => {

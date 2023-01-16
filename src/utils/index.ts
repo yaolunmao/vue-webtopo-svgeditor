@@ -120,7 +120,7 @@ export const objectDeepClone = <T>(object: object, default_val: any = {}) => {
  */
 export const setSvgActualInfo = (done_json: IDoneJson) => {
   const queryBbox = document.querySelector(`#${done_json.id}`);
-  // const rectBBox = document.querySelector(`#rect${done_json.id}`);
+  const rectBBox = document.querySelector(`#rect${done_json.id}`);
   if (queryBbox) {
     let x = 0,
       y = 0,
@@ -134,22 +134,46 @@ export const setSvgActualInfo = (done_json: IDoneJson) => {
     } else {
       (width = (queryBbox as HTMLElement).offsetWidth),
         (height = (queryBbox as HTMLElement).offsetHeight);
+      width = width === 0 ? 100 : width;
+      height = height === 0 ? 100 : height;
       x = 50 - width / 2;
       y = 50 - height / 2;
       const foreignObjectBox = document.querySelector(`#foreign-object${done_json.id}`);
-      if (foreignObjectBox) {
+      if (
+        foreignObjectBox &&
+        foreignObjectBox.getAttribute('x') === '0' &&
+        foreignObjectBox.getAttribute('y') === '0' &&
+        foreignObjectBox.getAttribute('width') === '0' &&
+        foreignObjectBox.getAttribute('height') === '0'
+      ) {
         foreignObjectBox.setAttribute('x', x.toString());
         foreignObjectBox.setAttribute('y', y.toString());
         foreignObjectBox.setAttribute('width', width.toString());
         foreignObjectBox.setAttribute('height', height.toString());
       }
     }
-
-    // rectBBox.setAttribute('x', x.toString());
-    // rectBBox.setAttribute('y', y.toString());
-    // rectBBox.setAttribute('width', width.toString());
-    // rectBBox.setAttribute('height', height.toString());
-    done_json.actual_bound = { x, y, width, height };
+    if (
+      rectBBox &&
+      rectBBox.getAttribute('x') === '0' &&
+      rectBBox.getAttribute('y') === '0' &&
+      rectBBox.getAttribute('width') === '0' &&
+      rectBBox.getAttribute('height') === '0'
+    ) {
+      console.log(rectBBox.getAttribute('x'), 168);
+      rectBBox.setAttribute('x', x.toString());
+      rectBBox.setAttribute('y', y.toString());
+      rectBBox.setAttribute('width', width.toString());
+      rectBBox.setAttribute('height', height.toString());
+    }
+    //实际大小和坐标理论上不会变 但是如果子组件设置了100% 还是会变 所以要做下判断
+    if (
+      done_json.actual_bound.x === 0 &&
+      done_json.actual_bound.y === 0 &&
+      done_json.actual_bound.width === 0 &&
+      done_json.actual_bound.height === 0
+    ) {
+      done_json.actual_bound = { x, y, width, height };
+    }
     done_json.point_coordinate.tl = {
       x: done_json.x - (width * done_json.scale_x) / 2,
       y: done_json.y - (height * done_json.scale_y) / 2

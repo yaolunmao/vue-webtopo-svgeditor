@@ -76,8 +76,7 @@
             ></component>
             <foreignObject
               v-else-if="item.type === EDoneJsonType.Vue"
-              width="100"
-              height="100"
+              v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
               :id="`foreign-object${item.id}`"
             >
               <component
@@ -110,18 +109,7 @@
               :id="`rect${item.id}`"
               fill="black"
               fill-opacity="0"
-              :x="
-                item.actual_bound.x -
-                (item.actual_bound.width / 2) * item.scale_x +
-                item.actual_bound.width / 2
-              "
-              :y="
-                item.actual_bound.y -
-                (item.actual_bound.height / 2) * item.scale_y +
-                item.actual_bound.height / 2
-              "
-              :width="item.actual_bound.width * item.scale_x"
-              :height="item.actual_bound.height * item.scale_y"
+              v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
               style="stroke: none; stroke-width: 2; stroke-miterlimit: 10"
               :class="`${
                 globalStore.intention == EGlobalStoreIntention.None ||
@@ -665,6 +653,23 @@
    */
   const onCanvasContextMenuEvent = (e: MouseEvent) => {
     e.preventDefault(); //禁用浏览器右键
+  };
+  const getActualBoundScale = (
+    actual_bound: {
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+    },
+    scale_x: number,
+    scale_y: number
+  ) => {
+    return {
+      x: actual_bound.x - (actual_bound.width / 2) * scale_x + actual_bound.width / 2,
+      y: actual_bound.y - (actual_bound.height / 2) * scale_y + actual_bound.height / 2,
+      width: actual_bound.width * scale_x,
+      height: actual_bound.height * scale_y
+    };
   };
 </script>
 <style lang="less" scoped>

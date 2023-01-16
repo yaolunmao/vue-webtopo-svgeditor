@@ -56,7 +56,9 @@
     'stateless',
     'have_animation',
     'custom_svg_group',
-    'element-ui'
+    'element-ui',
+    'custom-vue',
+    'echarts'
   ]);
   const libChange = (val: any) => {
     config_center.value = [];
