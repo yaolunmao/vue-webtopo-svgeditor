@@ -158,7 +158,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { computed, getCurrentInstance, reactive } from 'vue';
+  import { computed, getCurrentInstance, onMounted, reactive } from 'vue';
   import { useConfigStore } from '@/store/config';
   import { useGlobalStore } from '@/store/global';
   import {
@@ -673,6 +673,9 @@
       height: actual_bound.height * scale_y
     };
   };
+  onMounted(() => {
+    globalStore.setDoneJson([]);
+  });
 </script>
 <style lang="less" scoped>
   .canvas {

@@ -13,14 +13,28 @@
     </div>
     <div class="flex justify-between" style="width: calc(100% - 440px)">
       <div class="flex items-center">
-        <el-icon title="撤销" :size="20" :class="'icon-normal'" class="ml-20px">
+        <el-icon
+          title="撤销"
+          :size="20"
+          :class="`${
+            edit_private_store.getTopBtnUndoStatus ? 'icon-normal' : 'icon-disable'
+          } ml-20px`"
+          @click="() => edit_private_store.topUndoBtnClick()"
+        >
           <svg-analysis name="undo"></svg-analysis>
         </el-icon>
-        <el-icon title="重做" class="ml-5px" :class="'icon-disable'" :size="20">
+        <el-icon
+          title="重做"
+          :class="`${
+            edit_private_store.getTopBtnRedoStatus ? 'icon-normal' : 'icon-disable'
+          } ml-5px`"
+          :size="20"
+          @click="() => edit_private_store.topRedoBtnClick()"
+        >
           <svg-analysis name="redo"></svg-analysis>
         </el-icon>
         <el-divider direction="vertical"></el-divider>
-        <el-icon title="清空" class="icon-normal" :size="20">
+        <el-icon title="清空" class="icon-normal" :size="20" @click="onDeleteBtnClick">
           <svg-analysis name="delete"></svg-analysis>
         </el-icon>
         <el-divider direction="vertical"></el-divider>
@@ -66,10 +80,17 @@
   </div>
 </template>
 <script setup lang="ts">
+  import { useGlobalStore } from '@/store/global';
+  import { useEditPrivateStore } from '@/store/system';
   import { ElIcon, ElDivider } from 'element-plus';
   import SvgAnalysis from '../../../../components/svg-analysis/index.vue';
   import { useSvgEditLayoutStore } from '../../../../store/svgedit-layout';
   const svgEditLayoutStore = useSvgEditLayoutStore();
+  const globalStore = useGlobalStore();
+  const edit_private_store = useEditPrivateStore();
+  const onDeleteBtnClick = () => {
+    globalStore.setDoneJson([]);
+  };
 </script>
 <style scoped lang="less">
   .logoimg {
