@@ -18,6 +18,7 @@ export interface IConfigCenter {
 export interface IConfigItem {
   name: string;
   title: string;
+  display: boolean;
   props: IConfigItemProps;
   type: EDoneJsonType;
   config: IDoneJsonConfig;

@@ -10,6 +10,7 @@ export const straight_line_system: ISystemStraightLine = Object.seal({
     have_anchor: false,
     actual_rect: false
   },
+  display: true,
   props: {
     fill: {
       title: '填充色',
@@ -51,6 +52,7 @@ export const connection_line_system: ISystemStraightLine = Object.freeze({
     have_anchor: false,
     actual_rect: false
   },
+  display: true,
   props: {
     stroke: {
       title: '线条颜色',

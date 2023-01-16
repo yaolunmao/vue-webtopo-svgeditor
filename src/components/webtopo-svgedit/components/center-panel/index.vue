@@ -27,6 +27,7 @@
           v-for="(item, index) in globalStore.done_json"
           :key="item.id"
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
+          v-show="item.display"
         >
           <g
             :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${

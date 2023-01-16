@@ -9,6 +9,7 @@ export const alternator_svg_file: IConfigItem = {
     have_anchor: true,
     actual_rect: true
   },
+  display: true,
   props: {
     fill: {
       title: '填充色',

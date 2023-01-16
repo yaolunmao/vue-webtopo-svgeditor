@@ -9,6 +9,7 @@ export const circuit_breaker_svg_file: IConfigItem = {
     have_anchor: true,
     actual_rect: true
   },
+  display: true,
   props: {},
   state: {
     OnOff: {

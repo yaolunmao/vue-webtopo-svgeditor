@@ -10,5 +10,6 @@ export const pie_charts: IConfigItem = {
     have_anchor: true,
     actual_rect: true
   },
+  display: true,
   props: {}
 };

@@ -10,6 +10,7 @@ export const custom_vue_common_table: IConfigItem = {
     have_anchor: true,
     actual_rect: true
   },
+  display: true,
   props: {
     'col-config': {
       title: '列配置',

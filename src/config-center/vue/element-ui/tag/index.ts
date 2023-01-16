@@ -10,6 +10,7 @@ export const el_tag_vue: IConfigItem = {
     have_anchor: true,
     actual_rect: true
   },
+  display: true,
   props: {
     type: {
       title: '类型',

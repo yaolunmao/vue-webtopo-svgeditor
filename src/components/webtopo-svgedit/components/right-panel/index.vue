@@ -42,6 +42,9 @@
             <el-form-item label="y轴坐标" size="small">
               <el-input-number v-model="globalStore.handle_svg_info.info.y"></el-input-number>
             </el-form-item>
+            <el-form-item label="显示" size="small">
+              <el-switch v-model="globalStore.handle_svg_info.info.display"></el-switch>
+            </el-form-item>
             <el-form-item
               :label="globalStore.handle_svg_info.info.state?.OnOff.title"
               size="small"

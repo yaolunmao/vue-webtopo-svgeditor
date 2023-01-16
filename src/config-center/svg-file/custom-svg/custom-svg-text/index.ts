@@ -5,6 +5,7 @@ export const custom_svg_text: IConfigItem = {
   title: '文字',
   tag: 'custom-svg-text',
   type: EDoneJsonType.CustomSvg,
+  display: true,
   config: {
     can_zoom: true,
     have_anchor: true,

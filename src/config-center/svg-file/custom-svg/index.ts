@@ -1,4 +1,4 @@
-import { IConfigComponentGroup } from '../types';
+import { IConfigComponentGroup } from '../../types';
 import { custom_svg_text } from './custom-svg-text';
 
 export const custom_svg_group: IConfigComponentGroup = {

@@ -10,6 +10,7 @@ export const el_button_vue: IConfigItem = {
     have_anchor: true,
     actual_rect: true
   },
+  display: true,
   props: {
     size: {
       title: '尺寸',
