@@ -76,22 +76,31 @@ export const useGlobalStore = defineStore('global-store', {
       } else {
         this.done_json = objectDeepClone<IDoneJson[]>(done_json);
       }
-      const edit_private_store = useEditPrivateStore();
-      if (edit_private_store.is_record_history) {
-        if (
-          edit_private_store.history_nowindex + 1 <
-          edit_private_store.history_doneComponent.length
-        ) {
-          edit_private_store.history_doneComponent.splice(edit_private_store.history_nowindex + 1);
-        }
-        edit_private_store.history_doneComponent.push(objectDeepClone<IDoneJson[]>(this.done_json));
-        edit_private_store.history_nowindex = edit_private_store.history_doneComponent.length - 1;
-        if (edit_private_store.history_doneComponent.length > 10) {
-          edit_private_store.history_doneComponent.shift();
+      nextTick(() => {
+        const edit_private_store = useEditPrivateStore();
+        if (edit_private_store.is_record_history) {
+          if (
+            edit_private_store.history_nowindex + 1 <
+            edit_private_store.history_doneComponent.length
+          ) {
+            edit_private_store.history_doneComponent.splice(
+              edit_private_store.history_nowindex + 1
+            );
+          }
+          edit_private_store.history_doneComponent.push(
+            objectDeepClone<IDoneJson[]>(this.done_json)
+          );
           edit_private_store.history_nowindex = edit_private_store.history_doneComponent.length - 1;
+          if (
+            edit_private_store.history_doneComponent.length > edit_private_store.max_record_times
+          ) {
+            edit_private_store.history_doneComponent.shift();
+            edit_private_store.history_nowindex =
+              edit_private_store.history_doneComponent.length - 1;
+          }
         }
-      }
-      edit_private_store.is_record_history = true;
+        edit_private_store.is_record_history = true;
+      });
     },
     setMouseInfo(mouse_info: IMouseInfo) {
       this.mouse_info = mouse_info;

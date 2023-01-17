@@ -237,8 +237,8 @@
         x: e.clientX - svgEditLayoutStore.center_offset.x,
         y: e.clientY - svgEditLayoutStore.center_offset.y,
         client: {
-          x: e.clientX,
-          y: e.clientY
+          x: e.clientX - svgEditLayoutStore.center_offset.x,
+          y: e.clientY - svgEditLayoutStore.center_offset.y
         },
         scale_x: 1,
         scale_y: 1,
@@ -384,8 +384,8 @@
       }
       //当前鼠标坐标
       const curPositon = {
-        x: e.clientX,
-        y: e.clientY
+        x: e.clientX - svgEditLayoutStore.center_offset.x,
+        y: e.clientY - svgEditLayoutStore.center_offset.y
       };
       let new_length = {
         width: 0,
@@ -514,8 +514,8 @@
         (Math.PI / 180);
       const rotateDegreeAfter =
         Math.atan2(
-          clientY - globalStore.handle_svg_info.info.client.y,
-          clientX - globalStore.handle_svg_info.info.client.x
+          clientY - svgEditLayoutStore.center_offset.y - globalStore.handle_svg_info.info.client.y,
+          clientX - svgEditLayoutStore.center_offset.x - globalStore.handle_svg_info.info.client.x
         ) /
         (Math.PI / 180);
       globalStore.handle_svg_info.info.rotate =
@@ -572,6 +572,8 @@
       // globalStore.setDoneJson(globalStore.done_json);
       setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
       globalStore.intention = EGlobalStoreIntention.Select;
+      //记录历史记录
+      globalStore.setDoneJson(globalStore.done_json);
       // globalStore.setHandleSvgInfo(undefined, 0);
     } else if (
       globalStore.handle_svg_info?.info &&
@@ -588,17 +590,20 @@
       };
       globalStore.intention = EGlobalStoreIntention.None;
       setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
+      //记录历史记录
+      globalStore.setDoneJson(globalStore.done_json);
     } else if (
       globalStore.intention === EGlobalStoreIntention.Rotate &&
       globalStore.handle_svg_info?.info
     ) {
       setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
+      //记录历史记录
+      globalStore.setDoneJson(globalStore.done_json);
     } else if (globalStore.intention === EGlobalStoreIntention.Connection) {
       return;
     } else if (globalStore.intention != EGlobalStoreIntention.Select) {
       globalStore.intention = EGlobalStoreIntention.None;
     }
-
     globalStore.setMouseInfo({
       state: EMouseInfoState.Up,
       position_x: 0,

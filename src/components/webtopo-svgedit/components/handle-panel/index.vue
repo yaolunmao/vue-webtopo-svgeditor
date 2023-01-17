@@ -113,6 +113,7 @@
   </g>
 </template>
 <script lang="ts" setup>
+  import { useSvgEditLayoutStore } from '@/store/svgedit-layout';
   import { PropType, ref } from 'vue';
   import { useGlobalStore } from '../../../../store/global/index.js';
   import {
@@ -129,6 +130,7 @@
     }
   });
   const globalStore = useGlobalStore();
+  const svgEditLayoutStore = useSvgEditLayoutStore();
   const offset = ref(4);
   const fill = ref('#4F80FF');
   const angle_to_cursor = [
@@ -148,10 +150,10 @@
     globalStore.intention = EGlobalStoreIntention.Zoom;
     globalStore.setMouseInfo({
       state: EMouseInfoState.Down,
-      position_x: clientX,
-      position_y: clientY,
-      now_position_x: clientX,
-      now_position_y: clientY,
+      position_x: clientX - svgEditLayoutStore.center_offset.x,
+      position_y: clientY - svgEditLayoutStore.center_offset.y,
+      now_position_x: clientX - svgEditLayoutStore.center_offset.x,
+      now_position_y: clientY - svgEditLayoutStore.center_offset.y,
       new_position_x: 0,
       new_position_y: 0
     });
@@ -168,11 +170,12 @@
       symmetric_point: {
         x:
           props.itemInfo.client.x +
-          Math.abs(clientX - props.itemInfo.client.x) *
-            (clientX < props.itemInfo.client.x ? 1 : -1),
+          Math.abs(clientX - svgEditLayoutStore.center_offset.x - props.itemInfo.client.x) *
+            (clientX - svgEditLayoutStore.center_offset.x < props.itemInfo.client.x ? 1 : -1),
         y:
           props.itemInfo.client.y +
-          Math.abs(clientY - props.itemInfo.client.y) * (clientY < props.itemInfo.client.y ? 1 : -1)
+          Math.abs(clientY - svgEditLayoutStore.center_offset.y - props.itemInfo.client.y) *
+            (clientY - svgEditLayoutStore.center_offset.y < props.itemInfo.client.y ? 1 : -1)
       }
     });
   };
@@ -185,10 +188,10 @@
     };
     globalStore.setMouseInfo({
       state: EMouseInfoState.Down,
-      position_x: clientX,
-      position_y: clientY,
-      now_position_x: clientX,
-      now_position_y: clientY,
+      position_x: clientX - svgEditLayoutStore.center_offset.x,
+      position_y: clientY - svgEditLayoutStore.center_offset.y,
+      now_position_x: clientX - svgEditLayoutStore.center_offset.x,
+      now_position_y: clientY - svgEditLayoutStore.center_offset.y,
       new_position_x: 0,
       new_position_y: 0
     });

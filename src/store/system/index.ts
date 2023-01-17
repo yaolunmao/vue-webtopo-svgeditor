@@ -11,7 +11,8 @@ export const useEditPrivateStore = defineStore('edit-private-store', {
       old_done_components: [], //记录预览之前的组件数据
       history_doneComponent: [],
       history_nowindex: 0,
-      is_record_history: true //是否需要记录当前状态，如果是操作的历史记录，则不需要记录
+      is_record_history: true, //是否需要记录当前状态，如果是操作的历史记录，则不需要记录
+      max_record_times: 10
     };
   },
   getters: {

@@ -5,4 +5,5 @@ export interface EditPrivateStoreState {
   history_doneComponent: IDoneJson[][];
   history_nowindex: number;
   is_record_history: boolean;
+  max_record_times: number;
 }
