@@ -10,11 +10,13 @@
           ? props.itemInfo.animations.color.val
           : props.itemInfo.props.stroke.val
       "
-      stroke-width="2"
+      :stroke-width="props.itemInfo.props['stroke-width'].val"
       style="cursor: move"
       stroke-dashoffset="0"
       :stroke-dasharray="
-        props.itemInfo.animations?.type.val === EConfigAnimationsType.Electricity ? 6 : 0
+        props.itemInfo.animations?.type.val === EConfigAnimationsType.Electricity
+          ? props.itemInfo.props['stroke-width'].val * 3
+          : 0
       "
     >
       <animate
@@ -33,8 +35,8 @@
       fill="none"
       fill-opacity="0"
       :stroke="props.itemInfo.animations.color.val"
-      stroke-width="2"
-      stroke-dasharray="6"
+      :stroke-width="props.itemInfo.props['stroke-width'].val"
+      :stroke-dasharray="props.itemInfo.props['stroke-width'].val * 3"
       stroke-dashoffset="0"
       stroke-linecap="round"
     >
@@ -52,7 +54,7 @@
       v-else-if="props.itemInfo.animations?.type.val === EConfigAnimationsType.Track"
       cx="0"
       cy="0"
-      r="5"
+      :r="props.itemInfo.props['stroke-width'].val * 2"
       :fill="props.itemInfo.animations.color.val"
     >
       <animateMotion
@@ -75,7 +77,7 @@
         :key="index"
         :cx="item.x"
         :cy="item.y"
-        r="4"
+        r="6"
         stroke-width="1"
         :stroke="props.itemInfo.props.stroke.val"
         fill="#fff"

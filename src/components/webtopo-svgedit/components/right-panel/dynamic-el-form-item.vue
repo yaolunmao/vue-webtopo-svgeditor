@@ -39,6 +39,12 @@
       v-model="attr_item.val"
       :disabled="attr_item?.disabled"
     ></el-switch>
+    <json-edit
+      v-else-if="attr_item.type === EConfigItemPropsType.JsonEdit"
+      :content-obj="attr_item.val"
+      :disabled="attr_item?.disabled"
+      @update-attr-item-val="(val) => updateAttrItemVal(attr_item, val)"
+    ></json-edit>
   </el-form-item>
 </template>
 <script setup lang="ts">
@@ -53,10 +59,23 @@
     ElSwitch
   } from 'element-plus';
   import { PropType } from 'vue';
+  import JsonEdit from '@/components/webtopo-svgedit/components/right-panel/json-edit.vue';
   const props = defineProps({
     objInfo: {
       type: Object as PropType<IConfigItemProps>,
       default: () => {}
     }
   });
+  const updateAttrItemVal = (
+    attr_item: {
+      title: string;
+      type: EConfigItemPropsType;
+      val: any;
+      options?: any;
+      disabled?: boolean | undefined;
+    },
+    val: any
+  ) => {
+    attr_item.val = val;
+  };
 </script>

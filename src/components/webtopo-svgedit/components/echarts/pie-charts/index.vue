@@ -1,5 +1,5 @@
 <template>
-  <v-chart ref="pieChartRef" class="chart" :option="option" autoresize />
+  <v-chart class="chart" :option="option" autoresize />
 </template>
 
 <script lang="ts" setup>
@@ -8,14 +8,29 @@
   import { PieChart } from 'echarts/charts';
   import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components';
   import VChart, { THEME_KEY } from 'vue-echarts';
-  import { ref, provide } from 'vue';
+  import { watch, provide, reactive } from 'vue';
   use([SVGRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent]);
 
   provide(THEME_KEY, 'dark');
 
-  const option = ref({
+  const props = defineProps({
     title: {
-      text: 'Traffic Sources',
+      type: String,
+      default: '标题'
+    },
+    seriesName: {
+      type: String,
+      default: '详情'
+    },
+    seriesData: {
+      type: Array,
+      default: () => []
+    }
+  });
+
+  const option = reactive({
+    title: {
+      text: props.title,
       left: 'center'
     },
     tooltip: {
@@ -24,22 +39,15 @@
     },
     legend: {
       orient: 'vertical',
-      left: 'left',
-      data: ['Direct', 'Email', 'Ad Networks', 'Video Ads', 'Search Engines']
+      left: 'left'
     },
     series: [
       {
-        name: 'Traffic Sources',
+        name: props.seriesName,
         type: 'pie',
         radius: '55%',
         center: ['50%', '60%'],
-        data: [
-          { value: 335, name: 'Direct' },
-          { value: 310, name: 'Email' },
-          { value: 234, name: 'Ad Networks' },
-          { value: 135, name: 'Video Ads' },
-          { value: 1548, name: 'Search Engines' }
-        ],
+        data: props.seriesData,
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
@@ -50,7 +58,11 @@
       }
     ]
   });
-  const pieChartRef = ref();
+  watch(props, (new_val) => {
+    option.title.text = new_val.title;
+    option.series[0].name = new_val.seriesName;
+    option.series[0].data = new_val.seriesData;
+  });
 </script>
 
 <style scoped>

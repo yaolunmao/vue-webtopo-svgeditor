@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header class="top-el-header">
-        <top-panel></top-panel>
+        <top-panel @change-visible="changeVisible" @on-return="emits('onReturn')"></top-panel>
       </el-header>
       <el-container class="middle">
         <el-aside class="side-nav" :class="svgEditLayoutStore.left_nav ? 'show-nav' : 'hide-nav'">
@@ -25,10 +25,46 @@
         <bottom-panel></bottom-panel>
       </el-footer>
     </el-container>
+    <el-dialog v-model="visible_conf.ImportJson" title="导入" width="60%" destroy-on-close>
+      <import-json ref="importJsonRef"></import-json>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" @click="onImportJson">确定</el-button>
+          <el-button type="primary" @click="visible_conf.ImportJson = false">关闭</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <el-dialog v-model="visible_conf.ExportJson" title="导出" width="60%" destroy-on-close>
+      <export-json></export-json>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" @click="visible_conf.ExportJson = false">关闭</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <el-drawer
+      v-if="visible_conf.ComponentTree"
+      v-model="visible_conf.ComponentTree"
+      title="组件树"
+      direction="ltr"
+      size="30%"
+    >
+      <component-tree></component-tree>
+    </el-drawer>
   </div>
 </template>
 <script setup lang="ts">
-  import { ElContainer, ElHeader, ElAside, ElFooter, ElMain, ElScrollbar } from 'element-plus';
+  import {
+    ElContainer,
+    ElHeader,
+    ElAside,
+    ElFooter,
+    ElMain,
+    ElScrollbar,
+    ElDialog,
+    ElButton,
+    ElDrawer
+  } from 'element-plus';
   import 'element-plus/dist/index.css';
   import TopPanel from './components/top-panel/index.vue';
   import LeftPanel from './components/left-panel/index.vue';
@@ -36,7 +72,27 @@
   import RightPanel from './components/right-panel/index.vue';
   import BottomPanel from './components/bottom-panel/index.vue';
   import { useSvgEditLayoutStore } from '../../store/svgedit-layout';
+  import { reactive, ref } from 'vue';
+  import ExportJson from '@/components/webtopo-svgedit/components/export-json/index.vue';
+  import ImportJson from '@/components/webtopo-svgedit/components/import-json/index.vue';
+  import ComponentTree from '@/components/webtopo-svgedit/components/component-tree/index.vue';
+  import { IVisibleConf, EVisibleConfKey } from './types';
+
   const svgEditLayoutStore = useSvgEditLayoutStore();
+  const importJsonRef = ref<InstanceType<typeof ImportJson>>();
+  const visible_conf: IVisibleConf = reactive({
+    [EVisibleConfKey.ExportJson]: false,
+    [EVisibleConfKey.ImportJson]: false,
+    [EVisibleConfKey.ComponentTree]: false
+  });
+  const emits = defineEmits(['onReturn']);
+  const changeVisible = (key: EVisibleConfKey, val: boolean) => {
+    visible_conf[key] = val;
+  };
+  const onImportJson = () => {
+    importJsonRef.value?.onImportJson();
+    changeVisible(EVisibleConfKey.ImportJson, false);
+  };
 </script>
 <style scoped lang="less">
   @headerHeight: 60px;

@@ -41,14 +41,29 @@
           <svg-analysis name="delete"></svg-analysis>
         </el-icon>
         <el-divider direction="vertical"></el-divider>
-        <el-icon title="组件树" class="icon-normal" :size="20">
+        <el-icon
+          title="组件树"
+          class="icon-normal"
+          :size="20"
+          @click="emits('changeVisible', EVisibleConfKey.ComponentTree, true)"
+        >
           <svg-analysis name="tree-list"></svg-analysis>
         </el-icon>
         <el-divider direction="vertical"></el-divider>
-        <el-icon title="导入json" class="icon-normal" :size="20">
+        <el-icon
+          title="导入数据模型"
+          class="icon-normal"
+          :size="20"
+          @click="emits('changeVisible', EVisibleConfKey.ImportJson, true)"
+        >
           <svg-analysis name="import-json"></svg-analysis>
         </el-icon>
-        <el-icon title="导出json" :size="20" class="icon-normal ml-5px">
+        <el-icon
+          title="导出数据模型"
+          :size="20"
+          class="icon-normal ml-5px"
+          @click="emits('changeVisible', EVisibleConfKey.ExportJson, true)"
+        >
           <svg-analysis name="export-json"></svg-analysis>
         </el-icon>
         <!-- <el-divider direction="vertical"></el-divider>
@@ -65,7 +80,11 @@
         </el-icon> -->
       </div>
       <div class="flex items-center mr-20px">
-        <el-icon title="预览" class="icon-normal" :size="20">
+        <el-icon title="返回" class="icon-normal" :size="20" @click="emits('onReturn')">
+          <svg-analysis name="return"></svg-analysis>
+        </el-icon>
+        <el-divider direction="vertical"></el-divider>
+        <el-icon title="预览" class="icon-normal" :size="20" @click="onPreviewClick">
           <svg-analysis name="preview"></svg-analysis>
         </el-icon>
       </div>
@@ -83,16 +102,33 @@
   </div>
 </template>
 <script setup lang="ts">
+  import { useConfigStore } from '@/store/config';
   import { useGlobalStore } from '@/store/global';
   import { useEditPrivateStore } from '@/store/system';
   import { ElIcon, ElDivider } from 'element-plus';
+  import { useRouter } from 'vue-router';
   import SvgAnalysis from '../../../../components/svg-analysis/index.vue';
   import { useSvgEditLayoutStore } from '../../../../store/svgedit-layout';
+  import { EVisibleConfKey, IDataModel } from '../../types';
+  const router = useRouter();
   const svgEditLayoutStore = useSvgEditLayoutStore();
   const globalStore = useGlobalStore();
   const editPrivateStore = useEditPrivateStore();
+  const configStore = useConfigStore();
+  const emits = defineEmits(['changeVisible', 'onReturn']);
   const onDeleteBtnClick = () => {
     globalStore.done_json.length <= 0 || globalStore.setDoneJson([]);
+  };
+  const onPreviewClick = () => {
+    const data_model: IDataModel = {
+      layout_center: svgEditLayoutStore.center_offset,
+      config: configStore.svg,
+      done_json: globalStore.done_json
+    };
+    router.push({
+      name: 'preview',
+      params: { data_model: JSON.stringify(data_model) }
+    });
   };
 </script>
 <style scoped lang="less">

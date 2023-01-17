@@ -59,6 +59,11 @@ export const connection_line_system: ISystemStraightLine = Object.freeze({
       type: EConfigItemPropsType.Color,
       val: '#ff0000'
     },
+    'stroke-width': {
+      title: '线条宽度',
+      type: EConfigItemPropsType.InputNumber,
+      val: 2
+    },
     point_position: {
       title: '点坐标',
       type: EConfigItemPropsType.JsonEdit,

@@ -571,7 +571,7 @@
         globalStore.mouse_info.new_position_y;
       // globalStore.setDoneJson(globalStore.done_json);
       setSvgActualInfo(globalStore.done_json[globalStore.handle_svg_info.index]);
-      globalStore.intention = EGlobalStoreIntention.Select;
+      globalStore.intention = EGlobalStoreIntention.None;
       //记录历史记录
       globalStore.setDoneJson(globalStore.done_json);
       // globalStore.setHandleSvgInfo(undefined, 0);

@@ -10,12 +10,14 @@
     "postinstall": "husky install"
   },
   "dependencies": {
+    "ace-builds": "^1.14.0",
     "echarts": "^5.4.1",
     "element-plus": "^2.2.9",
     "pinia": "^2.0.16",
     "vue": "^3.2.25",
     "vue-echarts": "^6.5.1",
-    "vue-router": "4"
+    "vue-router": "4",
+    "vue3-ace-editor": "^2.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
