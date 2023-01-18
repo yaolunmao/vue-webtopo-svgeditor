@@ -1,7 +1,11 @@
+<!-- eslint-disable vue/html-indent -->
 <template>
   <div class="flex justify-between" style="width: 100%">
     <div class="flex items-center justify-between" style="width: 220px">
-      <div class="flex items-center"> </div>
+      <div class="flex items-center">
+        <!-- <img title="咬轮猫" class="logoimg" src="../../../../assets/logo.png" /> -->
+        <span class="logo-title">vue-webtopo-svgeditor</span></div
+      >
       <el-icon
         size="22"
         style="cursor: pointer"
@@ -84,6 +88,10 @@
           <svg-analysis name="return"></svg-analysis>
         </el-icon>
         <el-divider direction="vertical"></el-divider>
+        <el-icon title="保存" class="icon-normal" :size="20" @click="onSaveClick">
+          <svg-analysis name="save"></svg-analysis>
+        </el-icon>
+        <el-divider direction="vertical"></el-divider>
         <el-icon title="预览" class="icon-normal" :size="20" @click="onPreviewClick">
           <svg-analysis name="preview"></svg-analysis>
         </el-icon>
@@ -106,16 +114,14 @@
   import { useGlobalStore } from '@/store/global';
   import { useEditPrivateStore } from '@/store/system';
   import { ElIcon, ElDivider } from 'element-plus';
-  import { useRouter } from 'vue-router';
   import SvgAnalysis from '../../../../components/svg-analysis/index.vue';
   import { useSvgEditLayoutStore } from '../../../../store/svgedit-layout';
   import { EVisibleConfKey, IDataModel } from '../../types';
-  const router = useRouter();
   const svgEditLayoutStore = useSvgEditLayoutStore();
   const globalStore = useGlobalStore();
   const editPrivateStore = useEditPrivateStore();
   const configStore = useConfigStore();
-  const emits = defineEmits(['changeVisible', 'onReturn']);
+  const emits = defineEmits(['changeVisible', 'onReturn', 'onPreview', 'onSave']);
   const onDeleteBtnClick = () => {
     globalStore.done_json.length <= 0 || globalStore.setDoneJson([]);
   };
@@ -125,16 +131,21 @@
       config: configStore.svg,
       done_json: globalStore.done_json
     };
-    router.push({
-      name: 'preview',
-      params: { data_model: JSON.stringify(data_model) }
-    });
+    emits('onPreview', data_model);
+  };
+  const onSaveClick = () => {
+    const data_model: IDataModel = {
+      layout_center: svgEditLayoutStore.center_offset,
+      config: configStore.svg,
+      done_json: globalStore.done_json
+    };
+    emits('onSave', data_model);
   };
 </script>
 <style scoped lang="less">
   .logoimg {
     height: 40px;
-    width: 160px;
+    width: 40px;
   }
 
   .logo-title {

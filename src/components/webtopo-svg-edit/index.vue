@@ -2,12 +2,17 @@
   <div>
     <el-container>
       <el-header class="top-el-header">
-        <top-panel @change-visible="changeVisible" @on-return="emits('onReturn')"></top-panel>
+        <top-panel
+          @change-visible="changeVisible"
+          @on-return="emits('onReturn')"
+          @on-preview="(val) => emits('onPreview', val)"
+          @on-save="(val) => emits('onSave', val)"
+        ></top-panel>
       </el-header>
       <el-container class="middle">
         <el-aside class="side-nav" :class="svgEditLayoutStore.left_nav ? 'show-nav' : 'hide-nav'">
           <el-scrollbar class="elscrooll-pc">
-            <left-panel class="content-left"></left-panel>
+            <left-panel class="content-left" :custom-tool-bar="props.customToolBar"></left-panel>
           </el-scrollbar>
         </el-aside>
         <el-main class="middle main">
@@ -72,12 +77,25 @@
   import RightPanel from './components/right-panel/index.vue';
   import BottomPanel from './components/bottom-panel/index.vue';
   import { useSvgEditLayoutStore } from '../../store/svgedit-layout';
-  import { reactive, ref } from 'vue';
-  import ExportJson from '@/components/webtopo-svgedit/components/export-json/index.vue';
-  import ImportJson from '@/components/webtopo-svgedit/components/import-json/index.vue';
-  import ComponentTree from '@/components/webtopo-svgedit/components/component-tree/index.vue';
+  import { onMounted, PropType, reactive, ref } from 'vue';
+  import ExportJson from '@/components/webtopo-svg-edit/components/export-json/index.vue';
+  import ImportJson from '@/components/webtopo-svg-edit/components/import-json/index.vue';
+  import ComponentTree from '@/components/webtopo-svg-edit/components/component-tree/index.vue';
   import { IVisibleConf, EVisibleConfKey } from './types';
-
+  import { IConfigCenter } from '@/config-center/types';
+  import { useImportDataModel } from '@/hooks';
+  import { useGlobalStore } from '@/store/global';
+  const props = defineProps({
+    customToolBar: {
+      type: Object as PropType<IConfigCenter>,
+      default: () => {}
+    },
+    dataModel: {
+      type: String,
+      default: ''
+    }
+  });
+  const globalStore = useGlobalStore();
   const svgEditLayoutStore = useSvgEditLayoutStore();
   const importJsonRef = ref<InstanceType<typeof ImportJson>>();
   const visible_conf: IVisibleConf = reactive({
@@ -85,7 +103,7 @@
     [EVisibleConfKey.ImportJson]: false,
     [EVisibleConfKey.ComponentTree]: false
   });
-  const emits = defineEmits(['onReturn']);
+  const emits = defineEmits(['onReturn', 'onPreview', 'onSave']);
   const changeVisible = (key: EVisibleConfKey, val: boolean) => {
     visible_conf[key] = val;
   };
@@ -93,6 +111,13 @@
     importJsonRef.value?.onImportJson();
     changeVisible(EVisibleConfKey.ImportJson, false);
   };
+  onMounted(() => {
+    if (props.dataModel != '') {
+      useImportDataModel(props.dataModel);
+    } else {
+      globalStore.setDoneJson([]);
+    }
+  });
 </script>
 <style scoped lang="less">
   @headerHeight: 60px;

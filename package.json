@@ -1,13 +1,31 @@
 {
-  "name": "vue-webtopo-svgeditor",
-  "version": "1.0.0",
+  "name": "webtopo-svg-edit",
+  "version": "0.0.2",
+  "description": "基于vue3.2+ts实现的svg可视化web组态编辑器。",
+  "author": "咬轮猫 <10928033@qq.com>",
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/webtopo-svg-edit.es.ts",
+  "main": "./dist/webtopo-svg-edit.umd.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/webtopo-svg-edit.es.ts",
+      "require": "./dist/webtopo-svg-edit.umd.ts"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
   "scripts": {
     "dev": "vite --port 3001",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint:eslint": "eslint --fix --ext .js,.ts,.vue,.tsx ./src",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "lib": "vue-tsc --noEmit --skipLibCheck && vite build --mode lib"
   },
   "dependencies": {
     "ace-builds": "^1.14.0",

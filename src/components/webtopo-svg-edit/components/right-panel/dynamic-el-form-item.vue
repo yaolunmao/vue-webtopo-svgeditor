@@ -59,7 +59,7 @@
     ElSwitch
   } from 'element-plus';
   import { PropType } from 'vue';
-  import JsonEdit from '@/components/webtopo-svgedit/components/right-panel/json-edit.vue';
+  import JsonEdit from '@/components/webtopo-svg-edit/components/right-panel/json-edit.vue';
   const props = defineProps({
     objInfo: {
       type: Object as PropType<IConfigItemProps>,

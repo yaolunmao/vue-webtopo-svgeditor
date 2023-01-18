@@ -5,7 +5,7 @@
       <div class="source-repo">组件库 :</div>
       <el-select v-model="select_lib" placeholder="请选择组件库" @change="libChange">
         <el-option
-          v-for="(item, key) in globalStore.config_center"
+          v-for="(item, key) in left_tool_bar"
           :key="key"
           :label="key"
           :value="item"
@@ -41,16 +41,30 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { PropType, ref } from 'vue';
   import { ElSelect, ElOption, ElCollapse, ElCollapseItem, ElIcon, ElMessage } from 'element-plus';
-  import { IConfigComponentGroup, IConfigItem } from '@/config-center/types';
+  import { IConfigCenter, IConfigComponentGroup, IConfigItem } from '@/config-center/types';
   import { useGlobalStore } from '@/store/global';
   import SvgAnalysis from '@/components/svg-analysis/index.vue';
   import { EGlobalStoreIntention } from '@/store/global/types';
   import { prosToVBind } from '@/utils';
   const globalStore = useGlobalStore();
-  const select_lib = ref('svg文件');
-  const config_center = ref<IConfigComponentGroup[]>(globalStore.config_center.svg文件);
+  const props = defineProps({
+    customToolBar: {
+      type: Object as PropType<IConfigCenter>,
+      default: () => {}
+    }
+  });
+  const left_tool_bar = ref(
+    props.customToolBar
+      ? Object.keys(props.customToolBar).length > 0
+        ? props.customToolBar
+        : globalStore.config_center
+      : globalStore.config_center
+  );
+  const first_key = Object.keys(left_tool_bar.value)[0];
+  const select_lib = ref(first_key);
+  const config_center = ref<IConfigComponentGroup[]>(left_tool_bar.value[first_key]);
   const activeNames = ref([
     'stateful',
     'stateless',

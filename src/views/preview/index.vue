@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts">
   import WebtopoSvgPreview from '@/components/webtopo-svg-preview/index.vue';
-  import { IDataModel } from '@/components/webtopo-svgedit/types';
+  import { IDataModel } from '@/components/webtopo-svg-edit/types';
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
   const route = useRoute();

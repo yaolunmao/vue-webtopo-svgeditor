@@ -96,10 +96,10 @@
   import { prosToVBind } from '@/utils';
 
   import { EDoneJsonType } from '@/config-center/types';
-  import ConnectionLine from '@/components/webtopo-svgedit/components/connection-line/index.vue';
+  import ConnectionLine from '@/components/webtopo-svg-edit/components/connection-line/index.vue';
 
   import { ComponentImport } from '@/config-center';
-  import { IDataModel } from '../webtopo-svgedit/types';
+  import { IDataModel } from '../webtopo-svg-edit/types';
   import 'element-plus/dist/index.css';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件

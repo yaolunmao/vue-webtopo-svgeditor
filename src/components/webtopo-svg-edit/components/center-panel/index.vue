@@ -172,7 +172,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { computed, getCurrentInstance, onMounted, reactive, ref } from 'vue';
+  import { computed, getCurrentInstance, reactive, ref } from 'vue';
   import { useConfigStore } from '@/store/config';
   import { useGlobalStore } from '@/store/global';
   import {
@@ -200,10 +200,10 @@
     calculateRightTop,
     calculateTop
   } from '@/utils/scale-core';
-  import HandlePanel from '@/components/webtopo-svgedit/components/handle-panel/index.vue';
-  import ConnectionPanel from '@/components/webtopo-svgedit/components/connection-panel/index.vue';
+  import HandlePanel from '@/components/webtopo-svg-edit/components/handle-panel/index.vue';
+  import ConnectionPanel from '@/components/webtopo-svg-edit/components/connection-panel/index.vue';
   import { EDoneJsonType, IConfigItem } from '@/config-center/types';
-  import ConnectionLine from '@/components/webtopo-svgedit/components/connection-line/index.vue';
+  import ConnectionLine from '@/components/webtopo-svg-edit/components/connection-line/index.vue';
   import { IVisiableInfo } from './types';
   import { ComponentImport } from '@/config-center';
   import { useContextMenuStore } from '@/store/system';
@@ -720,10 +720,6 @@
       height: actual_bound.height * scale_y
     };
   };
-
-  onMounted(() => {
-    globalStore.setDoneJson([]);
-  });
 </script>
 <style lang="less" scoped>
   .canvas {
