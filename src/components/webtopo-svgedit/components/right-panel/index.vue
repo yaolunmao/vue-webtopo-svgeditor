@@ -14,13 +14,14 @@
           <el-form-item label="y轴原点坐标" size="small">
             <el-input-number v-model="configStore.svg.position_center.y"></el-input-number>
           </el-form-item>
-          <el-form-item label="缩放" size="small">
+          <!-- 基础版不做画布缩放了 有需要自己写吧（^-^）！ -->
+          <!-- <el-form-item label="缩放" size="small">
             <el-input-number
               v-model="configStore.svg.scale"
               :step="0.1"
               step-strictly
             ></el-input-number>
-          </el-form-item>
+          </el-form-item> -->
         </el-form>
       </div>
     </div>

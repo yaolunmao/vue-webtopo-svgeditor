@@ -45,7 +45,8 @@ export enum EGlobalStoreIntention {
   Zoom = 'Zoom',
   Rotate = 'Rotate',
   Connection = 'Connection',
-  SetConnectionLineNode = 'SetConnectionLineNode'
+  SetConnectionLineNode = 'SetConnectionLineNode',
+  ContextMenu = 'ContextMenu'
 }
 export interface IMouseInfo {
   state: EMouseInfoState;

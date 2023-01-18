@@ -12,7 +12,7 @@ import {
   IMouseInfo,
   IScaleInfo
 } from './types';
-import { useEditPrivateStore } from '../system';
+import { useHistoryRecord } from '@/hooks';
 /**
  * 全局共享状态
  */
@@ -67,7 +67,6 @@ export const useGlobalStore = defineStore('global-store', {
       this.create_svg_info = create_svg_info;
     },
     setDoneJson(done_json: IDoneJson[] | IDoneJson) {
-      console.log('这里要记录操作历史记录', done_json);
       if (isOfType(done_json, 'id')) {
         this.done_json.push(done_json);
         nextTick(() => {
@@ -77,29 +76,7 @@ export const useGlobalStore = defineStore('global-store', {
         this.done_json = objectDeepClone<IDoneJson[]>(done_json);
       }
       nextTick(() => {
-        const edit_private_store = useEditPrivateStore();
-        if (edit_private_store.is_record_history) {
-          if (
-            edit_private_store.history_nowindex + 1 <
-            edit_private_store.history_doneComponent.length
-          ) {
-            edit_private_store.history_doneComponent.splice(
-              edit_private_store.history_nowindex + 1
-            );
-          }
-          edit_private_store.history_doneComponent.push(
-            objectDeepClone<IDoneJson[]>(this.done_json)
-          );
-          edit_private_store.history_nowindex = edit_private_store.history_doneComponent.length - 1;
-          if (
-            edit_private_store.history_doneComponent.length > edit_private_store.max_record_times
-          ) {
-            edit_private_store.history_doneComponent.shift();
-            edit_private_store.history_nowindex =
-              edit_private_store.history_doneComponent.length - 1;
-          }
-        }
-        edit_private_store.is_record_history = true;
+        useHistoryRecord(objectDeepClone<IDoneJson[]>(this.done_json));
       });
     },
     setMouseInfo(mouse_info: IMouseInfo) {
@@ -122,6 +99,11 @@ export const useGlobalStore = defineStore('global-store', {
     },
     setScaleInfo(info: IScaleInfo) {
       this.scale_info = info;
+    },
+    spliceDoneJson(index: number) {
+      const globalStore = useGlobalStore();
+      globalStore.done_json.splice(index, 1);
+      useHistoryRecord(globalStore.done_json);
     }
   }
 });

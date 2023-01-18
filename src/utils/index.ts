@@ -159,7 +159,6 @@ export const setSvgActualInfo = (done_json: IDoneJson) => {
       rectBBox.getAttribute('width') === '0' &&
       rectBBox.getAttribute('height') === '0'
     ) {
-      console.log(rectBBox.getAttribute('x'), 168);
       rectBBox.setAttribute('x', x.toString());
       rectBBox.setAttribute('y', y.toString());
       rectBBox.setAttribute('width', width.toString());

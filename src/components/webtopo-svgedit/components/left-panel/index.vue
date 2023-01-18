@@ -63,8 +63,6 @@
   const libChange = (val: any) => {
     config_center.value = [];
     config_center.value = val;
-
-    console.log(val, 71474);
   };
 
   const createBegin = (svg_item: IConfigItem) => {

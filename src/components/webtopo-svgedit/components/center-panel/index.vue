@@ -39,6 +39,7 @@
             @mousedown="onSvgMouseDown(item, index, $event)"
             @mouseenter="onSvgMouseEnter(item, index, $event)"
             @mouseleave="onSvgMouseLeave(item, index, $event)"
+            @contextmenu="onSvgContextMenuEvent(item, index, $event)"
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -155,10 +156,23 @@
         </g>
       </g>
     </svg>
+    <!-- 右键菜单 -->
+    <ul ref="contextMenuRef" class="contextMenu" v-show="contextMenuStore.display">
+      <li
+        v-for="(item, key) in contextMenuStore.info"
+        :key="item.title"
+        @click="contextMenuStore.onContextMenuClick(key)"
+      >
+        <p :class="item.enable ? '' : 'disabled'">
+          {{ item.title }}
+          <span class="shortcut">{{ item.hot_key }}</span>
+        </p>
+      </li>
+    </ul>
   </div>
 </template>
 <script setup lang="ts">
-  import { computed, getCurrentInstance, onMounted, reactive } from 'vue';
+  import { computed, getCurrentInstance, onMounted, reactive, ref } from 'vue';
   import { useConfigStore } from '@/store/config';
   import { useGlobalStore } from '@/store/global';
   import {
@@ -192,6 +206,7 @@
   import ConnectionLine from '@/components/webtopo-svgedit/components/connection-line/index.vue';
   import { IVisiableInfo } from './types';
   import { ComponentImport } from '@/config-center';
+  import { useContextMenuStore } from '@/store/system';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
@@ -203,6 +218,8 @@
   const globalStore = useGlobalStore();
   const configStore = useConfigStore();
   const svgEditLayoutStore = useSvgEditLayoutStore();
+  const contextMenuStore = useContextMenuStore();
+  const contextMenuRef = ref<HTMLElement>();
   const cursor_style = computed(() =>
     globalStore.intention == EGlobalStoreIntention.MoveCanvas
       ? 'grab'
@@ -299,7 +316,6 @@
     e.preventDefault();
   };
   const onSvgMouseDown = (select_item: IDoneJson, index: number, e: MouseEvent) => {
-    console.log('触发选中', e);
     if (globalStore.intention === EGlobalStoreIntention.Connection) {
       return;
     }
@@ -613,9 +629,9 @@
       new_position_x: 0,
       new_position_y: 0
     });
+    contextMenuStore.display = false;
   };
   const onCanvasMouseDown = (e: MouseEvent) => {
-    console.log('onCanvasMouseDown', e);
     const { clientX, clientY } = e;
     if (globalStore.intention === EGlobalStoreIntention.Connection && globalStore.handle_svg_info) {
       if (e.button === 0) {
@@ -661,6 +677,32 @@
   const onCanvasContextMenuEvent = (e: MouseEvent) => {
     e.preventDefault(); //禁用浏览器右键
   };
+  const onSvgContextMenuEvent = (select_item: IDoneJson, index: number, e: MouseEvent) => {
+    if (globalStore.intention === EGlobalStoreIntention.Connection) {
+      return;
+    }
+
+    if (contextMenuRef.value) {
+      globalStore.intention = EGlobalStoreIntention.ContextMenu;
+      globalStore.setHandleSvgInfo(select_item, index);
+      contextMenuRef.value.style.left = e.pageX + 'px';
+      contextMenuRef.value.style.top = e.pageY + 'px';
+      contextMenuStore.info.MoveUpOneLevel.enable =
+        contextMenuStore.info.MoveUpTopLevel.enable =
+        contextMenuStore.info.MoveDownOneLevel.enable =
+        contextMenuStore.info.MoveDownTopLevel.enable =
+          true;
+      if (index === globalStore.done_json.length - 1) {
+        contextMenuStore.info.MoveUpOneLevel.enable = contextMenuStore.info.MoveUpTopLevel.enable =
+          false;
+      }
+      if (index === 0) {
+        contextMenuStore.info.MoveDownOneLevel.enable =
+          contextMenuStore.info.MoveDownTopLevel.enable = false;
+      }
+      contextMenuStore.display = true;
+    }
+  };
   const getActualBoundScale = (
     actual_bound: {
       x: number;
@@ -678,6 +720,7 @@
       height: actual_bound.height * scale_y
     };
   };
+
   onMounted(() => {
     globalStore.setDoneJson([]);
   });
@@ -705,5 +748,57 @@
   .svg-item-select {
     cursor: move;
     outline: 1px solid rgb(23, 222, 30);
+  }
+  .contextMenu {
+    position: absolute;
+    z-index: 99999;
+    background: #ffffff;
+    padding: 5px 0;
+    margin: 0px;
+    display: block;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+
+    li {
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .shortcut {
+      width: 115px;
+      text-align: right;
+      float: right;
+    }
+
+    p {
+      text-decoration: none;
+      display: block;
+      padding: 0px 15px 1px 20px;
+      margin: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    p:hover {
+      background-color: #0cf;
+      color: #ffffff;
+      cursor: default;
+    }
+
+    .disabled {
+      color: #999;
+    }
+
+    .disabled:hover {
+      color: #999;
+      background-color: transparent;
+    }
+
+    li.separator {
+      border-top: solid 1px #e3e3e3;
+      padding-top: 5px;
+      margin-top: 5px;
+    }
   }
 </style>

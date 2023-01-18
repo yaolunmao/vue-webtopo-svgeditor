@@ -7,3 +7,22 @@ export interface EditPrivateStoreState {
   is_record_history: boolean;
   max_record_times: number;
 }
+export interface ContextMenuStoreState {
+  display: boolean;
+  info: {
+    [key in EContextMenuInfoType]: IContextMenuInfo;
+  };
+}
+export interface IContextMenuInfo {
+  title: string;
+  hot_key: string;
+  enable: boolean;
+}
+export enum EContextMenuInfoType {
+  Copy = 'Copy',
+  Delete = 'Delete',
+  MoveUpOneLevel = 'MoveUpOneLevel',
+  MoveDownOneLevel = 'MoveDownOneLevel',
+  MoveUpTopLevel = 'MoveUpTopLevel',
+  MoveDownTopLevel = 'MoveDownTopLevel'
+}
