@@ -299,3 +299,19 @@ export const prosToVBind = (item: IConfigItem) => {
   }
   return temp;
 };
+export const setArrItemByID = (id: string, key: string, val: any, json_arr: IDoneJson[]) => {
+  return new Promise((res) => {
+    const find_item = json_arr.find((f) => f.id === id);
+    if (!find_item) {
+      res({
+        status: false,
+        msg: '要设置的id不存在'
+      });
+    }
+    eval(`find_item.${key} = val;`);
+    res({
+      status: true,
+      msg: '操作成功'
+    });
+  });
+};

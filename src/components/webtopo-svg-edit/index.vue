@@ -85,6 +85,7 @@
   import { IConfigCenter } from '@/config-center/types';
   import { useImportDataModel } from '@/hooks';
   import { useGlobalStore } from '@/store/global';
+  import { IDoneJson } from '@/store/global/types';
   const props = defineProps({
     customToolBar: {
       type: Object as PropType<IConfigCenter>,
@@ -111,12 +112,18 @@
     importJsonRef.value?.onImportJson();
     changeVisible(EVisibleConfKey.ImportJson, false);
   };
+  const setGraphNodeJson = (done_json: IDoneJson[]) => {
+    globalStore.setDoneJson(done_json);
+  };
   onMounted(() => {
     if (props.dataModel != '') {
       useImportDataModel(props.dataModel);
     } else {
       globalStore.setDoneJson([]);
     }
+  });
+  defineExpose({
+    setGraphNodeJson
   });
 </script>
 <style scoped lang="less">

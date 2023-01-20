@@ -93,7 +93,7 @@
   import { getCurrentInstance, PropType, reactive } from 'vue';
   import { useGlobalStore } from '@/store/global';
   import { EGlobalStoreIntention, EMouseInfoState } from '@/store/global/types';
-  import { prosToVBind } from '@/utils';
+  import { prosToVBind, setArrItemByID } from '@/utils';
 
   import { EDoneJsonType } from '@/config-center/types';
   import ConnectionLine from '@/components/webtopo-svg-edit/components/connection-line/index.vue';
@@ -215,6 +215,12 @@
       height: actual_bound.height * scale_y
     };
   };
+  const setNodeAttrByID = (id: string, attr: string, val: any) => {
+    return setArrItemByID(id, attr, val, preview_data.done_json);
+  };
+  defineExpose({
+    setNodeAttrByID
+  });
 </script>
 <style lang="less" scoped>
   .canvas {

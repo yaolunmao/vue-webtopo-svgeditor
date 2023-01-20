@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 export const constantRoutes = [
   {
     path: '/',
-    redirect: '/edit'
+    component: () => import('../views/demo/index.vue')
   },
   {
     name: 'edit',
@@ -13,6 +13,26 @@ export const constantRoutes = [
     name: 'preview',
     path: '/preview',
     component: () => import('../views/preview/index.vue')
+  },
+  {
+    name: 'edit-load',
+    path: '/edit-load',
+    component: () => import('../views/demo/edit-load.vue')
+  },
+  {
+    name: 'custom-toolbar',
+    path: '/custom-toolbar',
+    component: () => import('../views/demo/custom-toolbar.vue')
+  },
+  {
+    name: 'preview-test',
+    path: '/preview-test',
+    component: () => import('../views/demo/preview-test.vue')
+  },
+  {
+    name: 'set-node-attr',
+    path: '/set-node-attr',
+    component: () => import('../views/demo/set-node-attr.vue')
   }
 ];
 const router = createRouter({
