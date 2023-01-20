@@ -4,9 +4,14 @@
 
 
 
-qq交流群：209048413
+预览地址：[http://svg.yaolm.top/](http://svg.yaolm.top/)
+
+`qq`交流群：`209048413`,仅供交流，有问题请提[issue](https://github.com/yaolunmao/vue-webtopo-svgeditor/issues)，以便帮助更多有相同问题的人
+
+历史版本请在本项目其它分支进行查看
 
 ## 项目优点
+
 
 ### 组态软件核心功能都具备
 
@@ -14,64 +19,79 @@ qq交流群：209048413
 
 ### 优越的性能
 
-使用了svg的symbol技术，use方式加载svg图形，同样的svg图形不管数量多少，只会渲染一次
+使用了`svg`的`symbol`技术，`use`方式加载`svg`图形，同样的svg图形不管数量多少，只会渲染一次
 
 ### 学习成本极低
 
-svg文件即组件，引入之后无需进行额外配置，编辑器会自适应解析加载组件，添加自定义组件和传统html无差，前端er零学习成本上手
+`svg`文件即组件，引入之后无需进行额外配置，编辑器会自适应解析加载组件，添加自定义组件和传统`html`无差，前端er零学习成本上手
 
 ### 易拓展
 
-配置文件采用开放式结构，属性支持自定义拓展。图形库支持添加svg文件或者vue组件，定制开发将变得容易
+配置文件采用开放式结构，属性支持自定义拓展。图形库支持添加`svg`文件或者`vue`组件，定制开发将变得容易
 
 ### 易于集成
 
-项目已经编写好了库模式脚本，组件已经发布到npm，支持外部传入自定义组件，支持组件事件订阅等
+项目已经编写好了库模式脚本，组件已经发布到[npm](https://www.npmjs.com/package/webtopo-svg-edit)，支持外部传入自定义组件，支持组件事件订阅等
 
 ### 免费开源
 
-MIT开源协议 可商用
-
-## 项目说明
-
-### 组件库
-
-编写中，敬请期待
-
-### 工具栏
-
-编写中，敬请期待
-
-### 画布
-
-编写中，敬请期待
-
-### 属性面板
-
-编写中，敬请期待
+MIT开源协议 可商用（自带的`svg`文件除外）
 
 
 ## 图形库说明
 
-### 有状态组件
-
-编写中，敬请期待
 
 ### 无状态组件
 
-编写中，敬请期待
+无状态组件就是`svg`文件，编辑器已经将节点的拖动，缩放，旋转等功能封装好了，您无需做出额外配置即可使用，若是需要动态的去设置`svg`的颜色边框之类的，需要自行设置`props`，参考`src\config-center\svg-file\stateless`的配置，可以设置的属性为`svg`的公共属性，例如`fill`、`stroke `、`stroke-dasharray`这些，具体属性请参考[MDN-SVG属性](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute#svg_%E5%B1%9E%E6%80%A7%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%86%E7%B1%BB%EF%BC%89)
+
+### 有状态组件
+
+有状态组件也是svg文件，区别就在于无状态组件控制节点属性的配置配置在`props`上，而有状态组件的配置需要配置到`state`上，有状态组件对比无状态组件的好处是可以改变一个状态去影响多个属性，例如这里的断路器开关，其实是同时改变了颜色和把手的透明度,参考配置：`src\config-center\svg-file\stateful\circuit-breaker\index.ts`
+
+![](./readme-imgs/有状态组件.gif)
 
 ### 自带动画组件
 
-编写中，敬请期待
+没什么好说的了，支持直接使用自带动画的`svg`文件，参考`src\config-center\svg-file\have-animation`
 
 ### 自定义svg
 
-编写中，敬请期待
+本质上就是`vue`的`template`代码片段，它可以完全替代无状态组件和有状态组件，并且可以根据自定义代码实现更多节点和属性的控制，缺点就是需要写代码--！参考`src\config-center\svg-file\custom-svg`
 
 ### vue组件
 
-编写中，敬请期待
+其实和自定义`svg`相似，都是`vue`的`template`代码片段，但是`svg`标签里面无法渲染`html`的代码，所以在最外层用了`foreignObject`进行了包裹，同样支持缩放旋转等操作。参考`src\config-center\vue`
+
+
+
+## 操作说明
+
+### 绘画
+
+选中左侧的组件库，按住鼠标左键即可把组件拖动到画布中
+
+![](./readme-imgs/绘画.gif)
+
+## 操作
+
+选中绘制好的节点后会出现锚点，可以直接进行移动、缩放、旋转等功能，右侧属性面板可以设置配置好的节点的属性，鼠标右键可以进行一些快捷操作
+
+![](./readme-imgs/操作.gif)
+
+### 连线
+
+鼠标移动到组件上时会出现连线锚点，左键点击锚点创建线段，继续左键点击画布会连续创建线段，右键停止创建线段，鼠标放在线段上会出现线段端点提示，拖动即可重新设置连线，选中线段后还可以在右侧的动画面板设置线段的动画效果
+
+![](./readme-imgs/连线.gif)
+
+
+
+## 其他说明
+
+- 若是组件中心点不是鼠标指针点，请自行在页面设置里匹配`x`轴和`y`轴数据
+- 组件隐藏后，可以在顶部工具栏的组件树里面选中隐藏的组件，进而设置隐藏组件的属性
+- 本项目示例`svg`文件规格以标准图标大小`1024x1024px`，如果您的组件效果不好，请使用该规格
 
 ## 集成到已有项目
 
@@ -94,7 +114,7 @@ const app = createApp(App);
 app.use(createPinia());
 app.mount('#app')
 
-#引入插件
+#在需要的页面引入插件
 import { WebtopoSvgEdit,WebtopoSvgPreview } from 'webtopo-svg-edit';
 import 'webtopo-svg-edit/dist/style.css'
 ```
@@ -105,10 +125,10 @@ import 'webtopo-svg-edit/dist/style.css'
 
 ## 贡献代码
 
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
+1. `Fork` 本项目
+2. 新建` Feat_xxx `分支
 3. 提交代码
-4. 新建 Pull Request
+4. 新建 `Pull Request`
 
 **只接受github的pr，gitee为github镜像库**
 
@@ -126,7 +146,7 @@ import 'webtopo-svg-edit/dist/style.css'
 ## 常见问题
 
 行尾序列问题（error  Delete `␍`  prettier/prettier）
-git config --global core.autocrlf false
+`git config --global core.autocrlf false`
 
 ## 捐助
 
