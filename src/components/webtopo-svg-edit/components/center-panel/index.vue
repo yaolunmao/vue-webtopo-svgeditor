@@ -16,6 +16,12 @@
       width="100%"
       height="100%"
     >
+      <defs>
+        <pattern id="pattern_grid" patternUnits="userSpaceOnUse" x="0" y="0" width="10" height="10">
+          <rect width="1" height="1" rx="1" ry="1" fill="#aaaaaa" />
+        </pattern>
+      </defs>
+      <rect v-if="configStore.svg.grid" width="100%" height="100%" fill="url(#pattern_grid)" />
       <g
         :transform="`translate(${
           configStore.svg.position_center.x + svgEditLayoutStore.center_offset.x

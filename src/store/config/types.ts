@@ -12,4 +12,5 @@ export interface IPositionCenterSvg {
     x: number;
     y: number;
   };
+  grid: boolean;
 }

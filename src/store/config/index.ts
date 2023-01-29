@@ -16,7 +16,8 @@ export const useConfigStore = defineStore('config-store', {
         svg_position_center: {
           x: 50,
           y: 50
-        }
+        },
+        grid: true
       }
     };
   },
