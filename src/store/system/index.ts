@@ -1,7 +1,7 @@
 import { objectDeepClone, randomString } from '@/utils';
 import { defineStore } from 'pinia';
 import { useGlobalStore } from '../global';
-import { IDoneJson } from '../global/types';
+import { EGlobalStoreIntention, IDoneJson } from '../global/types';
 import { ContextMenuStoreState, EContextMenuInfoType, EditPrivateStoreState } from './types';
 import { useHistoryRecord } from '@/hooks';
 /**
@@ -99,6 +99,7 @@ export const useContextMenuStore = defineStore('context-menu-store', {
       if (!globalStore.handle_svg_info) {
         return;
       }
+      globalStore.intention = EGlobalStoreIntention.Select;
       switch (type) {
         case EContextMenuInfoType.Copy:
           const temp_item = objectDeepClone<IDoneJson>(globalStore.handle_svg_info.info);
@@ -108,10 +109,12 @@ export const useContextMenuStore = defineStore('context-menu-store', {
           temp_item.y += 10;
           globalStore.setDoneJson(temp_item);
           this.display = false;
+          globalStore.setHandleSvgInfo(temp_item, globalStore.done_json.length);
           break;
         case EContextMenuInfoType.Delete:
           globalStore.spliceDoneJson(globalStore.handle_svg_info.index);
           this.display = false;
+          globalStore.setHandleSvgInfo(null);
           break;
         case EContextMenuInfoType.MoveUpOneLevel:
           if (
@@ -126,6 +129,7 @@ export const useContextMenuStore = defineStore('context-menu-store', {
           globalStore.done_json[globalStore.handle_svg_info.index + 1] = temp_up_one;
           useHistoryRecord(globalStore.done_json);
           this.display = false;
+          globalStore.setHandleSvgInfo(temp_up_one, globalStore.handle_svg_info.index + 1);
           break;
         case EContextMenuInfoType.MoveDownOneLevel:
           if (globalStore.done_json.length === 1 || globalStore.handle_svg_info.index === 0) {
@@ -137,16 +141,18 @@ export const useContextMenuStore = defineStore('context-menu-store', {
           globalStore.done_json[globalStore.handle_svg_info.index - 1] = temp_down_one;
           useHistoryRecord(globalStore.done_json);
           this.display = false;
+          globalStore.setHandleSvgInfo(temp_down_one, globalStore.handle_svg_info.index - 1);
           break;
         case EContextMenuInfoType.MoveDownTopLevel:
           if (globalStore.done_json.length === 1 || globalStore.handle_svg_info.index === 0) {
             return;
           }
-          const temp_up_top = globalStore.handle_svg_info.info;
+          const temp_down_top = globalStore.handle_svg_info.info;
           globalStore.done_json.splice(globalStore.handle_svg_info.index, 1);
-          globalStore.done_json.unshift(temp_up_top);
+          globalStore.done_json.unshift(temp_down_top);
           useHistoryRecord(globalStore.done_json);
           this.display = false;
+          globalStore.setHandleSvgInfo(temp_down_top, 0);
           break;
         case EContextMenuInfoType.MoveUpTopLevel:
           if (
@@ -155,11 +161,12 @@ export const useContextMenuStore = defineStore('context-menu-store', {
           ) {
             return;
           }
-          const temp_down_top = globalStore.handle_svg_info.info;
+          const temp_up_top = globalStore.handle_svg_info.info;
           globalStore.done_json.splice(globalStore.handle_svg_info.index, 1);
-          globalStore.done_json.push(temp_down_top);
+          globalStore.done_json.push(temp_up_top);
           useHistoryRecord(globalStore.done_json);
           this.display = false;
+          globalStore.setHandleSvgInfo(temp_up_top, globalStore.done_json.length - 1);
           break;
         default:
           break;

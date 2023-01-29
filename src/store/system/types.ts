@@ -26,3 +26,18 @@ export enum EContextMenuInfoType {
   MoveUpTopLevel = 'MoveUpTopLevel',
   MoveDownTopLevel = 'MoveDownTopLevel'
 }
+
+export enum EShortcutKeyType {
+  Copy = 'Copy',
+  Delete = 'Delete',
+  MoveUpOneLevel = 'MoveUpOneLevel',
+  MoveDownOneLevel = 'MoveDownOneLevel',
+  MoveUpTopLevel = 'MoveUpTopLevel',
+  MoveDownTopLevel = 'MoveDownTopLevel',
+  Redo = 'Redo',
+  Undo = 'Undo',
+  MoveUp = 'MoveUp',
+  MoveDown = 'MoveDown',
+  MoveLeft = 'MoveLeft',
+  MoveRight = 'MoveRight'
+}

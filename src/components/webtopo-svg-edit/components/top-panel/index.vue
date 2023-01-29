@@ -18,7 +18,7 @@
     <div class="flex justify-between" style="width: calc(100% - 440px)">
       <div class="flex items-center">
         <el-icon
-          title="撤销"
+          title="撤销 ctrl+z"
           :size="20"
           :class="`${
             editPrivateStore.getTopBtnUndoStatus ? 'icon-normal' : 'icon-disable'
@@ -28,7 +28,7 @@
           <svg-analysis name="undo"></svg-analysis>
         </el-icon>
         <el-icon
-          title="重做"
+          title="重做 ctrl+shift+z"
           :class="`${editPrivateStore.getTopBtnRedoStatus ? 'icon-normal' : 'icon-disable'} ml-5px`"
           :size="20"
           @click="() => editPrivateStore.topRedoBtnClick()"
@@ -37,7 +37,7 @@
         </el-icon>
         <el-divider direction="vertical"></el-divider>
         <el-icon
-          title="清空"
+          title="清空 ctrl+delete"
           :class="`${globalStore.done_json.length > 0 ? 'icon-normal' : 'icon-disable'}`"
           :size="20"
           @click="onDeleteBtnClick"

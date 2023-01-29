@@ -2,6 +2,8 @@
 <template>
   <div
     class="canvas"
+    tabindex="0"
+    ref="canvasRef"
     @drop="dropEvent"
     @dragenter="dragEnterEvent"
     @dragover="dragOverEvent"
@@ -9,6 +11,7 @@
     @mousemove="onCanvasMouseMove"
     @mouseup="onCanvasMouseUp"
     @contextmenu="onCanvasContextMenuEvent"
+    @keydown="onHandleKeyDown"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +181,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { computed, getCurrentInstance, reactive, ref } from 'vue';
+  import { computed, getCurrentInstance, onMounted, reactive, ref } from 'vue';
   import { useConfigStore } from '@/store/config';
   import { useGlobalStore } from '@/store/global';
   import {
@@ -212,7 +215,9 @@
   import ConnectionLine from '@/components/webtopo-svg-edit/components/connection-line/index.vue';
   import { IVisiableInfo } from './types';
   import { ComponentImport } from '@/config-center';
-  import { useContextMenuStore } from '@/store/system';
+  import { useContextMenuStore, useEditPrivateStore } from '@/store/system';
+  import { EContextMenuInfoType } from '@/store/system/types';
+  import { useHistoryRecord } from '@/hooks';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
@@ -224,8 +229,10 @@
   const globalStore = useGlobalStore();
   const configStore = useConfigStore();
   const svgEditLayoutStore = useSvgEditLayoutStore();
+  const editPrivateStore = useEditPrivateStore();
   const contextMenuStore = useContextMenuStore();
   const contextMenuRef = ref<HTMLElement>();
+  const canvasRef = ref<HTMLElement>();
   const cursor_style = computed(() =>
     globalStore.intention == EGlobalStoreIntention.MoveCanvas
       ? 'grab'
@@ -312,6 +319,7 @@
       globalStore.setDoneJson(done_item_json);
       globalStore.intention = EGlobalStoreIntention.None;
     }
+    canvasRef.value?.focus();
   };
   const dragEnterEvent = (e: DragEvent) => {
     //dragenter和dragover一定要阻止浏览器默认行为 不然不会触发drop
@@ -322,6 +330,7 @@
     e.preventDefault();
   };
   const onSvgMouseDown = (select_item: IDoneJson, index: number, e: MouseEvent) => {
+    canvasRef.value?.focus();
     if (globalStore.intention === EGlobalStoreIntention.Connection) {
       return;
     }
@@ -726,12 +735,71 @@
       height: actual_bound.height * scale_y
     };
   };
+  const onHandleKeyDown = (e: KeyboardEvent) => {
+    console.log(e, 733);
+    e.preventDefault();
+    if (globalStore.handle_svg_info && !e.ctrlKey && e.key == 'ArrowUp') {
+      globalStore.done_json[globalStore.handle_svg_info.index].y -= 1;
+      useHistoryRecord(globalStore.done_json);
+    } else if (globalStore.handle_svg_info && !e.ctrlKey && e.key == 'ArrowDown') {
+      globalStore.handle_svg_info.info.y += 1;
+      useHistoryRecord(globalStore.done_json);
+    } else if (globalStore.handle_svg_info && !e.ctrlKey && e.key == 'ArrowLeft') {
+      globalStore.handle_svg_info.info.x -= 1;
+      useHistoryRecord(globalStore.done_json);
+    } else if (globalStore.handle_svg_info && !e.ctrlKey && e.key == 'ArrowRight') {
+      globalStore.handle_svg_info.info.x += 1;
+      useHistoryRecord(globalStore.done_json);
+    }
+    //ctrl  c
+    else if (e.ctrlKey && e.key.toLowerCase() == 'c') {
+      contextMenuStore.onContextMenuClick(EContextMenuInfoType.Copy);
+    }
+    //deleted
+    else if (!e.ctrlKey && e.key == 'Delete') {
+      contextMenuStore.onContextMenuClick(EContextMenuInfoType.Delete);
+    }
+    //上移一层
+    else if (e.ctrlKey && e.key == 'ArrowUp') {
+      contextMenuStore.onContextMenuClick(EContextMenuInfoType.MoveUpOneLevel);
+    }
+    //下移一层
+    else if (e.ctrlKey && e.key == 'ArrowDown') {
+      contextMenuStore.onContextMenuClick(EContextMenuInfoType.MoveDownOneLevel);
+    }
+    //置于底层
+    else if (e.ctrlKey && e.key == 'ArrowLeft') {
+      contextMenuStore.onContextMenuClick(EContextMenuInfoType.MoveDownTopLevel);
+    }
+    //置于顶层
+    else if (e.ctrlKey && e.key == 'ArrowRight') {
+      contextMenuStore.onContextMenuClick(EContextMenuInfoType.MoveUpTopLevel);
+    }
+    //ctrl+shift+z
+    else if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() == 'z') {
+      editPrivateStore.topRedoBtnClick();
+    }
+    //ctrl+z
+    else if (e.ctrlKey && e.key.toLowerCase() == 'z') {
+      editPrivateStore.topUndoBtnClick();
+    }
+    //ctrl+delete
+    else if (e.ctrlKey && e.key.toLowerCase() == 'delete') {
+      globalStore.done_json.length <= 0 || globalStore.setDoneJson([]);
+    }
+  };
+  onMounted(() => {
+    canvasRef.value?.focus();
+  });
 </script>
 <style lang="less" scoped>
   .canvas {
     width: 100%;
     height: 100%;
     cursor: v-bind('cursor_style');
+    &:focus-visible {
+      outline: 0px;
+    }
   }
 
   .svg-item-none {
