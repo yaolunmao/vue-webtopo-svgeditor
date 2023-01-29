@@ -1,6 +1,11 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import ECharts from 'vue-echarts';
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router/index';
+import 'virtual:windi.css';
+import 'virtual:svg-icons-register';
+import { createPinia } from 'pinia';
+const pinia = createPinia();
 const app = createApp(App);
-app.component('v-chart', ECharts);
+app.use(pinia);
+app.use(router);
 app.mount('#app');

@@ -1,4 +1,5 @@
-import SvgEditor from './components/SvgEditor.vue';
-import SvgPrview from './components/SvgPrview.vue';
-import ECharts from 'vue-echarts';
-export { SvgEditor,SvgPrview,ECharts as VChart }
+import WebtopoSvgEdit from '@/components/webtopo-svg-edit/index.vue';
+import WebtopoSvgPreview from '@/components/webtopo-svg-preview/index.vue';
+import 'virtual:windi.css';
+import 'virtual:svg-icons-register';
+export { WebtopoSvgEdit, WebtopoSvgPreview };
