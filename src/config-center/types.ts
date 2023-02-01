@@ -41,7 +41,8 @@ export enum EConfigAnimationsType {
   None = 'None',
   Electricity = 'Electricity', //电流效果
   WaterDrop = 'WaterDrop', //水珠
-  Track = 'Track' //轨迹
+  Track = 'Track', //轨迹
+  Rotate = 'Rotate' //旋转
 }
 export enum EConfigItemPropsType {
   Input = 'Input',

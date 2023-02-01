@@ -70,7 +70,19 @@
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-            ></use>
+              :class="
+                item.animations?.type.val === EConfigAnimationsType.Rotate ? 'svg-rorate' : ''
+              "
+            >
+              <animateTransform
+                v-if="item.animations?.type.val === EConfigAnimationsType.Rotate"
+                attributeName="transform"
+                type="rotate"
+                :values="item.animations?.reverse.val ? '360;0' : '0;360'"
+                :dur="item.animations?.dur.val + 's'"
+                :repeatCount="item.animations?.repeatCount.val"
+              />
+            </use>
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
               :is="item.tag"
@@ -218,6 +230,7 @@
   import { useContextMenuStore, useEditPrivateStore } from '@/store/system';
   import { EContextMenuInfoType } from '@/store/system/types';
   import { useHistoryRecord } from '@/hooks';
+  import { EConfigAnimationsType } from '@/config-center/types';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
@@ -870,5 +883,9 @@
       padding-top: 5px;
       margin-top: 5px;
     }
+  }
+  .svg-rorate {
+    transform-box: fill-box;
+    transform-origin: center;
   }
 </style>
