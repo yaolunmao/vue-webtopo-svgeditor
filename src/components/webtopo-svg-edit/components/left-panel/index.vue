@@ -18,7 +18,7 @@
         <template #title>
           <div style="font-weight: bolder">{{ item.title }}</div>
         </template>
-        <div class="component-group flex flex-warp">
+        <div class="component-group flex flex-wrap">
           <div
             v-for="svg_item in item.list"
             class="ideal"
@@ -112,5 +112,8 @@
     font-weight: bolder;
     font-style: italic;
     font-size: 15px;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
   }
 </style>
