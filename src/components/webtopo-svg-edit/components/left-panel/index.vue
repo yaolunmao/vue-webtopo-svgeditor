@@ -66,6 +66,7 @@
   const select_lib = ref(first_key);
   const config_center = ref<IConfigComponentGroup[]>(left_tool_bar.value[first_key]);
   const activeNames = ref([
+    'shape',
     'stateful',
     'stateless',
     'have_animation',

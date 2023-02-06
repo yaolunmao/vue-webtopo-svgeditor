@@ -1,8 +1,8 @@
 import { EDoneJsonType, IConfigItem } from '@/config-center/types';
 
-export const diamond_svg_file: IConfigItem = {
-  name: 'diamond',
-  title: '菱形',
+export const shapeArrow_svg_file: IConfigItem = {
+  name: 'shapeArrow',
+  title: '箭头',
   type: EDoneJsonType.File,
   config: {
     can_zoom: true,
