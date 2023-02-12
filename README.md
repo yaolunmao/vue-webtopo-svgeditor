@@ -2,14 +2,11 @@
 
 > 纯vue3实现的svg可视化web组态编辑器。可无需修改代码动态添加组件
 
-当前主分支版本为2.0
+当前分支版本为2.0
 
-## [版本1.0请点此](https://svgv1.yaolunmao.top)
+
 
 ## [图片挂了点此](https://www.cnblogs.com/Hero-/p/14784744.html)
-## 预览地址
-
-[https://svg.yaolunmao.top](https://svg.yaolunmao.top)
 
 ## 如何使用
 
@@ -44,7 +41,7 @@ yarn serve
 
 可使用任意生成svg代码的工具，我这里使用在线编译器进行模拟
 
-点击[这里](https://svgedit.yaolunmao.top/)进行svg图像绘制，我这里以心形为例
+点击[这里](http://svgedit.yaolm.top/)进行svg图像绘制，我这里以心形为例
 
 ![绘制心形图片](https://images.cnblogs.com/cnblogs_com/Hero-/1976969/o_2105190646421.png)
 
