@@ -2,9 +2,6 @@
 
 > 纯vue3实现的svg可视化web组态编辑器。主要用于物联网mqtt实时系统图
 
-## 预览地址
-
-[https://svg.yaolunmao.top](https://svg.yaolunmao.top)
 
 ## 如何使用
 
