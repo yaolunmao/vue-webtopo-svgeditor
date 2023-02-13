@@ -1,8 +1,6 @@
 # vue-webtopo-svgeditor
 
-> 基于vue3.2+ts实现的svg可视化web组态编辑器。可直接把svg文件和vue组件作为编辑器图形库使用，赋予其缩放和旋转等功能，并支持自定义拓展参数，实时控制组件状态等
-
-
+> 基于 vue3.2+ts 实现的 svg 可视化 web 组态编辑器。可直接把 svg 文件和 vue 组件作为编辑器图形库使用，赋予其缩放和旋转等功能，并支持自定义拓展参数，实时控制组件状态等
 
 预览地址：[http://svg.yaolm.top/](http://svg.yaolm.top/)
 
@@ -12,18 +10,17 @@
 
 ## 项目优点
 
-
 ### 组态软件核心功能都具备
 
 没有特殊需求，只需要配置好图形库，即可开始您的组态世界
 
 ### 优越的性能
 
-使用了`svg`的`symbol`技术，`use`方式加载`svg`图形，同样的svg图形不管数量多少，只会渲染一次
+使用了`svg`的`symbol`技术，`use`方式加载`svg`图形，同样的 svg 图形不管数量多少，只会渲染一次
 
 ### 学习成本极低
 
-`svg`文件即组件，引入之后无需进行额外配置，编辑器会自适应解析加载组件，添加自定义组件和传统`html`无差，前端er零学习成本上手
+`svg`文件即组件，引入之后无需进行额外配置，编辑器会自适应解析加载组件，添加自定义组件和传统`html`无差，前端 er 零学习成本上手
 
 ### 易拓展
 
@@ -35,19 +32,17 @@
 
 ### 免费开源
 
-MIT开源协议 可商用（自带的`svg`文件除外）
-
+MIT 开源协议 可商用（自带的`svg`文件除外）
 
 ## 图形库说明
 
-
 ### 无状态组件
 
-无状态组件就是`svg`文件，编辑器已经将节点的拖动，缩放，旋转等功能封装好了，您无需做出额外配置即可使用，若是需要动态的去设置`svg`的颜色边框之类的，需要自行设置`props`，参考`src\config-center\svg-file\stateless`的配置，可以设置的属性为`svg`的公共属性，例如`fill`、`stroke `、`stroke-dasharray`这些，具体属性请参考[MDN-SVG属性](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute#svg_%E5%B1%9E%E6%80%A7%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%86%E7%B1%BB%EF%BC%89)
+无状态组件就是`svg`文件，编辑器已经将节点的拖动，缩放，旋转等功能封装好了，您无需做出额外配置即可使用，若是需要动态的去设置`svg`的颜色边框之类的，需要自行设置`props`，参考`src\config-center\svg-file\stateless`的配置，可以设置的属性为`svg`的公共属性，例如`fill`、`stroke `、`stroke-dasharray`这些，具体属性请参考[MDN-SVG 属性](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute#svg_%E5%B1%9E%E6%80%A7%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%86%E7%B1%BB%EF%BC%89)
 
 ### 有状态组件
 
-有状态组件也是svg文件，区别就在于无状态组件控制节点属性的配置配置在`props`上，而有状态组件的配置需要配置到`state`上，有状态组件对比无状态组件的好处是可以改变一个状态去影响多个属性，例如这里的断路器开关，其实是同时改变了颜色和把手的透明度,参考配置：`src\config-center\svg-file\stateful\circuit-breaker\index.ts`
+有状态组件也是 svg 文件，区别就在于无状态组件控制节点属性的配置配置在`props`上，而有状态组件的配置需要配置到`state`上，有状态组件对比无状态组件的好处是可以改变一个状态去影响多个属性，例如这里的断路器开关，其实是同时改变了颜色和把手的透明度,参考配置：`src\config-center\svg-file\stateful\circuit-breaker\index.ts`
 
 ![](./readme-imgs/有状态组件.gif)
 
@@ -55,15 +50,13 @@ MIT开源协议 可商用（自带的`svg`文件除外）
 
 没什么好说的了，支持直接使用自带动画的`svg`文件，参考`src\config-center\svg-file\have-animation`
 
-### 自定义svg
+### 自定义 svg
 
 本质上就是`vue`的`template`代码片段，它可以完全替代无状态组件和有状态组件，并且可以根据自定义代码实现更多节点和属性的控制，缺点就是需要写代码--！参考`src\config-center\svg-file\custom-svg`
 
-### vue组件
+### vue 组件
 
 其实和自定义`svg`相似，都是`vue`的`template`代码片段，但是`svg`标签里面无法渲染`html`的代码，所以在最外层用了`foreignObject`进行了包裹，同样支持缩放旋转等操作。参考`src\config-center\vue`
-
-
 
 ## 操作说明
 
@@ -84,8 +77,6 @@ MIT开源协议 可商用（自带的`svg`文件除外）
 鼠标移动到组件上时会出现连线锚点，左键点击锚点创建线段，继续左键点击画布会连续创建线段，右键停止创建线段，鼠标放在线段上会出现线段端点提示，拖动即可重新设置连线，选中线段后还可以在右侧的动画面板设置线段的动画效果
 
 ![](./readme-imgs/连线.gif)
-
-
 
 ## 其他说明
 
@@ -121,17 +112,16 @@ import 'webtopo-svg-edit/dist/style.css'
 
 如果集成有问题请参考示例项目[vue-webtopo-svgeditor-example](https://github.com/yaolunmao/vue-webtopo-svgeditor-example)
 
-**请注意：插件方式引入会导致左侧工具栏的icon图标无法正确显示，请自行寻找您项目构建工具的svg加载器，将icon图标转换成symbol，并将名字命名为‘svg-xxx’即可正常显示**
+**请注意：插件方式引入会导致左侧工具栏的 icon 图标无法正确显示，请自行寻找您项目构建工具的 svg 加载器，将 icon 图标转换成 symbol，并将名字命名为‘svg-xxx’即可正常显示**
 
 ## 贡献代码
 
 1. `Fork` 本项目
-2. 新建` Feat_xxx `分支
+2. 新建`Feat_xxx`分支
 3. 提交代码
 4. 新建 `Pull Request`
 
-**只接受github的pr，gitee为github镜像库**
-
+**只接受 github 的 pr，gitee 为 github 镜像库**
 
 ## 声明
 
@@ -145,8 +135,15 @@ import 'webtopo-svg-edit/dist/style.css'
 
 ## 常见问题
 
-行尾序列问题（error  Delete `␍`  prettier/prettier）
-`git config --global core.autocrlf false`
+### vue2怎么集成，有vue2的版本吗？
+
+vue2建议使用iframe集成，目前没有vue2的版本，如果您接受不了vue2方式集成，也可参考2.1分支进行改造。
+
+## 鸣谢
+
+吉林省格尺科技有限公司促进该项目诞生
+
+[秀英童鞋](https://blog.csdn.net/qq_42862247)对此项目前进的耐心指导
 
 ## 捐助
 
