@@ -23,7 +23,8 @@ export default defineConfig(({ mode }) => {
         // 指定symbolId格式
         symbolId: 'svg-[name]',
         // 禁用压缩 否则想要修改无状态组件的stroke或者fill会影响到预设样式 例如stroke-width
-        svgoOptions: false
+        svgoOptions: false,
+        customDomId: '__webtopo__svgedit__icons__dom__'
       })
     ],
     resolve: {
