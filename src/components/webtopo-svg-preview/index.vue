@@ -129,7 +129,7 @@
         background_color: '#fff',
         scale: 1,
         position_center: {
-          x: -295,
+          x: -315,
           y: -95
         },
         svg_position_center: {

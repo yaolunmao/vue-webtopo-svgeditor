@@ -18,7 +18,7 @@
         <template #title>
           <div style="font-weight: bolder">{{ item.title }}</div>
         </template>
-        <div class="component-group flex flex-warp">
+        <div class="component-group flex flex-wrap">
           <div
             v-for="svg_item in item.list"
             class="ideal"
@@ -94,12 +94,13 @@
 </script>
 <style scoped lang="less">
   .component-item {
-    width: 100px;
+    width: 110px;
     height: 30px;
     border: 1px solid #f0f0f0;
     border-radius: 4px;
     box-sizing: border-box;
     overflow: hidden;
+    margin-bottom: 5px;
 
     &:hover {
       cursor: move;
