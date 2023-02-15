@@ -10,7 +10,7 @@
   </rdf:RDF>
  </metadata>
  <path d="m1.4358 17.248 4.2257-11.309h12.677l4.2257 11.309z" 
- fill="none" pointer-events="none" stroke="black" 
+ fill="white" stroke="black" 
  stroke-miterlimit="10" stroke-width="2"
  vector-effect="non-scaling-stroke"/>
 </svg>

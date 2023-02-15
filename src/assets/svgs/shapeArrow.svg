@@ -9,8 +9,8 @@
    </cc:Work>
   </rdf:RDF>
  </metadata>
- <path d="m0.92906 12.502v-3.0016h16.594v-3.1517l5.2549 4.6525-5.2549 4.6525v-3.1517z" fill="none" 
- pointer-events="none" stroke="black" 
+ <path d="m0.92906 12.502v-3.0016h16.594v-3.1517l5.2549 4.6525-5.2549 4.6525v-3.1517z" fill="white" 
+ stroke="black" 
  stroke-miterlimit="10" stroke-width="2"
  vector-effect="non-scaling-stroke"/>
 </svg>

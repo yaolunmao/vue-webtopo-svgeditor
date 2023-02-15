@@ -5,6 +5,6 @@ version="1.1" xmlns="http://www.w3.org/2000/svg"
 p-id="2129" xmlns:xlink="http://www.w3.org/1999/xlink" 
 width="200" height="200">
 <polygon points="0,400 400,0 800,400 400,800"
-style="fill:none;stroke:black;stroke-width:2;"
+style="fill:white;stroke:black;stroke-width:2;"
 vector-effect="non-scaling-stroke"/>
 </svg>

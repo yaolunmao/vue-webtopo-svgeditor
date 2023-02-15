@@ -5,5 +5,5 @@ version="1.1" xmlns="http://www.w3.org/2000/svg"
 p-id="2129" xmlns:xlink="http://www.w3.org/1999/xlink" 
 width="200" height="200">
 <circle cx="450" cy="450" r="400"
-style="fill:none;stroke:black;stroke-width:2;" vector-effect="non-scaling-stroke"></circle>
+style="fill:white;stroke:black;stroke-width:2;" vector-effect="non-scaling-stroke"></circle>
 </svg>

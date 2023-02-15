@@ -4,5 +4,7 @@
 version="1.1" xmlns="http://www.w3.org/2000/svg" 
 p-id="2129" xmlns:xlink="http://www.w3.org/1999/xlink" 
 width="200" height="200">
-<rect x="10" y="10" width="600" height="600" style="fill: none; stroke: black;stroke-width: 2;" vector-effect="non-scaling-stroke"/>
+<rect x="10" y="10" width="600" height="600" 
+style="fill: white; stroke: black;stroke-width: 2;" 
+vector-effect="non-scaling-stroke"/>
 </svg>

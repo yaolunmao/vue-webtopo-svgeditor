@@ -23,7 +23,8 @@
           v-for="item in preview_data.done_json"
           :key="item.id"
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
-          v-show="item.display"
+          v-show="item.display"    
+          
         >
           <g
             :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
@@ -31,7 +32,7 @@
             })rotate(${item.rotate}) scale(1) translate(${-(
               item.actual_bound.x +
               item.actual_bound.width / 2
-            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"                        
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -49,7 +50,8 @@
               }) scale(${item.scale_x},${item.scale_y}) translate(${-(
                 item.actual_bound.x +
                 item.actual_bound.width / 2
-              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"  
+              v-on="event_attr"  
             ></use>
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
@@ -90,7 +92,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { getCurrentInstance, PropType, reactive } from 'vue';
+  import { getCurrentInstance, PropType, reactive, ref } from 'vue';
   import { useGlobalStore } from '@/store/global';
   import { EGlobalStoreIntention, EMouseInfoState } from '@/store/global/types';
   import { prosToVBind, setArrItemByID } from '@/utils';
@@ -104,6 +106,26 @@
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
+  const event_attr = ref<object>({});
+  event_attr.value = {};
+  const dynamicEvent = (params: string[], event_str: string) => {
+    try {
+      if (params?.length > 0) {
+        return new Function(params.toString(), event_str);
+      } else {
+        return new Function(event_str);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //取出自定义函数
+  event_attr.value = {
+    ...event_attr.value,
+    ...{
+      ['click']: dynamicEvent([], "alert('点击了控件')")
+    }
+  };
   Object.keys(ComponentImport).forEach((key) => {
     if (!Object.keys(instance?.appContext?.components as any).includes(key)) {
       instance?.appContext.app.component(key, ComponentImport[key]);
