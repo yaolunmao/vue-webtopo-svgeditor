@@ -147,7 +147,7 @@
     }
 
     .side-nav {
-      @showLeftNavWidth: 240px;
+      @showLeftNavWidth: 260px;
       @hideLeftNavWidth: 0px;
       position: relative;
       overflow: inherit;
