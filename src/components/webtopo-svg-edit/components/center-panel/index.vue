@@ -13,6 +13,11 @@
     @contextmenu="onCanvasContextMenuEvent"
     @keydown="onHandleKeyDown"
   >
+    <!-- 横标尺 -->
+    <!-- <svg id="ruler-v" class="ruler-v"></svg> -->
+    <!-- 竖标尺 -->
+    <!-- <svg id="ruler-h" class="ruler-h"></svg> -->
+
     <svg
       xmlns="http://www.w3.org/2000/svg"
       :style="{ backgroundColor: configStore.svg.background_color }"
@@ -20,8 +25,15 @@
       height="100%"
     >
       <defs>
-        <pattern id="pattern_grid" patternUnits="userSpaceOnUse" x="0" y="0" width="10" height="10">
-          <rect width="1" height="1" rx="1" ry="1" fill="#aaaaaa" />
+        <pattern
+          id="pattern_grid"
+          patternUnits="userSpaceOnUse"
+          width="10"
+          height="10"
+          patternTransform="rotate(90)"
+        >
+          <line x1="5" y1="0" x2="5" y2="10" stroke="#aaaaaa" stroke-width="0.5" />
+          <line x1="0" y1="5" x2="10" y2="5" stroke="#aaaaaa" stroke-width="0.5" />
         </pattern>
       </defs>
       <rect v-if="configStore.svg.grid" width="100%" height="100%" fill="url(#pattern_grid)" />
@@ -801,8 +813,56 @@
       globalStore.done_json.length <= 0 || globalStore.setDoneJson([]);
     }
   };
+  // //svg绘制标尺
+  // const drawRuler = () => {
+  //   //绘制标尺[横]
+  //   var r = Snap('#ruler-v');
+  //   //绘制标尺[竖]
+  //   var rh = Snap('#ruler-h');
+  //   r.line(25, 0, 25, 25).attr({
+  //     stroke: '#8f9292',
+  //     strokeWidth: 1
+  //   });
+  //   rh.line(0, 25, 25, 25).attr({
+  //     stroke: '#8f9292',
+  //     strokeWidth: 1
+  //   });
+  //   for (var i = 1; i < 100; i++) {
+  //     // 绘制横标尺
+  //     r.line(80 * i + 25, 0, 80 * i + 25, 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     r.line(20 * i + 25, 15, 20 * i + 25, 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     let text = 80 * i;
+  //     r.text(80 * i + 25 + 2, 12.5, text).attr({
+  //       fill: '#b1b4b4'
+  //     });
+  //     // 绘制竖标尺
+  //     rh.line(0, 80 * i + 25, 25, 80 * i + 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     rh.line(15, 20 * i + 25, 25, 20 * i + 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     let texth = 80 * i;
+  //     let ruletext = rh.text(0, 80 * i + 25 + 4, texth).attr({
+  //       fill: '#b1b4b4'
+  //     });
+  //     // 旋转文字
+  //     let matrix = new Snap.Matrix();
+  //     matrix.rotate(90, 2, 80 * i + 25 + 4);
+  //     ruletext.transform(matrix);
+  //   }
+  // };
   onMounted(() => {
     canvasRef.value?.focus();
+    // drawRuler();
   });
 </script>
 <style lang="less" scoped>

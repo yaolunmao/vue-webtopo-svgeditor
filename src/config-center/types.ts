@@ -26,6 +26,8 @@ export interface IConfigItem {
   tag?: any;
   state?: IConfigItemState; //通过一个属性去控制多个属性就是有状态组件
   tag_slot?: string;
+  eventAttr?: IEventAttr;
+  triggerList?: ITrigger[];
 }
 export interface IConfigItemProps {
   [key: string]: {
@@ -37,6 +39,12 @@ export interface IConfigItemProps {
   };
 }
 
+export interface ITrigger {
+  tag: string | undefined;
+  max: number | undefined;
+  min: number | undefined;
+  animationsType: EConfigAnimationsType;
+}
 export enum EConfigAnimationsType {
   None = 'None',
   Electricity = 'Electricity', //电流效果
@@ -52,6 +60,14 @@ export enum EConfigItemPropsType {
   JsonEdit = 'JsonEdit',
   Select = 'Select'
 }
+// export enum EJudgingType {
+//   EQU = '等于', //equal
+//   NEQ = '不等于', //not equal
+//   LSS = '小于', //less than
+//   LEQ = '小于或等于', //equal or less than
+//   GTR = '大于', //greater than
+//   GEQ = '大于或等于' //equal or greater than
+// }
 export enum EDoneJsonType {
   File = 'File',
   StraightLine = 'StraightLine',
@@ -73,4 +89,17 @@ export interface IConfigItemState {
     default: false;
     props: { [key: string]: { openVal: any; closeVal: any } };
   };
+}
+export interface IEventAttr {
+  [key: string]: {
+    custom: boolean;
+    tips: string;
+    val: string;
+    anonymous_params: string[];
+    list: string[];
+  };
+}
+export enum IEventAttrType {
+  Call = 'call', //代表调用
+  Custom = 'custom' //代表自定义
 }

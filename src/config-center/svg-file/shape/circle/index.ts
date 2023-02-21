@@ -1,4 +1,4 @@
-import { EDoneJsonType, IConfigItem } from '@/config-center/types';
+import { EDoneJsonType, IConfigItem, EConfigAnimationsType } from '@/config-center/types';
 
 export const circle_svg_file: IConfigItem = {
   name: 'circle',
@@ -26,5 +26,22 @@ export const circle_svg_file: IConfigItem = {
         }
       }
     }
-  }
+  },
+  eventAttr: {
+    click: {
+      custom: true,
+      tips: '点击',
+      val: "alert('点击了按钮')",
+      anonymous_params: [],
+      list: []
+    }
+  },
+  triggerList: [
+    {
+      tag: '',
+      max: undefined,
+      min: undefined,
+      animationsType: EConfigAnimationsType.None
+    }
+  ]
 };

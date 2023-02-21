@@ -10,5 +10,6 @@ export const square_svg_file: IConfigItem = {
     actual_rect: true
   },
   display: true,
-  props: {}
+  props: {},
+  triggerList: []
 };
