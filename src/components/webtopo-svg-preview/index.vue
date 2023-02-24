@@ -6,6 +6,11 @@
     @mousemove="onCanvasMouseMove"
     @mouseup="onCanvasMouseUp"
   >
+    <el-form style="width: 10%;">
+      <el-form-item><el-input type="string" v-model="data.A" /></el-form-item>
+      {{ data.A }}
+      <el-button @click="bianli">设置</el-button>
+    </el-form>    
     <svg
       xmlns="http://www.w3.org/2000/svg"
       :style="{ backgroundColor: preview_data.config.background_color }"
@@ -32,7 +37,8 @@
             })rotate(${item.rotate}) scale(1) translate(${-(
               item.actual_bound.x +
               item.actual_bound.width / 2
-            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"                        
+            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"   
+            class="animate__animated animate__bounce"                     
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -51,8 +57,9 @@
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"  
-              v-on="event_attr"  
-            ></use>
+              v-on="event_attr" 
+            >
+            </use>
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
               :is="item.tag"
@@ -103,10 +110,15 @@
   import { ComponentImport } from '@/config-center';
   import { IDataModel } from '../webtopo-svg-edit/types';
   import 'element-plus/dist/index.css';
+  import { ElButton, ElInput, ElForm, ElFormItem } from 'element-plus';
+  import { EConfigAnimationsType } from '@/config-center/types';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
   const event_attr = ref<object>({});
+  const data = ref({
+    A: 1
+  });
   event_attr.value = {};
   const dynamicEvent = (params: string[], event_str: string) => {
     try {
@@ -243,6 +255,33 @@
   defineExpose({
     setNodeAttrByID
   });
+  const bianli = () => {
+    console.log(preview_data.done_json);
+    preview_data.done_json.forEach((element) => {
+      if (element.triggerList && element.triggerList?.length > 0) {
+        element.triggerList.forEach((item) => {
+          //判断最小值 最大值
+          if (
+            item.min &&
+            item.max &&
+            data.value.A >= Number(item.min) &&
+            data.value.A <= Number(item.max)
+          ) {
+            //执行动效
+            if (element.animations) {
+              element.animations.type.val = item.animationsType;
+              console.log(item.animationsType);
+              console.log(preview_data.done_json);
+              console.log(preview_data);
+            } else {
+            }
+          } else {
+            element.animations.type.val = EConfigAnimationsType.None;
+          }
+        });
+      }
+    });
+  };
 </script>
 <style lang="less" scoped>
   .canvas {
@@ -266,5 +305,9 @@
   .svg-item-select {
     cursor: move;
     outline: 1px solid rgb(23, 222, 30);
+  }
+  .svg-rorate {
+    transform-box: fill-box;
+    transform-origin: center;
   }
 </style>

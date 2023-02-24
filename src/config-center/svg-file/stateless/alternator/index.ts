@@ -1,9 +1,4 @@
-import {
-  EConfigItemPropsType,
-  EDoneJsonType,
-  IConfigItem,
-  EConfigAnimationsType
-} from '../../../types';
+import { EConfigItemPropsType, EDoneJsonType, IConfigItem } from '../../../types';
 
 export const alternator_svg_file: IConfigItem = {
   name: 'alternator',
@@ -22,29 +17,30 @@ export const alternator_svg_file: IConfigItem = {
       val: '#00ff00'
     }
   },
-  animations: {
-    type: {
-      title: '动画类型',
-      type: EConfigItemPropsType.Select,
-      val: EConfigAnimationsType.None,
-      options: [
-        {
-          label: '无',
-          value: EConfigAnimationsType.None
-        },
-        {
-          label: '旋转',
-          value: EConfigAnimationsType.Rotate
-        }
-      ]
-    },
-    dur: { title: '持续时间', type: EConfigItemPropsType.InputNumber, val: 5 },
-    repeatCount: {
-      title: '循环次数',
-      type: EConfigItemPropsType.Input,
-      val: 'indefinite',
-      disabled: true
-    },
-    reverse: { title: '反转动画', type: EConfigItemPropsType.Switch, val: false }
-  }
+  // animations: {
+  //   type: {
+  //     title: '动画类型',
+  //     type: EConfigItemPropsType.Select,
+  //     val: EConfigAnimationsType.None,
+  //     options: [
+  //       {
+  //         label: '无',
+  //         value: EConfigAnimationsType.None
+  //       },
+  //       {
+  //         label: '旋转',
+  //         value: EConfigAnimationsType.Rotate
+  //       }
+  //     ]
+  //   },
+  //   dur: { title: '持续时间', type: EConfigItemPropsType.InputNumber, val: 5 },
+  //   repeatCount: {
+  //     title: '循环次数',
+  //     type: EConfigItemPropsType.Input,
+  //     val: 'indefinite',
+  //     disabled: true
+  //   },
+  //   reverse: { title: '反转动画', type: EConfigItemPropsType.Switch, val: false }
+  // },
+  triggerList: []
 };

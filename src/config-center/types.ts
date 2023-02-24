@@ -50,7 +50,20 @@ export enum EConfigAnimationsType {
   Electricity = 'Electricity', //电流效果
   WaterDrop = 'WaterDrop', //水珠
   Track = 'Track', //轨迹
-  Rotate = 'Rotate' //旋转
+  RotateOut = 'animate__rotateOut', //旋转
+  RotateIn = 'animate__rotateIn', //旋转
+  HeartBeat = 'animate__heartBeat',
+  Bounce = 'animate__bounce',
+  Flash = 'animate__flash',
+  Pulse = 'animate__pulse',
+  RubberBand = 'animate__rubberBand',
+  ShakeX = 'animate__shakeX',
+  ShakeY = 'animate__shakeY',
+  HeadShake = 'animate__headShake',
+  Swing = 'animate__swing',
+  Tada = 'animate__tada',
+  Wobble = 'animate__wobble',
+  Jello = 'animate__jello'
 }
 export enum EConfigItemPropsType {
   Input = 'Input',

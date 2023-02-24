@@ -61,6 +61,13 @@
             @mouseenter="onSvgMouseEnter(item, index, $event)"
             @mouseleave="onSvgMouseLeave(item, index, $event)"
             @contextmenu="onSvgContextMenuEvent(item, index, $event)"
+            class="animate__animated"
+            :class="item.animations?.type.val"
+            style="
+              transform-box: fill-box;
+              animation-duration: 3s;
+              animation-iteration-count: infinite;
+            "
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -82,19 +89,7 @@
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-              :class="
-                item.animations?.type.val === EConfigAnimationsType.Rotate ? 'svg-rorate' : ''
-              "
-            >
-              <animateTransform
-                v-if="item.animations?.type.val === EConfigAnimationsType.Rotate"
-                attributeName="transform"
-                type="rotate"
-                :values="item.animations?.reverse.val ? '360;0' : '0;360'"
-                :dur="item.animations?.dur.val + 's'"
-                :repeatCount="item.animations?.repeatCount.val"
-              />
-            </use>
+            ></use>
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
               :is="item.tag"
@@ -242,7 +237,7 @@
   import { useContextMenuStore, useEditPrivateStore } from '@/store/system';
   import { EContextMenuInfoType } from '@/store/system/types';
   import { useHistoryRecord } from '@/hooks';
-  import { EConfigAnimationsType } from '@/config-center/types';
+  import { EConfigAnimationsType, EConfigItemPropsType } from '@/config-center/types';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
@@ -337,6 +332,83 @@
             x: 0,
             y: 0
           }
+        },
+        animations: {
+          type: {
+            title: '动画类型',
+            type: EConfigItemPropsType.Select,
+            val: EConfigAnimationsType.None,
+            options: [
+              {
+                label: '无',
+                value: EConfigAnimationsType.None
+              },
+              {
+                label: '顺时针旋转',
+                value: EConfigAnimationsType.RotateIn
+              },
+              {
+                label: '逆时针旋转',
+                value: EConfigAnimationsType.RotateOut
+              },
+              {
+                label: '心跳',
+                value: EConfigAnimationsType.HeartBeat
+              },
+              {
+                label: '弹跳',
+                value: EConfigAnimationsType.Bounce
+              },
+              {
+                label: '闪光',
+                value: EConfigAnimationsType.Flash
+              },
+              {
+                label: '脉冲',
+                value: EConfigAnimationsType.Pulse
+              },
+              {
+                label: '橡皮筋',
+                value: EConfigAnimationsType.RubberBand
+              },
+              {
+                label: 'X轴摇晃',
+                value: EConfigAnimationsType.ShakeX
+              },
+              {
+                label: 'Y轴摇晃',
+                value: EConfigAnimationsType.ShakeY
+              },
+              {
+                label: '摇头',
+                value: EConfigAnimationsType.HeadShake
+              },
+              {
+                label: '秋千摇摆',
+                value: EConfigAnimationsType.Swing
+              },
+              {
+                label: '惊讶抖动',
+                value: EConfigAnimationsType.Tada
+              },
+              {
+                label: '晃动',
+                value: EConfigAnimationsType.Wobble
+              },
+              {
+                label: '果冻弹跳',
+                value: EConfigAnimationsType.Jello
+              }
+            ]
+          },
+          dur: { title: '持续时间', type: EConfigItemPropsType.InputNumber, val: 5 },
+          repeatCount: {
+            title: '循环次数',
+            type: EConfigItemPropsType.Input,
+            val: 'infinite',
+            disabled: true
+          },
+          reverse: { title: '反转动画', type: EConfigItemPropsType.Switch, val: false }
         },
         ...objectDeepClone<IConfigItem>(globalStore.create_svg_info)
       };
@@ -947,5 +1019,39 @@
   .svg-rorate {
     transform-box: fill-box;
     transform-origin: center;
+  }
+  .animate__rotateOut {
+    -webkit-animation-name: rotateOut;
+    animation-name: rotateOut;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateOut {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+  }
+  .animate__rotateIn {
+    -webkit-animation-name: rotateIn;
+    animation-name: rotateIn;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateIn {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
+    }
   }
 </style>
