@@ -36,7 +36,7 @@
   import { ref, PropType } from 'vue';
   //   import { useConfigStore } from '@/store/config';
   // import { useGlobalStore } from '@/store/global';
-  import { ITrigger } from '@/config-center/types';
+  import { ITrigger, EConfigAnimationsType } from '@/config-center/types';
   //   import { EGlobalStoreIntention } from '@/store/global/types';
   //   const configStore = useConfigStore();
   // const globalStore = useGlobalStore();
@@ -49,11 +49,66 @@
   //   { label: '大于或等于', value: 'GEQ' }
   // ]);
   const animationOptions = ref([
-    { label: '无', value: 'None' },
-    { label: '电流', value: 'Electricity' },
-    { label: '水珠', value: 'WaterDrop' },
-    { label: '轨迹', value: 'Track' },
-    { label: '旋转', value: 'Rotate' }
+    {
+      label: '无',
+      value: EConfigAnimationsType.None
+    },
+    {
+      label: '顺时针旋转',
+      value: EConfigAnimationsType.RotateIn
+    },
+    {
+      label: '逆时针旋转',
+      value: EConfigAnimationsType.RotateOut
+    },
+    {
+      label: '心跳',
+      value: EConfigAnimationsType.HeartBeat
+    },
+    {
+      label: '弹跳',
+      value: EConfigAnimationsType.Bounce
+    },
+    {
+      label: '闪光',
+      value: EConfigAnimationsType.Flash
+    },
+    {
+      label: '脉冲',
+      value: EConfigAnimationsType.Pulse
+    },
+    {
+      label: '橡皮筋',
+      value: EConfigAnimationsType.RubberBand
+    },
+    {
+      label: 'X轴摇晃',
+      value: EConfigAnimationsType.ShakeX
+    },
+    {
+      label: 'Y轴摇晃',
+      value: EConfigAnimationsType.ShakeY
+    },
+    {
+      label: '摇头',
+      value: EConfigAnimationsType.HeadShake
+    },
+    {
+      label: '秋千摇摆',
+      value: EConfigAnimationsType.Swing
+    },
+    {
+      label: '惊讶抖动',
+      value: EConfigAnimationsType.Tada
+    },
+    {
+      label: '晃动',
+      value: EConfigAnimationsType.Wobble
+    },
+    {
+      label: '果冻弹跳',
+      value: EConfigAnimationsType.Jello
+    }
   ]);
   const props = defineProps({
     triggerList: {

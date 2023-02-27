@@ -7,8 +7,8 @@
     @mouseup="onCanvasMouseUp"
   >
     <el-form style="width: 10%;">
-      <el-form-item><el-input type="string" v-model="data.A" /></el-form-item>
-      {{ data.A }}
+      <el-form-item><el-input type="string" /></el-form-item>
+      {{ currentData }}
       <el-button @click="bianli">设置</el-button>
     </el-form>    
     <svg
@@ -107,6 +107,7 @@
 <script setup lang="ts">
   import { getCurrentInstance, PropType, reactive, ref } from 'vue';
   import { useGlobalStore } from '@/store/global';
+  import { useServerStore } from '@/store/server';
   import { EGlobalStoreIntention, EMouseInfoState } from '@/store/global/types';
   import { prosToVBind, setArrItemByID } from '@/utils';
 
@@ -122,9 +123,7 @@
   //注册所有组件
   const instance = getCurrentInstance();
   const event_attr = ref<object>({});
-  const data = ref({
-    A: 1
-  });
+
   event_attr.value = {};
   const dynamicEvent = (params: string[], event_str: string) => {
     try {
@@ -261,6 +260,18 @@
   defineExpose({
     setNodeAttrByID
   });
+  const serverStore = useServerStore();
+  const currentData = ref<any>();
+  const dingshi = () => {
+    setInterval(function () {
+      serverStore.getData().then((a) => {
+        currentData.value = a;
+        console.log(currentData.value['price']);
+        bianli();
+      });
+    }, 3000);
+  };
+  dingshi();
   const bianli = () => {
     console.log(preview_data.done_json);
     preview_data.done_json.forEach((element) => {
@@ -270,8 +281,8 @@
           if (
             item.min &&
             item.max &&
-            data.value.A >= Number(item.min) &&
-            data.value.A <= Number(item.max)
+            currentData.value[item.tag] >= Number(item.min) &&
+            currentData.value[item.tag] <= Number(item.max)
           ) {
             //执行动效
             if (element.animations) {
