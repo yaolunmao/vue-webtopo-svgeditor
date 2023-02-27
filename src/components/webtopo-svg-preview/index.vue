@@ -38,7 +38,13 @@
               item.actual_bound.x +
               item.actual_bound.width / 2
             )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"   
-            class="animate__animated animate__bounce"                     
+            class="animate__animated"
+            :class="item.animations?.type.val"
+            :style="{
+              'animation-duration': item.animations?.dur.val + 's',
+              'animation-iteration-count': item.animations?.repeatCount.val
+            }"
+            style="transform-box: fill-box"           
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -309,5 +315,40 @@
   .svg-rorate {
     transform-box: fill-box;
     transform-origin: center;
+  }
+
+  .animate__rotateOut {
+    -webkit-animation-name: rotateOut;
+    animation-name: rotateOut;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateOut {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+  }
+  .animate__rotateIn {
+    -webkit-animation-name: rotateIn;
+    animation-name: rotateIn;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateIn {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
+    }
   }
 </style>

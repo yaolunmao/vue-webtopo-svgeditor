@@ -63,11 +63,11 @@
             @contextmenu="onSvgContextMenuEvent(item, index, $event)"
             class="animate__animated"
             :class="item.animations?.type.val"
-            style="
-              transform-box: fill-box;
-              animation-duration: 3s;
-              animation-iteration-count: infinite;
-            "
+            :style="{
+              'animation-duration': item.animations?.dur.val + 's',
+              'animation-iteration-count': item.animations?.repeatCount.val
+            }"
+            style="transform-box: fill-box"
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -407,8 +407,7 @@
             type: EConfigItemPropsType.Input,
             val: 'infinite',
             disabled: true
-          },
-          reverse: { title: '反转动画', type: EConfigItemPropsType.Switch, val: false }
+          }
         },
         ...objectDeepClone<IConfigItem>(globalStore.create_svg_info)
       };
