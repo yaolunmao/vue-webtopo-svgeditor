@@ -42,5 +42,11 @@ export const custom_svg_text: IConfigItem = {
       type: EConfigItemPropsType.Color,
       val: '#FFF200FF'
     }
+  },
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
   }
 };

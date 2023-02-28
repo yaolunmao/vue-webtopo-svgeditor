@@ -16,5 +16,11 @@ export const alternator_svg_file: IConfigItem = {
       type: EConfigItemPropsType.Color,
       val: '#00ff00'
     }
+  },
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
   }
 };

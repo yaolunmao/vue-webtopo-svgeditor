@@ -112,5 +112,11 @@ export const custom_vue_common_table: IConfigItem = {
       type: EConfigItemPropsType.Switch,
       val: false
     }
+  },
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
   }
 };

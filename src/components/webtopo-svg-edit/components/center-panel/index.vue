@@ -70,6 +70,7 @@
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              :class="`${getCommonClass(item)}`"
             ></use>
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
@@ -84,11 +85,13 @@
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              :class="`${getCommonClass(item)}`"
             ></component>
             <foreignObject
               v-else-if="item.type === EDoneJsonType.Vue"
               v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
               :id="`foreign-object${item.id}`"
+              :class="`${getCommonClass(item)}`"
             >
               <component
                 :is="item.tag"
@@ -138,7 +141,7 @@
                 globalStore.handle_svg_info?.info.id == item.id
                   ? 'svg-item-select'
                   : ''
-              }`"
+              } ${getCommonClass(item)}`"
             ></rect>
             <handle-panel
               v-if="
@@ -197,7 +200,8 @@
     getSvgNowPosition,
     setSvgActualInfo,
     prosToVBind,
-    objectDeepClone
+    objectDeepClone,
+    getCommonClass
   } from '@/utils';
   import {
     calculateBottom,
@@ -870,5 +874,8 @@
       padding-top: 5px;
       margin-top: 5px;
     }
+  }
+  .common-ani {
+    transform-box: fill-box;
   }
 </style>

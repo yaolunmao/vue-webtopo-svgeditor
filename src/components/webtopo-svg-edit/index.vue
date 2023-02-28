@@ -86,6 +86,7 @@
   import { useImportDataModel } from '@/hooks';
   import { useGlobalStore } from '@/store/global';
   import { IDoneJson } from '@/store/global/types';
+  import 'animate.css';
   const props = defineProps({
     customToolBar: {
       type: Object as PropType<IConfigCenter>,

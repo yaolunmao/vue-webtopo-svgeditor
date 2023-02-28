@@ -34,5 +34,11 @@ export const el_tag_vue: IConfigItem = {
       val: false
     }
   },
-  tag_slot: '标签'
+  tag_slot: '标签',
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
+  }
 };

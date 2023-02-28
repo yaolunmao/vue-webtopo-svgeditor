@@ -48,5 +48,11 @@ export const pie_charts: IConfigItem = {
         }
       ]
     }
+  },
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
   }
 };

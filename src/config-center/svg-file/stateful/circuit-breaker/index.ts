@@ -26,5 +26,11 @@ export const circuit_breaker_svg_file: IConfigItem = {
         }
       }
     }
+  },
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
   }
 };

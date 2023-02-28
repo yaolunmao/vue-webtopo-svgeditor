@@ -45,5 +45,11 @@ export const el_button_vue: IConfigItem = {
       val: false
     }
   },
-  tag_slot: '按钮'
+  tag_slot: '按钮',
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
+  }
 };

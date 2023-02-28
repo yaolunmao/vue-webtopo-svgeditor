@@ -16,5 +16,11 @@ export const traction_transformer_svg_file: IConfigItem = {
       type: EConfigItemPropsType.Color,
       val: '#ff0000'
     }
+  },
+  common_animations: {
+    val: '',
+    delay: 'delay-0s',
+    speed: 'slow',
+    repeat: 'infinite'
   }
 };
