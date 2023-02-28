@@ -50,6 +50,7 @@
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              :class="`${getCommonClass(item)}`"
             ></use>
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
@@ -64,11 +65,13 @@
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              :class="`${getCommonClass(item)}`"
             ></component>
             <foreignObject
               v-else-if="item.type === EDoneJsonType.Vue"
               v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
               :id="`foreign-object${item.id}`"
+              :class="`${getCommonClass(item)}`"
             >
               <component
                 :is="item.tag"
@@ -93,7 +96,7 @@
   import { getCurrentInstance, PropType, reactive } from 'vue';
   import { useGlobalStore } from '@/store/global';
   import { EGlobalStoreIntention, EMouseInfoState } from '@/store/global/types';
-  import { prosToVBind, setArrItemByID } from '@/utils';
+  import { prosToVBind, setArrItemByID, getCommonClass } from '@/utils';
 
   import { EDoneJsonType } from '@/config-center/types';
   import ConnectionLine from '@/components/webtopo-svg-edit/components/connection-line/index.vue';
@@ -101,6 +104,7 @@
   import { ComponentImport } from '@/config-center';
   import { IDataModel } from '../webtopo-svg-edit/types';
   import 'element-plus/dist/index.css';
+  import 'animate.css';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
@@ -244,5 +248,8 @@
   .svg-item-select {
     cursor: move;
     outline: 1px solid rgb(23, 222, 30);
+  }
+  .common-ani {
+    transform-box: fill-box;
   }
 </style>

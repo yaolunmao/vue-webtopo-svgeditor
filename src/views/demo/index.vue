@@ -79,6 +79,13 @@
           params: {}
         });
       }
+    },
+    {
+      name: '集成到平台效果预览',
+      title: '集成到平台效果预览',
+      onClick: () => {
+        window.open('http://svgpro.yaolm.top/');
+      }
     }
   ]);
   interface IButtonList {

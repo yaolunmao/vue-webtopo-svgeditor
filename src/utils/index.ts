@@ -315,3 +315,9 @@ export const setArrItemByID = (id: string, key: string, val: any, json_arr: IDon
     });
   });
 };
+export const getCommonClass = (item: IDoneJson) => {
+  if (!item.common_animations || !item.common_animations.val) {
+    return ``;
+  }
+  return `common-ani animate__animated animate__${item.common_animations.val} animate__${item.common_animations.speed} animate__${item.common_animations.repeat} animate__${item.common_animations.delay}`;
+};
