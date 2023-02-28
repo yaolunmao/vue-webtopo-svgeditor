@@ -66,6 +66,9 @@
             <dynamic-el-form-item
               :obj-info="globalStore.handle_svg_info.info.props"
             ></dynamic-el-form-item>
+            <el-form-item label="触发器配置" size="small">
+              <el-button type="primary" @click="configTrigger">配置</el-button>
+            </el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="动画" name="animation">
@@ -79,9 +82,33 @@
             ></dynamic-el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="事件" name="event"></el-tab-pane>
+        <el-tab-pane label="事件" name="event">
+          <el-form
+            label-width="90px"
+            label-position="left"
+            v-if="globalStore.handle_svg_info.info.eventAttr"
+          >
+            <dynamic-event-item
+              :obj-info="globalStore.handle_svg_info.info.eventAttr"
+            ></dynamic-event-item>
+          </el-form>
+        </el-tab-pane>
       </el-tabs>
     </div>
+    <el-dialog v-model="dialogTriggerVisible" title="触发器配置" width="60%">
+      <div>
+        <dynamic-trigger
+          @update-trigger-list-val="updateTriggerListVal"
+          :trigger-list="globalStore.handle_svg_info?.info.triggerList"
+        ></dynamic-trigger>
+      </div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" @click="onYesBtnClick">确定</el-button>
+          <el-button type="primary" @click="dialogTriggerVisible = false">关闭</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script setup lang="ts">
@@ -93,6 +120,7 @@
     ElInputNumber,
     ElTabs,
     ElTabPane,
+    ElDialog,
     TabsPaneContext,
     ElInput,
     ElSwitch
@@ -102,11 +130,30 @@
   import { useGlobalStore } from '@/store/global';
   import { EGlobalStoreIntention } from '@/store/global/types';
   import DynamicElFormItem from './dynamic-el-form-item.vue';
+  import DynamicEventItem from './dynamic-event-item.vue';
+  import DynamicTrigger from './dynamic-trigger.vue';
+  import { EConfigAnimationsType } from '@/config-center/types';
   const configStore = useConfigStore();
   const globalStore = useGlobalStore();
 
   const activeName = ref('style');
+  const dialogTriggerVisible = ref(false);
   const handleClick = (tab: TabsPaneContext, event: Event) => {
     console.log(tab, event);
+  };
+  const configTrigger = () => {
+    dialogTriggerVisible.value = true;
+  };
+  const onYesBtnClick = () => {
+    console.log(globalStore.handle_svg_info);
+    console.log(globalStore.done_json[globalStore.handle_svg_info.index]);
+  };
+  const updateTriggerListVal = () => {
+    globalStore.handle_svg_info?.info.triggerList?.push({
+      tag: '',
+      max: undefined,
+      min: undefined,
+      animationsType: EConfigAnimationsType.None
+    });
   };
 </script>

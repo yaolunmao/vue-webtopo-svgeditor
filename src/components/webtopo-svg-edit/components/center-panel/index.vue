@@ -13,6 +13,11 @@
     @contextmenu="onCanvasContextMenuEvent"
     @keydown="onHandleKeyDown"
   >
+    <!-- 横标尺 -->
+    <!-- <svg id="ruler-v" class="ruler-v"></svg> -->
+    <!-- 竖标尺 -->
+    <!-- <svg id="ruler-h" class="ruler-h"></svg> -->
+
     <svg
       xmlns="http://www.w3.org/2000/svg"
       :style="{ backgroundColor: configStore.svg.background_color }"
@@ -20,8 +25,15 @@
       height="100%"
     >
       <defs>
-        <pattern id="pattern_grid" patternUnits="userSpaceOnUse" x="0" y="0" width="10" height="10">
-          <rect width="1" height="1" rx="1" ry="1" fill="#aaaaaa" />
+        <pattern
+          id="pattern_grid"
+          patternUnits="userSpaceOnUse"
+          width="10"
+          height="10"
+          patternTransform="rotate(90)"
+        >
+          <line x1="5" y1="0" x2="5" y2="10" stroke="#aaaaaa" stroke-width="0.5" />
+          <line x1="0" y1="5" x2="10" y2="5" stroke="#aaaaaa" stroke-width="0.5" />
         </pattern>
       </defs>
       <rect v-if="configStore.svg.grid" width="100%" height="100%" fill="url(#pattern_grid)" />
@@ -49,6 +61,13 @@
             @mouseenter="onSvgMouseEnter(item, index, $event)"
             @mouseleave="onSvgMouseLeave(item, index, $event)"
             @contextmenu="onSvgContextMenuEvent(item, index, $event)"
+            class="animate__animated"
+            :class="item.animations?.type.val"
+            :style="{
+              'animation-duration': item.animations?.dur.val + 's',
+              'animation-iteration-count': item.animations?.repeatCount.val
+            }"
+            style="transform-box: fill-box"
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -218,6 +237,7 @@
   import { useContextMenuStore, useEditPrivateStore } from '@/store/system';
   import { EContextMenuInfoType } from '@/store/system/types';
   import { useHistoryRecord } from '@/hooks';
+  import { EConfigAnimationsType, EConfigItemPropsType } from '@/config-center/types';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
@@ -311,6 +331,82 @@
           br: {
             x: 0,
             y: 0
+          }
+        },
+        animations: {
+          type: {
+            title: '动画类型',
+            type: EConfigItemPropsType.Select,
+            val: EConfigAnimationsType.None,
+            options: [
+              {
+                label: '无',
+                value: EConfigAnimationsType.None
+              },
+              {
+                label: '顺时针旋转',
+                value: EConfigAnimationsType.RotateIn
+              },
+              {
+                label: '逆时针旋转',
+                value: EConfigAnimationsType.RotateOut
+              },
+              {
+                label: '心跳',
+                value: EConfigAnimationsType.HeartBeat
+              },
+              {
+                label: '弹跳',
+                value: EConfigAnimationsType.Bounce
+              },
+              {
+                label: '闪光',
+                value: EConfigAnimationsType.Flash
+              },
+              {
+                label: '脉冲',
+                value: EConfigAnimationsType.Pulse
+              },
+              {
+                label: '橡皮筋',
+                value: EConfigAnimationsType.RubberBand
+              },
+              {
+                label: 'X轴摇晃',
+                value: EConfigAnimationsType.ShakeX
+              },
+              {
+                label: 'Y轴摇晃',
+                value: EConfigAnimationsType.ShakeY
+              },
+              {
+                label: '摇头',
+                value: EConfigAnimationsType.HeadShake
+              },
+              {
+                label: '秋千摇摆',
+                value: EConfigAnimationsType.Swing
+              },
+              {
+                label: '惊讶抖动',
+                value: EConfigAnimationsType.Tada
+              },
+              {
+                label: '晃动',
+                value: EConfigAnimationsType.Wobble
+              },
+              {
+                label: '果冻弹跳',
+                value: EConfigAnimationsType.Jello
+              }
+            ]
+          },
+          dur: { title: '持续时间', type: EConfigItemPropsType.InputNumber, val: 5 },
+          repeatCount: {
+            title: '循环次数',
+            type: EConfigItemPropsType.Input,
+            val: 'infinite',
+            disabled: true
           }
         },
         ...objectDeepClone<IConfigItem>(globalStore.create_svg_info)
@@ -788,8 +884,56 @@
       globalStore.done_json.length <= 0 || globalStore.setDoneJson([]);
     }
   };
+  // //svg绘制标尺
+  // const drawRuler = () => {
+  //   //绘制标尺[横]
+  //   var r = Snap('#ruler-v');
+  //   //绘制标尺[竖]
+  //   var rh = Snap('#ruler-h');
+  //   r.line(25, 0, 25, 25).attr({
+  //     stroke: '#8f9292',
+  //     strokeWidth: 1
+  //   });
+  //   rh.line(0, 25, 25, 25).attr({
+  //     stroke: '#8f9292',
+  //     strokeWidth: 1
+  //   });
+  //   for (var i = 1; i < 100; i++) {
+  //     // 绘制横标尺
+  //     r.line(80 * i + 25, 0, 80 * i + 25, 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     r.line(20 * i + 25, 15, 20 * i + 25, 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     let text = 80 * i;
+  //     r.text(80 * i + 25 + 2, 12.5, text).attr({
+  //       fill: '#b1b4b4'
+  //     });
+  //     // 绘制竖标尺
+  //     rh.line(0, 80 * i + 25, 25, 80 * i + 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     rh.line(15, 20 * i + 25, 25, 20 * i + 25).attr({
+  //       stroke: '#8f9292',
+  //       strokeWidth: 1
+  //     });
+  //     let texth = 80 * i;
+  //     let ruletext = rh.text(0, 80 * i + 25 + 4, texth).attr({
+  //       fill: '#b1b4b4'
+  //     });
+  //     // 旋转文字
+  //     let matrix = new Snap.Matrix();
+  //     matrix.rotate(90, 2, 80 * i + 25 + 4);
+  //     ruletext.transform(matrix);
+  //   }
+  // };
   onMounted(() => {
     canvasRef.value?.focus();
+    // drawRuler();
   });
 </script>
 <style lang="less" scoped>
@@ -869,6 +1013,44 @@
       border-top: solid 1px #e3e3e3;
       padding-top: 5px;
       margin-top: 5px;
+    }
+  }
+  .svg-rorate {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .animate__rotateOut {
+    -webkit-animation-name: rotateOut;
+    animation-name: rotateOut;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateOut {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+  }
+  .animate__rotateIn {
+    -webkit-animation-name: rotateIn;
+    animation-name: rotateIn;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateIn {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
     }
   }
 </style>

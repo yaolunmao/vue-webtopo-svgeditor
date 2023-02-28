@@ -6,6 +6,11 @@
     @mousemove="onCanvasMouseMove"
     @mouseup="onCanvasMouseUp"
   >
+    <el-form style="width: 10%;">
+      <el-form-item><el-input type="string" /></el-form-item>
+      {{ currentData }}
+      <el-button @click="bianli">设置</el-button>
+    </el-form>    
     <svg
       xmlns="http://www.w3.org/2000/svg"
       :style="{ backgroundColor: preview_data.config.background_color }"
@@ -23,7 +28,8 @@
           v-for="item in preview_data.done_json"
           :key="item.id"
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
-          v-show="item.display"
+          v-show="item.display"    
+          
         >
           <g
             :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
@@ -31,7 +37,14 @@
             })rotate(${item.rotate}) scale(1) translate(${-(
               item.actual_bound.x +
               item.actual_bound.width / 2
-            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"   
+            class="animate__animated"
+            :class="item.animations?.type.val"
+            :style="{
+              'animation-duration': item.animations?.dur.val + 's',
+              'animation-iteration-count': item.animations?.repeatCount.val
+            }"
+            style="transform-box: fill-box"           
           >
             <connection-line
               v-if="item.type === EDoneJsonType.ConnectionLine"
@@ -49,8 +62,10 @@
               }) scale(${item.scale_x},${item.scale_y}) translate(${-(
                 item.actual_bound.x +
                 item.actual_bound.width / 2
-              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-            ></use>
+              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"  
+              v-on="event_attr" 
+            >
+            </use>
             <component
               v-else-if="item.type === EDoneJsonType.CustomSvg"
               :is="item.tag"
@@ -90,8 +105,9 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { getCurrentInstance, PropType, reactive } from 'vue';
+  import { getCurrentInstance, PropType, reactive, ref } from 'vue';
   import { useGlobalStore } from '@/store/global';
+  import { useServerStore } from '@/store/server';
   import { EGlobalStoreIntention, EMouseInfoState } from '@/store/global/types';
   import { prosToVBind, setArrItemByID } from '@/utils';
 
@@ -101,9 +117,32 @@
   import { ComponentImport } from '@/config-center';
   import { IDataModel } from '../webtopo-svg-edit/types';
   import 'element-plus/dist/index.css';
+  import { ElButton, ElInput, ElForm, ElFormItem } from 'element-plus';
+  import { EConfigAnimationsType } from '@/config-center/types';
   // import HandlePanel from '../handle-panel/index.vue';
   //注册所有组件
   const instance = getCurrentInstance();
+  const event_attr = ref<object>({});
+
+  event_attr.value = {};
+  const dynamicEvent = (params: string[], event_str: string) => {
+    try {
+      if (params?.length > 0) {
+        return new Function(params.toString(), event_str);
+      } else {
+        return new Function(event_str);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //取出自定义函数
+  event_attr.value = {
+    ...event_attr.value,
+    ...{
+      ['click']: dynamicEvent([], "alert('点击了控件')")
+    }
+  };
   Object.keys(ComponentImport).forEach((key) => {
     if (!Object.keys(instance?.appContext?.components as any).includes(key)) {
       instance?.appContext.app.component(key, ComponentImport[key]);
@@ -221,6 +260,45 @@
   defineExpose({
     setNodeAttrByID
   });
+  const serverStore = useServerStore();
+  const currentData = ref<any>();
+  const dingshi = () => {
+    setInterval(function () {
+      serverStore.getData().then((a) => {
+        currentData.value = a;
+        console.log(currentData.value['price']);
+        bianli();
+      });
+    }, 3000);
+  };
+  dingshi();
+  const bianli = () => {
+    console.log(preview_data.done_json);
+    preview_data.done_json.forEach((element) => {
+      if (element.triggerList && element.triggerList?.length > 0) {
+        element.triggerList.forEach((item) => {
+          //判断最小值 最大值
+          if (
+            item.min &&
+            item.max &&
+            currentData.value[item.tag] >= Number(item.min) &&
+            currentData.value[item.tag] <= Number(item.max)
+          ) {
+            //执行动效
+            if (element.animations) {
+              element.animations.type.val = item.animationsType;
+              console.log(item.animationsType);
+              console.log(preview_data.done_json);
+              console.log(preview_data);
+            } else {
+            }
+          } else {
+            element.animations.type.val = EConfigAnimationsType.None;
+          }
+        });
+      }
+    });
+  };
 </script>
 <style lang="less" scoped>
   .canvas {
@@ -244,5 +322,44 @@
   .svg-item-select {
     cursor: move;
     outline: 1px solid rgb(23, 222, 30);
+  }
+  .svg-rorate {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .animate__rotateOut {
+    -webkit-animation-name: rotateOut;
+    animation-name: rotateOut;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateOut {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+  }
+  .animate__rotateIn {
+    -webkit-animation-name: rotateIn;
+    animation-name: rotateIn;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    animation-timing-function: linear;
+  }
+  @keyframes rotateIn {
+    from {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(0deg);
+    }
+    to {
+      /*变换 transform;旋转 rotate */
+      transform: rotate(360deg);
+    }
   }
 </style>
