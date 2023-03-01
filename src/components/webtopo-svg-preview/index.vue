@@ -25,57 +25,25 @@
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
           v-show="item.display"
         >
-          <g
-            :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
-              item.actual_bound.y + item.actual_bound.height / 2
-            })rotate(${item.rotate}) scale(1) translate(${-(
-              item.actual_bound.x +
-              item.actual_bound.width / 2
-            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-          >
-            <connection-line
-              v-if="item.type === EDoneJsonType.ConnectionLine"
-              :item-info="item"
-            ></connection-line>
-            <use
-              v-else-if="item.type === EDoneJsonType.File"
-              :xlink:href="`#svg-${item.name}`"
-              v-bind="prosToVBind(item)"
-              width="100"
-              height="100"
-              :id="item.id"
+          <g :class="`${getCommonClass(item)}`">
+            <g
               :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
                 item.actual_bound.y + item.actual_bound.height / 2
-              }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+              })rotate(${item.rotate}) scale(1) translate(${-(
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-              :class="`${getCommonClass(item)}`"
-            ></use>
-            <component
-              v-else-if="item.type === EDoneJsonType.CustomSvg"
-              :is="item.tag"
-              v-bind="prosToVBind(item)"
-              width="100"
-              height="100"
-              :id="item.id"
-              :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
-                item.actual_bound.y + item.actual_bound.height / 2
-              }) scale(${item.scale_x},${item.scale_y}) translate(${-(
-                item.actual_bound.x +
-                item.actual_bound.width / 2
-              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-              :class="`${getCommonClass(item)}`"
-            ></component>
-            <foreignObject
-              v-else-if="item.type === EDoneJsonType.Vue"
-              v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
-              :id="`foreign-object${item.id}`"
-              :class="`${getCommonClass(item)}`"
             >
-              <component
-                :is="item.tag"
+              <connection-line
+                v-if="item.type === EDoneJsonType.ConnectionLine"
+                :item-info="item"
+              ></connection-line>
+              <use
+                v-else-if="item.type === EDoneJsonType.File"
+                :xlink:href="`#svg-${item.name}`"
                 v-bind="prosToVBind(item)"
+                width="100"
+                height="100"
                 :id="item.id"
                 :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
                   item.actual_bound.y + item.actual_bound.height / 2
@@ -83,9 +51,40 @@
                   item.actual_bound.x +
                   item.actual_bound.width / 2
                 )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-              >{{ item.tag_slot }}</component
+              ></use>
+              <component
+                v-else-if="item.type === EDoneJsonType.CustomSvg"
+                :is="item.tag"
+                v-bind="prosToVBind(item)"
+                width="100"
+                height="100"
+                :id="item.id"
+                :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+                  item.actual_bound.y + item.actual_bound.height / 2
+                }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+                  item.actual_bound.x +
+                  item.actual_bound.width / 2
+                )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              ></component>
+              <foreignObject
+                v-else-if="item.type === EDoneJsonType.Vue"
+                v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
+                :id="`foreign-object${item.id}`"
               >
-            </foreignObject>
+                <component
+                  :is="item.tag"
+                  v-bind="prosToVBind(item)"
+                  :id="item.id"
+                  :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+                    item.actual_bound.y + item.actual_bound.height / 2
+                  }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+                    item.actual_bound.x +
+                    item.actual_bound.width / 2
+                  )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+                >{{ item.tag_slot }}</component
+                >
+              </foreignObject>
+            </g>
           </g>
         </g>
       </g>

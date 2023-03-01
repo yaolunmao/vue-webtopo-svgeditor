@@ -38,64 +38,32 @@
           :transform="`translate(${item.x},${item.y})rotate(0)scale(1)`"
           v-show="item.display"
         >
-          <g
-            :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
-              item.actual_bound.y + item.actual_bound.height / 2
-            })rotate(${item.rotate}) scale(1) translate(${-(
-              item.actual_bound.x +
-              item.actual_bound.width / 2
-            )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-            @mousedown="onSvgMouseDown(item, index, $event)"
-            @mouseenter="onSvgMouseEnter(item, index, $event)"
-            @mouseleave="onSvgMouseLeave(item, index, $event)"
-            @contextmenu="onSvgContextMenuEvent(item, index, $event)"
-          >
-            <connection-line
-              v-if="item.type === EDoneJsonType.ConnectionLine"
-              :item-info="item"
-              :point-visiable="
-                visiable_info.connection_line && visiable_info.select_item.info?.id == item.id
-              "
-            ></connection-line>
-            <use
-              v-else-if="item.type === EDoneJsonType.File"
-              :xlink:href="`#svg-${item.name}`"
-              v-bind="prosToVBind(item)"
-              width="100"
-              height="100"
-              :id="item.id"
+          <g :class="`${getCommonClass(item)}`">
+            <g
               :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
                 item.actual_bound.y + item.actual_bound.height / 2
-              }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+              })rotate(${item.rotate}) scale(1) translate(${-(
                 item.actual_bound.x +
                 item.actual_bound.width / 2
               )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-              :class="`${getCommonClass(item)}`"
-            ></use>
-            <component
-              v-else-if="item.type === EDoneJsonType.CustomSvg"
-              :is="item.tag"
-              v-bind="prosToVBind(item)"
-              width="100"
-              height="100"
-              :id="item.id"
-              :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
-                item.actual_bound.y + item.actual_bound.height / 2
-              }) scale(${item.scale_x},${item.scale_y}) translate(${-(
-                item.actual_bound.x +
-                item.actual_bound.width / 2
-              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-              :class="`${getCommonClass(item)}`"
-            ></component>
-            <foreignObject
-              v-else-if="item.type === EDoneJsonType.Vue"
-              v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
-              :id="`foreign-object${item.id}`"
-              :class="`${getCommonClass(item)}`"
+              @mousedown="onSvgMouseDown(item, index, $event)"
+              @mouseenter="onSvgMouseEnter(item, index, $event)"
+              @mouseleave="onSvgMouseLeave(item, index, $event)"
+              @contextmenu="onSvgContextMenuEvent(item, index, $event)"
             >
-              <component
-                :is="item.tag"
+              <connection-line
+                v-if="item.type === EDoneJsonType.ConnectionLine"
+                :item-info="item"
+                :point-visiable="
+                  visiable_info.connection_line && visiable_info.select_item.info?.id == item.id
+                "
+              ></connection-line>
+              <use
+                v-else-if="item.type === EDoneJsonType.File"
+                :xlink:href="`#svg-${item.name}`"
                 v-bind="prosToVBind(item)"
+                width="100"
+                height="100"
                 :id="item.id"
                 :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
                   item.actual_bound.y + item.actual_bound.height / 2
@@ -103,67 +71,98 @@
                   item.actual_bound.x +
                   item.actual_bound.width / 2
                 )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
-                >{{ item.tag_slot }}</component
+              ></use>
+              <component
+                v-else-if="item.type === EDoneJsonType.CustomSvg"
+                :is="item.tag"
+                v-bind="prosToVBind(item)"
+                width="100"
+                height="100"
+                :id="item.id"
+                :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+                  item.actual_bound.y + item.actual_bound.height / 2
+                }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+                  item.actual_bound.x +
+                  item.actual_bound.width / 2
+                )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              ></component>
+              <foreignObject
+                v-else-if="item.type === EDoneJsonType.Vue"
+                v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
+                :id="`foreign-object${item.id}`"
               >
-            </foreignObject>
+                <component
+                  :is="item.tag"
+                  v-bind="prosToVBind(item)"
+                  :id="item.id"
+                  :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
+                    item.actual_bound.y + item.actual_bound.height / 2
+                  }) scale(${item.scale_x},${item.scale_y}) translate(${-(
+                    item.actual_bound.x +
+                    item.actual_bound.width / 2
+                  )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+                  >{{ item.tag_slot }}</component
+                >
+              </foreignObject>
 
-            <line
-              v-else-if="item.type === EDoneJsonType.StraightLine"
-              :id="item.id"
-              :x1="item.props.start_x.val"
-              :y1="item.props.start_y.val"
-              :x2="item.props.end_x.val"
-              :y2="item.props.end_y.val"
-              fill="#FF0000"
-              stroke="#FF0000"
-              stroke-width="2"
-            ></line>
-            <rect
-              v-if="item.config.actual_rect"
-              :id="`rect${item.id}`"
-              fill="black"
-              fill-opacity="0"
-              v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
-              style="stroke: none; stroke-width: 2; stroke-miterlimit: 10"
-              :class="`${
-                globalStore.intention == EGlobalStoreIntention.None ||
-                globalStore.intention == EGlobalStoreIntention.Select
-                  ? 'svg-item-none'
-                  : ''
-              }
+              <line
+                v-else-if="item.type === EDoneJsonType.StraightLine"
+                :id="item.id"
+                :x1="item.props.start_x.val"
+                :y1="item.props.start_y.val"
+                :x2="item.props.end_x.val"
+                :y2="item.props.end_y.val"
+                fill="#FF0000"
+                stroke="#FF0000"
+                stroke-width="2"
+              ></line>
+              <rect
+                v-if="item.config.actual_rect"
+                :id="`rect${item.id}`"
+                fill="black"
+                fill-opacity="0"
+                v-bind="getActualBoundScale(item.actual_bound, item.scale_x, item.scale_y)"
+                style="stroke: none; stroke-width: 2; stroke-miterlimit: 10"
+                :class="`${
+                  globalStore.intention == EGlobalStoreIntention.None ||
+                  globalStore.intention == EGlobalStoreIntention.Select
+                    ? 'svg-item-none'
+                    : ''
+                }
                                     ${
                                       globalStore.intention == EGlobalStoreIntention.Move &&
                                       globalStore.handle_svg_info?.info.id == item.id
                                         ? 'svg-item-move'
                                         : ''
                                     } ${
-                globalStore.intention == EGlobalStoreIntention.Select &&
-                globalStore.handle_svg_info?.info.id == item.id
-                  ? 'svg-item-select'
-                  : ''
-              } ${getCommonClass(item)}`"
-            ></rect>
-            <handle-panel
-              v-if="
-                globalStore.handle_svg_info?.info.id === item.id &&
-                visiable_info.handle_panel &&
-                item.config.can_zoom
-              "
-              :item-info="item"
-            ></handle-panel>
-            <connection-panel
-              v-if="
-                visiable_info.select_item.info?.id == item.id &&
-                visiable_info.connection_panel &&
-                item.config.have_anchor &&
-                (globalStore.intention === EGlobalStoreIntention.Select
-                  ? item.id !== globalStore.handle_svg_info?.info.id
-                    ? true
-                    : false
-                  : true)
-              "
-              :item-info="item"
-            ></connection-panel>
+                  globalStore.intention == EGlobalStoreIntention.Select &&
+                  globalStore.handle_svg_info?.info.id == item.id
+                    ? 'svg-item-select'
+                    : ''
+                }`"
+              ></rect>
+              <handle-panel
+                v-if="
+                  globalStore.handle_svg_info?.info.id === item.id &&
+                  visiable_info.handle_panel &&
+                  item.config.can_zoom
+                "
+                :item-info="item"
+              ></handle-panel>
+              <connection-panel
+                v-if="
+                  visiable_info.select_item.info?.id == item.id &&
+                  visiable_info.connection_panel &&
+                  item.config.have_anchor &&
+                  (globalStore.intention === EGlobalStoreIntention.Select
+                    ? item.id !== globalStore.handle_svg_info?.info.id
+                      ? true
+                      : false
+                    : true)
+                "
+                :item-info="item"
+              ></connection-panel>
+            </g>
           </g>
         </g>
       </g>
