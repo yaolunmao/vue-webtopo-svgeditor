@@ -40,8 +40,8 @@ export default defineConfig(({ mode }) => {
         build: {
           lib: {
             entry: resolve(__dirname, 'src/export.ts'),
-            name: 'webtopo-svg-edit',
-            fileName: (format) => `webtopo-svg-edit.${format}.ts`
+            name: 'WebtopoYLM',
+            fileName: `webtopo-svg-edit`
           },
           rollupOptions: {
             // 确保外部化处理那些你不想打包进库的依赖

@@ -58,6 +58,14 @@ MIT 开源协议 可商用（自带的`svg`文件除外）
 
 其实和自定义`svg`相似，都是`vue`的`template`代码片段，但是`svg`标签里面无法渲染`html`的代码，所以在最外层用了`foreignObject`进行了包裹，同样支持缩放旋转等操作。参考`src\config-center\vue`
 
+## 如何添加图形库
+
+1. 将下载好的svg文件放到`src\assets\svgs`目录下
+2. 修改下载好的svg文件代码片段，删除想动态修改的属性。例如你想动态修改svg的填充颜色，要删掉代码片段的`fill`属性
+3. 添加配置文件，文件目录为`src\config-center`
+
+需要注意配置文件的`name`属性要和`svg`文件名保持一致，如果是自定义组件需要按需导入一下，参考`src\config-center\index.ts`，这么做的目的是当你把编辑器构建成插件引入到其它项目的时候，其它项目使用编辑器无需注册你的自定义组件
+
 ## 操作说明
 
 ### 绘画
@@ -86,6 +94,8 @@ MIT 开源协议 可商用（自带的`svg`文件除外）
 
 ## 集成到已有项目
 
+### 脚手架项目
+
 ```
 # 创建项目(已有项目跳过此步骤)
 npm init vite@latest
@@ -109,8 +119,64 @@ app.mount('#app')
 import { WebtopoSvgEdit,WebtopoSvgPreview } from 'webtopo-svg-edit';
 import 'webtopo-svg-edit/dist/style.css'
 ```
+### umd方式集成
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>webtopo-svg-edit Example</title>
+    <link href="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/vue@3.2.6/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/vue-demi@0.13.11/lib/index.iife.js"></script>
+    <script src="https://unpkg.com/pinia@2.0.33/dist/pinia.iife.prod.js"></script>
+    <script src="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/webtopo-svg-edit.umd.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const pinia = Pinia.createPinia()
+      const app = Vue.createApp(WebtopoYLM.WebtopoSvgEdit)
+      app.use(pinia)
+      app.mount('#app')
+    </script>
+  </body>
+</html>
 
-如果集成有问题请参考示例项目[vue-webtopo-svgeditor-example](https://github.com/yaolunmao/vue-webtopo-svgeditor-example)
+```
+### es module方式集成
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>webtopo-svg-edit Example</title>
+    <link href="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3.2.47/dist/vue.esm-browser.prod.js",
+      "@vue/devtools-api": "https://cdn.jsdelivr.net/npm/@vue/devtools-api/lib/esm/index.min.js",
+      "vue-demi": "https://unpkg.com/vue-demi@0.13.11/lib/index.mjs",
+      "pinia": "https://unpkg.com/pinia@2.0.29/dist/pinia.esm-browser.js",
+      "WebtopoYLM": "https://unpkg.com/webtopo-svg-edit@0.0.8/dist/webtopo-svg-edit.es.js"
+    }
+  }
+</script>
+<script type="module">
+  import { createApp } from 'vue'
+  import { createPinia } from 'pinia'
+  import { WebtopoSvgEdit } from 'WebtopoYLM'
+  const app = createApp(WebtopoSvgEdit)
+  app.use(createPinia())
+  app.mount('#app')
+</script>
+
+```
+如果集成有问题请参考示例项目[demo](/demo)
 
 **请注意：插件方式引入会导致左侧工具栏的 icon 图标无法正确显示，请自行寻找您项目构建工具的 svg 加载器，将 icon 图标转换成 symbol，并将名字命名为‘svg-xxx’即可正常显示**
 
@@ -137,8 +203,11 @@ import 'webtopo-svg-edit/dist/style.css'
 
 ### vue2怎么集成，有vue2的版本吗？
 
-vue2建议使用iframe集成，目前没有vue2的版本，如果您接受不了vue2方式集成，也可参考2.1分支进行改造。
-
+vue2建议使用iframe、cdn集成，目前没有vue2的版本，如果您接受不了vue2方式集成，也可参考2.1分支进行改造。
+### 项目启动不起来怎么办？
+请使用`pnpm`安装依赖
+### 随便改哪里的代码eslint都报错怎么办？
+vscode安装eslint插件
 ## 鸣谢
 
 吉林省格尺科技有限公司促进该项目诞生

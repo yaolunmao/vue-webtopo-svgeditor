@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>webtopo-svg-edit Example</title>
+    <link href="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3.2.47/dist/vue.esm-browser.prod.js",
+      "@vue/devtools-api": "https://cdn.jsdelivr.net/npm/@vue/devtools-api/lib/esm/index.min.js",
+      "vue-demi": "https://unpkg.com/vue-demi@0.13.11/lib/index.mjs",
+      "pinia": "https://unpkg.com/pinia@2.0.29/dist/pinia.esm-browser.js",
+      "WebtopoYLM": "https://unpkg.com/webtopo-svg-edit@0.0.8/dist/webtopo-svg-edit.es.js"
+    }
+  }
+</script>
+<script type="module">
+  import { createApp } from 'vue'
+  import { createPinia } from 'pinia'
+  import { WebtopoSvgEdit } from 'WebtopoYLM'
+  const app = createApp(WebtopoSvgEdit)
+  app.use(createPinia())
+  app.mount('#app')
+</script>

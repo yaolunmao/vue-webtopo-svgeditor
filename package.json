@@ -1,17 +1,17 @@
 {
   "name": "webtopo-svg-edit",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "description": "基于vue3.2+ts实现的svg可视化web组态编辑器。",
   "author": "咬轮猫 <10928033@qq.com>",
   "files": [
     "dist"
   ],
-  "module": "./dist/webtopo-svg-edit.es.ts",
-  "main": "./dist/webtopo-svg-edit.umd.ts",
+  "module": "./dist/webtopo-svg-edit.es.js",
+  "main": "./dist/webtopo-svg-edit.umd.cjs",
   "exports": {
     ".": {
-      "import": "./dist/webtopo-svg-edit.es.ts",
-      "require": "./dist/webtopo-svg-edit.umd.ts"
+      "import": "./dist/webtopo-svg-edit.es.js",
+      "require": "./dist/webtopo-svg-edit.umd.cjs"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",

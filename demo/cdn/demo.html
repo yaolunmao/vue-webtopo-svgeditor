@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>webtopo-svg-edit Example</title>
+    <link href="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/vue@3.2.6/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/vue-demi@0.13.11/lib/index.iife.js"></script>
+    <script src="https://unpkg.com/pinia@2.0.33/dist/pinia.iife.prod.js"></script>
+    <script src="https://unpkg.com/webtopo-svg-edit@0.0.8/dist/webtopo-svg-edit.umd.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const pinia = Pinia.createPinia()
+      const app = Vue.createApp(WebtopoYLM.WebtopoSvgEdit)
+      app.use(pinia)
+      app.mount('#app')
+    </script>
+  </body>
+</html>
