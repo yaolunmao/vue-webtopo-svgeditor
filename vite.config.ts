@@ -31,6 +31,9 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': resolve(__dirname, 'src')
       }
+    },
+    optimizeDeps: {
+      entries: ['demo-module.html']
     }
   };
   if (mode === 'lib') {
