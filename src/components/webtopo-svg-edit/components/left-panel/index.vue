@@ -8,7 +8,7 @@
           v-for="(item, key) in left_tool_bar"
           :key="key"
           :label="key"
-          :value="item"
+          :value="key"
         ></el-option>
       </el-select>
     </div>
@@ -74,9 +74,9 @@
     'custom-vue',
     'echarts'
   ]);
-  const libChange = (val: any) => {
+  const libChange = (key: any) => {
     config_center.value = [];
-    config_center.value = val;
+    config_center.value = left_tool_bar.value[key];
   };
 
   const createBegin = (svg_item: IConfigItem) => {
