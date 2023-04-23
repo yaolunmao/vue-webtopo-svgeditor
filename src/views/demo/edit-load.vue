@@ -22,8 +22,8 @@
         background_color: '#fff',
         scale: 1,
         position_center: {
-          x: -315,
-          y: -95
+          x: -333,
+          y: -113
         },
         svg_position_center: {
           x: 50,

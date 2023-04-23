@@ -823,7 +823,7 @@
     outline: 1px solid rgb(23, 222, 30);
   }
   .contextMenu {
-    position: absolute;
+    position: fixed;
     z-index: 99999;
     background: #ffffff;
     padding: 5px 0;
