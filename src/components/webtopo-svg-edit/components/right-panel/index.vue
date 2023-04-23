@@ -17,6 +17,9 @@
           <el-form-item label="网格" size="small">
             <el-switch v-model="configStore.svg.grid"></el-switch>
           </el-form-item>
+          <el-form-item label="标尺" size="small">
+            <el-switch v-model="configStore.svg.ruler"></el-switch>
+          </el-form-item>
           <!-- 基础版不做画布缩放了 有需要自己写吧（^-^）！ -->
           <!-- <el-form-item label="缩放" size="small">
             <el-input-number

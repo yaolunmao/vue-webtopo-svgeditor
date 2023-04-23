@@ -13,4 +13,5 @@ export interface IPositionCenterSvg {
     y: number;
   };
   grid: boolean;
+  ruler: boolean;
 }

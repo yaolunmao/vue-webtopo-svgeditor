@@ -17,7 +17,17 @@
         </el-aside>
         <el-main class="middle main">
           <div class="canvas-main-pc">
-            <center-panel></center-panel>
+            <vue3-ruler-tool
+              class="canvas-main-pc"
+              :value="presetLine"
+              :step-length="50"
+              :parent="true"
+              :is-scale-revise="false"
+              v-model:visible="configStore.svg.ruler"
+              @input="input"
+            >
+              <center-panel></center-panel>
+            </vue3-ruler-tool>
           </div>
         </el-main>
         <el-aside class="side-nav" :class="svgEditLayoutStore.right_nav ? 'show-nav' : 'hide-nav'">
@@ -87,6 +97,8 @@
   import { useGlobalStore } from '@/store/global';
   import { IDoneJson } from '@/store/global/types';
   import 'animate.css';
+  import { useConfigStore } from '@/store/config';
+  import vue3RulerTool from '@/components/vue3-ruler-tool/index.vue';
   const props = defineProps({
     customToolBar: {
       type: Object as PropType<IConfigCenter>,
@@ -97,8 +109,13 @@
       default: ''
     }
   });
+  const presetLine = ref([]);
+  const input = (list: any) => {
+    presetLine.value = list;
+  };
   const globalStore = useGlobalStore();
   const svgEditLayoutStore = useSvgEditLayoutStore();
+  const configStore = useConfigStore();
   const importJsonRef = ref<InstanceType<typeof ImportJson>>();
   const visible_conf: IVisibleConf = reactive({
     [EVisibleConfKey.ExportJson]: false,
