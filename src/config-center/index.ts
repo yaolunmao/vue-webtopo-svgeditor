@@ -1,6 +1,7 @@
 import { svgfile_config_center } from './svg-file';
 import { IComponentImport, IConfigCenter } from './types';
 import customSvgText from '@/components/webtopo-svg-edit/components/custom-svg/custom-svg-text/index.vue';
+import switchDemo from '@/components/webtopo-svg-edit/components/custom-svg/switch-demo/index.vue';
 import { vue_config_center } from './vue';
 import { ElButton, ElTag } from 'element-plus';
 import CommonTable from '@/components/webtopo-svg-edit/components/custom-vue/common-table/index.vue';
@@ -14,5 +15,6 @@ export const ComponentImport: IComponentImport = {
   'el-button': ElButton,
   'el-tag': ElTag,
   'custom-vue-common-table': CommonTable,
-  'pie-charts': PieCharts
+  'pie-charts': PieCharts,
+  'switch-demo': switchDemo
 };
