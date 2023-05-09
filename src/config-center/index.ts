@@ -5,6 +5,7 @@ import switchDemo from '@/components/webtopo-svg-edit/components/custom-svg/swit
 import { vue_config_center } from './vue';
 import { ElButton, ElTag } from 'element-plus';
 import CommonTable from '@/components/webtopo-svg-edit/components/custom-vue/common-table/index.vue';
+import NowTime from '@/components/webtopo-svg-edit/components/custom-vue/now-time/index.vue';
 import PieCharts from '@/components/webtopo-svg-edit/components/echarts/pie-charts/index.vue';
 export const configCenter: IConfigCenter = {
   svg文件: svgfile_config_center,
@@ -16,5 +17,6 @@ export const ComponentImport: IComponentImport = {
   'el-tag': ElTag,
   'custom-vue-common-table': CommonTable,
   'pie-charts': PieCharts,
-  'switch-demo': switchDemo
+  'switch-demo': switchDemo,
+  'custom-vue-now-time': NowTime
 };
