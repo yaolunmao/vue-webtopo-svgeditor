@@ -105,6 +105,36 @@
             }
           }
         ]
+      },
+      {
+        groupType: 'svg-file',
+        title: 'svg文件',
+        list: [
+          {
+            name: 'alternator',
+            title: '发电机',
+            type: 'File',
+            config: {
+              can_zoom: true,
+              have_anchor: true,
+              actual_rect: true
+            },
+            display: true,
+            props: {
+              fill: {
+                title: '填充色',
+                type: 'Color',
+                val: '#00ff00'
+              }
+            },
+            common_animations: {
+              val: '',
+              delay: 'delay-0s',
+              speed: 'slow',
+              repeat: 'infinite'
+            }
+          }
+        ]
       }
     ]
   });
