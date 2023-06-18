@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "fast-glob": "^3.2.12",
     "pinia": "^2.0.29",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.45",
     "webtopo-svg-edit": "^0.0.2"
   },
