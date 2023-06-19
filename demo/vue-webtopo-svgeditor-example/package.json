@@ -13,7 +13,7 @@
     "pinia": "^2.0.29",
     "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.45",
-    "webtopo-svg-edit": "^0.0.2"
+    "webtopo-svg-edit": "^0.0.10"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
