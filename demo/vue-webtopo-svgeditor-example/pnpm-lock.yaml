@@ -9,14 +9,14 @@ specifiers:
   vite-plugin-svg-icons: ^2.0.1
   vue: ^3.2.45
   vue-tsc: ^1.0.11
-  webtopo-svg-edit: ^0.0.2
+  webtopo-svg-edit: ^0.0.10
 
 dependencies:
   fast-glob: 3.2.12
   pinia: 2.0.29_prq2uz4lho2pwp6irk4cfkrxwu
   vite-plugin-svg-icons: 2.0.1_vite@4.0.4
   vue: 3.2.45
-  webtopo-svg-edit: 0.0.2_typescript@4.9.4
+  webtopo-svg-edit: 0.0.10_typescript@4.9.4
 
 devDependencies:
   '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
@@ -456,6 +456,10 @@ packages:
 
   /ace-builds/1.14.0:
     resolution: {integrity: sha512-3q8LvawomApRCt4cC0OzxVjDsZ609lDbm8l0Xl9uqG06dKEq4RT0YXLUyk7J2SxmqIp5YXzZNw767Dr8GKUruw==}
+    dev: false
+
+  /animate.css/4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
     dev: false
 
   /ansi-regex/2.1.1:
@@ -2000,11 +2004,12 @@ packages:
       vue: 3.2.45
     dev: false
 
-  /webtopo-svg-edit/0.0.2_typescript@4.9.4:
-    resolution: {integrity: sha512-u+6a6vdOONV9Gb0Xj11OdGcAJxMKUD3hLplfZFbIivESlhCOoHBwTu2UCTRbbLf821KXyANgZsRpaiU7pbNW8w==}
+  /webtopo-svg-edit/0.0.10_typescript@4.9.4:
+    resolution: {integrity: sha512-n/e8XEKdYQSPQYQT7ZYlLKmz6z3OMem6d36pKUmOlAbb1dLiZpR2gTw/wipyaYDK+PJF68cDshh5FkOZJwx17w==}
     requiresBuild: true
     dependencies:
       ace-builds: 1.14.0
+      animate.css: 4.1.1
       echarts: 5.4.1
       element-plus: 2.2.28_vue@3.2.45
       pinia: 2.0.29_prq2uz4lho2pwp6irk4cfkrxwu
