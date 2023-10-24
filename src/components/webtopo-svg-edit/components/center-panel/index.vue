@@ -40,12 +40,9 @@
         >
           <g :class="`${getCommonClass(item)}`">
             <g
-              :transform="`translate(${item.actual_bound.x + item.actual_bound.width / 2},${
-                item.actual_bound.y + item.actual_bound.height / 2
-              })rotate(${item.rotate}) scale(1) translate(${-(
-                item.actual_bound.x +
-                item.actual_bound.width / 2
-              )},${-(item.actual_bound.y + item.actual_bound.height / 2)})`"
+              :transform="`rotate(${item.rotate},${
+                item.actual_bound.x + item.actual_bound.width / 2
+              },${item.actual_bound.y + item.actual_bound.height / 2}) scale(1)`"
               @mousedown="onSvgMouseDown(item, index, $event)"
               @mouseenter="onSvgMouseEnter(item, index, $event)"
               @mouseleave="onSvgMouseLeave(item, index, $event)"
@@ -194,7 +191,6 @@
   } from '@/store/global/types';
   import { useSvgEditLayoutStore } from '@/store/svgedit-layout';
   import {
-    getCenterPoint,
     randomString,
     getSvgNowPosition,
     setSvgActualInfo,
@@ -425,7 +421,11 @@
         width: 0,
         height: 0,
         is_old_width: false,
-        is_old_height: false
+        is_old_height: false,
+        newCenterPoint: {
+          x: 0,
+          y: 0
+        }
       };
       if (globalStore.scale_info.type === EScaleInfoType.TopLeft) {
         new_length = calculateLeftTop(
@@ -510,18 +510,13 @@
         const scale_y = !new_length.is_old_height
           ? new_length.height / globalStore.handle_svg_info.info.actual_bound.height
           : 1;
-        const newCenterPoint = getCenterPoint(curPositon, globalStore.scale_info.symmetric_point);
+        // const newCenterPoint = getCenterPoint(curPositon, globalStore.scale_info.symmetric_point);
         if (
           scale_x > 0 &&
           globalStore.scale_info.type !== EScaleInfoType.TopCenter &&
           globalStore.scale_info.type !== EScaleInfoType.BottomCenter
         ) {
           globalStore.handle_svg_info.info.scale_x = scale_x;
-          globalStore.handle_svg_info.info.x = getSvgNowPosition(
-            globalStore.handle_svg_info.info.client.x,
-            newCenterPoint.x,
-            globalStore.scale_info.scale_item_info.x
-          );
         }
         if (
           scale_y > 0 &&
@@ -529,12 +524,17 @@
           globalStore.scale_info.type !== EScaleInfoType.Right
         ) {
           globalStore.handle_svg_info.info.scale_y = scale_y;
-          globalStore.handle_svg_info.info.y = getSvgNowPosition(
-            globalStore.handle_svg_info.info.client.y,
-            newCenterPoint.y,
-            globalStore.scale_info.scale_item_info.y
-          );
         }
+        globalStore.handle_svg_info.info.x = getSvgNowPosition(
+          globalStore.handle_svg_info.info.client.x,
+          new_length.newCenterPoint.x,
+          globalStore.scale_info.scale_item_info.x
+        );
+        globalStore.handle_svg_info.info.y = getSvgNowPosition(
+          globalStore.handle_svg_info.info.client.y,
+          new_length.newCenterPoint.y,
+          globalStore.scale_info.scale_item_info.y
+        );
       }
     } else if (globalStore.intention === EGlobalStoreIntention.Rotate) {
       if (!globalStore.handle_svg_info) {
