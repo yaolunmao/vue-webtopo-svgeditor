@@ -25,7 +25,8 @@ export const calculateLeftTop = (
     width: newBottomRightPoint.x - newTopLeftPoint.x,
     height: newBottomRightPoint.y - newTopLeftPoint.y,
     is_old_width: false,
-    is_old_height: false
+    is_old_height: false,
+    newCenterPoint
   };
 };
 /**
@@ -52,7 +53,8 @@ export const calculateRightTop = (
     width: newTopRightPoint.x - newBottomLeftPoint.x,
     height: newBottomLeftPoint.y - newTopRightPoint.y,
     is_old_width: false,
-    is_old_height: false
+    is_old_height: false,
+    newCenterPoint
   };
 };
 /**
@@ -75,7 +77,8 @@ export const calculateRightBottom = (
     width: newBottomRightPoint.x - newTopLeftPoint.x,
     height: newBottomRightPoint.y - newTopLeftPoint.y,
     is_old_width: false,
-    is_old_height: false
+    is_old_height: false,
+    newCenterPoint
   };
 };
 /**
@@ -98,7 +101,8 @@ export const calculateLeftBottom = (
     width: newTopRightPoint.x - newBottomLeftPoint.x,
     height: newBottomLeftPoint.y - newTopRightPoint.y,
     is_old_width: false,
-    is_old_height: false
+    is_old_height: false,
+    newCenterPoint
   };
 };
 /**
@@ -106,6 +110,7 @@ export const calculateLeftBottom = (
  * @param curPositon 按住的缩放按钮的坐标
  * @param symmetricPoint 缩放前对称点的坐标
  * @param rotate 旋转角度
+ * @param curPoint 旋转中心
  * @returns
  */
 export const calculateTop = (
@@ -127,11 +132,16 @@ export const calculateTop = (
     (rotatedTopMiddlePoint.x - symmetricPoint.x) ** 2 +
       (rotatedTopMiddlePoint.y - symmetricPoint.y) ** 2
   );
+  const newCenterPoint = {
+    x: rotatedTopMiddlePoint.x - (rotatedTopMiddlePoint.x - symmetricPoint.x) / 2,
+    y: rotatedTopMiddlePoint.y + (symmetricPoint.y - rotatedTopMiddlePoint.y) / 2
+  };
   return {
     width: 1,
     height: Math.round(newHeight),
     is_old_width: true,
-    is_old_height: false
+    is_old_height: false,
+    newCenterPoint
   };
 };
 /**
@@ -161,12 +171,16 @@ export const calculateRight = (
     (rotatedRightMiddlePoint.x - symmetricPoint.x) ** 2 +
       (rotatedRightMiddlePoint.y - symmetricPoint.y) ** 2
   );
-
+  const newCenterPoint = {
+    x: rotatedRightMiddlePoint.x - (rotatedRightMiddlePoint.x - symmetricPoint.x) / 2,
+    y: rotatedRightMiddlePoint.y + (symmetricPoint.y - rotatedRightMiddlePoint.y) / 2
+  };
   return {
     width: Math.round(newWidth),
     height: 1,
     is_old_width: false,
-    is_old_height: true
+    is_old_height: true,
+    newCenterPoint
   };
 };
 /**
@@ -196,12 +210,16 @@ export const calculateBottom = (
     (rotatedBottomMiddlePoint.x - symmetricPoint.x) ** 2 +
       (rotatedBottomMiddlePoint.y - symmetricPoint.y) ** 2
   );
-
+  const newCenterPoint = {
+    x: rotatedBottomMiddlePoint.x - (rotatedBottomMiddlePoint.x - symmetricPoint.x) / 2,
+    y: rotatedBottomMiddlePoint.y + (symmetricPoint.y - rotatedBottomMiddlePoint.y) / 2
+  };
   return {
     width: 1,
     height: Math.round(newHeight),
     is_old_width: true,
-    is_old_height: false
+    is_old_height: false,
+    newCenterPoint
   };
 };
 /**
@@ -231,11 +249,15 @@ export const calculateLeft = (
     (rotatedLeftMiddlePoint.x - symmetricPoint.x) ** 2 +
       (rotatedLeftMiddlePoint.y - symmetricPoint.y) ** 2
   );
-
+  const newCenterPoint = {
+    x: rotatedLeftMiddlePoint.x - (rotatedLeftMiddlePoint.x - symmetricPoint.x) / 2,
+    y: rotatedLeftMiddlePoint.y + (symmetricPoint.y - rotatedLeftMiddlePoint.y) / 2
+  };
   return {
     width: Math.round(newWidth),
     height: 1,
     is_old_width: false,
-    is_old_height: true
+    is_old_height: true,
+    newCenterPoint
   };
 };
