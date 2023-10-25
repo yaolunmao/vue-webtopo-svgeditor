@@ -88,6 +88,13 @@
       }
     },
     {
+      name: '集成到平台效果预览(vue2)',
+      title: '集成到平台效果预览(vue2)',
+      onClick: () => {
+        window.open('http://svgprov2.yaolm.top/');
+      }
+    },
+    {
       name: 'pro纯前端预览版',
       title: '集成到平台效果预览更新频率较慢,查看pro效果可在此查看,每次进入之前建议清理一下缓存',
       onClick: () => {
