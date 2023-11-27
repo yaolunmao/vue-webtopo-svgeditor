@@ -4,7 +4,7 @@
 
 预览地址：[http://svg.yaolm.top/](http://svg.yaolm.top/)
 
-`qq`交流群：`209048413`,仅供交流，有问题请提[issue](https://github.com/yaolunmao/vue-webtopo-svgeditor/issues)，以便帮助更多有相同问题的人
+有问题请提[issue](https://github.com/yaolunmao/vue-webtopo-svgeditor/issues)，以便帮助更多有相同问题的人
 
 历史版本请在本项目其它分支进行查看
 
@@ -14,11 +14,7 @@
 
 没有特殊需求，只需要配置好图形库，即可开始您的组态世界
 
-### 优越的性能
-
-使用了`svg`的`symbol`技术，`use`方式加载`svg`图形，同样的 svg 图形不管数量多少，只会渲染一次
-
-### 学习成本极低
+### 学习成本低
 
 `svg`文件即组件，引入之后无需进行额外配置，编辑器会自适应解析加载组件，添加自定义组件和传统`html`无差，前端 er 零学习成本上手
 
@@ -193,12 +189,6 @@ import 'webtopo-svg-edit/dist/style.css'
 
 **本项目组件库来源均为网络，仅供学习交流使用，请勿将本项目里面的组件用于商业用途**
 
-## 君子协议
-
-开源版使用时请保留底部的版权声明，感谢支持
-
-![](./readme-imgs/版权声明.png)
-
 ## 常见问题
 
 ### vue2怎么集成，有vue2的版本吗？
@@ -218,11 +208,6 @@ vscode安装eslint插件
 
 还在坚持用原生`svg`进行组态的开发者们
 
-## 捐助
-
-如果这个项目对您有所帮助，请扫下方二维码打赏一杯咖啡。
-
-![](./readme-imgs/捐赠.jpg)
 
 ## 感谢以下小伙伴为此项目做出的贡献
 
