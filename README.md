@@ -1,3 +1,5 @@
+# 该版本永久停止更新 请使用新版本：https://github.com/yaolunmao/maotu-webtopo
+
 # vue-webtopo-svgeditor
 
 > 基于 vue3.2+ts 实现的 svg 可视化 web 组态编辑器。可直接把 svg 文件和 vue 组件作为编辑器图形库使用，赋予其缩放和旋转等功能，并支持自定义拓展参数，实时控制组件状态等
